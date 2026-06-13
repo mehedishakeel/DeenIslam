@@ -71,6 +71,7 @@
   <div id="footer-placeholder"></div>
 
   <script src="js/components.js"></script>
+  <script src="js/avro.js"></script>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const bookSlug = urlParams.get('book');
@@ -134,9 +135,12 @@
               const decodedQuery = decodeURIComponent(urlQuery);
               document.getElementById('hadith-search').value = decodedQuery;
               isSearchMode = true;
-              currentFilteredHadiths = allHadiths.filter(h => 
-                  h.text && h.text.toLowerCase().includes(decodedQuery.toLowerCase())
-              );
+              const lowerQuery = decodedQuery.toLowerCase();
+              const bnQuery = typeof avroPhonetic !== 'undefined' ? avroPhonetic.parse(lowerQuery).toLowerCase() : '';
+              currentFilteredHadiths = allHadiths.filter(h => {
+                  const text = h.text ? h.text.toLowerCase() : '';
+                  return text.includes(lowerQuery) || (bnQuery && text.includes(bnQuery));
+              });
           } else {
               currentFilteredHadiths = allHadiths;
           }
@@ -324,9 +328,11 @@
             } else {
                 // Text search (and allow number match if one exists in the query)
                 const lowerQuery = rawQuery.toLowerCase();
+                const bnQuery = typeof avroPhonetic !== 'undefined' ? avroPhonetic.parse(rawQuery).toLowerCase() : '';
                 currentFilteredHadiths = allHadiths.filter(h => {
                     const numMatch = !isNaN(extractedNumber) && h.hadithnumber == extractedNumber;
-                    const textMatch = h.text && h.text.toLowerCase().includes(lowerQuery);
+                    const text = h.text ? h.text.toLowerCase() : '';
+                    const textMatch = text.includes(lowerQuery) || (bnQuery && text.includes(bnQuery));
                     return numMatch || textMatch;
                 });
             }

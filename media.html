@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>মিডিয়া গ্যালারি - ইসলামিক ভিডিও ও অডিও | DeenIslam</title>
+  <title>মিডিয়া গ্যালারি - ইসলামিক ভিডিও | DeenIslam</title>
   <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
-  <meta name="description" content="ইসলামিক জ্ঞান, নবীদের জীবনী এবং সুন্দর কুরআন তেলাওয়াতের ভিডিও ও অডিও সংগ্রহ।">
-  <meta name="keywords" content="ইসলামিক ভিডিও, নবীদের জীবনী, Prophet Series, Islamic Media">
+  <meta name="description" content="ইসলামিক জীবনী ও আলোচনার ভিডিও সংগ্রহ।">
+  <meta name="keywords" content="ইসলামিক ভিডিও, জীবনী, Prophet Series, Islamic Media">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
@@ -16,8 +16,8 @@
       theme: {
         extend: {
           colors: {
-            primary: '#059669', // Emerald 600
-            secondary: '#d97706', // Amber 600
+            primary: '#059669',
+            secondary: '#d97706',
           },
           fontFamily: {
             bengali: ['Noto Sans Bengali', 'sans-serif'],
@@ -27,350 +27,152 @@
     }
   </script>
   <style>
-    .video-card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .video-card-hover:hover { transform: translateY(-8px); }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #059669; border-radius: 10px; }
+    .hub-card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .hub-card-hover:hover { transform: translateY(-8px); }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slide-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fade-in 0.4s ease-out; }
+    .animate-slide-up { animation: slide-up 0.5s ease-out; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 flex flex-col min-h-screen font-bengali transition-colors duration-300">
 
-  <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Hero Section -->
   <header class="relative py-20 overflow-hidden">
     <div class="container mx-auto px-6 relative z-10 text-center">
       <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 dark:text-white mb-4 tracking-tight">অডিও ও ভিডিও গ্যালারি</h1>
-      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto italic text-lg">ইসলামিক জ্ঞান, নবীদের জীবনী এবং সুন্দর কুরআন তেলাওয়াতের এক বিশাল সংগ্রহ।</p>
+      <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto italic text-lg">ইসলামিক জীবনী ও আলোচনার ভিডিও সংগ্রহ।</p>
       <div class="w-24 h-1.5 bg-primary mx-auto rounded-full mt-8 shadow-lg shadow-primary/20"></div>
     </div>
   </header>
-  
-  <main class="container mx-auto px-6 py-8 flex-grow">
-    
-    <!-- Controls Section -->
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-        <!-- Tabs -->
-        <div class="flex bg-white dark:bg-slate-900 p-1.5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 w-full md:w-auto overflow-x-auto no-scrollbar">
-            <button onclick="filterMedia('all')" class="tab-btn px-6 py-2.5 rounded-xl font-bold transition-all active-tab bg-primary text-white" data-category="all">সবগুলো</button>
-            <button onclick="filterMedia('prophets')" class="tab-btn px-6 py-2.5 rounded-xl font-bold transition-all text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800" data-category="prophets">নবীদের জীবনী</button>
-            <button onclick="filterMedia('quran')" class="tab-btn px-6 py-2.5 rounded-xl font-bold transition-all text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800" data-category="quran">কুরআন তেলাওয়াত</button>
-            <button onclick="filterMedia('lecture')" class="tab-btn px-6 py-2.5 rounded-xl font-bold transition-all text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800" data-category="lecture">আলোচনা ও বয়ান</button>
-        </div>
 
-        <!-- Search -->
-        <div class="relative w-full md:w-80 group">
-            <input type="text" id="media-search" placeholder="ভিডিও খুঁজুন..." class="w-full p-3.5 pl-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-4 focus:ring-emerald-100 dark:focus:ring-emerald-900/20 focus:border-primary transition-all shadow-sm font-medium text-slate-700 dark:text-slate-200">
-            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">🔍</span>
-        </div>
-    </div>
-
-    <!-- Media Grid -->
-    <div id="media-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        <!-- Cards injected via JS -->
-    </div>
-
-    <!-- Pagination -->
-    <div id="pagination-container" class="flex justify-center items-center space-x-3 mt-16 mb-8">
-        <!-- Pagination buttons will be injected here -->
-    </div>
-
-    <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-20">
-        <div class="w-20 h-20 bg-slate-100 dark:bg-slate-900 text-slate-300 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-        </div>
-        <h3 class="text-xl font-bold text-slate-600 dark:text-slate-400">দুঃখিত, কোনো ভিডিও পাওয়া যায়নি</h3>
-        <button onclick="resetFilters()" class="mt-4 text-primary font-bold hover:underline">সব ভিডিও দেখুন</button>
-    </div>
-
-  </main>
-
-  <!-- Video Player Modal -->
-  <div id="video-modal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 md:p-10 opacity-0 pointer-events-none transition-all duration-300">
-    <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm" onclick="closeModal()"></div>
-    <div class="relative w-full max-w-5xl bg-black rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
-        <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-        </button>
-        <div class="aspect-video">
-            <iframe id="modal-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="p-6 bg-white dark:bg-slate-900">
-            <h3 id="modal-title" class="text-xl font-bold text-slate-800 dark:text-white line-clamp-1">ভিডিও টাইটেল</h3>
-            <p id="modal-category" class="text-primary text-sm font-bold mt-1 uppercase tracking-widest">CATEGORY</p>
-        </div>
+  <div class="container mx-auto px-6 pb-2 max-w-3xl">
+    <div class="relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      <input type="text" id="media-search" placeholder="সব ক্যাটাগরিতে ভিডিও খুঁজুন..." class="w-full p-4 pl-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-4 focus:ring-emerald-100 dark:focus:ring-emerald-900/20 focus:border-primary transition-all shadow-sm font-medium text-slate-700 dark:text-slate-200">
     </div>
   </div>
 
-  <!-- Footer -->
+  <main class="container mx-auto px-6 py-12 flex-grow">
+    <div id="category-cards" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
+      <a href="jiboni.html" class="hub-card-hover group bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:border-primary/30">
+        <div class="aspect-video bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+          </div>
+          <span class="text-6xl opacity-20 group-hover:scale-125 transition-transform duration-500">📖</span>
+          <div class="absolute bottom-4 left-4">
+            <span class="text-white/80 text-sm font-bold bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg">২৯৭ টি ভিডিও</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">জীবনী</h3>
+          <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm leading-relaxed">ইসলামিক ব্যক্তিত্বদের জীবনী বিষয়ক ভিডিও সংগ্রহ। ফোল্ডার ভিত্তিক সাজানো।</p>
+          <div class="flex items-center gap-2 mt-4 text-primary font-bold text-sm">
+            <span>ভিডিও দেখুন</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </div>
+        </div>
+      </a>
+
+      <a href="lectures.html" class="hub-card-hover group bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:border-primary/30">
+        <div class="aspect-video bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+          </div>
+          <span class="text-6xl opacity-20 group-hover:scale-125 transition-transform duration-500">📖</span>
+          <div class="absolute bottom-4 left-4">
+            <span class="text-white/80 text-sm font-bold bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg">৯৯ টি ভিডিও</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">আলোচনা ও বয়ান</h3>
+          <p class="text-slate-500 dark:text-slate-400 mt-2 text-sm leading-relaxed">ইসলামিক আলোচনা ও বয়ানের ভিডিও সংগ্রহ। জ্ঞান ভিত্তিক আলোচনা।</p>
+          <div class="flex items-center gap-2 mt-4 text-primary font-bold text-sm">
+            <span>ভিডিও দেখুন</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div id="search-results" class="hidden">
+      <div class="flex items-center justify-between mb-8 max-w-3xl mx-auto">
+        <h2 class="text-xl font-bold text-slate-800 dark:text-white" id="results-title"></h2>
+        <button onclick="clearSearch()" class="text-sm text-primary font-bold hover:underline">সব দেখুন</button>
+      </div>
+      <div id="media-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+      <div id="empty-state" class="hidden text-center py-16">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-slate-300 dark:text-slate-700 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+        <h3 class="text-xl font-bold text-slate-600 dark:text-slate-400">দুঃখিত, কোনো ভিডিও পাওয়া যায়নি</h3>
+      </div>
+      <div id="pagination-container" class="flex flex-wrap justify-center gap-3 mt-10"></div>
+    </div>
+  </main>
+
+  <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div class="relative w-full max-w-5xl bg-black rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+      <div class="aspect-video">
+        <iframe id="modal-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="p-6 bg-white dark:bg-slate-900">
+        <h3 id="modal-title" class="text-xl font-bold text-slate-800 dark:text-white line-clamp-1">ভিডিও টাইটেল</h3>
+        <p id="modal-category" class="text-primary text-sm font-bold mt-1 uppercase tracking-widest"></p>
+      </div>
+    </div>
+  </div>
+
   <div id="footer-placeholder"></div>
 
   <script src="js/components.js"></script>
+  <script src="js/avro.js"></script>
+  <script src="js/videos.js"></script>
   <script>
-    const mediaItems = [
-      { id: '76CayvF0flE', title: 'নবীদের জীবনী - পর্ব ১', category: 'prophets' },
-      { id: 'ywHoaKVf0E4', title: 'নবীদের জীবনী - পর্ব ২', category: 'prophets' },
-      { id: 'S4JR8gWIvYg', title: 'নবীদের জীবনী - পর্ব ৩', category: 'prophets' },
-      { id: 'Qe9ylM6fNYM', title: 'নবীদের জীবনী - পর্ব ৪', category: 'prophets' },
-      { id: 'Brnu5TgB0Jc', title: 'নবীদের জীবনী - পর্ব ৫', category: 'prophets' },
-      { id: 'Pxf0L6PguOY', title: 'নবীদের জীবনী - পর্ব ৬', category: 'prophets' },
-      { id: 'T8e9J_FleyE', title: 'নবীদের জীবনী - পর্ব ৭', category: 'prophets' },
-      { id: 'LlLNy0Icf7M', title: 'নবীদের জীবনী - পর্ব ৮', category: 'prophets' },
-      { id: 'ntfdrLthUdg', title: 'নবীদের জীবনী - পর্ব ৯', category: 'prophets' },
-      { id: '_CqhdVQztxg', title: 'নবীদের জীবনী - পর্ব ১০', category: 'prophets' },
-      { id: '_lzwHFr2hBA', title: 'নবীদের জীবনী - পর্ব ১১', category: 'prophets' },
-      { id: 'bFIheGltBC8', title: 'নবীদের জীবনী - পর্ব ১২', category: 'prophets' },
-      { id: '4uvZtvQv6ow', title: 'নবীদের জীবনী - পর্ব ১৩', category: 'prophets' },
-      { id: 'MxkQM92MSzI', title: 'নবীদের জীবনী - পর্ব ১৪', category: 'prophets' },
-      { id: '2pVm1-edHWk', title: 'নবীদের জীবনী - পর্ব ১৫', category: 'prophets' },
-      { id: '9KFO2P-0LhI', title: 'নবীদের জীবনী - পর্ব ১৬', category: 'prophets' },
-      { id: '9_W1cFXWqrE', title: 'নবীদের জীবনী - পর্ব ১৭', category: 'prophets' },
-      { id: 'vf0Df6XVTTc', title: 'নবীদের জীবনী - পর্ব ১৮', category: 'prophets' },
-      { id: 'cWfNnCaH6MI', title: 'নবীদের জীবনী - পর্ব ১৯', category: 'prophets' },
-      { id: 'prZrvfpMQ9U', title: 'নবীদের জীবনী - পর্ব ২০', category: 'prophets' },
-      { id: 'UQokR2tslts', title: 'নবীদের জীবনী - পর্ব ২১', category: 'prophets' },
-      { id: 'UPybeb9JdJs', title: 'নবীদের জীবনী - পর্ব ২২', category: 'prophets' },
-      { id: 'TbQJ6MKtp5Q', title: 'নবীদের জীবনী - পর্ব ২৩', category: 'prophets' },
-      { id: 'jcCEiN4xhFI', title: 'নবীদের জীবনী - পর্ব ২৪', category: 'prophets' },
-      { id: 'lN_0oRePY-g', title: 'নবীদের জীবনী - পর্ব ২৫', category: 'prophets' },
-      { id: 'tSteK_9b5Q0', title: 'নবীদের জীবনী - পর্ব ২৬', category: 'prophets' },
-      
-      // Quran Recitation (114 Surahs)
-      { id: 'nTxN-rdRCUs', title: 'কুরআন তেলাওয়াত - সূরা ১', category: 'quran' },
-      { id: 'aUBDWm4gnLo', title: 'কুরআন তেলাওয়াত - সূরা ২', category: 'quran' },
-      { id: '0zo4VmJdP4I', title: 'কুরআন তেলাওয়াত - সূরা ৩', category: 'quran' },
-      { id: '0kVWwI6yMHA', title: 'কুরআন তেলাওয়াত - সূরা ৪', category: 'quran' },
-      { id: '7o1TwXnorX0', title: 'কুরআন তেলাওয়াত - সূরা ৫', category: 'quran' },
-      { id: 'O3LruQJW0eU', title: 'কুরআন তেলাওয়াত - সূরা ৬', category: 'quran' },
-      { id: '8qtsOENUyLg', title: 'কুরআন তেলাওয়াত - সূরা ৭', category: 'quran' },
-      { id: 'jQ-A2NnL2JM', title: 'কুরআন তেলাওয়াত - সূরা ৮', category: 'quran' },
-      { id: '_MgLhKB3CLI', title: 'কুরআন তেলাওয়াত - সূরা ৯', category: 'quran' },
-      { id: 'uOkoJDJOKAc', title: 'কুরআন তেলাওয়াত - সূরা ১০', category: 'quran' },
-      { id: 'I8LmqftQemg', title: 'কুরআন তেলাওয়াত - সূরা ১১', category: 'quran' },
-      { id: '7jAMSOQVCII', title: 'কুরআন তেলাওয়াত - সূরা ১২', category: 'quran' },
-      { id: 'pjYa5vaHNYc', title: 'কুরআন তেলাওয়াত - সূরা ১৩', category: 'quran' },
-      { id: 'whCFylHGNN4', title: 'কুরআন তেলাওয়াত - সূরা ১৪', category: 'quran' },
-      { id: 'Axu7VPsy2WU', title: 'কুরআন তেলাওয়াত - সূরা ১৫', category: 'quran' },
-      { id: 'ATuAo9OIQ_g', title: 'কুরআন তেলাওয়াত - সূরা ১৬', category: 'quran' },
-      { id: 'cSspJZtaGNo', title: 'কুরআন তেলাওয়াত - সূরা ১৭', category: 'quran' },
-      { id: 'G7bqyTvlQsM', title: 'কুরআন তেলাওয়াত - সূরা ১৮', category: 'quran' },
-      { id: 'rs8HW3HDw34', title: 'কুরআন তেলাওয়াত - সূরা ১৯', category: 'quran' },
-      { id: 'pR2oy3L7-gQ', title: 'কুরআন তেলাওয়াত - সূরা ২০', category: 'quran' },
-      { id: 'k4zEOdI3J1E', title: 'কুরআন তেলাওয়াত - সূরা ২১', category: 'quran' },
-      { id: 'W9IfSwpnCaI', title: 'কুরআন তেলাওয়াত - সূরা ২২', category: 'quran' },
-      { id: 'NmGvAZfj6uo', title: 'কুরআন তেলাওয়াত - সূরা ২৩', category: 'quran' },
-      { id: 'xjzAQ9HR8c4', title: 'কুরআন তেলাওয়াত - সূরা ২৪', category: 'quran' },
-      { id: '3ZA_5FARsyw', title: 'কুরআন তেলাওয়াত - সূরা ২৫', category: 'quran' },
-      { id: 'MTpOtd57zqE', title: 'কুরআন তেলাওয়াত - সূরা ২৬', category: 'quran' },
-      { id: '6UfCBuer5yY', title: 'কুরআন তেলাওয়াত - সূরা ২৭', category: 'quran' },
-      { id: 'WRPZFG25dEs', title: 'কুরআন তেলাওয়াত - সূরা ২৮', category: 'quran' },
-      { id: '4nl1wUxvEVk', title: 'কুরআন তেলাওয়াত - সূরা ২৯', category: 'quran' },
-      { id: '1MMtwF6CKOY', title: 'কুরআন তেলাওয়াত - সূরা ৩০', category: 'quran' },
-      { id: 'VZ-9uXV8N6k', title: 'কুরআন তেলাওয়াত - সূরা ৩১', category: 'quran' },
-      { id: 'GIqlO92BDI8', title: 'কুরআন তেলাওয়াত - সূরা ৩২', category: 'quran' },
-      { id: '16Y10EpuWAg', title: 'কুরআন তেলাওয়াত - সূরা ৩৩', category: 'quran' },
-      { id: 'w8a-RlGsBos', title: 'কুরআন তেলাওয়াত - সূরা ৩৪', category: 'quran' },
-      { id: 'KH926vc0Gac', title: 'কুরআন তেলাওয়াত - সূরা ৩৫', category: 'quran' },
-      { id: 'xloz7aca5lk', title: 'কুরআন তেলাওয়াত - সূরা ৩৬', category: 'quran' },
-      { id: 'yFlN8x0PdP0', title: 'কুরআন তেলাওয়াত - সূরা ৩৭', category: 'quran' },
-      { id: 'fyAgxrdc400', title: 'কুরআন তেলাওয়াত - সূরা ৩৮', category: 'quran' },
-      { id: 'Nkb5dA00Ei4', title: 'কুরআন তেলাওয়াত - সূরা ৩৯', category: 'quran' },
-      { id: 'F8qG1IpiCZ8', title: 'কুরআন তেলাওয়াত - সূরা ৪০', category: 'quran' },
-      { id: 'Zq6NSvWzbSY', title: 'কুরআন তেলাওয়াত - সূরা ৪১', category: 'quran' },
-      { id: 'R6gBs7UFpOk', title: 'কুরআন তেলাওয়াত - সূরা ৪২', category: 'quran' },
-      { id: 'x9AdX1iAmjk', title: 'কুরআন তেলাওয়াত - সূরা ৪৩', category: 'quran' },
-      { id: 'FINwZ26HcA4', title: 'কুরআন তেলাওয়াত - সূরা ৪৪', category: 'quran' },
-      { id: 'zX7kcJ4PHvo', title: 'কুরআন তেলাওয়াত - সূরা ৪৫', category: 'quran' },
-      { id: '0j_mLdEPX1M', title: 'কুরআন তেলাওয়াত - সূরা ৪৬', category: 'quran' },
-      { id: 'FXGjlO9cRN0', title: 'কুরআন তেলাওয়াত - সূরা ৪৭', category: 'quran' },
-      { id: 'OU9Y1IS-AsY', title: 'কুরআন তেলাওয়াত - সূরা ৪৮', category: 'quran' },
-      { id: 'VDqNg4bcVik', title: 'কুরআন তেলাওয়াত - সূরা ৪৯', category: 'quran' },
-      { id: 'h2OiWFAiSlA', title: 'কুরআন তেলাওয়াত - সূরা ৫০', category: 'quran' },
-      { id: 'i__3eEG2474', title: 'কুরআন তেলাওয়াত - সূরা ৫১', category: 'quran' },
-      { id: '3pN2ofxat58', title: 'কুরআন তেলাওয়াত - সূরা ৫২', category: 'quran' },
-      { id: 'mUWvm4fyPZ8', title: 'কুরআন তেলাওয়াত - সূরা ৫৩', category: 'quran' },
-      { id: 'vaBQb8JBFPw', title: 'কুরআন তেলাওয়াত - সূরা ৫৪', category: 'quran' },
-      { id: '9epRSTw66BE', title: 'কুরআন তেলাওয়াত - সূরা ৫৫', category: 'quran' },
-      { id: 'rgMgvNE79Gw', title: 'কুরআন তেলাওয়াত - সূরা ৫৬', category: 'quran' },
-      { id: 'ueT4M2EyA_o', title: 'কুরআন তেলাওয়াত - সূরা ৫৭', category: 'quran' },
-      { id: 'Xj6Fv5Ve5U8', title: 'কুরআন তেলাওয়াত - সূরা ৫৮', category: 'quran' },
-      { id: 'T102FgwWlRw', title: 'কুরআন তেলাওয়াত - সূরা ৫৯', category: 'quran' },
-      { id: 'urjQjfMupuY', title: 'কুরআন তেলাওয়াত - সূরা ৬০', category: 'quran' },
-      { id: 'cEnyZfCoZzk', title: 'কুরআন তেলাওয়াত - সূরা ৬১', category: 'quran' },
-      { id: 'ae_du1lLOnw', title: 'কুরআন তেলাওয়াত - সূরা ৬২', category: 'quran' },
-      { id: 'GrTPTVQznAk', title: 'কুরআন তেলাওয়াত - সূরা ৬৩', category: 'quran' },
-      { id: 'yivwvWPmLlM', title: 'কুরআন তেলাওয়াত - সূরা ৬৪', category: 'quran' },
-      { id: 'nZWgz4omi5Y', title: 'কুরআন তেলাওয়াত - সূরা ৬৫', category: 'quran' },
-      { id: 'H0utca_MDz8', title: 'কুরআন তেলাওয়াত - সূরা ৬৬', category: 'quran' },
-      { id: 'OnWMQuBfWfM', title: 'কুরআন তেলাওয়াত - সূরা ৬৭', category: 'quran' },
-      { id: 'xW21tG8UBRs', title: 'কুরআন তেলাওয়াত - সূরা ৬৮', category: 'quran' },
-      { id: 'xjjDJ6m7LyE', title: 'কুরআন তেলাওয়াত - সূরা ৬৯', category: 'quran' },
-      { id: 'lFGAPQ8ZWYo', title: 'কুরআন তেলাওয়াত - সূরা ৭০', category: 'quran' },
-      { id: '-Xrx7P8uICk', title: 'কুরআন তেলাওয়াত - সূরা ৭১', category: 'quran' },
-      { id: 'm5mDEbTEAJs', title: 'কুরআন তেলাওয়াত - সূরা ৭২', category: 'quran' },
-      { id: 'KMnX0hSV5Aw', title: 'কুরআন তেলাওয়াত - সূরা ৭৩', category: 'quran' },
-      { id: 'Sl0KSYG0nrk', title: 'কুরআন তেলাওয়াত - সূরা ৭৪', category: 'quran' },
-      { id: 'nb7fcuAJU2k', title: 'কুরআন তেলাওয়াত - সূরা ৭৫', category: 'quran' },
-      { id: 'kUv0K96AQwM', title: 'কুরআন তেলাওয়াত - সূরা ৭৬', category: 'quran' },
-      { id: 'lDWc8bKUB7c', title: 'কুরআন তেলাওয়াত - সূরা ৭৭', category: 'quran' },
-      { id: 'Sthz0-vcX2A', title: 'কুরআন তেলাওয়াত - সূরা ৭৮', category: 'quran' },
-      { id: 'L8X4PbgVbAY', title: 'কুরআন তেলাওয়াত - সূরা ৭৯', category: 'quran' },
-      { id: '_17mqbl5_Y8', title: 'কুরআন তেলাওয়াত - সূরা ৮০', category: 'quran' },
-      { id: 'MrAp_MZSXzU', title: 'কুরআন তেলাওয়াত - সূরা ৮১', category: 'quran' },
-      { id: 'oLHMDfWDxtY', title: 'কুরআন তেলাওয়াত - সূরা ৮২', category: 'quran' },
-      { id: '8LwHrslBAg0', title: 'কুরআন তেলাওয়াত - সূরা ৮৩', category: 'quran' },
-      { id: '_hMljF6tprs', title: 'কুরআন তেলাওয়াত - সূরা ৮৪', category: 'quran' },
-      { id: 'dU5GTSwv5x4', title: 'কুরআন তেলাওয়াত - সূরা ৮৫', category: 'quran' },
-      { id: 'VHV2hYdSdJw', title: 'কুরআন তেলাওয়াত - সূরা ৮৬', category: 'quran' },
-      { id: 'KG6nXcY1Lgc', title: 'কুরআন তেলাওয়াত - সূরা ৮৭', category: 'quran' },
-      { id: '8o1LP6C_zoI', title: 'কুরআন তেলাওয়াত - সূরা ৮৮', category: 'quran' },
-      { id: '6BL9gBPqqRE', title: 'কুরআন তেলাওয়াত - সূরা ৮৯', category: 'quran' },
-      { id: 'inO3mxXJej8', title: 'কুরআন তেলাওয়াত - সূরা ৯০', category: 'quran' },
-      { id: '7aLRazRfiZ4', title: 'কুরআন তেলাওয়াত - সূরা ৯১', category: 'quran' },
-      { id: '301a5NGUaB8', title: 'কুরআন তেলাওয়াত - সূরা ৯২', category: 'quran' },
-      { id: '2ugXpHFCjiE', title: 'কুরআন তেলাওয়াত - সূরা ৯৩', category: 'quran' },
-      { id: 'CDhMDkiguzg', title: 'কুরআন তেলাওয়াত - সূরা ৯৪', category: 'quran' },
-      { id: 'mPNqwyTEc0I', title: 'কুরআন তেলাওয়াত - সূরা ৯৫', category: 'quran' },
-      { id: 'Yfymd-vCgoA', title: 'কুরআন তেলাওয়াত - সূরা ৯৬', category: 'quran' },
-      { id: 'Ls4QNHldQcs', title: 'কুরআন তেলাওয়াত - সূরা ৯৭', category: 'quran' },
-      { id: 'zpkhc7BFZu4', title: 'কুরআন তেলাওয়াত - সূরা ৯৮', category: 'quran' },
-      { id: '7-xJg_p9Xcs', title: 'কুরআন তেলাওয়াত - সূরা ৯৯', category: 'quran' },
-      { id: '-NPbWSlN91w', title: 'কুরআন তেলাওয়াত - সূরা ১০০', category: 'quran' },
-      { id: 'bSEZXYlW1cw', title: 'কুরআন তেলাওয়াত - সূরা ১০১', category: 'quran' },
-      { id: 'TGUZCOTMdzU', title: 'কুরআন তেলাওয়াত - সূরা ১০২', category: 'quran' },
-      { id: 'fLYndBNu2gE', title: 'কুরআন তেলাওয়াত - সূরা ১০৩', category: 'quran' },
-      { id: '0EPuzbs2DHg', title: 'কুরআন তেলাওয়াত - সূরা ১০৪', category: 'quran' },
-      { id: 'b8XB6C-pPhs', title: 'কুরআন তেলাওয়াত - সূরা ১০৫', category: 'quran' },
-      { id: 'zk_WETYL9_k', title: 'কুরআন তেলাওয়াত - সূরা ১০৬', category: 'quran' },
-      { id: '7ItnXg-_zfo', title: 'কুরআন তেলাওয়াত - সূরা ১০৭', category: 'quran' },
-      { id: 're1c1d9Zuqs', title: 'কুরআন তেলাওয়াত - সূরা ১০৮', category: 'quran' },
-      { id: 'xmxDogKICTM', title: 'কুরআন তেলাওয়াত - সূরা ১০৯', category: 'quran' },
-      { id: 'SaZ90AWN0rg', title: 'কুরআন তেলাওয়াত - সূরা ১১০', category: 'quran' },
-      { id: 'Txss5Bc5nAg', title: 'কুরআন তেলাওয়াত - সূরা ১১১', category: 'quran' },
-      { id: 'r150AzG3YT0', title: 'কুরআন তেলাওয়াত - সূরা ১১২', category: 'quran' },
-      { id: 'ih4lqnP8FmI', title: 'কুরআন তেলাওয়াত - সূরা ১১৩', category: 'quran' },
-      { id: 'YYXNxYHhEZg', title: 'কুরআন তেলাওয়াত - সূরা ১১৪', category: 'quran' },
-
-      // Alochona o Boyan (Lectures)
-      { id: '4MNqOfrz29g', title: 'আলোচনা ও বয়ান - পর্ব ১', category: 'lecture' },
-      { id: '_t6MwPSw15w', title: 'আলোচনা ও বয়ান - পর্ব ২', category: 'lecture' },
-      { id: 'kq2rcR5pRhI', title: 'আলোচনা ও বয়ান - পর্ব ৩', category: 'lecture' },
-      { id: '4NlKj7Saogc', title: 'আলোচনা ও বয়ান - পর্ব ৪', category: 'lecture' },
-      { id: 'UUXju3OCHkc', title: 'আলোচনা ও বয়ান - পর্ব ৫', category: 'lecture' },
-      { id: 'NNa7odii4GI', title: 'আলোচনা ও বয়ান - পর্ব ৬', category: 'lecture' },
-      { id: 'oLrTGNUf5iI', title: 'আলোচনা ও বয়ান - পর্ব ৭', category: 'lecture' },
-      { id: 'TECwN_W2dqY', title: 'আলোচনা ও বয়ান - পর্ব ৮', category: 'lecture' },
-      { id: 'IlWgOyQd7Ko', title: 'আলোচনা ও বয়ান - পর্ব ৯', category: 'lecture' },
-      { id: 'Q3VtCVFfze4', title: 'আলোচনা ও বয়ান - পর্ব ১০', category: 'lecture' },
-      { id: 'OG-1FfOwzEg', title: 'আলোচনা ও বয়ান - পর্ব ১১', category: 'lecture' },
-      { id: 'P7THrkoSEEI', title: 'আলোচনা ও বয়ান - পর্ব ১২', category: 'lecture' },
-      { id: 'eGEr9ZZ3TAw', title: 'আলোচনা ও বয়ান - পর্ব ১৩', category: 'lecture' },
-      { id: 'TvnOngfc_h0', title: 'আলোচনা ও বয়ান - পর্ব ১৪', category: 'lecture' },
-      { id: '0yAvLQXrQ_Q', title: 'আলোচনা ও বয়ান - পর্ব ১৫', category: 'lecture' },
-      { id: 'f8V1ScLzOxY', title: 'আলোচনা ও বয়ান - পর্ব ১৬', category: 'lecture' },
-      { id: '640R4vz4S_Y', title: 'আলোচনা ও বয়ান - পর্ব ১৭', category: 'lecture' },
-      { id: '6OEBxmOyMgE', title: 'আলোচনা ও বয়ান - পর্ব ১৮', category: 'lecture' },
-      { id: 'W_Pf10psvi8', title: 'আলোচনা ও বয়ান - পর্ব ১৯', category: 'lecture' },
-      { id: '14nG4FbnArw', title: 'আলোচনা ও বয়ান - পর্ব ২০', category: 'lecture' },
-      { id: '8Tm5NFiCaNM', title: 'আলোচনা ও বয়ান - পর্ব ২১', category: 'lecture' },
-      { id: 'yv_vRCScI28', title: 'আলোচনা ও বয়ান - পর্ব ২২', category: 'lecture' },
-      { id: 'GDf9TJn_CF8', title: 'আলোচনা ও বয়ান - পর্ব ২৩', category: 'lecture' },
-      { id: '1IyWbT5IgFQ', title: 'আলোচনা ও বয়ান - পর্ব ২৪', category: 'lecture' },
-      { id: 'q8we0VuWGGU', title: 'আলোচনা ও বয়ান - পর্ব ২৫', category: 'lecture' },
-      { id: 'ZZyecjNQ2mo', title: 'আলোচনা ও বয়ান - পর্ব ২৬', category: 'lecture' },
-      { id: 'B4ptZjHQE3c', title: 'আলোচনা ও বয়ান - পর্ব ২৭', category: 'lecture' },
-      { id: 'y2w7WXqmI-0', title: 'আলোচনা ও বয়ান - পর্ব ২৮', category: 'lecture' },
-      { id: 'XkyV7-2MmPU', title: 'আলোচনা ও বয়ান - পর্ব ২৯', category: 'lecture' },
-      { id: 'errwjtbdDWo', title: 'আলোচনা ও বয়ান - পর্ব ৩০', category: 'lecture' },
-      { id: 'R8PJXoBeQ4Q', title: 'আলোচনা ও বয়ান - পর্ব ৩১', category: 'lecture' },
-      { id: 'FClkxLgmyRA', title: 'আলোচনা ও বয়ান - পর্ব ৩২', category: 'lecture' },
-      { id: '1cXM7mQ9siI', title: 'আলোচনা ও বয়ান - পর্ব ৩৩', category: 'lecture' },
-      { id: 'n9fKyuo7d2E', title: 'আলোচনা ও বয়ান - পর্ব ৩৪', category: 'lecture' },
-      { id: '9IvDyCtuMz4', title: 'আলোচনা ও বয়ান - পর্ব ৩৫', category: 'lecture' },
-      { id: 'qY90Gi1XrSA', title: 'আলোচনা ও বয়ান - পর্ব ৩৬', category: 'lecture' },
-      { id: 'G8ljaRJ3Dd4', title: 'আলোচনা ও বয়ান - পর্ব ৩৭', category: 'lecture' },
-      { id: 'PLMo1pQ-4AM', title: 'আলোচনা ও বয়ান - পর্ব ৩৮', category: 'lecture' },
-      { id: 'ik0axWIAxVY', title: 'আলোচনা ও বয়ান - পর্ব ৩৯', category: 'lecture' },
-      { id: 'PKojaVr4vaw', title: 'আলোচনা ও বয়ান - পর্ব ৪০', category: 'lecture' },
-      { id: 'JjQBmGNohkE', title: 'আলোচনা ও বয়ান - পর্ব ৪১', category: 'lecture' },
-      { id: 'PNcAgBuemN0', title: 'আলোচনা ও বয়ান - পর্ব ৪২', category: 'lecture' },
-      { id: 'xWSxneQxERg', title: 'আলোচনা ও বয়ান - পর্ব ৪৩', category: 'lecture' },
-      { id: 'X5Op5Pu4Gz8', title: 'আলোচনা ও বয়ান - পর্ব ৪৪', category: 'lecture' },
-      { id: 'J6x9oKV3h1E', title: 'আলোচনা ও বয়ান - পর্ব ৪৫', category: 'lecture' },
-      { id: 'zZM9C6kHZok', title: 'আলোচনা ও বয়ান - পর্ব ৪৬', category: 'lecture' },
-      { id: '5iON0Om7mxI', title: 'আলোচনা ও বয়ান - পর্ব ৪৭', category: 'lecture' },
-      { id: 't6HPg3V3So0', title: 'আলোচনা ও বয়ান - পর্ব ৪৮', category: 'lecture' },
-      { id: 'OBuUN7YM1GE', title: 'আলোচনা ও বয়ান - পর্ব ৪৯', category: 'lecture' },
-      { id: 'Hi6tmpIEXg4', title: 'আলোচনা ও বয়ান - পর্ব ৫০', category: 'lecture' },
-      { id: 'VLL_6_RtNus', title: 'আলোচনা ও বয়ান - পর্ব ৫১', category: 'lecture' },
-      { id: 'rFvYwuTN7WY', title: 'আলোচনা ও বয়ান - পর্ব ৫২', category: 'lecture' },
-      { id: 'X1zFHWiP2Y0', title: 'আলোচনা ও বয়ান - পর্ব ৫৩', category: 'lecture' },
-      { id: '4fHvizV_9xA', title: 'আলোচনা ও বয়ান - পর্ব ৫৪', category: 'lecture' },
-      { id: 'Yy0yHkk3Xww', title: 'আলোচনা ও বয়ান - পর্ব ৫৫', category: 'lecture' },
-      { id: '7-xbejr91HQ', title: 'আলোচনা ও বয়ান - পর্ব ৫৬', category: 'lecture' },
-      { id: 'qSXubdf-_SI', title: 'আলোচনা ও বয়ান - পর্ব ৫৭', category: 'lecture' },
-      { id: 'd_Irm7ztrs0', title: 'আলোচনা ও বয়ান - পর্ব ৫৮', category: 'lecture' },
-      { id: 'ifYjHxh9W0M', title: 'আলোচনা ও বয়ান - পর্ব ৫৯', category: 'lecture' },
-      { id: '6jxRDbqDxlI', title: 'আলোচনা ও বয়ান - পর্ব ৬০', category: 'lecture' },
-      { id: 'WTq5zq2bH44', title: 'আলোচনা ও বয়ান - পর্ব ৬১', category: 'lecture' },
-      { id: 'RJlNtFEMbHU', title: 'আলোচনা ও বয়ান - পর্ব ৬২', category: 'lecture' },
-      { id: 'nDksHnaRmRI', title: 'আলোচনা ও বয়ান - পর্ব ৬৩', category: 'lecture' },
-      { id: '9yWkxH6A7Ek', title: 'আলোচনা ও বয়ান - পর্ব ৬৪', category: 'lecture' },
-      { id: 'o_ZAzHuvVSA', title: 'আলোচনা ও বয়ান - পর্ব ৬৫', category: 'lecture' },
-      { id: '0r7aWwFhhoM', title: 'আলোচনা ও বয়ান - পর্ব ৬৬', category: 'lecture' },
-      { id: '0NyBhGx4W5c', title: 'আলোচনা ও বয়ান - পর্ব ৬৭', category: 'lecture' },
-      { id: 'kGUV0MUQnxc', title: 'আলোচনা ও বয়ান - পর্ব ৬৮', category: 'lecture' },
-      { id: 't2pSiH_KSDg', title: 'আলোচনা ও বয়ান - পর্ব ৬৯', category: 'lecture' },
-      { id: 'B6hPF2vn7gY', title: 'আলোচনা ও বয়ান - পর্ব ৭০', category: 'lecture' },
-      { id: 'OQ98nhJuvyM', title: 'আলোচনা ও বয়ান - পর্ব ৭১', category: 'lecture' },
-      { id: 'B0V8dKoLZgA', title: 'আলোচনা ও বয়ান - পর্ব ৭২', category: 'lecture' },
-      { id: 'EAENdLenCys', title: 'আলোচনা ও বয়ান - পর্ব ৭৩', category: 'lecture' },
-      { id: 'bnzDEhyeI7c', title: 'আলোচনা ও বয়ান - পর্ব ৭৪', category: 'lecture' },
-      { id: 'JYd3_Q5a70w', title: 'আলোচনা ও বয়ান - পর্ব ৭৫', category: 'lecture' },
-      { id: '2o-7SpBlfu8', title: 'আলোচনা ও বয়ান - পর্ব ৭৬', category: 'lecture' },
-      { id: '1YfSFfmCg5o', title: 'আলোচনা ও বয়ান - পর্ব ৭৭', category: 'lecture' },
-      { id: 'o47mr8v-xYI', title: 'আলোচনা ও বয়ান - পর্ব ৭৮', category: 'lecture' },
-      { id: 'lL-BPMoF0y8', title: 'আলোচনা ও বয়ান - পর্ব ७৯', category: 'lecture' },
-      { id: 'L29Igj8MfsU', title: 'আলোচনা ও বয়ান - পর্ব ৮০', category: 'lecture' },
-      { id: '2NYiimq6D1E', title: 'আলোচনা ও বয়ান - পর্ব ৮১', category: 'lecture' },
-      { id: 'hCLcMvAdbTY', title: 'আলোচনা ও বয়ান - পর্ব ৮২', category: 'lecture' },
-      { id: 'wgDX_IWfzM4', title: 'আলোচনা ও বয়ান - পর্ব ৮৩', category: 'lecture' },
-      { id: 'WpT7wsT5yRg', title: 'আলোচনা ও বয়ান - পর্ব ৮৪', category: 'lecture' },
-      { id: 'xuYyLovgTOk', title: 'আলোচনা ও বয়ান - পর্ব ৮৫', category: 'lecture' },
-      { id: 'vhZQ_-LWzYk', title: 'আলোচনা ও বয়ান - পর্ব ৮৬', category: 'lecture' },
-      { id: 'zC-szyFhG-k', title: 'আলোচনা ও বয়ান - পর্ব ৮৭', category: 'lecture' },
-      { id: 'VIIjK_QPYW0', title: 'আলোচনা ও বয়ান - পর্ব ৮৮', category: 'lecture' },
-      { id: 'iHg9K4gIwu8', title: 'আলোচনা ও বয়ান - পর্ব ৮৯', category: 'lecture' },
-      { id: '2KADX7mKmFI', title: 'আলোচনা ও বয়ান - পর্ব ৯০', category: 'lecture' },
-      { id: '-mSuK3vJf-E', title: 'আলোচনা ও বয়ান - পর্ব ৯১', category: 'lecture' },
-      { id: 'pDnDbOZ8Xhs', title: 'আলোচনা ও বয়ান - পর্ব ৯২', category: 'lecture' },
-      { id: '0BtiIFHD0_s', title: 'আলোচনা ও বয়ান - পর্ব ৯৩', category: 'lecture' },
-      { id: '2q98Vw3J_7I', title: 'আলোচনা ও বয়ান - পর্ব ৯৪', category: 'lecture' },
-      { id: 'CMvkgt0JDiw', title: 'আলোচনা ও বয়ান - পর্ব ৯৫', category: 'lecture' },
-      { id: 'kqftOcEcn_4', title: 'আলোচনা ও বয়ান - পর্ব ৯৬', category: 'lecture' },
-      { id: 'LRsKMxownrU', title: 'আলোচনা ও বয়ান - পর্ব ৯৭', category: 'lecture' },
-      { id: 'uA2dB2Ty2sU', title: 'আলোচনা ও বয়ান - পর্ব ৯৮', category: 'lecture' },
-      { id: 'xJr8n77CkEw', title: 'আলোচনা ও বয়ান - পর্ব ৯৯', category: 'lecture' }
-    ];
-
     const grid = document.getElementById('media-grid');
     const paginationContainer = document.getElementById('pagination-container');
     const modal = document.getElementById('video-modal');
     const modalIframe = document.getElementById('modal-iframe');
     const modalContent = document.getElementById('modal-content');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCategory = document.getElementById('modal-category');
     const searchInput = document.getElementById('media-search');
-    
-    let currentCategory = 'all';
+    const categoryCards = document.getElementById('category-cards');
+    const searchResults = document.getElementById('search-results');
+    const resultsTitle = document.getElementById('results-title');
+
     let currentPage = 1;
     const itemsPerPage = 12;
-    let filteredItems = [...mediaItems];
+    let filteredItems = [];
+
+    function categoryLabel(item) {
+      return item.category === 'jiboni' ? 'জীবনী' : 'আলোচনা ও বয়ান';
+    }
+
+    function openModal(item) {
+      modalIframe.src = `https://www.youtube.com/embed/${item.id}?autoplay=1`;
+      modalTitle.textContent = item.title;
+      modalCategory.textContent = categoryLabel(item);
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => { modalContent.style.transform = 'scale(1)'; }, 10);
+    }
+
+    function closeModal() {
+      modalIframe.src = '';
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      modalContent.style.transform = 'scale(0.95)';
+    }
 
     function renderMedia() {
       grid.innerHTML = '';
-      
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
       const paginatedItems = filteredItems.slice(startIndex, endIndex);
@@ -384,45 +186,31 @@
 
       paginatedItems.forEach((item) => {
         const thumbUrl = `https://img.youtube.com/vi/${item.id}/hqdefault.jpg`;
-        const categoryLabels = {
-            'prophets': 'নবীদের জীবনী',
-            'quran': 'কুরআন তেলাওয়াত',
-            'lecture': 'আলোচনা'
-        };
-        
         const card = document.createElement('div');
         card.className = "video-card-hover bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 group cursor-pointer";
         card.onclick = () => openModal(item);
-        
         card.innerHTML = `
           <div class="aspect-video relative overflow-hidden">
             <img src="${thumbUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
+              <div class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
             </div>
-            <div class="absolute top-4 left-4 flex flex-col space-y-2">
-                <span class="px-3 py-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-[10px] font-bold text-primary rounded-lg uppercase tracking-wider shadow-sm border border-emerald-50 dark:border-slate-800">
-                    ${categoryLabels[item.category]}
-                </span>
-            </div>
-            <div class="absolute top-4 right-4">
-                <button onclick="handleMediaBookmark(event, ${JSON.stringify(item).replace(/"/g, '&quot;')})" class="w-10 h-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-primary rounded-xl flex items-center justify-center shadow-sm border border-emerald-50 dark:border-slate-800 hover:bg-primary hover:text-white transition-all bookmark-btn" data-key="media_${item.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="${window.isBookmarked(`media_${item.id}`) ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
-                </button>
+            <div class="absolute top-4 left-4">
+              <span class="px-3 py-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-[10px] font-bold rounded-lg uppercase tracking-wider shadow-sm border border-emerald-50 dark:border-slate-800 ${item.category === 'jiboni' ? 'text-emerald-600' : 'text-amber-600'}">${categoryLabel(item)}</span>
             </div>
           </div>
           <div class="p-6">
             <h3 class="font-bold text-slate-800 dark:text-white text-sm md:text-base line-clamp-2 leading-relaxed group-hover:text-primary transition-colors">${item.title}</h3>
             <div class="flex items-center justify-between mt-4">
-                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    এখন দেখুন
-                </span>
-                <div class="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
-                </div>
+              <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                এখন দেখুন
+              </span>
+              <div class="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
+              </div>
             </div>
           </div>
         `;
@@ -433,107 +221,53 @@
     }
 
     function renderPagination() {
-        paginationContainer.innerHTML = '';
-        const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-        if (totalPages <= 1) return;
-
-        for (let i = 1; i <= totalPages; i++) {
-            const btn = document.createElement('button');
-            btn.innerText = window.toBengaliNumerals ? window.toBengaliNumerals(i) : i;
-            btn.className = `w-12 h-12 rounded-2xl font-bold transition-all duration-300 ${
-                currentPage === i 
-                ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-110' 
-                : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border border-slate-100 dark:border-slate-800'
-            }`;
-            btn.onclick = () => {
-                currentPage = i;
-                renderMedia();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-            paginationContainer.appendChild(btn);
-        }
+      paginationContainer.innerHTML = '';
+      const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+      if (totalPages <= 1) return;
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = window.toBengaliNumerals ? window.toBengaliNumerals(i) : i;
+        btn.className = `w-12 h-12 rounded-2xl font-bold transition-all duration-300 ${currentPage === i ? 'bg-primary text-white shadow-lg shadow-primary/30 scale-110' : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border border-slate-100 dark:border-slate-800'}`;
+        btn.onclick = () => { currentPage = i; renderMedia(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+        paginationContainer.appendChild(btn);
+      }
     }
 
-    function openModal(item) {
-        modalIframe.src = `https://www.youtube.com/embed/${item.id}?autoplay=1`;
-        document.getElementById('modal-title').innerText = item.title;
-        document.getElementById('modal-category').innerText = item.category === 'prophets' ? 'নবীদের জীবনী' : (item.category === 'quran' ? 'কুরআন তেলাওয়াত' : 'আলোচনা');
-        
-        modal.classList.remove('pointer-events-none', 'opacity-0');
-        modal.classList.add('opacity-100');
-        modalContent.classList.remove('scale-95');
-        modalContent.classList.add('scale-100');
-        document.body.style.overflow = 'hidden';
+    function handleSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) {
+        clearSearch();
+        return;
+      }
+      currentPage = 1;
+      const bnQuery = typeof avroPhonetic !== 'undefined' ? avroPhonetic.parse(query).toLowerCase() : '';
+      filteredItems = allVideos.filter(v =>
+        v.title.includes(query) || (bnQuery && v.title.includes(bnQuery))
+      );
+      categoryCards.classList.add('hidden');
+      searchResults.classList.remove('hidden');
+      const count = window.toBengaliNumerals ? window.toBengaliNumerals(filteredItems.length) : filteredItems.length;
+      resultsTitle.textContent = `"${searchInput.value}" - ${count} টি ফলাফল`;
+      renderMedia();
     }
 
-    function closeModal() {
-        modal.classList.remove('opacity-100');
-        modal.classList.add('opacity-0', 'pointer-events-none');
-        modalContent.classList.add('scale-95');
-        modalContent.classList.remove('scale-100');
-        setTimeout(() => { modalIframe.src = ''; }, 300);
-        document.body.style.overflow = '';
+    function clearSearch() {
+      searchInput.value = '';
+      searchResults.classList.add('hidden');
+      categoryCards.classList.remove('hidden');
+      filteredItems = [];
+      currentPage = 1;
     }
 
-    function filterMedia(category) {
-        currentCategory = category;
-        currentPage = 1;
-        
-        // Update tabs UI
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.remove('bg-primary', 'text-white', 'active-tab');
-            btn.classList.add('text-slate-500');
-            if (btn.dataset.category === category) {
-                btn.classList.add('bg-primary', 'text-white', 'active-tab');
-                btn.classList.remove('text-slate-500');
-            }
-        });
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(handleSearch, 300);
+    });
 
-        applyFilters();
-    }
-
-    function applyFilters() {
-        const query = searchInput.value.toLowerCase().trim();
-        filteredItems = mediaItems.filter(item => {
-            const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
-            const matchesSearch = item.title.toLowerCase().includes(query);
-            return matchesCategory && matchesSearch;
-        });
-        currentPage = 1;
-        renderMedia();
-    }
-
-    function resetFilters() {
-        searchInput.value = '';
-        filterMedia('all');
-    }
-
-    searchInput.addEventListener('input', applyFilters);
-
-    window.handleMediaBookmark = (event, item) => {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        const key = `media_${item.id}`;
-        const data = {
-            key: key,
-            type: 'media',
-            id: item.id,
-            title: item.title,
-            url: `media.html?id=${item.id}`
-        };
-        
-        const isAdded = window.toggleBookmark(data);
-        
-        document.querySelectorAll(`.bookmark-btn[data-key="${key}"]`).forEach(btn => {
-            const svg = btn.querySelector('svg');
-            svg.setAttribute('fill', isAdded ? 'currentColor' : 'none');
-        });
-    };
-
-    // Initial render
-    renderMedia();
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
   </script>
-
 </body>
 </html>
