@@ -627,140 +627,138 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Inject Navbar
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
     if (navbarPlaceholder) {
-        const isIbadahActive = ['qibla.html', 'dua.html', 'allah-names.html', 'namaz.html', 'zakat.html', 'tasbih.html', 'roja.html', 'hajj.html', 'kalima.html'].includes(currentPage);
+        const isIbadahActive = ['salat.html', 'qibla.html', 'dua.html', 'allah-names.html', 'namaz.html', 'zakat.html', 'tasbih.html', 'roja.html', 'hajj.html', 'kalima.html', 'media.html', 'community.html'].includes(currentPage) || isSubDir;
         const isOthersActive = ['community.html', 'about.html', 'credits.html'].includes(currentPage);
 
         navbarPlaceholder.innerHTML = `
         <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 transition-colors duration-200">
-            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center transition-all">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center gap-4">
                 <!-- Brand Logo -->
-                <a href="${basePath}index.html" class="flex items-center space-x-3 shrink-0 group">
+                <a href="${basePath}index.html" class="flex items-center space-x-2.5 shrink-0 group">
                     <div class="w-9 h-9 bg-emerald-600 group-hover:bg-emerald-700 rounded-xl flex items-center justify-center text-white shadow-sm transition-all group-hover:scale-105">
                         <span class="text-base select-none">🌙</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-xl md:text-2xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-primary transition-colors leading-tight">DeenIslam</span>
-                        <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider uppercase leading-none hidden sm:block">দ্বীন ইসলাম</span>
+                        <span class="text-xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-primary transition-colors leading-tight">DeenIslam</span>
+                        <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider leading-none hidden sm:block">দ্বীন ইসলাম</span>
                     </div>
                 </a>
                 
-                <!-- Desktop Nav Menu -->
-                <div class="hidden lg:flex flex-grow justify-center items-center">
-                    <ul class="flex space-x-6 xl:space-x-8 items-center text-sm font-semibold">
+                <!-- Desktop Nav Menu (5 Clean Top-Level Items) -->
+                <div class="hidden lg:flex items-center justify-center">
+                    <ul class="flex items-center gap-1 xl:gap-2 text-sm font-semibold whitespace-nowrap">
                         <li>
-                            <a href="${basePath}index.html" class="${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
+                            <a href="${basePath}index.html" class="px-3.5 py-2 rounded-xl transition-colors ${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
                                 হোম
                             </a>
                         </li>
                         <li>
-                            <a href="${basePath}salat.html" class="${currentPage === 'salat.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
-                                সালাত
+                            <a href="${basePath}quran.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                                আল-কুরআন
                             </a>
                         </li>
                         <li>
-                            <a href="${basePath}quran.html" class="${currentPage === 'quran.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
-                                কুরআন
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${basePath}hadith.html" class="${currentPage === 'hadith.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
+                            <a href="${basePath}hadith.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'hadith.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
                                 হাদিস
                             </a>
                         </li>
                         <li>
-                            <a href="${basePath}seerah.html" class="${currentPage === 'seerah.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
-                                সীরাতুন্নবী (ﷺ)
+                            <a href="${basePath}seerah.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'seerah.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                                সীরাত (ﷺ)
                             </a>
                         </li>
 
-                        <!-- Ibadah & Tools Dropdown -->
+                        <!-- All Ibadah, Tools & Portal Resources Dropdown -->
                         <li class="relative group">
-                            <button class="flex items-center space-x-1 py-1.5 ${isIbadahActive ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
-                                <span>ইবাদত ও টুলস</span>
+                            <button class="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-colors ${isIbadahActive ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                                <span>ইবাদত ও সেবাসমূহ</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 transform group-hover:rotate-180 transition-transform duration-200 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                             </button>
-                            <div class="absolute left-0 mt-2 w-72 bg-white dark:bg-[#0f172a] border border-stone-200/90 dark:border-slate-800 rounded-2xl shadow-xl py-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 grid grid-cols-1 gap-0.5">
-                                <a href="${basePath}qibla.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'qibla.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">🧭</span>
-                                    <span>কিবলা কম্পাস</span>
-                                </a>
-                                <a href="${basePath}dua.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'dua.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">🤲</span>
-                                    <span>দৈনন্দিন দো'আ (হিসনুল মুসলিম)</span>
-                                </a>
-                                <a href="${basePath}allah-names.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">🌟</span>
-                                    <span>আল্লাহর ৯৯ নাম</span>
-                                </a>
-                                <a href="${basePath}namaz.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">🕌</span>
-                                    <span>নামাজ শিক্ষা গাইড</span>
-                                </a>
-                                <a href="${basePath}zakat.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'zakat.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">💎</span>
-                                    <span>যাকাত ক্যালকুলেটর</span>
-                                </a>
-                                <a href="${basePath}tasbih.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'tasbih.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">📿</span>
-                                    <span>ডিজিটাল তাসবীহ</span>
-                                </a>
-                                <a href="${basePath}roja.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'roja.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">🌙</span>
-                                    <span>রোজা ও সেহরি-ইফতার</span>
-                                </a>
-                                <a href="${basePath}hajj.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'hajj.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">🕋</span>
-                                    <span>হজ ও উমরাহ গাইড</span>
-                                </a>
-                                <a href="${basePath}kalima.html" class="flex items-center space-x-3 px-4 py-2 text-xs font-semibold ${currentPage === 'kalima.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl mx-1 transition-colors">
-                                    <span class="text-base">☝️</span>
-                                    <span>ইসলামের ৫ কালিমা</span>
-                                </a>
+                            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-[30rem] bg-white dark:bg-[#0f172a] border border-stone-200/90 dark:border-slate-800 rounded-2xl shadow-xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+                                <div class="grid grid-cols-2 gap-1">
+                                    <a href="${basePath}salat.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'salat.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🕰️</span>
+                                        <span>সালাতের সময়সূচি</span>
+                                    </a>
+                                    <a href="${basePath}qibla.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'qibla.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🧭</span>
+                                        <span>কিবলা কম্পাস</span>
+                                    </a>
+                                    <a href="${basePath}dua.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'dua.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🤲</span>
+                                        <span>দৈনন্দিন দো'আ</span>
+                                    </a>
+                                    <a href="${basePath}allah-names.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🌟</span>
+                                        <span>আল্লাহর ৯৯ নাম</span>
+                                    </a>
+                                    <a href="${basePath}namaz.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🕌</span>
+                                        <span>নামাজ শিক্ষা গাইড</span>
+                                    </a>
+                                    <a href="${basePath}zakat.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'zakat.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">💎</span>
+                                        <span>যাকাত ক্যালকুলেটর</span>
+                                    </a>
+                                    <a href="${basePath}tasbih.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'tasbih.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">📿</span>
+                                        <span>ডিজিটাল তাসবীহ</span>
+                                    </a>
+                                    <a href="${basePath}roja.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'roja.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🌙</span>
+                                        <span>রোজা ও সেহরি-ইফতার</span>
+                                    </a>
+                                    <a href="${basePath}hajj.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'hajj.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🕋</span>
+                                        <span>হজ ও উমরাহ গাইড</span>
+                                    </a>
+                                    <a href="${basePath}kalima.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'kalima.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">☝️</span>
+                                        <span>ইসলামের ৫ কালিমা</span>
+                                    </a>
+                                </div>
+                                <div class="mt-2 pt-2 border-t border-stone-100 dark:border-slate-800 grid grid-cols-3 gap-1">
+                                    <a href="${basePath}media.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${currentPage === 'media.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-slate-800'} rounded-lg transition-colors">
+                                        <span>🎬</span>
+                                        <span>মিডিয়া</span>
+                                    </a>
+                                    <a href="${basePath}articles/index.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${isSubDir ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-slate-800'} rounded-lg transition-colors">
+                                        <span>📝</span>
+                                        <span>প্রবন্ধ</span>
+                                    </a>
+                                    <a href="${basePath}community.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${currentPage === 'community.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-slate-800'} rounded-lg transition-colors">
+                                        <span>💬</span>
+                                        <span>কমিউনিটি</span>
+                                    </a>
+                                </div>
                             </div>
-                        </li>
-
-                        <li>
-                            <a href="${basePath}community.html" class="${currentPage === 'community.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
-                                কমিউনিটি
-                            </a>
-                        </li>
-                        <li>
-                            <a href="${basePath}media.html" class="${currentPage === 'media.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
-                                মিডিয়া
-                            </a>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Right Side Actions -->
-                <div class="flex items-center space-x-2 md:space-x-3 shrink-0">
-                    <!-- Live Hijri Date Badge (Desktop) -->
-                    <div class="hidden xl:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-50/80 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold border border-emerald-200/60 dark:border-emerald-800/40 shrink-0">
-                        <span class="text-xs">🌙</span>
-                        <span id="navbar-hijri-date">২৪ রবিউস সানি, ১৪৪৮ হিজরি</span>
-                    </div>
-
+                <!-- Right Side Actions (Compact & Uncluttered) -->
+                <div class="flex items-center space-x-2 shrink-0">
                     <!-- Quick Search Button -->
-                    <button onclick="window.openCommandPalette()" class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-stone-100/90 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-stone-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:text-primary transition-all text-xs font-medium" title="অনুসন্ধান (Ctrl+K)">
+                    <button onclick="window.openCommandPalette()" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-stone-100/90 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-stone-200/80 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:text-primary transition-all text-xs font-medium" title="অনুসন্ধান (Ctrl+K)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         <span class="hidden sm:inline text-xs text-slate-500 dark:text-slate-400">অনুসন্ধান</span>
                         <kbd class="hidden md:inline-block px-1.5 py-0.5 text-[10px] bg-white dark:bg-slate-700 text-slate-400 rounded font-mono border border-stone-200 dark:border-slate-600">⌘K</kbd>
                     </button>
 
                     <!-- Bookmarks -->
-                    <a href="${basePath}bookmarks.html" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all relative border border-transparent hover:border-emerald-200/60 ${currentPage === 'bookmarks.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200' : ''}" title="বুকমার্ক">
+                    <a href="${basePath}bookmarks.html" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all relative border border-transparent hover:border-emerald-200/60 ${currentPage === 'bookmarks.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200' : ''}" title="বুকমার্ক">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="${currentPage === 'bookmarks.html' ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
                         <span id="navbar-bookmark-count" class="hidden absolute -top-1 -right-1 bg-primary text-white text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center shadow-xs"></span>
                     </a>
 
                     <!-- Theme Toggle -->
-                    <button class="theme-toggle p-2 rounded-lg bg-stone-100/90 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all" title="থিম পরিবর্তন">
+                    <button class="theme-toggle p-2 rounded-xl bg-stone-100/90 dark:bg-slate-800/80 border border-stone-200/80 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all" title="থিম পরিবর্তন">
                         <svg class="theme-toggle-dark-icon hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                         <svg class="theme-toggle-light-icon hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                     </button>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="lg:hidden text-slate-600 dark:text-slate-300 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 border border-stone-200 dark:border-slate-700" aria-label="Menu">
+                    <button id="mobile-menu-btn" class="lg:hidden text-slate-600 dark:text-slate-300 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 border border-stone-200 dark:border-slate-700" aria-label="Menu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     </button>
                 </div>
@@ -922,6 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li><a href="${basePath}index.html" class="hover:text-primary dark:hover:text-white transition-colors">হোম</a></li>
                             <li><a href="${basePath}quran.html" class="hover:text-primary dark:hover:text-white transition-colors">আল-কুরআন</a></li>
                             <li><a href="${basePath}hadith.html" class="hover:text-primary dark:hover:text-white transition-colors">সহীহ হাদিস</a></li>
+                            <li><a href="${basePath}seerah.html" class="hover:text-primary dark:hover:text-white transition-colors">সীরাতুন্নবী (ﷺ)</a></li>
                             <li><a href="${basePath}salat.html" class="hover:text-primary dark:hover:text-white transition-colors">সালাতের সময়সূচি</a></li>
                             <li><a href="${basePath}namaz.html" class="hover:text-primary dark:hover:text-white transition-colors">নামাজ শিক্ষা</a></li>
                             <li><a href="${basePath}articles/index.html" class="hover:text-primary dark:hover:text-white transition-colors">ইসলামিক প্রবন্ধ</a></li>
