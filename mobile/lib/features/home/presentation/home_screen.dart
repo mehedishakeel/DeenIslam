@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),
                 Text(
-                  "$_selectedCity, বাংলাদেশ • হিজরি ১৪৪৮",
+                  "$_selectedCity, বাংলাদেশ",
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 11,
                     color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
@@ -213,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // 1. Bento Card 1: Prayer Times Active Countdown
+            // 1. Bento Card 1: Prayer Times Status Card
             _buildPrayerCountdownCard(prayerStatus, isDark),
             const SizedBox(height: 12),
 
@@ -242,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
-  // --- CARD 1: Prayer Countdown Card ---
+  // --- CARD 1: Prayer Status Card ---
   Widget _buildPrayerCountdownCard(PrayerStatus status, bool isDark) {
     return Container(
       padding: const EdgeInsets.all(18),
@@ -261,101 +261,90 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           ),
         ],
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Icon(status.icon, color: AppColors.emerald, size: 18),
                   const SizedBox(width: 6),
                   Text(
-                    "পরবর্তী নামাজ: ${status.nextName}",
-                    style: GoogleFonts.hindSiliguri(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? Colors.white : AppColors.textPrimaryLight,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft,
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(
-                    color: isDark ? AppColors.emeraldDark : AppColors.emerald.withOpacity(0.2),
-                  ),
-                ),
-                child: Text(
-                  status.nextTimeFormatted,
-                  style: GoogleFonts.hindSiliguri(
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.emerald,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "ওয়াক্ত হতে বাকি",
+                    "পরবর্তী ওয়াক্ত",
                     style: GoogleFonts.hindSiliguri(
                       fontSize: 12,
+                      fontWeight: FontWeight.w600,
                       color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
                     ),
                   ),
-                  const SizedBox(height: 2),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
                   Text(
-                    BengaliNumerals.formatCountdown(status.remaining),
+                    status.nextName,
                     style: GoogleFonts.hindSiliguri(
-                      fontSize: 28,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
                       color: AppColors.emerald,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: isDark ? AppColors.emeraldDark : AppColors.emerald.withOpacity(0.2),
+                      ),
+                    ),
+                    child: Text(
+                      status.nextTimeFormatted,
+                      style: GoogleFonts.hindSiliguri(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.emerald,
+                      ),
                     ),
                   ),
                 ],
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                decoration: BoxDecoration(
-                  color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: isDark ? AppColors.borderDark : AppColors.borderLight,
+              ),
+            ),
+            child: Column(
+              children: [
+                Text(
+                  "বর্তমান ওয়াক্ত",
+                  style: GoogleFonts.hindSiliguri(
+                    fontSize: 10,
+                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      "বর্তমান ওয়াক্ত",
-                      style: GoogleFonts.hindSiliguri(
-                        fontSize: 10,
-                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                      ),
-                    ),
-                    Text(
-                      status.currentName,
-                      style: GoogleFonts.hindSiliguri(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : AppColors.textPrimaryLight,
-                      ),
-                    ),
-                  ],
+                Text(
+                  status.currentName,
+                  style: GoogleFonts.hindSiliguri(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

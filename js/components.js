@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navbarPlaceholder.innerHTML = `
         <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 transition-colors duration-200">
-            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center gap-4">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center gap-4 bg-transparent">
                 <!-- Brand Logo -->
                 <a href="${basePath}index.html" class="flex items-center space-x-2.5 shrink-0 group">
                     <div class="w-9 h-9 bg-emerald-600 group-hover:bg-emerald-700 rounded-xl flex items-center justify-center text-white shadow-sm transition-all group-hover:scale-105">
