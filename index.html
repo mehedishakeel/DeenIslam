@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeenIslam - ইসলামিক জ্ঞান, কুরআন, হাদিস ও সালাত টাইমলাইন</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="DeenIslam.org - আধুনিক ইসলামিক ওয়েব পোর্টাল। শুদ্ধ ও সঠিক ইসলামিক তথ্য, আল-কুরআন, হাদিস, নামাজের সালাত টাইমলাইন, কিবলা কম্পাস ও প্রাত্যহিক দো'আ।">
+  <meta name="keywords" content="Islam, Quran, Hadith, Prayer Times, Qibla, Dua, 99 Names of Allah, Zakat, দ্বীন ইসলাম, কুরআন, হাদিস, নামাজের সময়সূচি">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deenislam.org/">
+  <meta property="og:title" content="DeenIslam - ইসলামিক জ্ঞান, কুরআন ও হাদিস গাইড">
+  <meta property="og:description" content="শুদ্ধ ও সঠিক ইসলামিক তথ্য নিয়ে আপনার দ্বীনি জীবনের সফরকে আরও সহজ ও সুন্দর করতে আধুনিক মিনিমালিস্ট পোর্টাল।">
+  <meta property="og:image" content="https://deenislam.org/favicon/deenislam.ico">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://deenislam.org/">
+  <meta property="twitter:title" content="DeenIslam - ইসলামিক জ্ঞান, কুরআন ও হাদিস গাইড">
+  <meta property="twitter:description" content="শুদ্ধ ও সঠিক ইসলামিক তথ্য নিয়ে আপনার দ্বীনি জীবনের সফরকে আরও সহজ ও সুন্দর করতে আধুনিক মিনিমালিস্ট পোর্টাল।">
+  <meta property="twitter:image" content="https://deenislam.org/favicon/deenislam.ico">
+
+  <!-- Performance Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { 
+            primary: '#059669', 
+            primaryDark: '#047857',
+            secondary: '#d97706', 
+            accentGold: '#f59e0b',
+            brandIvory: '#fbfaf8'
+          },
+          fontFamily: { 
+            bengali: ['Noto Sans Bengali', 'sans-serif'], 
+            arabic: ['Amiri', 'serif'] 
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Arabesque background subtle pattern */
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 selection:bg-emerald-500 selection:text-white bg-islamic-pattern">
+
+  <!-- Navbar Placeholder (Injected via js/components.js) -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content Wrapper -->
+  <main class="flex-grow">
+
+    <!-- HERO & SPIRITUAL DASHBOARD -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-8">
+      
+      <!-- 2-Column Balanced Architectural Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+
+        <!-- Column 1: Deep Botanical Emerald Prayer Focal Sanctuary (7 cols) -->
+        <div class="lg:col-span-7 relative bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#043328] rounded-2xl p-6 sm:p-8 text-white shadow-md overflow-hidden border border-emerald-500/25 flex flex-col justify-between">
+          
+          <!-- Subtle Arabesque Star Geometry Overlay -->
+          <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="islamic-geom-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+                  <path d="M24 0 L48 24 L24 48 L0 24 Z M24 12 L36 24 L24 36 L12 24 Z" fill="none" stroke="white" stroke-width="0.75"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#islamic-geom-grid)" />
+            </svg>
+          </div>
+
+          <!-- Top Row: Hijri Badge + Location -->
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-2.5 mb-4">
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-sm text-xs font-semibold text-emerald-100 border border-white/10">
+              <span class="text-xs">🌙</span>
+              <span id="hero-hijri-date">২৪ রবিউস সানি, ১৪৪৮ হিজরি</span>
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <div id="location-text" class="inline-flex items-center text-xs text-emerald-50 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span>ঢাকা (ডিফল্ট)</span>
+              </div>
+              <button onclick="getPrayerTimes(true)" class="text-xs font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-xl transition-all border border-white/10" title="জিপিএস লোকেশন রিফ্রেশ">
+                GPS
+              </button>
+            </div>
+          </div>
+
+          <!-- Center: Circular Countdown Ring & Next Waqt Status -->
+          <div class="relative z-10 flex flex-col items-center justify-center my-4 select-none">
+            <div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center">
+              
+              <!-- Clean SVG Progress Circle -->
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="64" class="text-white/10" stroke-width="7" stroke="currentColor" fill="transparent" />
+                <circle 
+                  id="prayer-progress-circle" 
+                  cx="80" 
+                  cy="80" 
+                  r="64" 
+                  class="text-amber-400" 
+                  stroke-width="7" 
+                  stroke-dasharray="402.12" 
+                  stroke-dashoffset="120" 
+                  stroke-linecap="round" 
+                  stroke="currentColor" 
+                  fill="transparent" 
+                  style="transition: stroke-dashoffset 1s linear;"
+                />
+              </svg>
+
+              <!-- Central Content Inside Ring -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center select-none">
+                <span class="text-[11px] uppercase font-bold tracking-widest text-emerald-200/90 mb-0.5">পরবর্তী ওয়াক্ত</span>
+                <h2 id="next-prayer-name" class="text-3xl sm:text-4xl font-black text-white tracking-tight my-0.5">ফজর</h2>
+                <div class="flex items-center space-x-1 text-sm text-amber-300 font-bold mb-2 font-mono">
+                  <span id="next-prayer-time">--:--</span>
+                </div>
+                <div class="px-3.5 py-1 bg-white/15 rounded-lg text-xs font-semibold text-emerald-50 border border-white/10">
+                  <span id="next-prayer-countdown">গণনা হচ্ছে...</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bottom: 5-Waqt Horizontal Timeline Strip -->
+          <div class="relative z-10 pt-4 border-t border-white/10">
+            <div class="grid grid-cols-5 gap-2 text-center">
+              <div id="waqt-card-fajr" class="p-2 sm:p-2.5 rounded-xl bg-white/10 transition-all border border-transparent">
+                <span class="block text-xs font-semibold text-emerald-100">ফজর</span>
+                <span id="fajr-time" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">--:--</span>
+              </div>
+              <div id="waqt-card-dhuhr" class="p-2 sm:p-2.5 rounded-xl bg-white/10 transition-all border border-transparent">
+                <span class="block text-xs font-semibold text-emerald-100">যোহর</span>
+                <span id="dhuhr-time" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">--:--</span>
+              </div>
+              <div id="waqt-card-asr" class="p-2 sm:p-2.5 rounded-xl bg-white/10 transition-all border border-transparent">
+                <span class="block text-xs font-semibold text-emerald-100">আসর</span>
+                <span id="asr-time" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">--:--</span>
+              </div>
+              <div id="waqt-card-maghrib" class="p-2 sm:p-2.5 rounded-xl bg-white/10 transition-all border border-transparent">
+                <span class="block text-xs font-semibold text-emerald-100">মাগরিব</span>
+                <span id="maghrib-time" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">--:--</span>
+              </div>
+              <div id="waqt-card-isha" class="p-2 sm:p-2.5 rounded-xl bg-white/10 transition-all border border-transparent">
+                <span class="block text-xs font-semibold text-emerald-100">ইশা</span>
+                <span id="isha-time" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">--:--</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Column 2: Spiritual Guidance & Personal Progress (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-6 justify-between">
+          
+          <!-- Card A: Daily Quranic Ayah Card -->
+          <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 sm:p-7 shadow-sm border border-stone-200/80 dark:border-slate-800 flex flex-col justify-between relative">
+            <div>
+              <!-- Header Pill -->
+              <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 text-xs font-bold border border-amber-200/60 dark:border-amber-800/40">
+                  <span>📖</span>
+                  <span>আজকের আয়াত • Daily Ayah</span>
+                </span>
+                <a href="quran.html" class="text-xs font-bold text-slate-400 hover:text-primary transition-colors flex items-center space-x-1" title="কুরআন পাঠ করুন">
+                  <span>কুরআন</span>
+                  <span>→</span>
+                </a>
+              </div>
+
+              <!-- Arabic Calligraphy with reverent spacing -->
+              <div class="my-4 text-right">
+                <p id="daily-verse-arabic" class="font-arabic text-2xl sm:text-3xl leading-[2.2] font-bold text-slate-800 dark:text-white select-all" dir="rtl">
+                  إِنَّ اللَّهَ مَعَ الصَّابِرِينَ
+                </p>
+              </div>
+
+              <!-- Bengali Translation -->
+              <blockquote id="daily-verse" class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed my-3 border-l-2 border-emerald-500 pl-3.5">
+                "নিশ্চয়ই আল্লাহ ধৈর্যশীলদের সঙ্গে আছেন।"
+              </blockquote>
+            </div>
+
+            <!-- Footer Reference & Link -->
+            <div class="pt-4 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between">
+              <p id="daily-verse-ref" class="text-xs font-bold text-emerald-700 dark:text-emerald-400">সূরা আল-বাকারা: ১৫৩</p>
+              <a href="quran.html" class="inline-flex items-center space-x-1 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                <span>তিলাওয়াত শুনুন ও পড়ুন</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card B: Split Practice & Progress (Fasting & Last Read) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Widget 1: Fasting & Ramadan Tracker -->
+            <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-sm border border-stone-200/80 dark:border-slate-800 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2.5 py-0.5 rounded-md border border-amber-200/50 dark:border-amber-800/40">
+                  🌙 সাওম ট্র্যাকার
+                </span>
+                <a href="roja.html" class="text-slate-400 hover:text-primary transition-colors text-xs font-bold" title="রোজার গাইড">
+                  →
+                </a>
+              </div>
+
+              <div class="my-2">
+                <h3 id="bento-fasting-title" class="text-sm font-bold text-slate-700 dark:text-slate-200">
+                  ইফতারের বাকি
+                </h3>
+                <div id="bento-fasting-clock" class="font-mono text-2xl font-black text-amber-600 dark:text-amber-400 tracking-tight my-1">
+                  --:--:--
+                </div>
+                <p id="bento-fasting-info" class="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                  মাগরিব (ইফতার): --:--
+                </p>
+              </div>
+
+              <!-- Two-Tone Fasting Progress Bar -->
+              <div class="space-y-1.5 pt-2 border-t border-stone-100 dark:border-slate-800">
+                <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
+                  <div id="bento-fasting-bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-500 transition-all duration-500" style="width: 50%"></div>
+                </div>
+                <div class="flex justify-between items-center text-[10px] font-semibold text-slate-400">
+                  <span>সেহরি</span>
+                  <a href="roja.html#duas" class="text-primary hover:underline">দোয়া →</a>
+                  <span>ইফতার</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 2: Continue Reading Surah -->
+            <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-sm border border-stone-200/80 dark:border-slate-800 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-md border border-emerald-200/50 dark:border-emerald-800/40">
+                  সর্বশেষ পঠিত
+                </span>
+                <a href="quran.html" class="text-slate-400 hover:text-primary transition-colors text-xs font-bold" title="সূরা তালিকা">
+                  →
+                </a>
+              </div>
+
+              <div class="my-1">
+                <h4 id="home-last-read-title" class="text-sm font-black text-slate-800 dark:text-white truncate">
+                  Surah Al-Kahf
+                </h4>
+                <p id="home-last-read-sub" class="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                  সূরা আল-কাহাফ • আয়াত ১-১৫
+                </p>
+              </div>
+
+              <div class="space-y-1.5 my-2">
+                <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
+                  <div id="home-progress-bar-1" class="h-full bg-emerald-500 transition-all duration-500" style="width: 35%"></div>
+                  <div id="home-progress-bar-2" class="h-full bg-amber-400 transition-all duration-500" style="width: 25%"></div>
+                </div>
+                <div class="flex justify-between items-center text-[10px] font-semibold text-slate-400">
+                  <span>অগ্রগতি</span>
+                  <span id="home-last-read-progress">১-৫৮ (২৫%)</span>
+                </div>
+              </div>
+
+              <a id="home-last-read-link" href="surah.html?id=18" class="w-full py-1.5 bg-stone-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-primary font-bold text-xs rounded-lg text-center transition-all flex items-center justify-center space-x-1 group">
+                <span>পড়া চালিয়ে যান</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CORE TOOLS ARCHITECTURE GRID (Disciplined, Dignified Navigation) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white tracking-tight">প্রধান ইসলামিক সংকলন ও সেবা</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">সহীহ দলিল ও নির্ভরযোগ্য রেফারেন্সসহ প্রাত্যহিক ইবাদত সহায়ক</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+        
+        <!-- Tool 1: Quran -->
+        <a href="quran.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+          <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
+            📖
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">আল-কুরআন</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">১১৪ সূরা ও ৩০ পারা</p>
+          </div>
+        </a>
+
+        <!-- Tool 2: Hadith -->
+        <a href="hadith.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+          <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
+            📜
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">সহীহ হাদিস</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">৭টি প্রধান গ্রন্থ</p>
+          </div>
+        </a>
+
+        <!-- Tool 3: Dua -->
+        <a href="dua.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+          <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
+            🤲
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">দৈনন্দিন দো'আ</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">হিসনুল মুসলিম</p>
+          </div>
+        </a>
+
+        <!-- Tool 4: Tasbih -->
+        <a href="tasbih.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+          <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
+            📿
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">ডিজিটাল তাসবীহ</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">জিকির ও কাউন্টার</p>
+          </div>
+        </a>
+
+        <!-- Tool 5: Qibla -->
+        <a href="qibla.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+          <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
+            🧭
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">কিবলা কম্পাস</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">সঠিক দিকনির্ণয়</p>
+          </div>
+        </a>
+
+        <!-- Tool 6: Namaz Guide -->
+        <a href="namaz.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+          <div class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg mb-3 shadow-sm group-hover:scale-110 transition-transform">
+            🕌
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">নামাজ শিক্ষা</h3>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">সহীহ সালাত গাইড</p>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- DAILY SPIRITUAL SPOTLIGHT (4 Purposeful Interactive Feature Cards) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Card 1: Qibla Compass Widget -->
+        <a href="qibla.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group block">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">কিবলা কম্পাস</h3>
+              <span class="text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all text-xs font-bold">→</span>
+            </div>
+
+            <!-- Compass Dial Visualization -->
+            <div class="relative w-36 h-36 mx-auto my-2 flex items-center justify-center">
+              <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-300/70 dark:border-amber-400/40"></div>
+              <div class="absolute inset-1.5 rounded-full border border-stone-200 dark:border-slate-800 bg-stone-50/70 dark:bg-slate-800/40"></div>
+              
+              <!-- Cardinal Points -->
+              <span class="absolute top-1.5 text-[10px] font-bold text-amber-600 dark:text-amber-400">N</span>
+              <span class="absolute right-2 text-[10px] font-bold text-slate-400">E</span>
+              <span class="absolute bottom-1.5 text-[10px] font-bold text-slate-400">S</span>
+              <span class="absolute left-2 text-[10px] font-bold text-slate-400">W</span>
+
+              <!-- Directional Triangle Indicator -->
+              <div class="absolute top-3.5 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[7px] border-b-amber-500"></div>
+
+              <!-- Kaaba Icon in Center -->
+              <div class="w-11 h-11 bg-emerald-50 dark:bg-emerald-950/60 rounded-full flex items-center justify-center text-lg shadow-xs border border-emerald-200/60 dark:border-emerald-800 z-10 group-hover:scale-105 transition-transform">
+                🕋
+              </div>
+
+              <!-- Needle -->
+              <div class="absolute inset-0 flex items-center justify-center transform -rotate-45 pointer-events-none">
+                <div class="w-1 h-12 bg-gradient-to-t from-transparent via-emerald-500 to-emerald-600 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compass Degree Text -->
+          <div class="text-center mt-3 pt-3 border-t border-stone-100 dark:border-slate-800">
+            <h4 class="text-2xl font-black text-slate-800 dark:text-white">২৮০°</h4>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">মক্কার দিকে অভিমুখ</p>
+          </div>
+        </a>
+
+        <!-- Card 2: Hisnul Muslim Daily Dua Card -->
+        <a href="dua.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group block">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">প্রাত্যহিক দো'আ</h3>
+              <span class="text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all text-xs font-bold">→</span>
+            </div>
+
+            <!-- Calligraphic Dua Text (Amiri font) -->
+            <div class="my-3 text-center">
+              <p id="bento-dua-arabic" class="font-arabic text-xl leading-relaxed text-slate-800 dark:text-white font-bold select-all" dir="rtl">
+                اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا
+              </p>
+              <p class="font-arabic text-sm text-slate-500 dark:text-slate-400 mt-1" dir="rtl">
+                وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ
+              </p>
+            </div>
+          </div>
+
+          <!-- Bengali Translation -->
+          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-slate-800">
+            <p id="bento-dua-bn" class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+              "হে আল্লাহ! নিশ্চয়ই আমি আমার নিজের ওপর বহু জুলুম করেছি, আর আপনি ছাড়া কোনো ক্ষমাকারী নেই..."
+            </p>
+            <div class="mt-2.5 flex items-center justify-between text-[11px] text-slate-400">
+              <span class="text-emerald-700 dark:text-emerald-400 font-bold">হিসনুল মুসলিম</span>
+              <span class="group-hover:text-primary font-bold">সকল দো'আ →</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Card 3: 99 Names of Allah Dynamic Grid Tile -->
+        <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-2.5">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-amber-500 text-xs">🌟</span>
+                <a href="allah-names.html" class="font-bold text-sm text-slate-800 dark:text-white hover:text-primary transition-colors">
+                  আল্লাহর ৯৯ নাম
+                </a>
+              </div>
+              <span id="bento-names-batch-indicator" class="text-[10px] font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200/60 dark:border-emerald-800/40">
+                ১–৯ / ৯৯
+              </span>
+            </div>
+
+            <!-- Dynamic Names Grid: Desktop 9 names (3x3) | Mobile 5 names -->
+            <div id="bento-names-grid" class="grid grid-cols-2 md:grid-cols-3 gap-1.5 my-2">
+              <!-- Dynamically populated via renderBentoNames() -->
+            </div>
+          </div>
+
+          <!-- Interactive Action Deck & Footer -->
+          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between">
+            <button onclick="cycleBentoNamesBatch()" class="px-2.5 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary bg-stone-100 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-slate-700 rounded-lg border border-stone-200/80 dark:border-slate-700 transition-colors flex items-center space-x-1" title="পরবর্তী নামগুলো দেখুন">
+              <span id="bento-cycle-btn-text">পরবর্তী ৯টি ↻</span>
+            </button>
+            <a href="allah-names.html" class="text-[11px] font-bold text-primary hover:underline">
+              সকল ৯৯ নাম →
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Quran Surah Recitation & Audio Player -->
+        <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center space-x-1.5">
+                <span class="text-emerald-600 text-xs">🎧</span>
+                <h3 class="font-bold text-sm text-slate-800 dark:text-white">কুরআন তিলাওয়াত</h3>
+              </div>
+              <span id="bento-surah-badge" class="text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2 py-0.5 rounded border border-amber-200/60 dark:border-amber-800/40">
+                মাক্কী • ৭ আয়াত
+              </span>
+            </div>
+
+            <!-- Surah Calligraphy & Info Box -->
+            <div class="my-2 p-3.5 rounded-xl bg-gradient-to-b from-stone-50 to-amber-50/20 dark:from-slate-900/80 dark:to-amber-950/10 border border-stone-200/70 dark:border-slate-800 text-center">
+              <h4 id="bento-surah-ar" class="font-arabic text-2xl font-extrabold text-amber-800 dark:text-amber-300 leading-tight" dir="rtl">
+                سُورَةُ الفَاتِحَةِ
+              </h4>
+              <p id="bento-surah-title" class="text-xs font-bold text-slate-800 dark:text-white mt-1">
+                সূরা আল-ফাতিহা • The Opening
+              </p>
+              
+              <!-- Ayah Calligraphy Snippet -->
+              <p class="font-arabic text-sm text-slate-600 dark:text-slate-300 mt-1 select-all" dir="rtl">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+              </p>
+            </div>
+
+            <!-- Audio Waveform Visualizer & Play Button -->
+            <div class="flex items-center space-x-2.5 mt-2">
+              
+              <!-- Amber Circular Play / Pause Button -->
+              <button 
+                id="bento-play-btn" 
+                onclick="toggleBentoAudio()" 
+                class="w-9 h-9 bg-amber-500 hover:bg-amber-600 text-white rounded-full flex items-center justify-center shadow-sm active:scale-95 transition-all shrink-0" 
+                aria-label="Play recitation"
+              >
+                <svg id="bento-play-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-0.5 fill-current" viewBox="0 0 20 20">
+                  <path d="M4.5 3.5v13l11-6.5-11-6.5z"/>
+                </svg>
+                <svg id="bento-pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 fill-current hidden" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <!-- Waveform Bars -->
+              <div id="bento-waveform" class="flex items-end space-x-1 h-6 flex-grow cursor-pointer" onclick="toggleBentoAudio()">
+                <span class="w-1 h-2 bg-amber-400 rounded-full transition-all"></span>
+                <span class="w-1 h-4 bg-amber-400 rounded-full transition-all"></span>
+                <span class="w-1 h-5 bg-amber-500 rounded-full transition-all"></span>
+                <span class="w-1 h-3 bg-emerald-500 rounded-full transition-all"></span>
+                <span class="w-1 h-6 bg-emerald-600 rounded-full transition-all"></span>
+                <span class="w-1 h-4 bg-emerald-500 rounded-full transition-all"></span>
+                <span class="w-1 h-6 bg-emerald-600 rounded-full transition-all"></span>
+                <span class="w-1 h-3 bg-emerald-500 rounded-full transition-all"></span>
+                <span class="w-1 h-5 bg-amber-500 rounded-full transition-all"></span>
+                <span class="w-1 h-4 bg-amber-400 rounded-full transition-all"></span>
+                <span class="w-1 h-2 bg-slate-300 dark:bg-slate-700 rounded-full transition-all"></span>
+              </div>
+
+              <!-- Time Counter -->
+              <span id="bento-audio-timer" class="font-mono text-[11px] text-slate-500 dark:text-slate-400 font-bold shrink-0">
+                ০:০০
+              </span>
+
+            </div>
+          </div>
+
+          <!-- Footer Link -->
+          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-[11px]">
+            <span class="text-slate-400">মিশারি আল-আফাসি</span>
+            <a href="quran.html" class="text-primary font-bold hover:underline">পূর্ণ কুরআন শুনুন →</a>
+          </div>
+
+          <!-- Hidden HTML5 Audio Element -->
+          <audio id="bento-audio-el" preload="none" src="https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3"></audio>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PILLARS OF ISLAM SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-2 tracking-tight">ইসলামের পাঁচটি স্তম্ভ</h2>
+        <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400">প্রতিটি স্তম্ভ সম্পর্কে সহীহ দলিল ও পূর্ণাঙ্গ গাইডলাইন</p>
+        <div class="w-12 h-0.5 bg-amber-500 mx-auto rounded-full mt-3"></div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5">
+        <a href="kalima.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+          <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">১</div>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">কালেমা</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">ঈমানের ঘোষণা</p>
+        </a>
+        <a href="namaz.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+          <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">২</div>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">নামাজ</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">দৈনিক ৫ ওয়াক্ত সালাত</p>
+        </a>
+        <a href="roja.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+          <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">৩</div>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">রোজা</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">মাহে রামাদানের সাওম</p>
+        </a>
+        <a href="zakat.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+          <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">৪</div>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">যাকাত</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">সম্পদের পবিত্রতা</p>
+        </a>
+        <a href="hajj.html" class="col-span-2 sm:col-span-1 bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+          <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">৫</div>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">হজ</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">বাইতুল্লাহর সফর</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ZAKAT CALCULATOR SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 sm:p-8 md:p-10 shadow-sm border border-stone-200/80 dark:border-slate-800">
+        <div class="flex items-center justify-between mb-8 pb-4 border-b border-stone-100 dark:border-slate-800">
+          <div class="flex items-center space-x-3.5">
+            <div class="w-11 h-11 bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 rounded-xl flex items-center justify-center font-bold text-lg">৳</div>
+            <div>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">যাকাত ক্যালকুলেটর</h2>
+              <p class="text-xs text-slate-400">আপনার প্রদেয় ২.৫% নিট ফরজ যাকাত সহজে হিসাব করুন</p>
+            </div>
+          </div>
+          <a href="zakat.html" class="hidden sm:inline-flex text-xs font-bold text-primary dark:text-emerald-400 hover:underline">পূর্ণাঙ্গ গাইড →</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">১. নগদ অর্থ (হাতে ও ব্যাংকে)</label>
+              <input type="number" id="zakat-cash" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">২. স্বর্ণ ও রূপা (বর্তমান বাজারমূল্য)</label>
+              <input type="number" id="zakat-gold" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">৩. ব্যবসায়িক পণ্য ও মজুদ সম্পদ</label>
+              <input type="number" id="zakat-other" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-red-500 mb-1.5 uppercase tracking-wider">৪. চলতি ঋণ ও দেনা (বাদ দিতে হবে)</label>
+              <input type="number" id="zakat-debt" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+            </div>
+          </div>
+          <div class="bg-emerald-50/70 dark:bg-emerald-950/20 rounded-2xl p-8 text-center flex flex-col justify-center border border-emerald-200/60 dark:border-emerald-800/40">
+            <p class="text-emerald-800 dark:text-emerald-300 font-bold mb-1 text-xs uppercase tracking-wider">আপনার প্রদেয় মোট যাকাত</p>
+            <h3 class="text-3xl md:text-4xl font-black text-emerald-700 dark:text-emerald-400 mb-5 font-mono" id="zakat-result">৳ ০</h3>
+            <button onclick="calculateZakat()" class="bg-primary hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition-all shadow-xs text-sm">হিসাব করুন</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LATEST ARTICLES SECTION -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-6">
+      <div class="flex justify-between items-end mb-7">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mb-1 tracking-tight">সাম্প্রতিক ইসলামিক প্রবন্ধ</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">শুদ্ধ আকিদা ও আমল বিষয়ক গবেষণাভিত্তিক লেখা</p>
+        </div>
+        <a href="articles/index.html" class="text-primary dark:text-emerald-400 font-bold hover:underline flex items-center text-xs sm:text-sm">সবগুলো দেখুন <span class="ml-1">→</span></a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+          <div class="p-6 sm:p-7">
+            <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-2.5">তাকওয়া ও আত্মশুদ্ধি</div>
+            <h3 class="text-base sm:text-lg font-bold mb-2.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">রামাদানের তাৎপর্য ও গুরুত্ব</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">মাহে রামাদান মুসলিমদের জন্য এক পরম নিয়ামত। এই মাসে তাকওয়া অর্জনের বিস্তারিত বর্ণনা...</p>
+            <a href="articles/ramadan-benefits.html" class="inline-flex items-center text-primary dark:text-emerald-400 font-bold text-xs">আরও পড়ুন <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></a>
+          </div>
+        </article>
+        <article class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+          <div class="p-6 sm:p-7">
+            <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-2.5">আখলাক ও চরিত্র</div>
+            <h3 class="text-base sm:text-lg font-bold mb-2.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">সুন্দর আচরণের ইসলামি শিক্ষা</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">ইসলাম পারস্পরিক সম্পর্কের ক্ষেত্রে সুন্দর আচরণের ওপর অপরিসীম গুরুত্ব দিয়েছে।</p>
+            <a href="articles/good-manners.html" class="inline-flex items-center text-primary dark:text-emerald-400 font-bold text-xs">আরও পড়ুন <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></a>
+          </div>
+        </article>
+        <article class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+          <div class="p-6 sm:p-7">
+            <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-2.5">পবিত্রতা ও তাহরাত</div>
+            <h3 class="text-base sm:text-lg font-bold mb-2.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">পবিত্রতার গুরুত্ব ও উপকারিতা</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">ইসলামী শরিয়তে পবিত্রতা ঈমানের অর্ধেক। এর গুরুত্ব এবং দৈনন্দিন জীবনে এর প্রভাব।</p>
+            <a href="articles/purity-in-islam.html" class="inline-flex items-center text-primary dark:text-emerald-400 font-bold text-xs">আরও পড়ুন <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ANDROID APP DOWNLOAD BANNER -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div>
+          <span class="inline-block text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1.5">Android App • v1.0</span>
+          <h2 class="text-lg sm:text-xl font-black text-slate-800 dark:text-white mb-1.5">DeenIslam অ্যান্ড্রয়েড অ্যাপ ডাউনলোড করুন</h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">অফলাইন আল-কুরআন ও সহীহ হাদিস, সুমধুর কুরআন তিলাওয়াত অডিও, ৬৪ জেলার নামাজের সময়সূচি, লাইভ কিবলা কম্পাস এবং ডিজিটাল তাসবীহ—সবকিছু একটি বিজ্ঞাপনমুক্ত অ্যাপে।</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <a href="https://github.com/mehedishakeel/DeenIslam/releases/download/v1.0/DeenIslam-v1.0.apk" class="inline-flex items-center px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm transition-colors">
+            <span>APK ডাউনলোড করুন (v1.0)</span>
+          </a>
+          <a href="https://github.com/mehedishakeel/DeenIslam/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-3 rounded-xl border border-stone-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-emerald-500/40 font-bold text-xs sm:text-sm transition-colors">
+            <span>রিলিজ নোট দেখুন</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Placeholder (Injected via js/components.js) -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Global Components Script -->
+  <script src="js/components.js"></script>
+
+  <!-- Page Specific Logic -->
+  <script>
+    // 1. Daily Verse Database (With Calligraphy & Bangla)
+    const dailyVerses = [
+      { arabic: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", text: "নিশ্চয়ই আল্লাহ ধৈর্যশীলদের সঙ্গে আছেন।", ref: "সূরা আল-বাকারা: ১৫৩" },
+      { arabic: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", text: "হে আমাদের পালনকর্তা! আমাদের সরল পথ দেখান।", ref: "সূরা আল-ফাতিহা: ৬" },
+      { arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", text: "নিশ্চয়ই কষ্টের সাথেই স্বস্তি রয়েছে।", ref: "সূরা আল-ইনশিরাহ: ৬" },
+      { arabic: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", text: "আল্লাহর জিকিরেই তো অন্তর প্রশান্তি পায়।", ref: "সূরা আর-রা'দ: ২৮" },
+      { arabic: "إِنَّ اللَّهَ لَا يُخْلِفُ الْمِيعَادَ", text: "নিশ্চয়ই আল্লাহ তাঁর ওয়াদা খেলাফ করেন না।", ref: "সূরা আল-ইমরান: ৯" },
+      { arabic: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", text: "যে আল্লাহকে ভয় করে, তিনি তার পথ সহজ করে দেন।", ref: "সূরা আত-তালাক্ব: ৪" },
+      { arabic: "إِنَّمَا الْمُؤْمِنُونَ إِخْوَةٌ", text: "মুমিনগণ তো পরস্পরের ভাই।", ref: "সূরা আল-হুজুরাত: ১০" },
+      { arabic: "فَصَلِّ لِرَبِّكَ وَانْحَرْ", text: "তুমি তোমার প্রতিপালকের উদ্দেশ্যে সালাত আদায় কর।", ref: "সূরা আল-কাওসার: ২" },
+      { arabic: "وَاللَّهُ يَرْزُقُ مَن يَشَاءُ بِغَيْرِ حِسَابٍ", text: "আল্লাহ যাকে ইচ্ছা অপরিমিত রিযিক দান করেন।", ref: "সূরা আল-ইমরান: ৩৭" },
+      { arabic: "لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ", text: "আল্লাহর রহমত থেকে নিরাশ হয়ো না।", ref: "সূরা আয-যুমার: ৫৩" }
+    ];
+
+    function setDailyVerse() {
+      const now = new Date();
+      const startOfYear = new Date(now.getFullYear(), 0, 0);
+      const diff = now - startOfYear;
+      const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const verse = dailyVerses[dayOfYear % dailyVerses.length];
+      const arEl = document.getElementById('daily-verse-arabic');
+      const vEl = document.getElementById('daily-verse');
+      const rEl = document.getElementById('daily-verse-ref');
+      if (arEl) arEl.innerText = verse.arabic;
+      if (vEl) vEl.innerText = `"${verse.text}"`;
+      if (rEl) rEl.innerText = verse.ref;
+    }
+    setDailyVerse();
+
+    // 2. Check Continue Reading Surah
+    function checkLastRead() {
+      const lastRead = JSON.parse(localStorage.getItem('deen_last_read') || 'null');
+      if (lastRead && lastRead.surahName) {
+        const titleEl = document.getElementById('home-last-read-title');
+        const subEl = document.getElementById('home-last-read-sub');
+        const linkEl = document.getElementById('home-last-read-link');
+        const progressEl = document.getElementById('home-last-read-progress');
+        const bar1 = document.getElementById('home-progress-bar-1');
+        const bar2 = document.getElementById('home-progress-bar-2');
+
+        const ayahNum = lastRead.ayahNumber || 1;
+        const total = lastRead.totalAyahs || 110;
+        const pct = Math.min(100, Math.round((ayahNum / total) * 100));
+
+        if (titleEl) titleEl.innerText = lastRead.surahName;
+        if (subEl) subEl.innerText = `${lastRead.surahEnglish || ''} • আয়াত ${window.toBengaliNumerals(ayahNum)}`;
+        if (linkEl) linkEl.href = `surah.html?id=${lastRead.surahId || 1}#ayah-${ayahNum}`;
+        if (progressEl) progressEl.innerText = `Progress 1-${ayahNum} (${window.toBengaliNumerals(pct)}%)`;
+        if (bar1) bar1.style.width = `${Math.min(pct, 70)}%`;
+        if (bar2) bar2.style.width = `${Math.max(0, pct - 70)}%`;
+      }
+    }
+    checkLastRead();
+
+    // 3. Instant Hijri Date Update
+    function updateInstantHijriDate() {
+      const instantDate = (window.getInstantHijriDate && window.getInstantHijriDate()) || localStorage.getItem('deen_hijri_date') || "২৪ রবিউস সানি, ১৪৪৮ হিজরি";
+      const heroBadge = document.getElementById('hero-hijri-date');
+      if (heroBadge) heroBadge.innerText = instantDate;
+    }
+    updateInstantHijriDate();
+
+    // 4. Prayer Times & Circular Countdown Ring Logic
+    let currentTimings = null;
+    const prayerNamesBn = {
+      Fajr: "ফজর",
+      Dhuhr: "যোহর",
+      Asr: "আসর",
+      Maghrib: "মাগরিব",
+      Isha: "ইশা"
+    };
+
+    async function getPrayerTimes(forceGPS = false) {
+      const locationText = document.getElementById('location-text');
+      const cachedLat = localStorage.getItem('user_lat');
+      const cachedLon = localStorage.getItem('user_lon');
+      const cachedCity = localStorage.getItem('user_city');
+
+      if (!forceGPS && cachedLat && cachedLon) {
+        if (locationText) {
+          locationText.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            <span>${cachedCity || 'সংরক্ষিত এলাকা'}</span>
+          `;
+        }
+        fetchTimings(cachedLat, cachedLon);
+        return;
+      }
+
+      if (!forceGPS && navigator.permissions && navigator.permissions.query) {
+        try {
+          const result = await navigator.permissions.query({ name: 'geolocation' });
+          if (result.state === 'granted') {
+            return getGPSLocation();
+          }
+        } catch (e) {}
+      }
+
+      if (forceGPS) {
+        getGPSLocation();
+      } else {
+        fetchByIP();
+      }
+    }
+
+    function getGPSLocation() {
+      const locationText = document.getElementById('location-text');
+      if (!navigator.geolocation) return fetchByIP();
+
+      if (locationText) locationText.innerHTML = '<span class="animate-pulse">GPS খোঁজা হচ্ছে...</span>';
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        const { latitude, longitude } = position.coords;
+        localStorage.setItem('user_lat', latitude);
+        localStorage.setItem('user_lon', longitude);
+        
+        try {
+          const geo = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=bn`);
+          const geoData = await geo.json();
+          const city = geoData.city || geoData.locality || "আপনার এলাকা";
+          localStorage.setItem('user_city', city);
+          if (locationText) {
+            locationText.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              <span>${city}</span>
+            `;
+          }
+        } catch (e) {
+          if (locationText) locationText.innerText = "লোকেশন আপডেট হয়েছে";
+        }
+        fetchTimings(latitude, longitude);
+      }, (err) => {
+        fetchByIP();
+      });
+    }
+
+    async function fetchByIP() {
+      const locationText = document.getElementById('location-text');
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        
+        const res = await fetch('https://ipwho.is/', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        const data = await res.json();
+        
+        if (data && data.success && data.latitude && data.longitude) {
+          const city = data.city || "আপনার এলাকা";
+          if (locationText) {
+            locationText.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              <span>${city} (IP)</span>
+            `;
+          }
+          fetchTimings(data.latitude, data.longitude);
+          return;
+        }
+      } catch (e) {}
+
+      // Fallback default Dhaka
+      if (locationText) {
+        locationText.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          <span>ঢাকা (ডিফল্ট)</span>
+        `;
+      }
+      fetchTimings(23.8103, 90.4125); 
+    }
+
+    async function fetchTimings(lat, lon) {
+      try {
+        const school = localStorage.getItem('prayer_school') || '1';
+        const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&school=${school}`);
+        const data = await response.json();
+        if (data.code === 200) {
+          currentTimings = data.data.timings;
+          
+          document.getElementById('fajr-time').innerText = formatTime(currentTimings.Fajr);
+          document.getElementById('dhuhr-time').innerText = formatTime(currentTimings.Dhuhr);
+          document.getElementById('asr-time').innerText = formatTime(currentTimings.Asr);
+          document.getElementById('maghrib-time').innerText = formatTime(currentTimings.Maghrib);
+          document.getElementById('isha-time').innerText = formatTime(currentTimings.Isha);
+
+          // Update Hijri date from API if available
+          if (data.data.date && data.data.date.hijri) {
+            const hijriText = window.formatHijriDate(data.data.date.hijri);
+            localStorage.setItem('deen_hijri_date', hijriText);
+            const heroBadge = document.getElementById('hero-hijri-date');
+            if (heroBadge) heroBadge.innerText = hijriText;
+            const navBadge = document.getElementById('navbar-hijri-date');
+            if (navBadge) navBadge.innerText = hijriText;
+          }
+
+          updatePrayerCountdown();
+        }
+      } catch (e) {
+        console.error("Prayer times fetch error:", e);
+      }
+    }
+
+    function formatTime(time24) {
+      if (!time24) return "--:--";
+      const [h24, m] = time24.split(':');
+      let h = parseInt(h24);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${window.toBengaliNumerals(h)}:${window.toBengaliNumerals(m)} ${ampm}`;
+    }
+
+    // Live update of next prayer, remaining countdown, and circular progress ring
+    function updatePrayerCountdown() {
+      if (!currentTimings) return;
+
+      const now = new Date();
+      const prayers = [
+        { key: 'Fajr', name: 'ফজর', time: currentTimings.Fajr },
+        { key: 'Dhuhr', name: 'যোহর', time: currentTimings.Dhuhr },
+        { key: 'Asr', name: 'আসর', time: currentTimings.Asr },
+        { key: 'Maghrib', name: 'মাগরিব', time: currentTimings.Maghrib },
+        { key: 'Isha', name: 'ইশা', time: currentTimings.Isha }
+      ];
+
+      const getPrayerDate = (timeStr, addDay = 0) => {
+        const [h, m] = timeStr.split(':').map(Number);
+        const d = new Date(now);
+        d.setDate(d.getDate() + addDay);
+        d.setHours(h, m, 0, 0);
+        return d;
+      };
+
+      let activePrayer = null;
+      let nextPrayer = null;
+      let prevPrayerDate = null;
+      let nextPrayerDate = null;
+
+      for (let i = 0; i < prayers.length; i++) {
+        const pDate = getPrayerDate(prayers[i].time);
+        if (now < pDate) {
+          nextPrayer = prayers[i];
+          nextPrayerDate = pDate;
+          activePrayer = prayers[(i - 1 + prayers.length) % prayers.length];
+          prevPrayerDate = getPrayerDate(activePrayer.time, i === 0 ? -1 : 0);
+          break;
+        }
+      }
+
+      // If past Isha, next is tomorrow's Fajr
+      if (!nextPrayer) {
+        nextPrayer = prayers[0];
+        nextPrayerDate = getPrayerDate(prayers[0].time, 1);
+        activePrayer = prayers[4];
+        prevPrayerDate = getPrayerDate(prayers[4].time);
+      }
+
+      // Highlight active waqt on the horizontal timeline
+      const waqtKeys = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+      waqtKeys.forEach(k => {
+        const el = document.getElementById(`waqt-card-${k}`);
+        if (el) {
+          if (activePrayer && activePrayer.key.toLowerCase() === k) {
+            el.className = "p-2 sm:p-3 rounded-2xl bg-amber-400 text-slate-900 shadow-lg transform scale-105 border border-amber-300 font-bold";
+            const label = el.querySelector('span:first-child');
+            if (label) label.className = "block text-[11px] sm:text-xs font-bold text-slate-900";
+            const timeSpan = el.querySelector('span:last-child');
+            if (timeSpan) timeSpan.className = "block font-mono text-xs sm:text-base font-black text-slate-900 mt-0.5";
+          } else {
+            el.className = "p-2 sm:p-3 rounded-2xl bg-white/10 backdrop-blur-sm transition-all border border-transparent";
+            const label = el.querySelector('span:first-child');
+            if (label) label.className = "block text-[11px] sm:text-xs font-semibold text-emerald-100";
+            const timeSpan = el.querySelector('span:last-child');
+            if (timeSpan) timeSpan.className = "block font-mono text-xs sm:text-base font-bold text-white mt-0.5";
+          }
+        }
+      });
+
+      // Update Center Ring Text
+      const nameEl = document.getElementById('next-prayer-name');
+      const timeEl = document.getElementById('next-prayer-time');
+      const countdownEl = document.getElementById('next-prayer-countdown');
+      const circleEl = document.getElementById('prayer-progress-circle');
+
+      if (nameEl) nameEl.innerText = nextPrayer.name;
+      if (timeEl) timeEl.innerText = formatTime(nextPrayer.time);
+
+      const diffMs = nextPrayerDate - now;
+      if (diffMs > 0) {
+        const totalSec = Math.floor(diffMs / 1000);
+        const hrs = Math.floor(totalSec / 3600);
+        const mins = Math.floor((totalSec % 3600) / 60);
+        const secs = totalSec % 60;
+
+        let countdownStr = "আর মাত্র ";
+        if (hrs > 0) countdownStr += `${window.toBengaliNumerals(hrs)} ঘণ্টা `;
+        countdownStr += `${window.toBengaliNumerals(mins)} মিনিট `;
+        if (hrs === 0) countdownStr += `${window.toBengaliNumerals(secs)} সেকেন্ড`;
+
+        if (countdownEl) countdownEl.innerText = countdownStr;
+
+        // Circular Progress Ring Math
+        // Circumference = 2 * PI * 64 = 402.12
+        const totalInterval = nextPrayerDate - prevPrayerDate;
+        const elapsed = now - prevPrayerDate;
+        const progress = Math.max(0, Math.min(1, elapsed / totalInterval));
+        const circumference = 402.12;
+        const offset = circumference * (1 - progress);
+        if (circleEl) circleEl.style.strokeDashoffset = offset;
+      }
+    }
+
+    // Live Fasting / Suhoor & Iftar Widget
+    function updateBentoFasting() {
+      if (!currentTimings) return;
+      const now = new Date();
+      const curMins = now.getHours() * 60 + now.getMinutes();
+      const curSecs = curMins * 60 + now.getSeconds();
+
+      const [fH, fM] = (currentTimings.Imsak || currentTimings.Fajr).split(':');
+      const fajrSecs = (parseInt(fH) * 60 + parseInt(fM)) * 60;
+
+      const [mH, mM] = currentTimings.Maghrib.split(':');
+      const maghribSecs = (parseInt(mH) * 60 + parseInt(mM)) * 60;
+
+      let targetSecs;
+      let isIftar = false;
+      let progress = 0;
+
+      if (curSecs < fajrSecs) {
+        targetSecs = fajrSecs;
+        isIftar = false;
+        progress = Math.min(100, Math.max(0, (curSecs / fajrSecs) * 100));
+      } else if (curSecs < maghribSecs) {
+        targetSecs = maghribSecs;
+        isIftar = true;
+        const totalFasting = maghribSecs - fajrSecs;
+        const elapsed = curSecs - fajrSecs;
+        progress = Math.min(100, Math.max(0, (elapsed / totalFasting) * 100));
+      } else {
+        targetSecs = 24 * 3600 + fajrSecs;
+        isIftar = false;
+        const totalNight = (24 * 3600 - maghribSecs) + fajrSecs;
+        const elapsed = curSecs - maghribSecs;
+        progress = Math.min(100, Math.max(0, (elapsed / totalNight) * 100));
+      }
+
+      const diffSecs = targetSecs - curSecs;
+      const hours = Math.floor(diffSecs / 3600);
+      const mins = Math.floor((diffSecs % 3600) / 60);
+      const secs = diffSecs % 60;
+
+      const titleEl = document.getElementById('bento-fasting-title');
+      const infoEl = document.getElementById('bento-fasting-info');
+      const clockEl = document.getElementById('bento-fasting-clock');
+      const barEl = document.getElementById('bento-fasting-bar');
+
+      if (titleEl) titleEl.innerText = isIftar ? "ইফতারের বাকি" : "সেহরির বাকি";
+      if (infoEl) {
+        infoEl.innerText = isIftar 
+          ? `আজকের ইফতার: ${formatTime(currentTimings.Maghrib)}` 
+          : `সেহরি শেষ (ফজর): ${formatTime(currentTimings.Fajr)}`;
+      }
+      if (clockEl) {
+        const pad = (n) => String(n).padStart(2, '0');
+        clockEl.innerText = `${window.toBengaliNumerals(pad(hours))}:${window.toBengaliNumerals(pad(mins))}:${window.toBengaliNumerals(pad(secs))}`;
+      }
+      if (barEl) {
+        barEl.style.width = `${progress}%`;
+      }
+    }
+
+    // Run countdown every 1 second
+    setInterval(() => {
+      updatePrayerCountdown();
+      updateBentoFasting();
+    }, 1000);
+    getPrayerTimes();
+
+    // 5. Bento 99 Names Interactive Logic (9 on Desktop, 5 on Mobile)
+    const bentoAllahNames = [
+      { id: 1, arabic: "الرَّحْمَنُ", transliteration: "আর-রহমান", meaning: "পরম দয়ালু" },
+      { id: 2, arabic: "الرَّحِيمُ", transliteration: "আর-রাহীম", meaning: "অতিশয় মেহেরবান" },
+      { id: 3, arabic: "الْمَلِكُ", transliteration: "আল-মালিক", meaning: "সর্বভৌম ক্ষমতার অধিকারী" },
+      { id: 4, arabic: "الْقُدُّوسُ", transliteration: "আল-কুদ্দুস", meaning: "নিষ্কলুষ, পরম পবিত্র" },
+      { id: 5, arabic: "السَّلَامُ", transliteration: "আস-সালাম", meaning: "শান্তি ও নিরাপত্তা প্রদানকারী" },
+      { id: 6, arabic: "الْمُؤْمِنُ", transliteration: "আল-মু'মিন", meaning: "নিরাপত্তা ও ঈমান দানকারী" },
+      { id: 7, arabic: "الْمُهَيْمِنُ", transliteration: "আল-মুহাইমিন", meaning: "রক্ষক ও অভিভাবক" },
+      { id: 8, arabic: "الْعَزِيزُ", transliteration: "আল-আযীয", meaning: "পরাক্রমশালী, অপ্রতিরোধ্য" },
+      { id: 9, arabic: "الْجَبَّارُ", transliteration: "আল-জাব্বার", meaning: "মহাপ্রতাপশালী, সংশোধনকারী" },
+      { id: 10, arabic: "الْمُتَكَبِّرُ", transliteration: "আল-মুতাকাব্বির", meaning: "সর্বশ্রেষ্ঠ, চরম গৌরবান্বিত" },
+      { id: 11, arabic: "الْخَالِقُ", transliteration: "আল-খালিক্ব", meaning: "সৃষ্টিকর্তা" },
+      { id: 12, arabic: "الْبَارِئُ", transliteration: "আল-বারি", meaning: "সঠিক রূপদাতা, উৎপাদক" },
+      { id: 13, arabic: "الْمُصَوِّرُ", transliteration: "আল-মুছাওউয়ির", meaning: "আকৃতি দানকারী" },
+      { id: 14, arabic: "الْغَفَّارُ", transliteration: "আল-গাফফার", meaning: "পরম ক্ষমাশীল" },
+      { id: 15, arabic: "الْقَهَّارُ", transliteration: "আল-কাহ্হার", meaning: "কঠোর দমনকারী" },
+      { id: 16, arabic: "الْوَهَّابُ", transliteration: "আল-ওয়াহ্হাব", meaning: "মহাঅনুগ্রহকারী, নিস্বার্থ দাতা" },
+      { id: 17, arabic: "الرَّزَّاقُ", transliteration: "আর-রাযযাক্ব", meaning: "জীবিকা ও রিজিকদাতা" },
+      { id: 18, arabic: "الْفَتَّاحُ", transliteration: "আল-ফাত্তাহ", meaning: "বিজয়দানকারী ও উন্মোচনকারী" },
+      { id: 19, arabic: "الْعَلِيمُ", transliteration: "আল-আলীম", meaning: "সর্বজ্ঞানী" },
+      { id: 20, arabic: "الْقَابِضُ", transliteration: "আল-ক্বাবিদ", meaning: "সংকোচনকারী" },
+      { id: 21, arabic: "الْبَاسِطُ", transliteration: "আল-বাসিত", meaning: "প্রসারণকারী" },
+      { id: 22, arabic: "الْخَافِضُ", transliteration: "আল-খাফিদ", meaning: "অবনমিতকারী" },
+      { id: 23, arabic: "الرَّافِعُ", transliteration: "আর-রাফি‘", meaning: "মর্যাদাদানকারী, উন্নতকারী" },
+      { id: 24, arabic: "الْمُعِزُّ", transliteration: "আল-মু‘ইযয", meaning: "সম্মানদানকারী" },
+      { id: 25, arabic: "الْمُذِلُّ", transliteration: "আল-মুযিল্ল", meaning: "অপমানকারী" },
+      { id: 26, arabic: "السَّمِيعُ", transliteration: "আস-সামী‘", meaning: "সর্বশ্রোতা" },
+      { id: 27, arabic: "الْبَصِيرُ", transliteration: "আল-বাছীর", meaning: "সর্বদ্রষ্টা" },
+      { id: 28, arabic: "الْحَكَمُ", transliteration: "আল-হাকাম", meaning: "একচ্ছত্র বিচারক" },
+      { id: 29, arabic: "الْعَدْلُ", transliteration: "আল-‘আদল", meaning: "পরম ন্যায়পরায়ণ" },
+      { id: 30, arabic: "اللَّطِيفُ", transliteration: "আল-লাতীফ", meaning: "সূক্ষ্মদর্শী, পরম স্নেহশীল" },
+      { id: 31, arabic: "الْخَبِيرُ", transliteration: "আল-খাবীর", meaning: "সর্ববিষয়ে জ্ঞাত" },
+      { id: 32, arabic: "الْحَلِيمُ", transliteration: "আল-হালীম", meaning: "পরম ধৈর্যশীল ও সহনশীল" },
+      { id: 33, arabic: "الْعَظِيمُ", transliteration: "আল-‘আযীম", meaning: "অনুপম মহিমান্বিত" },
+      { id: 34, arabic: "الْغَفُورُ", transliteration: "আল-গাফূর", meaning: "অতীব ক্ষমাশীল" },
+      { id: 35, arabic: "الشَّكُورُ", transliteration: "আশ-শাকূর", meaning: "গুণগ্রাহী, মূল্যায়নকারী" },
+      { id: 36, arabic: "الْعَلِيُّ", transliteration: "আল-‘আলী", meaning: "সর্বোচ্চ মর্যাদাবান" },
+      { id: 37, arabic: "الْكَبِيرُ", transliteration: "আল-কাবীর", meaning: "সবচেয়ে মহান" },
+      { id: 38, arabic: "الْحَفِيظُ", transliteration: "আল-হাফীয", meaning: "মহারক্ষক" },
+      { id: 39, arabic: "الْمُقِيتُ", transliteration: "আল-মুক্বীত", meaning: "শক্তি ও আহার্য যোগানদাতা" },
+      { id: 40, arabic: "الْحَسِيبُ", transliteration: "আল-হাসীব", meaning: "হিসাব গ্রহণকারী ও যথেষ্ট" },
+      { id: 41, arabic: "الْجَلِيلُ", transliteration: "আল-জালীল", meaning: "প্রতাপশালী ও মহিমান্বিত" },
+      { id: 42, arabic: "الْكَرِيمُ", transliteration: "আল-কারীম", meaning: "পরম উদার ও দাতা" },
+      { id: 43, arabic: "الرَّقِيبُ", transliteration: "আর-রক্বীব", meaning: "তীক্ষ্ণ দৃষ্টিতে প্রত্যক্ষকারী" },
+      { id: 44, arabic: "الْمُجِيبُ", transliteration: "আল-মুজীব", meaning: "দো'আ কবুলকারী" },
+      { id: 45, arabic: "الْوَاسِعُ", transliteration: "আল-ওয়াসি‘", meaning: "অসীম প্রাচুর্যময়" },
+      { id: 46, arabic: "الْحَكِيمُ", transliteration: "আল-হাকীম", meaning: "প্রজ্ঞাময় ও তত্ত্বজ্ঞানী" },
+      { id: 47, arabic: "الْوَدُودُ", transliteration: "আল-ওয়াদূদ", meaning: "প্রেমময় ও পরম ভালোবাসার আধার" },
+      { id: 48, arabic: "الْمَجِيدُ", transliteration: "আল-মাজীদ", meaning: "মহিমান্বিত ও মর্যাদাবান" },
+      { id: 49, arabic: "الْبَاعِثُ", transliteration: "আল-বা‘ইছ", meaning: "পুনরুত্থানকারী" },
+      { id: 50, arabic: "الشَّهِيدُ", transliteration: "আশ-শাহীদ", meaning: "উপস্থিত প্রত্যক্ষদর্শী" },
+      { id: 51, arabic: "الْحَقُّ", transliteration: "আল-হাক্ব", meaning: "চিরসত্য ও অবিনশ্বর" },
+      { id: 52, arabic: "الْوَكِيلُ", transliteration: "আল-ওয়াকীল", meaning: "নির্ভরযোগ্য কর্মবিধায়ক" },
+      { id: 53, arabic: "الْقَوِيُّ", transliteration: "আল-ক্বউইয়্য", meaning: "মহাশক্তিধর" },
+      { id: 54, arabic: "الْمَتِينُ", transliteration: "আল-মাতীন", meaning: "সুদৃঢ় ও পরাক্রমশালী" },
+      { id: 55, arabic: "الْوَلِيُّ", transliteration: "আল-ওয়ালিয়্য", meaning: "পরম অভিভাবক ও বন্ধু" },
+      { id: 56, arabic: "الْحَمِيدُ", transliteration: "আল-হামীদ", meaning: "সকল প্রশংসার একমাত্র যোগ্য" },
+      { id: 57, arabic: "الْمُحْصِي", transliteration: "আল-মুহছী", meaning: "পুঙ্খানুপুঙ্খ গণনাকারী" },
+      { id: 58, arabic: "الْمُبْدِئُ", transliteration: "আল-মুবদি", meaning: "সূচনাকারী" },
+      { id: 59, arabic: "الْمُعِيدُ", transliteration: "আল-মু‘ঈদ", meaning: "পুনঃসৃষ্টিকারী" },
+      { id: 60, arabic: "الْمُحْيِي", transliteration: "আল-মুহ্য়ী", meaning: "জীবনদাতা" },
+      { id: 61, arabic: "الْمُمِيتُ", transliteration: "আল-মুমীত", meaning: "মৃত্যুদাতা" },
+      { id: 62, arabic: "الْحَيُّ", transliteration: "আল-হাইয়্য", meaning: "চিরঞ্জীব" },
+      { id: 63, arabic: "الْقَيُّومُ", transliteration: "আল-ক্বাইয়্যূম", meaning: "স্বয়ংসম্পূর্ণ ধারক" },
+      { id: 64, arabic: "الْوَاجِدُ", transliteration: "আল-ওয়াজিদ", meaning: "অফুরন্ত সম্পদের অধিকারী" },
+      { id: 65, arabic: "الْمَاجِدُ", transliteration: "আল-মাজিদ", meaning: "মহিমান্বিত ও দানশীল" },
+      { id: 66, arabic: "الْوَاحِدُ", transliteration: "আল-ওয়াহিদ", meaning: "একক ও অদ্বিতীয়" },
+      { id: 67, arabic: "الْأَحَدُ", transliteration: "আল-আহাদ", meaning: "এক ও অনন্য" },
+      { id: 68, arabic: "الصَّمَدُ", transliteration: "আছ-ছমাদ", meaning: "অমুখাপেক্ষী" },
+      { id: 69, arabic: "الْقَادِرُ", transliteration: "আল-ক্বাদির", meaning: "সর্বশক্তিমান" },
+      { id: 70, arabic: "الْمُقْتَدِرُ", transliteration: "আল-মুক্বতাদির", meaning: "পূর্ণ ক্ষমতার অধিকারী" },
+      { id: 71, arabic: "الْمُقَدِّمُ", transliteration: "আল-মুক্বাদ্দিম", meaning: "অগ্রসরকারী" },
+      { id: 72, arabic: "الْمُؤَخِّرُ", transliteration: "আল-মুআখ্খির", meaning: "পশ্চাতে প্রেরণকারী" },
+      { id: 73, arabic: "الْأَوَّلُ", transliteration: "আল-আউওয়াল", meaning: "সর্বপ্রথম" },
+      { id: 74, arabic: "الْآخِرُ", transliteration: "আল-আখির", meaning: "সর্বশেষ" },
+      { id: 75, arabic: "الظَّاهِرُ", transliteration: "আজ-জাহির", meaning: "প্রকাশ্য ও স্পষ্ট" },
+      { id: 76, arabic: "الْبَاطِنُ", transliteration: "আল-বাতিন", meaning: "অদৃশ্য ও গুপ্ত" },
+      { id: 77, arabic: "الْوَالِي", transliteration: "আল-ওয়ালী", meaning: "সার্বভৌম শাসক ও অভিভাবক" },
+      { id: 78, arabic: "الْمُتَعَالِي", transliteration: "আল-মুতা‘আলী", meaning: "সর্বোচ্চ উন্নত" },
+      { id: 79, arabic: "الْبَرُّ", transliteration: "আল-বারর", meaning: "পরম অনুগ্রহকারী ও সৎকর্মশীল" },
+      { id: 80, arabic: "التَّوَّابُ", transliteration: "আত-তাওয়াব", meaning: "তওবা কবুলকারী" },
+      { id: 81, arabic: "الْمُنْتَقِمُ", transliteration: "আল-মুনতাক্বিম", meaning: "প্রতিশোধ গ্রহণকারী" },
+      { id: 82, arabic: "الْعَفُوُّ", transliteration: "আল-‘আফুউ", meaning: "মার্জনাকারী" },
+      { id: 83, arabic: "الرَّءُوفُ", transliteration: "আর-রউফ", meaning: "পরম স্নেহশীল ও সহানুভূতিশীল" },
+      { id: 84, arabic: "مَالِكُ الْمُلْكِ", transliteration: "মালিকুল মুলক", meaning: "সমগ্র রাজ্যের একচ্ছত্র অধিপতি" },
+      { id: 85, arabic: "ذُو الْجَلَالِ وَالْإِكْرَامِ", transliteration: "যুল জালালি ওয়াল ইকরাম", meaning: "মহিমান্বিত ও মর্যাদাবান" },
+      { id: 86, arabic: "الْمُقْسِطُ", transliteration: "আল-মুক্বসিত", meaning: "ন্যায়পরায়ণ সমতা স্থাপনকারী" },
+      { id: 87, arabic: "الْجَামِعُ", transliteration: "আল-জামি‘", meaning: "একত্রকারী" },
+      { id: 88, arabic: "الْغَنِيُّ", transliteration: "আল-গানিয়্য", meaning: "পরম সম্পদশালী ও অভাবমুক্ত" },
+      { id: 89, arabic: "الْمُغْنِي", transliteration: "আল-মুগনী", meaning: "ধনী ও অভাবমুক্তকারী" },
+      { id: 90, arabic: "الْمَانِعُ", transliteration: "আল-মানি‘", meaning: "প্রতিহতকারী ও বাধাদানকারী" },
+      { id: 91, arabic: "الضَّارُّ", transliteration: "আদ-দারর", meaning: "ক্ষতি পৌঁছাতে সক্ষম" },
+      { id: 92, arabic: "النَّافِعُ", transliteration: "আন-নাফি‘", meaning: "কল্যাণ ও উপকারসাধনকারী" },
+      { id: 93, arabic: "النُّورُ", transliteration: "আন-নূর", meaning: "জ্যোতি ও আলো" },
+      { id: 94, arabic: "الْهَادِي", transliteration: "আল-হাদী", meaning: "পথপ্রদর্শক" },
+      { id: 95, arabic: "الْبَدِيعُ", transliteration: "আল-বাদী‘", meaning: "অনন্য উদ্ভাবক" },
+      { id: 96, arabic: "الْبَاقِي", transliteration: "আল-বাকী", meaning: "চিরস্থায়ী" },
+      { id: 97, arabic: "الْوَارِثُ", transliteration: "আল-ওয়ারিছ", meaning: "চূড়ান্ত উত্তরাধিকারী" },
+      { id: 98, arabic: "الرَّشِيدُ", transliteration: "আর-রশীদ", meaning: "সঠিক পথের পরিচালক" },
+      { id: 99, arabic: "الصَّبُورُ", transliteration: "আছ-ছবূর", meaning: "পরম ধৈর্যশীল" }
+    ];
+
+    let bentoNameBatchIndex = 0;
+
+    function isBentoMobile() {
+      return window.innerWidth < 768;
+    }
+
+    window.playBentoNameAudio = (arabicText) => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(arabicText);
+        utter.lang = 'ar-SA';
+        utter.rate = 0.85;
+        window.speechSynthesis.speak(utter);
+      }
+    };
+
+    window.cycleBentoNamesBatch = () => {
+      const isMobile = isBentoMobile();
+      const step = isMobile ? 5 : 9;
+      bentoNameBatchIndex = (bentoNameBatchIndex + step) % bentoAllahNames.length;
+      renderBentoNames();
+    };
+
+    function renderBentoNames() {
+      const gridEl = document.getElementById('bento-names-grid');
+      const badgeEl = document.getElementById('bento-names-batch-indicator');
+      const btnTextEl = document.getElementById('bento-cycle-btn-text');
+      if (!gridEl) return;
+
+      const isMobile = isBentoMobile();
+      const count = isMobile ? 5 : 9;
+      const total = bentoAllahNames.length;
+
+      const currentBatch = [];
+      for (let i = 0; i < count; i++) {
+        currentBatch.push(bentoAllahNames[(bentoNameBatchIndex + i) % total]);
+      }
+
+      const startNum = currentBatch[0].id;
+      const endNum = currentBatch[currentBatch.length - 1].id;
+
+      if (badgeEl) {
+        badgeEl.innerText = `${window.toBengaliNumerals(startNum)}–${window.toBengaliNumerals(endNum)} / ৯৯`;
+      }
+      if (btnTextEl) {
+        btnTextEl.innerText = isMobile ? 'পরবর্তী ৫টি ↻' : 'পরবর্তী ৯টি ↻';
+      }
+
+      if (isMobile) {
+        // Mobile Layout: Exactly 5 items (1 hero full width + 4 in 2x2 grid)
+        const hero = currentBatch[0];
+        const others = currentBatch.slice(1);
+
+        gridEl.innerHTML = `
+          <div onclick="playBentoNameAudio('${hero.arabic}')" class="col-span-2 p-2.5 rounded-xl bg-gradient-to-r from-stone-50 via-amber-50/20 to-emerald-50/20 dark:from-slate-900/80 dark:via-amber-950/20 dark:to-emerald-950/20 border border-amber-200/60 dark:border-amber-900/40 hover:border-amber-400 dark:hover:border-amber-600 transition-all cursor-pointer flex items-center justify-between group/hero">
+            <div class="flex items-center space-x-2.5 min-w-0">
+              <span class="text-[10px] font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-100/60 dark:bg-amber-950/60 px-1.5 py-0.5 rounded border border-amber-200 dark:border-amber-800">
+                #${window.toBengaliNumerals(hero.id)}
+              </span>
+              <div class="min-w-0">
+                <h4 class="text-xs font-bold text-slate-800 dark:text-white truncate">
+                  ${hero.transliteration}
+                </h4>
+                <p class="text-[10px] text-slate-500 dark:text-slate-400 truncate font-medium">
+                  ${hero.meaning}
+                </p>
+              </div>
+            </div>
+            <div class="text-right pl-2 shrink-0 flex items-center space-x-1.5">
+              <span class="font-arabic text-xl font-bold text-amber-800 dark:text-amber-300 leading-none" dir="rtl">
+                ${hero.arabic}
+              </span>
+              <span class="text-xs opacity-60 group-hover/hero:opacity-100 transition-opacity">🔊</span>
+            </div>
+          </div>
+          ${others.map(item => `
+            <div onclick="playBentoNameAudio('${item.arabic}')" class="p-2 rounded-xl bg-stone-50/80 hover:bg-emerald-50/70 dark:bg-slate-900/60 dark:hover:bg-emerald-950/30 border border-stone-200/60 dark:border-slate-800 hover:border-emerald-500/40 transition-all text-center cursor-pointer group/tile flex flex-col justify-center items-center">
+              <div class="w-full flex items-center justify-between mb-0.5">
+                <span class="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500">
+                  #${window.toBengaliNumerals(item.id)}
+                </span>
+                <span class="text-[9px] opacity-0 group-hover/tile:opacity-100 transition-opacity">🔊</span>
+              </div>
+              <p class="font-arabic text-base font-bold text-slate-800 dark:text-amber-200 leading-tight group-hover/tile:text-emerald-600 transition-colors" dir="rtl">
+                ${item.arabic}
+              </p>
+              <h5 class="text-[11px] font-bold text-slate-700 dark:text-slate-200 truncate w-full mt-0.5">
+                ${item.transliteration}
+              </h5>
+              <p class="text-[9.5px] text-slate-400 dark:text-slate-400 truncate w-full font-medium">
+                ${item.meaning}
+              </p>
+            </div>
+          `).join('')}
+        `;
+      } else {
+        // Desktop Layout: Exactly 9 items in a 3x3 symmetric grid
+        gridEl.innerHTML = currentBatch.map(item => `
+          <div onclick="playBentoNameAudio('${item.arabic}')" class="p-2 rounded-xl bg-stone-50/80 hover:bg-emerald-50/70 dark:bg-slate-900/60 dark:hover:bg-emerald-950/30 border border-stone-200/60 dark:border-slate-800 hover:border-emerald-500/40 transition-all text-center cursor-pointer group/tile flex flex-col justify-center items-center">
+            <div class="w-full flex items-center justify-between mb-0.5">
+              <span class="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500">
+                #${window.toBengaliNumerals(item.id)}
+              </span>
+              <span class="text-[9px] opacity-0 group-hover/tile:opacity-100 transition-opacity">🔊</span>
+            </div>
+            <p class="font-arabic text-base sm:text-lg font-bold text-slate-800 dark:text-amber-200 leading-tight group-hover/tile:text-emerald-600 transition-colors" dir="rtl">
+              ${item.arabic}
+            </p>
+            <h5 class="text-[11px] font-bold text-slate-700 dark:text-slate-200 truncate w-full mt-0.5">
+              ${item.transliteration}
+            </h5>
+            <p class="text-[9.5px] text-slate-400 dark:text-slate-400 truncate w-full font-medium">
+              ${item.meaning}
+            </p>
+          </div>
+        `).join('');
+      }
+    }
+
+    let bentoResizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(bentoResizeTimeout);
+      bentoResizeTimeout = setTimeout(() => {
+        renderBentoNames();
+      }, 150);
+    });
+
+    renderBentoNames();
+
+    // 6. Bento Quran Audio Waveform Player Logic
+    const bentoAudio = document.getElementById('bento-audio-el');
+    const bentoPlayBtn = document.getElementById('bento-play-btn');
+    const bentoPlayIcon = document.getElementById('bento-play-icon');
+    const bentoPauseIcon = document.getElementById('bento-pause-icon');
+    const bentoTimer = document.getElementById('bento-audio-timer');
+    const bentoWaveform = document.getElementById('bento-waveform');
+
+    window.toggleBentoAudio = () => {
+      if (!bentoAudio) return;
+      if (bentoAudio.paused) {
+        bentoAudio.play().then(() => {
+          if (bentoPlayIcon) bentoPlayIcon.classList.add('hidden');
+          if (bentoPauseIcon) bentoPauseIcon.classList.remove('hidden');
+          if (bentoWaveform) {
+            bentoWaveform.querySelectorAll('span').forEach(bar => bar.classList.add('wave-bar-active'));
+          }
+        }).catch(e => {
+          console.warn('Audio play request failed:', e);
+        });
+      } else {
+        bentoAudio.pause();
+        if (bentoPlayIcon) bentoPlayIcon.classList.remove('hidden');
+        if (bentoPauseIcon) bentoPauseIcon.classList.add('hidden');
+        if (bentoWaveform) {
+          bentoWaveform.querySelectorAll('span').forEach(bar => bar.classList.remove('wave-bar-active'));
+        }
+      }
+    };
+
+    if (bentoAudio) {
+      bentoAudio.addEventListener('timeupdate', () => {
+        const cur = Math.floor(bentoAudio.currentTime);
+        const m = Math.floor(cur / 60);
+        const s = cur % 60;
+        if (bentoTimer) {
+          bentoTimer.innerText = `${window.toBengaliNumerals(m)}:${s < 10 ? '০' : ''}${window.toBengaliNumerals(s)}`;
+        }
+      });
+      bentoAudio.addEventListener('ended', () => {
+        if (bentoPlayIcon) bentoPlayIcon.classList.remove('hidden');
+        if (bentoPauseIcon) bentoPauseIcon.classList.add('hidden');
+        if (bentoWaveform) {
+          bentoWaveform.querySelectorAll('span').forEach(bar => bar.classList.remove('wave-bar-active'));
+        }
+        if (bentoTimer) bentoTimer.innerText = "০:০০";
+      });
+    }
+
+    // 7. Zakat Calculation
+    window.calculateZakat = function() {
+      const cash = parseFloat(document.getElementById('zakat-cash').value) || 0;
+      const gold = parseFloat(document.getElementById('zakat-gold').value) || 0;
+      const other = parseFloat(document.getElementById('zakat-other').value) || 0;
+      const debt = parseFloat(document.getElementById('zakat-debt').value) || 0;
+      const zakat = Math.max(0, (cash + gold + other - debt) * 0.025);
+      const resEl = document.getElementById('zakat-result');
+      if (resEl) resEl.innerText = `৳ ${window.toBengaliNumerals(Math.floor(zakat))}`;
+    };
+  </script>
+
+</body>
+</html>

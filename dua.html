@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>হিসনুল মুসলিম - দৈনন্দিন দো'আ ও আযকার | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="দৈনন্দিন জীবনের প্রয়োজনীয় সহীহ দো'আ, সকাল-সন্ধ্যার জিকির, সালাতের দো'আ ও ক্ষমা প্রার্থনার সংগ্রহ।">
+  <meta name="keywords" content="দোআ, আযকার, হিসনুল মুসলিম, সকাল সন্ধ্যার জিকির, নামাজের দোআ, Bangla Dua, Islamic Duas">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;800;900&family=Amiri&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'], arabic: ['Amiri', 'serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content Header -->
+  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+      হিসনুল মুসলিম
+    </div>
+    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">দৈনন্দিন দো'আ ও আযকার</h1>
+    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+      মুমিনের আত্মিক ঢাল এবং প্রাত্যহিক জীবনের প্রয়োজনীয় সহীহ দো'আ ও জিকিরসমূহ বিশুদ্ধ উচ্চারণ ও অর্থসহ।
+    </p>
+    <div class="w-16 h-1 bg-emerald-600 dark:bg-emerald-500 mx-auto rounded-full mt-5"></div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl">
+    
+    <!-- Controls: Search & Category Tabs -->
+    <div class="mb-8 space-y-4">
+      <!-- Search Input -->
+      <div class="relative max-w-xl mx-auto">
+        <input type="text" id="dua-search" placeholder="দো'আর নাম, বিষয় বা শব্দ দিয়ে খুঁজুন..." 
+          class="w-full py-3.5 pl-11 pr-11 bg-white dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
+        <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500 font-bold text-xs">✕</button>
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div class="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-2 py-2">
+        <button onclick="filterCategory('all')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-emerald-600 text-white border border-emerald-600 shadow-xs" data-cat="all">সবগুলো (<span id="count-all">0</span>)</button>
+        <button onclick="filterCategory('morning_evening')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800" data-cat="morning_evening">সকাল ও সন্ধ্যা</button>
+        <button onclick="filterCategory('daily_life')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800" data-cat="daily_life">দৈনন্দিন জীবন</button>
+        <button onclick="filterCategory('prayer')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800" data-cat="prayer">নামাজ ও সালাত</button>
+        <button onclick="filterCategory('forgiveness')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800" data-cat="forgiveness">ক্ষমা ও তাওবা</button>
+        <button onclick="filterCategory('quranic')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800" data-cat="quranic">রব্বানা দো'আ</button>
+        <button onclick="filterCategory('hardship')" class="cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800" data-cat="hardship">বিপদ ও আরোগ্য</button>
+      </div>
+    </div>
+
+    <!-- Duas Grid Container -->
+    <div id="duas-list" class="space-y-6">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800">
+      <div class="w-12 h-12 bg-stone-100 dark:bg-slate-800 text-slate-400 rounded-xl flex items-center justify-center mx-auto mb-3 text-xl">🔍</div>
+      <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো দো'আ পাওয়া যায়নি</h3>
+      <p class="text-slate-400 text-xs mt-1">ভিন্ন শব্দ লিখে পুনরায় চেষ্টা করুন</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    const duasData = [
+      // 1. Sayyidul Istighfar
+      {
+        id: "sayyidul-istighfar",
+        category: "forgiveness",
+        title: "সাইয়্যিদুল ইস্তিগফার (তওবার শ্রেষ্ঠ দো'আ)",
+        arabic: "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ",
+        transliteration: "আল্লাহুম্মা আন্তা রব্বী, লা ইলাহা ইল্লা আন্তা, খালাকতানী ওয়া আনা ‘আব্দুকা, ওয়া আনা ‘আলা ‘আহদিকা ওয়া ওয়া‘দিকা মাসতাত্বা‘তু, আ‘ঊযু বিকা মিন শাররি মা ছা-না‘তু, আবূউ লাকা বিনি‘মাতিকা ‘আলাইয়্যা, ওয়া আবূউ বিযাম্বী, ফাগফির লী, ফাইন্নাহূ লা ইয়াগফিরুয যুনূবা ইল্লা আন্তা।",
+        translation: "হে আল্লাহ! আপনিই আমার প্রতিপালক। আপনি ছাড়া কোনো সত্য উপাস্য নেই। আপনি আমাকে সৃষ্টি করেছেন এবং আমি আপনার বান্দা। আমি আমার সাধ্যমতো আপনার অঙ্গীকার ও প্রতিশ্রুতির ওপর কায়েম আছি। আমি আমার কৃতকর্মের অনিষ্ট থেকে আপনার কাছে আশ্রয় চাই। আমার ওপর আপনার নিয়ামত আমি স্বীকার করছি এবং আমার গুনাহের কথাও স্বীকার করছি। অতএব আপনি আমাকে ক্ষমা করে দিন; কারণ আপনি ছাড়া গুনাহ মাফ করার আর কেউ নেই।",
+        reference: "সহীহ বুখারী: ৬৩০৬",
+        count: 1,
+        note: "রাসূলুল্লাহ (সা.) বলেছেন: যে ব্যক্তি দিনে বা রাতে দৃঢ় বিশ্বাসের সাথে এটি পড়বে এবং মারা যাবে, সে জান্নাতি হবে।"
+      },
+      // 2. Ayat al-Kursi
+      {
+        id: "ayatul-kursi",
+        category: "morning_evening",
+        title: "আয়াতুল কুরসী (কুরআনের শ্রেষ্ঠ আয়াত)",
+        arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+        transliteration: "আল্লা-হু লা- ইলা-হা ইল্লা- হুওয়াল হাইয়্যুল ক্বাইয়্যূম। লা তা’খুযুহূ সিনাতুঁও ওয়ালা- নাওম। লাহূ মা- ফিসসামা-ওয়া-তি ওয়ামা- ফিল আরদ্ব। মান যাল্লাযী ইয়াশফা‘উ ‘ইনদাহূ ইল্লা- বিইযনিহ। ইয়া‘লামু মা- বাইনা আইদীহিম ওয়ামা- খালফাহুম, ওয়ালা- ইউহীতূনা বিশাইইম মিন ‘ইলমিহী ইল্লা- বিমা- শা-আ। ওয়াসি‘আ কুরসিয়্যুহুস সামা-ওয়া-তি ওয়াল আরদ্ব, ওয়ালা- ইয়াউদুহূ হিফযুহুমা- ওয়াহুওয়াল ‘আলিয়্যুল ‘আজীম।",
+        translation: "আল্লাহ, তিনি ছাড়া কোনো সত্য ইলাহ নেই। তিনি চিরঞ্জীব, সর্বসত্তার ধারক। তন্দ্রা ও ঘুম তাঁকে স্পর্শ করতে পারে না। আকাশমণ্ডলী ও পৃথিবীতে যা কিছু আছে সবই তাঁর। কে আছে যে তাঁর অনুমতি ছাড়া তাঁর নিকট সুপারিশ করবে? তাদের সম্মুখে ও পেছনে যা কিছু আছে তা তিনি জানেন। তাঁর জ্ঞানের কোনো কিছু তারা আয়ত্ত করতে পারে না, কেবল যতটুকু তিনি ইচ্ছা করেন। তাঁর কুরসী আকাশমণ্ডলী ও পৃথিবী পরিবেষ্টন করে আছে। এ দুটোর রক্ষণাবেক্ষণ তাঁকে ক্লান্ত করে না। তিনি সর্বোচ্চ, মহান।",
+        reference: "সূরা আল-বাকারা: ২৫৫",
+        count: 1,
+        note: "প্রতি ফরজ নামাজের পর এবং সকাল-সন্ধ্যা ও ঘুমানোর আগে পাঠ্য।"
+      },
+      // 3. Morning / Evening Protection
+      {
+        id: "bismillah-protection",
+        category: "morning_evening",
+        title: "বিপদ-আপদ ও ক্ষতি থেকে সুরক্ষার দো'আ",
+        arabic: "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ",
+        transliteration: "বিসমিল্লাহিল্লাযী লা ইয়াদ্বুররু মা‘আসমিহী শাইউন ফিল আরদ্বি ওয়ালা ফিস সামা-ই, ওয়া হুওয়াস সামী‘উল ‘আলীম।",
+        translation: "আল্লাহর নামে, যাঁর নামের বরকতে আসমান ও জমিনের কোনো কিছুই ক্ষতি করতে পারে না। তিনি সর্বশ্রোতা, সর্বজ্ঞ।",
+        reference: "সুনানে আবু দাউদ: ৫০৮৮, জামে আত-তিরমিযী: ৩৩৮৮",
+        count: 3,
+        note: "সকাল ও সন্ধ্যায় ৩ বার পাঠ করলে কোনো জিনিস ক্ষতি করতে পারে না।"
+      },
+      // 4. Protection from Depression & Debt
+      {
+        id: "dua-anxiety-debt",
+        category: "hardship",
+        title: "দুশ্চিন্তা, পেরেশানি ও ঋণমুক্তির দো'আ",
+        arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ",
+        transliteration: "আল্লাহুম্মা ইন্নী আ‘ঊযু বিকা মিনাল হাম্মি ওয়াল হাযান, ওয়াল ‘আজযি ওয়াল কাসাল, ওয়াল বুখলি ওয়াল জুবন, ওয়াদ্বালাইদ দাইনি ওয়া গালাবাতির রিজাল।",
+        translation: "হে আল্লাহ! নিশ্চয়ই আমি আপনার কাছে আশ্রয় প্রার্থনা করছি দুশ্চিন্তা ও মনোকষ্ট থেকে, অক্ষমতা ও অলসতা থেকে, কৃপণতা ও কাপুরুষতা থেকে এবং ঋণের বোঝা ও মানুষের প্রাধান্য (অত্যাচার) থেকে।",
+        reference: "সহীহ বুখারী: ২৮৯৩",
+        count: 1,
+        note: "অস্থিরতা ও ঋণের চাপে বেশি বেশি পাঠ করা অত্যন্ত উপকারী।"
+      },
+      // 5. Dua of Yunus (a.)
+      {
+        id: "dua-yunus",
+        category: "hardship",
+        title: "দোয়ায়ে ইউনুস (বিপদে মুক্তির দোয়া)",
+        arabic: "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+        transliteration: "লা ইলা-হা ইল্লা- আন্তা সুবহা-নাকা ইন্নী কুনতু মিনায জোয়া-লিমীন।",
+        translation: "আপনি ছাড়া কোনো সত্য উপাস্য নেই, আপনি পরম পবিত্র। নিশ্চয়ই আমি অপরাধীদের অন্তর্ভুক্ত হয়ে গেছি।",
+        reference: "সূরা আল-আম্বিয়া: ৮৭",
+        count: 1,
+        note: "রাসূলুল্লাহ (সা.) বলেছেন: কোনো মুসলিম যেকোনো বিপদে পড়ে এ দো'আ পাঠ করলে আল্লাহ তা কবুল করেন।"
+      },
+      // 6. Rabbana Dunya Akhirah
+      {
+        id: "rabbana-atina",
+        category: "quranic",
+        title: "দুনিয়া ও আখেরাতের কল্যাণের দো'আ",
+        arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        transliteration: "রব্বানা- আ-তিনা ফিদ্দুনইয়া- হাসানাতাঁও ওয়া ফিল আ-খিরাতি হাসানাতাঁও ওয়াক্বিনা- ‘আযা-বান না-র।",
+        translation: "হে আমাদের প্রতিপালক! আমাদের দুনিয়াতে কল্যাণ দিন এবং আখেরাতেও কল্যাণ দান করুন এবং আমাদের জাহান্নামের শাস্তি থেকে রক্ষা করুন।",
+        reference: "সূরা আল-বাকারা: ২০১",
+        count: 1,
+        note: "রাসূলুল্লাহ (সা.) এই দো'আটি সবচেয়ে বেশি পাঠ করতেন।"
+      },
+      // 7. Parents Dua
+      {
+        id: "dua-parents",
+        category: "quranic",
+        title: "পিতা-মাতার জন্য মাগফিরাতের দো'আ",
+        arabic: "رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",
+        transliteration: "রব্বির হামহুমা- কামা- রব্বাইয়া-নী ছগীরা-।",
+        translation: "হে আমার পালনকর্তা! আপনি তাঁদের উভয়ের প্রতি রহম করুন, যেমন শৈশবে তাঁরা আমাকে স্নেহ-মমতায় লালন-পালন করেছেন।",
+        reference: "সূরা বনি ইসরাঈল: ২৪",
+        count: 1,
+        note: "পিতা-মাতার জীবিত ও ওফাত উভয় অবস্থায় পাঠ্য।"
+      },
+      // 8. Sleep Dua
+      {
+        id: "dua-before-sleep",
+        category: "daily_life",
+        title: "ঘুমানোর পূর্বে পাঠ করার দো'আ",
+        arabic: "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",
+        transliteration: "বিসমিকা আল্লাহুম্মা আমূতু ওয়া আহইয়া-।",
+        translation: "হে আল্লাহ! আপনারই নামে আমি মৃত্যুবরণ (ঘুমাই) করছি এবং আপনারই নামে জীবিত (জাগ্রত) হব।",
+        reference: "সহীহ বুখারী: ৬৩১২",
+        count: 1,
+        note: "ঘুমানোর প্রস্তুতি নিয়ে ডান কাতে শুয়ে এ দো'আ পাঠ করা সুন্নত।"
+      },
+      // 9. Waking Up Dua
+      {
+        id: "dua-waking-up",
+        category: "daily_life",
+        title: "ঘুম থেকে জাগ্রত হওয়ার দো'আ",
+        arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+        transliteration: "আলহামদু লিল্লাহিল্লাযী আহ্ইয়ানা বা‘দা মা আমা-তানা ওয়া ইলাইহিন নুশূর।",
+        translation: "সমস্ত প্রশংসা সেই আল্লাহর জন্য, যিনি আমাদের মৃত্যুর পর পুনরায় জীবিত করলেন এবং তাঁরই কাছে আমাদের পুনরুত্থান হবে।",
+        reference: "সহীহ বুখারী: ৬৩১২",
+        count: 1,
+        note: "ঘুম থেকে জেগে উঠে প্রথমেই পাঠ্য।"
+      },
+      // 10. Eating Dua
+      {
+        id: "dua-before-eating",
+        category: "daily_life",
+        title: "খাবার খাওয়ার শুরুতে দো'আ",
+        arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+        transliteration: "বিসমিল্লাহির রাহমানির রাহীম (শুরুতে ভুলে গেলে: 'বিসমিল্লাহি আউওয়ালাহূ ওয়া আখিরাহূ')",
+        translation: "পরম করুণাময় অসীম দয়ালু আল্লাহর নামে শুরু করছি।",
+        reference: "সুনানে আবু দাউদ: ৩৭৬৭",
+        count: 1,
+        note: "খাবারের শুরুতে আল্লাহর নাম নেওয়া বরকত আনয়ন করে।"
+      },
+      // 11. After Eating Dua
+      {
+        id: "dua-after-eating",
+        category: "daily_life",
+        title: "খাবার খাওয়ার সমাপ্তির দো'আ",
+        arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+        transliteration: "আলহামদু লিল্লাহিল্লাযী আত‘আমানা ওয়া সাক্বা-না ওয়া জা‘আলানা- মুসলিমীন।",
+        translation: "সমস্ত প্রশংসা আল্লাহর জন্য, যিনি আমাদের আহার করিয়েছেন, পান করিয়েছেন এবং মুসলিমদের অন্তর্ভুক্ত করেছেন।",
+        reference: "সুনানে আবু দাউদ: ৩৮৫০, জামে আত-তিরমিযী: ৩৪৫৭",
+        count: 1,
+        note: "খাবার শেষ করে আল্লাহর শোকরিয়া আদায়।"
+      },
+      // 12. Leaving Home
+      {
+        id: "dua-leaving-home",
+        category: "daily_life",
+        title: "ঘর থেকে বের হওয়ার দো'আ",
+        arabic: "بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+        transliteration: "বিসমিল্লাহি তাওয়াক্কালতু ‘আলাল্লা-হি, লা হাওলা ওয়ালা কুউওয়াতা ইল্লা বিল্লা-হ।",
+        translation: "আল্লাহর নামে, আমি আল্লাহর ওপর ভরসা করলাম। আল্লাহর সাহায্য ছাড়া কোনো উপায় ও ক্ষমতা নেই।",
+        reference: "সুনানে আবু দাউদ: ৫০৯৫, জামে আত-তিরমিযী: ৩৪২৬",
+        count: 1,
+        note: "পাঠকারীকে শয়তান থেকে নিরাপত্তা দেওয়া হয়।"
+      },
+      // 13. Entering Masjid
+      {
+        id: "dua-entering-masjid",
+        category: "daily_life",
+        title: "মসজিদে প্রবেশের দো'আ",
+        arabic: "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+        transliteration: "আল্লাহুম্মাফ তাহ্ লী আবওয়া-বা রহমাতিক।",
+        translation: "হে আল্লাহ! আমার জন্য আপনার রহমতের দরজাসমূহ উন্মুক্ত করে দিন।",
+        reference: "সহীহ মুসলিম: ৭১৩",
+        count: 1,
+        note: "ডান পা দিয়ে মসজিদে প্রবেশ করার সময় পাঠ্য।"
+      },
+      // 14. Exiting Masjid
+      {
+        id: "dua-exiting-masjid",
+        category: "daily_life",
+        title: "মসজিদ থেকে বের হওয়ার দো'আ",
+        arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+        transliteration: "আল্লাহুম্মা ইন্নী আসআলুকা মিন ফাদ্বলিক।",
+        translation: "হে আল্লাহ! নিশ্চয়ই আমি আপনার অনুগ্রহ প্রার্থনা করছি।",
+        reference: "সহীহ মুসলিম: ৭১৩",
+        count: 1,
+        note: "বাম পা দিয়ে মসজিদ থেকে বের হওয়ার সময় পাঠ্য।"
+      },
+      // 15. Tashahhud
+      {
+        id: "dua-tashahhud",
+        category: "prayer",
+        title: "তাশাহহুদ (আত্তাহিয়্যাতু)",
+        arabic: "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+        transliteration: "আত্তাহিইয়্যা-তু লিল্লাহি ওয়াস ছালাওয়া-তু ওয়াত তাইয়্যিবা-তু, আসসালা-মু ‘আলাইকা আইয়্যুহান নাবিয়্যু ওয়া রহমাতুল্লা-হি ওয়া বারাকা-তুহু, আসসালা-মু ‘আলাইনা ওয়া ‘আলা ‘ইবা-দিল্লা-হিস স-লিহীন। আশহাদু আল লা- ইলা-হা ইল্লাল্লা-হু ওয়া আশহাদু আন্না মুহাম্মাদান ‘আবদুহূ ওয়া রাসূলুহু।",
+        translation: "সমস্ত মৌখিক, শারীরিক ও আর্থিক ইবাদত আল্লাহর জন্য। হে নবী! আপনার প্রতি শান্তি, আল্লাহর রহমত ও তাঁর বরকত বর্ষিত হোক। শান্তি আমাদের ওপর এবং আল্লাহর নেক বান্দাদের ওপর বর্ষিত হোক। আমি সাক্ষ্য দিচ্ছি আল্লাহ ছাড়া কোনো সত্য উপাস্য নেই এবং মুহাম্মদ (সা.) তাঁর বান্দা ও রাসূল।",
+        reference: "সহীহ বুখারী: ৮৩১, সহীহ মুসলিম: ৪০২",
+        count: 1,
+        note: "নামাজে বসার সময় ওয়াজিব রুকন হিসেবে পাঠ্য।"
+      },
+      // 16. Durood Ibrahim
+      {
+        id: "dua-durood-ibrahim",
+        category: "prayer",
+        title: "দুরুদে ইব্রাহীম",
+        arabic: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+        transliteration: "আল্লাহুম্মা ছাল্লি ‘আলা মুহাম্মাদিঁও ওয়া ‘আলা- আ-লি মুহাম্মাদিন কামা- ছাল্লাইতা ‘আলা- ইবরা-হীমা ওয়া ‘আলা- আ-লি ইবরা-হীমা ইন্নাকা হামীদুম মাজীদ। আল্লাহুম্মা বা-রিক ‘আলা মুহাম্মাদিঁও ওয়া ‘আলা- আ-লি মুহাম্মাদিন কামা- বা-রকতা ‘আলা- ইবরা-হীমা ওয়া ‘আলা- আ-লি ইবরা-হীমা ইন্নাকা হামীদুম মাজীদ।",
+        translation: "হে আল্লাহ! মুহাম্মদ (সা.) এবং তাঁর বংশধরদের ওপর রহমত বর্ষণ করুন, যেভাবে আপনি ইব্রাহিম (আ.) এবং তাঁর বংশধরদের ওপর রহমত বর্ষণ করেছিলেন। নিশ্চয়ই আপনি প্রশংসিত ও মহিমান্বিত। হে আল্লাহ! মুহাম্মদ (সা.) এবং তাঁর বংশধরদের ওপর বরকত দান করুন, যেভাবে আপনি ইব্রাহিম (আ.) এবং তাঁর বংশধরদের ওপর বরকত দান করেছিলেন। নিশ্চয়ই আপনি প্রশংসিত ও মহিমান্বিত।",
+        reference: "সহীহ বুখারী: ৩৩৭০",
+        count: 1,
+        note: "নামাজের শেষ বৈঠকে তাশাহহুদের পর এবং সাধারণ সময়ে পাঠে অফুরন্ত সওয়াব।"
+      },
+      // 17. Dua Masura
+      {
+        id: "dua-masura",
+        category: "prayer",
+        title: "দো'আয়ে মাসূরা",
+        arabic: "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ وَارْحَمْنِي إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ",
+        transliteration: "আল্লাহুম্মা ইন্নী যালামতু নাফসী যুলমান কাছী-রাঁও ওয়ালা ইয়াগফিরুয যুনূবা ইল্লা- আন্তা, ফাগফির লী মাগফিরাতাম মিন ‘ইনদিকা ওয়ারহামনী, ইন্নাকা আন্তাল গাফূরুর রাহীম।",
+        translation: "হে আল্লাহ! আমি আমার নিজের ওপর অনেক জুলুম করেছি। আর আপনি ছাড়া কেউ গুনাহ মাফ করতে পারে না। অতএব আপনি নিজ অনুগ্রহে আমাকে ক্ষমা করে দিন এবং আমার প্রতি দয়া করুন। নিশ্চয়ই আপনি অতীব ক্ষমাশীল, পরম দয়ালু।",
+        reference: "সহীহ বুখারী: ৮৩৪",
+        count: 1,
+        note: "নামাজে দুরুদ পড়ার পর সালাম ফেরানোর পূর্বে পাঠ্য।"
+      },
+      // 18. Subhanallahi wa Bihamdihi
+      {
+        id: "tasbih-100",
+        category: "morning_evening",
+        title: "১০০ বার পাঠে সমুদ্রের ফেনা সমতুল্য গুনাহ মাফের তাসবীহ",
+        arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",
+        transliteration: "সুবহা-নাল্লা-হি ওয়া বিহামদিহী।",
+        translation: "আল্লাহর পবিত্রতা ঘোষণা করছি তাঁর প্রশংসার সাথে।",
+        reference: "সহীহ বুখারী: ৬৪০৫",
+        count: 100,
+        note: "রাসূলুল্লাহ (সা.) বলেছেন: যে ব্যক্তি দিনে ১০০ বার এটি বলবে, তার সব গুনাহ ক্ষমা করা হবে, যদিও তা সমুদ্রের ফেনা সমান হয়।"
+      }
+    ];
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    // Repetition counter states
+    const tapCounts = {};
+
+    function renderDuas() {
+      const container = document.getElementById('duas-list');
+      const emptyState = document.getElementById('empty-state');
+      
+      const filtered = duasData.filter(d => {
+        const matchesCat = currentCategory === 'all' || d.category === currentCategory;
+        const matchesQuery = !searchQuery || 
+          d.title.toLowerCase().includes(searchQuery) ||
+          d.translation.toLowerCase().includes(searchQuery) ||
+          d.transliteration.toLowerCase().includes(searchQuery) ||
+          d.arabic.includes(searchQuery);
+        return matchesCat && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = filtered.map(d => {
+        const countKey = d.id;
+        if (tapCounts[countKey] === undefined) tapCounts[countKey] = 0;
+        const currentCount = tapCounts[countKey];
+        const isDone = currentCount >= d.count;
+        const bookmarkKey = `dua_${d.id}`;
+        const isBookmarked = window.isBookmarked ? window.isBookmarked(bookmarkKey) : false;
+
+        return `
+          <div class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800 hover:border-emerald-500/40 transition-all duration-200 relative group" id="card-${d.id}">
+            
+            <!-- Card Header -->
+            <div class="flex justify-between items-start gap-3 mb-5">
+              <div>
+                <span class="inline-block text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 px-2.5 py-1 rounded-md uppercase tracking-wider mb-2">
+                  ${getCategoryName(d.category)}
+                </span>
+                <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white leading-snug">${d.title}</h2>
+              </div>
+              
+              <!-- Action Buttons -->
+              <div class="flex items-center space-x-1.5 shrink-0">
+                <button onclick="handleDuaBookmark(event, '${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                  </svg>
+                </button>
+                <button onclick="copyDua('${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5H6a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Arabic Text -->
+            <div class="text-right my-5 p-5 bg-emerald-50/40 dark:bg-emerald-950/20 rounded-xl border border-emerald-500/20 dark:border-emerald-900/30">
+              <p class="font-arabic text-2xl md:text-3xl leading-[2.3] text-slate-900 dark:text-emerald-50" dir="rtl">${d.arabic}</p>
+            </div>
+
+            <!-- Transliteration -->
+            <div class="mb-4">
+              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">উচ্চারণ</p>
+              <p class="text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed italic">${d.transliteration}</p>
+            </div>
+
+            <!-- Translation -->
+            <div class="mb-5 pt-4 border-t border-stone-100 dark:border-slate-800">
+              <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">অর্থ</p>
+              <p class="text-slate-800 dark:text-slate-200 text-sm md:text-base leading-relaxed font-medium">${d.translation}</p>
+            </div>
+
+            <!-- Reference & Fazilat Note -->
+            ${d.note ? `
+              <div class="p-3 bg-amber-50/70 dark:bg-amber-950/25 rounded-xl border border-amber-200/70 dark:border-amber-800/40 text-amber-900 dark:text-amber-200 text-xs md:text-sm mb-5 flex items-start gap-2 leading-relaxed">
+                <span class="text-amber-600 font-bold shrink-0 mt-0.5">★</span>
+                <span>${d.note}</span>
+              </div>
+            ` : ''}
+
+            <!-- Footer: Reference & Interactive Counter -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-100 dark:border-slate-800">
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                ${d.reference}
+              </span>
+
+              <!-- Counter Controls -->
+              <div class="flex items-center space-x-1.5">
+                <button onclick="resetDuaCounter('${d.id}')" class="w-8 h-8 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-red-500 hover:border-red-300 flex items-center justify-center text-xs transition-colors" title="কাউন্টার রিসেট">
+                  ↺
+                </button>
+                <button onclick="incrementDuaCounter('${d.id}', ${d.count})" 
+                  class="flex items-center space-x-2 px-3 py-1.5 rounded-lg font-bold text-xs md:text-sm transition-all ${
+                    isDone 
+                      ? 'bg-emerald-600 text-white shadow-xs' 
+                      : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60 hover:bg-emerald-100'
+                  }">
+                  <span class="w-5 h-5 rounded-md bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs shadow-xs">
+                    ${window.toBengaliNumerals(currentCount)}
+                  </span>
+                  <span>/ ${window.toBengaliNumerals(d.count)} ${isDone ? '✓' : ''}</span>
+                </button>
+                <button onclick="speakDua('${d.id}')" class="w-8 h-8 rounded-lg border border-amber-200 dark:border-amber-800/40 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/40 flex items-center justify-center text-xs transition-colors" title="আরবি উচ্চারণ শুনুন">
+                  🔊
+                </button>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.resetDuaCounter = (id) => {
+      tapCounts[id] = 0;
+      renderDuas();
+    };
+
+    window.speakDua = (id) => {
+      const d = duasData.find(item => item.id === id);
+      if (!d) return;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(d.arabic);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+        if (window.showToast) window.showToast('দো\'আ পড়া হচ্ছে...');
+      } else {
+        if (window.showToast) window.showToast('অডিও সাপোর্ট নেই');
+      }
+    };
+
+    function getCategoryName(cat) {
+      const names = {
+        morning_evening: "সকাল ও সন্ধ্যা",
+        daily_life: "দৈনন্দিন জীবন",
+        prayer: "নামাজ ও সালাত",
+        forgiveness: "ক্ষমা ও তাওবা",
+        quranic: "রব্বানা দো'আ",
+        hardship: "বিপদ ও আরোগ্য"
+      };
+      return names[cat] || "দো'আ";
+    }
+
+    function filterCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-tab').forEach(b => {
+        if (b.getAttribute('data-cat') === cat) {
+          b.className = "cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-emerald-600 text-white border border-emerald-600 shadow-xs";
+        } else {
+          b.className = "cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800";
+        }
+      });
+      renderDuas();
+    }
+
+    function incrementDuaCounter(id, max) {
+      if (tapCounts[id] === undefined) tapCounts[id] = 0;
+      tapCounts[id]++;
+      if (tapCounts[id] > max) {
+        tapCounts[id] = 0; // Loop reset
+      } else if (tapCounts[id] === max) {
+        if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
+        if (window.showToast) window.showToast('মাশাআল্লাহ! পাঠ সম্পন্ন হয়েছে');
+      } else {
+        if (navigator.vibrate) navigator.vibrate(30);
+      }
+      renderDuas();
+    }
+
+    function copyDua(id) {
+      const dua = duasData.find(d => d.id === id);
+      if (!dua) return;
+      const textToCopy = `${dua.title}\n\n${dua.arabic}\n\nউচ্চারণ: ${dua.transliteration}\n\nঅর্থ: ${dua.translation}\n\nরেফারেন্স: ${dua.reference}\n(দ্বীন ইসলাম - deenislam.org)`;
+      window.copyToClipboard(textToCopy);
+    }
+
+    function handleDuaBookmark(event, id) {
+      const dua = duasData.find(d => d.id === id);
+      if (!dua) return;
+      const key = `dua_${dua.id}`;
+      const data = {
+        key: key,
+        type: 'dua',
+        subType: getCategoryName(dua.category),
+        title: dua.title,
+        arabic: dua.arabic,
+        text: dua.translation,
+        url: `dua.html#card-${dua.id}`
+      };
+      const isAdded = window.toggleBookmark(data);
+      document.querySelectorAll(`.bookmark-btn[data-key="${key}"]`).forEach(btn => {
+        const svg = btn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isAdded ? 'currentColor' : 'none');
+      });
+    }
+
+    const searchInput = document.getElementById('dua-search');
+    const clearBtn = document.getElementById('clear-search');
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      if (searchQuery) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+      renderDuas();
+    });
+
+    function clearSearch() {
+      searchInput.value = '';
+      searchQuery = '';
+      clearBtn.classList.add('hidden');
+      renderDuas();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('count-all').innerText = window.toBengaliNumerals(duasData.length);
+      renderDuas();
+    });
+  </script>
+</body>
+</html>

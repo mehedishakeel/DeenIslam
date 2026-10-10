@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>যাকাত - যাকাত ক্যালকুলেটর, নিসাব ও নিয়মাবলী | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="ইসলামের চতুর্থ স্তম্ভ যাকাত সম্পর্কে বিস্তারিত গাইড। নির্ভুল যাকাত ক্যালকুলেটর, নিসাব ও ব্যয়ের ৮টি খাত।">
+  <meta name="keywords" content="যাকাত, নিসাব, যাকাত ক্যালকুলেটর, Zakat Calculator Bangla, Zakat Rules">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Header -->
+  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-xs font-medium mb-3">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400"></span>
+      <span>ইসলামের ৪র্থ স্তম্ভ</span>
+    </div>
+    <h1 class="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-2.5 tracking-tight">যাকাত ও স্মার্ট যাকাত ক্যালকুলেটর</h1>
+    <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+      সামাজিক ও অর্থনৈতিক ভারসাম্য রক্ষা এবং নিজের সম্পদকে পবিত্র করার ঐশী বিধান।
+    </p>
+  </header>
+
+  <!-- Content Section -->
+  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl space-y-8">
+    
+    <!-- 1. Interactive Full Zakat Calculator -->
+    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80">
+      <div class="flex items-center space-x-3.5 mb-6">
+        <div class="w-10 h-10 bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 rounded-xl flex items-center justify-center font-bold text-xl border border-amber-500/20">৳</div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">স্মার্ট যাকাত ক্যালকুলেটর</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">আপনার বাৎসরিক সম্পদের হিসাব করে প্রদেয় ২.৫% যাকাত তাৎক্ষণিকভাবে জেনে নিন</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Inputs Column (2 cols) -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">১. নগদ টাকা (হাতে ও ব্যাংকে জমা)</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">৳</span>
+                <input type="number" id="zakat-cash" oninput="runZakatCalculation()" class="w-full py-2.5 pl-8 pr-3 rounded-xl bg-stone-50/70 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-xs md:text-sm font-semibold text-slate-900 dark:text-white" placeholder="০.০০">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">২. স্বর্ণ ও অলংকারের বর্তমান বাজারমূল্য</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">৳</span>
+                <input type="number" id="zakat-gold" oninput="runZakatCalculation()" class="w-full py-2.5 pl-8 pr-3 rounded-xl bg-stone-50/70 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-xs md:text-sm font-semibold text-slate-900 dark:text-white" placeholder="০.০০">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">৩. রৌপ্যের (রূপা) বাজারমূল্য</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">৳</span>
+                <input type="number" id="zakat-silver" oninput="runZakatCalculation()" class="w-full py-2.5 pl-8 pr-3 rounded-xl bg-stone-50/70 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-xs md:text-sm font-semibold text-slate-900 dark:text-white" placeholder="০.০০">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">৪. ব্যবসার পণ্য ও বিক্রয়যোগ্য সম্পদ</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">৳</span>
+                <input type="number" id="zakat-business" oninput="runZakatCalculation()" class="w-full py-2.5 pl-8 pr-3 rounded-xl bg-stone-50/70 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-xs md:text-sm font-semibold text-slate-900 dark:text-white" placeholder="০.০০">
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1.5">৫. পাওনা টাকা (ফেরত নিশ্চিত)</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">৳</span>
+                <input type="number" id="zakat-receivable" oninput="runZakatCalculation()" class="w-full py-2.5 pl-8 pr-3 rounded-xl bg-stone-50/70 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 text-xs md:text-sm font-semibold text-slate-900 dark:text-white" placeholder="০.০০">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-red-600 dark:text-red-400 mb-1.5">৬. বর্তমান দেনা ও প্রদেয় ঋণ (বাদ)</label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-red-400 text-xs font-bold">৳</span>
+                <input type="number" id="zakat-debt" oninput="runZakatCalculation()" class="w-full py-2.5 pl-8 pr-3 rounded-xl bg-stone-50/70 dark:bg-slate-800/60 border border-red-200 dark:border-red-900/40 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 text-xs md:text-sm font-semibold text-slate-900 dark:text-white" placeholder="০.০০">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Box (1 col) -->
+        <div class="bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-900/40 rounded-xl p-5 md:p-6 flex flex-col justify-between text-center">
+          <div>
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 dark:text-emerald-400 block mb-1">মোট যাকাতযোগ্য নিট সম্পদ</span>
+            <h4 id="net-asset-display" class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-4">৳ ০</h4>
+
+            <div class="w-10 h-0.5 bg-emerald-200 dark:bg-emerald-800/60 mx-auto rounded-full mb-4"></div>
+
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 block mb-1">আপনার প্রদেয় যাকাত (২.৫%)</span>
+            <h3 id="zakat-final-result" class="text-3xl md:text-4xl font-black text-emerald-700 dark:text-emerald-400 mb-2">৳ ০</h3>
+            <p id="nisab-status-text" class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+              * নিসাব পরিমাণ সম্পদ (আনুমানিক ৬০-৭০ হাজার টাকার বেশি) পূর্ণ এক বছর অতিক্রম করলে যাকাত ফরজ হয়।
+            </p>
+          </div>
+
+          <button onclick="resetZakatForm()" class="mt-5 py-2 px-4 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold hover:text-red-500 hover:border-red-300 transition-all border border-stone-200/90 dark:border-slate-800 shadow-2xs">
+            রিসেট করুন
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. What is Zakat & Importance -->
+    <section class="space-y-4">
+      <div class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 leading-relaxed text-slate-700 dark:text-slate-300">
+        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+          <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
+          যাকাত কি ও এর হুকুম?
+        </h2>
+        <p class="text-xs md:text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          যাকাত শব্দের অর্থ পবিত্রতা, প্রবৃদ্ধি ও পরিশুদ্ধি। শরীয়তের পরিভাষায়, নিসাব পরিমাণ বর্ধনশীল সম্পদের অধিকারী প্রত্যেক প্রাপ্তবয়স্ক ও সুস্থমস্তিষ্ক সম্পন্ন মুসলিমের জন্য এক বছর পূর্ণ হওয়ার পর নির্দিষ্ট হারে (২.৫%) সম্পদ আল্লাহর নির্ধারিত হকদারদের মালিকানায় দেওয়া ফরজ। পবিত্র কুরআনে সালাতের পাশাপাশি ৮২ স্থানে যাকাত প্রদানের নির্দেশ এসেছে।
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-emerald-50/40 dark:bg-emerald-950/20 p-5 md:p-6 rounded-xl border border-emerald-500/20 dark:border-emerald-900/40">
+          <h3 class="text-base font-bold text-emerald-800 dark:text-emerald-300 mb-2">সম্পদ পবিত্রকরণ</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed">যাকাত কোনো অনুগ্রহ নয়, বরং সম্পদশালীর সম্পদে দরিদ্র ও অভাবীদের ন্যায্য অধিকার। তা আদায়ের মাধ্যমে নিজের বাকি সম্পদ পবিত্র ও বরকতময় হয়।</p>
+        </div>
+        <div class="bg-emerald-50/40 dark:bg-emerald-950/20 p-5 md:p-6 rounded-xl border border-emerald-500/20 dark:border-emerald-900/40">
+          <h3 class="text-base font-bold text-emerald-800 dark:text-emerald-300 mb-2">অর্থনৈতিক ভারসাম্য</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed">যাকাতের মাধ্যমে সমাজের ধনী ও দরিদ্রের বৈষম্য দূর হয় এবং অর্থ কুক্ষিগত না হয়ে অভাবীদের মধ্যে সঞ্চালিত হয়।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Zakat Nisab Table -->
+    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80">
+      <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+        <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
+        যাকাতের নিসাব (কার ওপর যাকাত ফরজ?)
+      </h2>
+      <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed mb-5">
+        যে পরিমাণ সম্পদ থাকলে শরীয়তে একজন ব্যক্তিকে ধনী গণ্য করা হয়, তাকে নিসাব বলা হয়। নিসাবের পরিমাপ নিম্নরূপ:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="p-5 rounded-xl bg-amber-50/40 dark:bg-amber-950/20 border border-amber-500/20 dark:border-amber-900/40">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-amber-800 dark:text-amber-400 block mb-1">স্বর্ণের নিসাব</span>
+          <h4 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">সাড়ে ৭ তোলা (ভরি) বা ৮৭.৪৫ গ্রাম</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">কারও নিকট শুধুমাত্র সোনা থাকলে তা সাড়ে সাত ভরি হলে এবং এক বছর পূর্ণ হলে ২.৫% যাকাত প্রযোজ্য হবে।</p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-700/80">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 block mb-1">রৌপ্য বা নগদ টাকার নিসাব</span>
+          <h4 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">সাড়ে ৫২ তোলা (ভরি) বা ৬১২.৩৬ গ্রাম</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">টাকা, রূপা বা মিশ্র সম্পদ থাকলে সাড়ে বায়ান্ন তোলা রূপার সমপরিমাণ অর্থ থাকলে যাকাত ফরজ হবে।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Eight Recipients of Zakat (Surah At-Tawbah: 60) -->
+    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80">
+      <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-1.5 flex items-center gap-2">
+        <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
+        যাকাত ব্যয়ের ৮টি খাত (কুরআনের আলোকে)
+      </h2>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mb-5 font-normal">পবিত্র কুরআনের সূরা আত-তাওবার ৬০ নম্বর আয়াতে যাকাত বণ্টনের আটটি নির্দিষ্ট খাত নির্ধারণ করে দেওয়া হয়েছে:</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">১</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">ফকির (নিঃস্ব)</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">যার কোনো সম্পদ বা জীবিকা নেই।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">২</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">মিসকিন (দরিদ্র)</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">যার আয় প্রয়োজনের তুলনায় অপর্যাপ্ত।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">৩</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">যাকাত কর্মচারী</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">যাকাত সংগ্রহ ও বিতরণে নিয়োজিত কর্মী।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">৪</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">মন জয় করার জন্য</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">ইসলামের প্রতি আকৃষ্ট করার উদ্দেশ্যে।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">৫</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">দাসমুক্তি</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">দাস বা বন্দীদের মুক্ত করার জন্য।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">৬</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">ঋণগ্রস্ত ব্যক্তি</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">অসহায়ভাবে ঋণ পরিশোধে অক্ষম ব্যক্তি।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">৭</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">আল্লাহর রাস্তায়</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">দ্বীনের খেদমত ও প্রতিরক্ষায়।</p>
+        </div>
+        <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <span class="w-6 h-6 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2">৮</span>
+          <h4 class="font-bold text-xs md:text-sm text-slate-900 dark:text-white mb-0.5">মুসাফির (বিপদগ্রস্ত)</h4>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400">সফরে সহায়সম্বলহীন হয়ে পড়া ব্যক্তি।</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    function runZakatCalculation() {
+      const cash = parseFloat(document.getElementById('zakat-cash').value) || 0;
+      const gold = parseFloat(document.getElementById('zakat-gold').value) || 0;
+      const silver = parseFloat(document.getElementById('zakat-silver').value) || 0;
+      const business = parseFloat(document.getElementById('zakat-business').value) || 0;
+      const receivable = parseFloat(document.getElementById('zakat-receivable').value) || 0;
+      const debt = parseFloat(document.getElementById('zakat-debt').value) || 0;
+
+      const totalAssets = cash + gold + silver + business + receivable;
+      const netAssets = Math.max(0, totalAssets - debt);
+      const zakat = netAssets * 0.025;
+
+      document.getElementById('net-asset-display').innerText = `৳ ${Math.floor(netAssets).toLocaleString('bn-BD')}`;
+      document.getElementById('zakat-final-result').innerText = `৳ ${Math.floor(zakat).toLocaleString('bn-BD')}`;
+    }
+
+    function resetZakatForm() {
+      document.querySelectorAll('#zakat-cash, #zakat-gold, #zakat-silver, #zakat-business, #zakat-receivable, #zakat-debt').forEach(i => i.value = '');
+      runZakatCalculation();
+    }
+  </script>
+</body>
+</html>

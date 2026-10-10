@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সালাত - নামাজের সময়সূচী, সেহরি ও ইফতার | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .prayer-card-active {
+      background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+      border-color: rgba(5, 150, 105, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200">
+  <div id="navbar-placeholder"></div>
+
+  <main class="container mx-auto px-4 md:px-6 py-10 flex-grow">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <span class="inline-block px-3.5 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-bold text-xs rounded-lg border border-emerald-200/60 dark:border-emerald-800/40 uppercase tracking-wider mb-3">
+        ওয়াক্ত ও সময়সূচি
+      </span>
+      <h1 class="text-3xl md:text-5xl font-black text-slate-800 dark:text-white mb-3 tracking-tight">সালাত ও নামাজের সময়সূচী</h1>
+      <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        আপনার ভৌগোলিক অবস্থান অনুযায়ী নির্ভুল ওয়াক্ত, সেহরি-ইফতার এবং নামাজের নিষিদ্ধ সময়।
+      </p>
+
+      <!-- Hijri Date & Quick Links Bar -->
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+        <span id="hijri-date-badge" class="px-3.5 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg border border-emerald-200/60 dark:border-emerald-800/40 flex items-center">
+          🌙 হিজরি তারিখ লোড হচ্ছে...
+        </span>
+        <a href="qibla.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
+          <span>🕋 কিবলা কম্পাস</span>
+        </a>
+        <a href="namaz.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
+          <span>📖 পূর্ণাঙ্গ নামাজ শিক্ষা</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Suhoor & Iftar Timer Banner -->
+    <section class="max-w-6xl mx-auto mb-8">
+      <div class="bg-gradient-to-r from-[#064e3b] via-[#047857] to-[#065f46] text-white p-6 md:p-7 rounded-2xl shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 border border-emerald-500/25">
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-2xl border border-white/10 shrink-0">
+            ⏳
+          </div>
+          <div>
+            <span class="text-[11px] uppercase tracking-wider text-emerald-200 font-bold block mb-0.5">পরবর্তী উপলক্ষ</span>
+            <h3 id="fasting-countdown-title" class="text-xl sm:text-2xl font-black">ইফতারের বাকি</h3>
+            <p id="fasting-time-info" class="text-xs text-emerald-100">মাগরিব: --:--</p>
+          </div>
+        </div>
+        <div class="bg-black/25 px-6 py-3 rounded-xl text-center border border-white/10 shadow-xs">
+          <div id="fasting-countdown-clock" class="text-2xl md:text-3xl font-black font-mono tracking-wider tabular-nums text-amber-300">
+            --:--:--
+          </div>
+          <span class="text-[10px] text-emerald-200 uppercase tracking-wider font-semibold">ঘণ্টা : মিনিট : সেকেন্ড</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prayer Times Grid Section -->
+    <section class="max-w-6xl mx-auto mb-10">
+      <div class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-xs border border-stone-200/80 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7 pb-4 border-b border-stone-100 dark:border-slate-800">
+          
+          <!-- Location Info -->
+          <div class="flex items-center space-x-3">
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">আজকের ওয়াক্ত</h2>
+            <span id="location-text" class="text-xs font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1 rounded-lg flex items-center border border-emerald-200/60 dark:border-emerald-800/40">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              লোকেশন...
+            </span>
+          </div>
+
+          <!-- Controls: Asr School Selector, Notifications, Update -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <!-- Asr Calculation Method (Hanafi vs Shafi'i) -->
+            <div class="flex items-center space-x-1.5 text-xs font-semibold bg-stone-100 dark:bg-slate-800/80 px-3 py-1.5 rounded-lg border border-stone-200 dark:border-slate-700">
+              <span class="text-slate-400">মাযহাব:</span>
+              <select id="asr-school" onchange="changeAsrSchool(this.value)" class="bg-transparent text-primary font-bold outline-none cursor-pointer">
+                <option value="1">হানাফী (Hanafi)</option>
+                <option value="0">শাফেঈ / অন্যান্য</option>
+              </select>
+            </div>
+
+            <!-- Notification Toggle Button -->
+            <button id="notify-btn" onclick="toggleNotifications()" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-primary flex items-center space-x-1.5 border border-stone-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all bg-white dark:bg-slate-800">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <span id="notify-text">নোটিফিকেশন</span>
+            </button>
+
+            <!-- Refresh Location -->
+            <button onclick="getPrayerTimes(true)" class="p-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 text-primary transition-all border border-stone-200 dark:border-slate-700" title="লোকেশন রিফ্রেশ">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 5 Waqt Tiles Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5" id="prayer-grid">
+          <!-- 5 Tiles will be injected here -->
+        </div>
+
+        <!-- Note -->
+        <div class="mt-6 flex items-center justify-center space-x-2 text-slate-400 dark:text-slate-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-xs font-medium text-center">সময়সূচী স্বয়ংক্রিয়ভাবে ইসলামিক ফাউন্ডেশন ও বিশ্বস্ত গণনা পদ্ধতি অনুযায়ী হালনাগাদ হয়।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Forbidden Times Section -->
+    <section class="max-w-6xl mx-auto mb-6">
+      <div class="bg-amber-50/70 dark:bg-amber-950/20 p-6 md:p-8 rounded-2xl border border-amber-200/60 dark:border-amber-900/30">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-black text-amber-900 dark:text-amber-200 mb-1">নামাজের নিষিদ্ধ সময়</h2>
+          <p class="text-xs text-amber-700 dark:text-amber-400">এই সময়গুলোতে যে কোনো নফল বা ফরজ সালাত আদায় করা নিষিদ্ধ</p>
+          <div class="w-12 h-0.5 bg-amber-400 dark:bg-amber-700 mx-auto rounded-full mt-3"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="bg-white dark:bg-[#0f172a] p-6 rounded-2xl border border-amber-200/50 dark:border-slate-800 shadow-xs text-center">
+            <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950/60 rounded-xl flex items-center justify-center mx-auto mb-4 text-amber-700 dark:text-amber-400 font-bold text-lg">১</div>
+            <h3 class="text-base font-bold text-slate-800 dark:text-white mb-2">সূর্যোদয়ের সময়</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">সূর্য উদিত হওয়ার সময় থেকে পরবর্তী প্রায় ১৫-২০ মিনিট পর্যন্ত কোনো নামাজ পড়া জায়েয নেই।</p>
+          </div>
+
+          <div class="bg-white dark:bg-[#0f172a] p-6 rounded-2xl border border-amber-200/50 dark:border-slate-800 shadow-xs text-center">
+            <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950/60 rounded-xl flex items-center justify-center mx-auto mb-4 text-amber-700 dark:text-amber-400 font-bold text-lg">২</div>
+            <h3 class="text-base font-bold text-slate-800 dark:text-white mb-2">দ্বিপ্রহর (জাওয়াল)</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">সূর্য যখন ঠিক মাথার উপরে অবস্থান করে (যোহরের ওয়াক্ত হওয়ার ঠিক পূর্বের ৫-১০ মিনিট)।</p>
+          </div>
+
+          <div class="bg-white dark:bg-[#0f172a] p-6 rounded-2xl border border-amber-200/50 dark:border-slate-800 shadow-xs text-center">
+            <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950/60 rounded-xl flex items-center justify-center mx-auto mb-4 text-amber-700 dark:text-amber-400 font-bold text-lg">৩</div>
+            <h3 class="text-base font-bold text-slate-800 dark:text-white mb-2">সূর্যাস্তের সময়</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">সূর্য ডোবার পূর্ব মুহূর্ত পর্যন্ত। তবে ওই দিনের আসরের ফরজ পড়া বাকি থাকলে তা পড়ে নেওয়া যাবে।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="js/components.js"></script>
+  <script>
+    let currentTimings = null;
+    let selectedSchool = localStorage.getItem('prayer_school') || '1'; // 1 = Hanafi, 0 = Shafi'i
+
+    document.getElementById('asr-school').value = selectedSchool;
+
+    const instantHijri = (window.getInstantHijriDate && window.getInstantHijriDate()) || localStorage.getItem('deen_hijri_date') || "২৪ রবিউস সানি, ১৪৪৮ হিজরি";
+    const badge = document.getElementById('hijri-date-badge');
+    if (badge) badge.innerText = `🌙 ${instantHijri}`;
+
+    function changeAsrSchool(val) {
+      selectedSchool = val;
+      localStorage.setItem('prayer_school', selectedSchool);
+      getPrayerTimes(true);
+    }
+
+    async function getPrayerTimes(forceGPS = false) {
+      const locText = document.getElementById('location-text');
+      const cachedLat = localStorage.getItem('user_lat');
+      const cachedLon = localStorage.getItem('user_lon');
+      const cachedCity = localStorage.getItem('user_city');
+
+      if (!forceGPS && cachedLat && cachedLon) {
+        locText.innerText = cachedCity || 'সংরক্ষিত লোকেশন';
+        fetchTimings(cachedLat, cachedLon);
+        return;
+      }
+
+      if (!forceGPS && navigator.permissions && navigator.permissions.query) {
+        try {
+          const res = await navigator.permissions.query({ name: 'geolocation' });
+          if (res.state === 'granted') return getGPSLocation();
+        } catch (e) {}
+      }
+
+      if (forceGPS) getGPSLocation();
+      else fetchByIP();
+    }
+
+    function getGPSLocation() {
+      const locText = document.getElementById('location-text');
+      if (!navigator.geolocation) return fetchByIP();
+      locText.innerText = "GPS খোঁজা হচ্ছে...";
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords;
+          localStorage.setItem('user_lat', latitude);
+          localStorage.setItem('user_lon', longitude);
+          try {
+            const geo = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=bn`);
+            const data = await geo.json();
+            const city = data.city || data.locality || "আপনার এলাকা";
+            localStorage.setItem('user_city', city);
+            locText.innerText = city;
+          } catch (e) {
+            locText.innerText = "GPS সক্রিয়";
+          }
+          fetchTimings(latitude, longitude);
+        },
+        () => fetchByIP()
+      );
+    }
+
+    async function fetchByIP() {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+        const res = await fetch('https://ipwho.is/', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        const data = await res.json();
+
+        if (data && data.success && data.latitude && data.longitude) {
+          document.getElementById('location-text').innerText = (data.city || "বাংলাদেশ") + " (IP)";
+          fetchTimings(data.latitude, data.longitude);
+          return;
+        }
+      } catch (e) {}
+
+      // Fallback default Dhaka
+      document.getElementById('location-text').innerText = "ঢাকা (ডিফল্ট)";
+      fetchTimings(23.8103, 90.4125);
+    }
+
+    async function fetchTimings(lat, lon) {
+      try {
+        const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&school=${selectedSchool}`);
+        const data = await res.json();
+        if (data.code === 200) {
+          currentTimings = data.data.timings;
+          localStorage.setItem('prayer_timings', JSON.stringify(currentTimings));
+          renderPrayerCards(currentTimings);
+
+          // Update Hijri date
+          if (data.data.date && data.data.date.hijri) {
+            const hijriFormatted = window.formatHijriDate(data.data.date.hijri);
+            localStorage.setItem('deen_hijri_date', hijriFormatted);
+            const badge = document.getElementById('hijri-date-badge');
+            if (badge) badge.innerText = `🌙 ${hijriFormatted}`;
+          }
+
+          startFastingCountdown();
+        }
+      } catch (e) {
+        console.error("Prayer times fetch error:", e);
+      }
+    }
+
+    function renderPrayerCards(timings) {
+      const grid = document.getElementById('prayer-grid');
+      grid.innerHTML = '';
+      const prayers = [
+        { id: 'Fajr', name: 'ফজর', details: '২ সুন্নাত, ২ ফরজ' },
+        { id: 'Dhuhr', name: 'যোহর', details: '৪ সুন্নাত, ৪ ফরজ, ২ সুন্নাত' },
+        { id: 'Asr', name: 'আসর', details: '৪ সুন্নাত, ৪ ফরজ' },
+        { id: 'Maghrib', name: 'মাগরিব', details: '৩ ফরজ, ২ সুন্নাত' },
+        { id: 'Isha', name: 'ইশা', details: '৪ ফরজ, ২ সুন্নাত, ৩ বিতর' }
+      ];
+
+      const now = new Date();
+      const curMins = now.getHours() * 60 + now.getMinutes();
+      let nextIdx = prayers.findIndex(p => {
+        const [h, m] = timings[p.id].split(':');
+        return (parseInt(h) * 60 + parseInt(m)) > curMins;
+      });
+      if (nextIdx === -1) nextIdx = 0;
+
+      prayers.forEach((p, i) => {
+        const isActive = i === nextIdx;
+        const div = document.createElement('div');
+        div.className = `p-5 md:p-6 rounded-2xl text-center border transition-all duration-300 ${
+          isActive 
+            ? 'prayer-card-active border-transparent text-white scale-102 shadow-lg' 
+            : 'bg-stone-50/80 dark:bg-slate-800/50 border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40'
+        }`;
+        div.innerHTML = `
+          <span class="text-xs font-bold uppercase tracking-widest block mb-2 ${isActive ? 'text-emerald-100' : 'text-slate-400'}">
+            ${isActive ? 'পরবর্তী ওয়াক্ত' : 'ওয়াক্ত'}
+          </span>
+          <h3 class="font-bold text-xl mb-2 ${isActive ? 'text-white' : 'text-slate-800 dark:text-white'}">${p.name}</h3>
+          <span class="font-mono text-2xl md:text-3xl font-black block mb-4">${formatTime(timings[p.id])}</span>
+          <div class="pt-4 border-t ${isActive ? 'border-white/20' : 'border-stone-200/60 dark:border-slate-700'}">
+            <p class="text-xs leading-relaxed ${isActive ? 'text-emerald-50' : 'text-slate-600 dark:text-slate-300'} font-bold">${p.details}</p>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function formatTime(t24) {
+      if (!t24) return "--:--";
+      const [h24, m] = t24.split(':');
+      let h = parseInt(h24);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${window.toBengaliNumerals(h)}:${window.toBengaliNumerals(m)} ${ampm}`;
+    }
+
+    // Suhoor & Iftar Countdown Timer
+    let countdownInterval;
+    function startFastingCountdown() {
+      if (!currentTimings) return;
+      clearInterval(countdownInterval);
+
+      const updateCountdown = () => {
+        const now = new Date();
+        const curMins = now.getHours() * 60 + now.getMinutes();
+        const curSecs = curMins * 60 + now.getSeconds();
+
+        const [fH, fM] = currentTimings.Fajr.split(':');
+        const fajrSecs = (parseInt(fH) * 60 + parseInt(fM)) * 60;
+
+        const [mH, mM] = currentTimings.Maghrib.split(':');
+        const maghribSecs = (parseInt(mH) * 60 + parseInt(mM)) * 60;
+
+        let targetSecs;
+        let isIftar = false;
+
+        if (curSecs < fajrSecs) {
+          // Before Fajr -> Countdown to Suhoor end (Fajr)
+          targetSecs = fajrSecs;
+          isIftar = false;
+        } else if (curSecs < maghribSecs) {
+          // After Fajr, before Maghrib -> Countdown to Iftar (Maghrib)
+          targetSecs = maghribSecs;
+          isIftar = true;
+        } else {
+          // After Maghrib -> Countdown to tomorrow's Fajr
+          targetSecs = 24 * 3600 + fajrSecs;
+          isIftar = false;
+        }
+
+        const diffSecs = targetSecs - curSecs;
+        const hours = Math.floor(diffSecs / 3600);
+        const mins = Math.floor((diffSecs % 3600) / 60);
+        const secs = diffSecs % 60;
+
+        const titleEl = document.getElementById('fasting-countdown-title');
+        const infoEl = document.getElementById('fasting-time-info');
+        const clockEl = document.getElementById('fasting-countdown-clock');
+
+        if (isIftar) {
+          titleEl.innerText = "ইফতারের বাকি";
+          infoEl.innerText = `মাগরিব (ইফতার): ${formatTime(currentTimings.Maghrib)}`;
+        } else {
+          titleEl.innerText = "সেহরির শেষ সময় বাকি";
+          infoEl.innerText = `ফজর (সেহরি শেষ): ${formatTime(currentTimings.Fajr)}`;
+        }
+
+        const pad = (n) => String(n).padStart(2, '0');
+        clockEl.innerText = `${window.toBengaliNumerals(pad(hours))}:${window.toBengaliNumerals(pad(mins))}:${window.toBengaliNumerals(pad(secs))}`;
+      };
+
+      updateCountdown();
+      countdownInterval = setInterval(updateCountdown, 1000);
+    }
+
+    // Notifications
+    async function toggleNotifications() {
+      if (!("Notification" in window)) {
+        alert("দুঃখিত, আপনার ব্রাউজার নোটিফিকেশন সাপোর্ট করে না।");
+        return;
+      }
+      if (Notification.permission === "granted") {
+        const current = localStorage.getItem('prayer_notifications') === 'true';
+        localStorage.setItem('prayer_notifications', !current);
+        updateNotifyUI();
+      } else {
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+          localStorage.setItem('prayer_notifications', 'true');
+          updateNotifyUI();
+        }
+      }
+    }
+
+    function updateNotifyUI() {
+      const btn = document.getElementById('notify-btn');
+      const text = document.getElementById('notify-text');
+      const isEnabled = localStorage.getItem('prayer_notifications') === 'true' && Notification.permission === "granted";
+      if (isEnabled) {
+        btn.classList.add('text-primary', 'border-emerald-200', 'bg-emerald-50', 'dark:bg-emerald-900/30');
+        text.innerText = "নোটিফিকেশন সক্রিয়";
+      } else {
+        btn.classList.remove('text-primary', 'border-emerald-200', 'bg-emerald-50', 'dark:bg-emerald-900/30');
+        text.innerText = "নোটিফিকেশন";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const instantDate = (window.getInstantHijriDate && window.getInstantHijriDate()) || localStorage.getItem('deen_hijri_date') || "২৪ রবিউস সানি, ১৪৪৮ হিজরি";
+      const badge = document.getElementById('hijri-date-badge');
+      if (badge) badge.innerText = `🌙 ${instantDate}`;
+
+      updateNotifyUI();
+      getPrayerTimes();
+    });
+  </script>
+</body>
+</html>

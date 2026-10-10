@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>নামাজ শিক্ষা - পূর্ণাঙ্গ সালাত গাইড ও নিয়মাবলী | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="সহজ ও সহীহ পদ্ধতিতে নামাজ শিক্ষা, ৫ ওয়াক্ত নামাজের রাকাতের হিসাব, অজুর নিয়ম ও প্রয়োজনীয় দো'আসমূহ।">
+  <meta name="keywords" content="নামাজ শিক্ষা, সালাত গাইড, নামাজের রাকাত, অজুর নিয়ম, নামাজের দোয়া, Namaz Shikkha, Salah Guide Bangla">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;800;900&family=Amiri&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'], arabic: ['Amiri', 'serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Header -->
+  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+      ইসলামের ২য় স্তম্ভ
+    </div>
+    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">নামাজ শিক্ষা ও পূর্ণাঙ্গ সালাত গাইড</h1>
+    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+      রাসূলুল্লাহ (সা.) বলেছেন: "তোমরা সেভাবে নামাজ আদায় করো, যেভাবে আমাকে নামাজ আদায় করতে দেখছ।" (সহীহ বুখারী)
+    </p>
+    <div class="w-16 h-1 bg-emerald-600 dark:bg-emerald-500 mx-auto rounded-full my-5"></div>
+    <div class="flex justify-center flex-wrap gap-3 mt-4">
+      <a href="salat.html" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>আজকের নামাজের সময়সূচী</span>
+      </a>
+      <a href="qibla.html" class="px-5 py-2.5 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:border-amber-500/50 border border-stone-200/90 dark:border-slate-800 font-bold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center space-x-2">
+        <span>🕋 কিবলা কম্পাস</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl space-y-10">
+    
+    <!-- 1. Five Times Prayer Rakat Breakdown Table -->
+    <section class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800 shadow-xs">
+      <div class="flex items-center space-x-3 mb-5">
+        <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">১</div>
+        <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white">৫ ওয়াক্ত নামাজের রাকাতের হিসাব</h2>
+      </div>
+      <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm mb-5 leading-relaxed">দৈনন্দিন পাঁচ ওয়াক্ত নামাজে মোট ফরজ, সুন্নত, ওয়াজিব ও নফল রাকাতের পূর্ণ বিবরণ:</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs md:text-sm border-collapse">
+          <thead>
+            <tr class="bg-stone-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold border-b border-stone-200 dark:border-slate-700">
+              <th class="p-3 rounded-l-lg">ওয়াক্ত</th>
+              <th class="p-3">সুন্নতে মুয়াক্কাদা</th>
+              <th class="p-3">ফরজ</th>
+              <th class="p-3">সুন্নতে জায়েদা / নফল</th>
+              <th class="p-3">ওয়াজিব (বিতর)</th>
+              <th class="p-3 rounded-r-lg text-right">মোট</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-100 dark:divide-slate-800 font-medium">
+            <tr class="hover:bg-stone-50/50 dark:hover:bg-slate-800/40 transition-colors">
+              <td class="p-3 font-bold text-emerald-700 dark:text-emerald-400">ফজর</td>
+              <td class="p-3">২ রাকাত (আগে)</td>
+              <td class="p-3 font-bold text-slate-900 dark:text-white">২ রাকাত</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 text-right font-black text-emerald-700 dark:text-emerald-400">৪ রাকাত</td>
+            </tr>
+            <tr class="hover:bg-stone-50/50 dark:hover:bg-slate-800/40 transition-colors">
+              <td class="p-3 font-bold text-emerald-700 dark:text-emerald-400">যোহর</td>
+              <td class="p-3">৪ (আগে) + ২ (পরে)</td>
+              <td class="p-3 font-bold text-slate-900 dark:text-white">৪ রাকাত</td>
+              <td class="p-3">২ রাকাত (নফল)</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 text-right font-black text-emerald-700 dark:text-emerald-400">১২ রাকাত</td>
+            </tr>
+            <tr class="hover:bg-stone-50/50 dark:hover:bg-slate-800/40 transition-colors">
+              <td class="p-3 font-bold text-emerald-700 dark:text-emerald-400">আসর</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 font-bold text-slate-900 dark:text-white">৪ রাকাত</td>
+              <td class="p-3">৪ রাকাত (নফল)</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 text-right font-black text-emerald-700 dark:text-emerald-400">৮ রাকাত</td>
+            </tr>
+            <tr class="hover:bg-stone-50/50 dark:hover:bg-slate-800/40 transition-colors">
+              <td class="p-3 font-bold text-emerald-700 dark:text-emerald-400">মাগরিব</td>
+              <td class="p-3">২ রাকাত (পরে)</td>
+              <td class="p-3 font-bold text-slate-900 dark:text-white">৩ রাকাত</td>
+              <td class="p-3">২ রাকাত (আউওয়াবীন)</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 text-right font-black text-emerald-700 dark:text-emerald-400">৭ রাকাত</td>
+            </tr>
+            <tr class="hover:bg-stone-50/50 dark:hover:bg-slate-800/40 transition-colors">
+              <td class="p-3 font-bold text-emerald-700 dark:text-emerald-400">এশা</td>
+              <td class="p-3">২ রাকাত (পরে)</td>
+              <td class="p-3 font-bold text-slate-900 dark:text-white">৪ রাকাত</td>
+              <td class="p-3">৪ (আগে) + ২ (নফল)</td>
+              <td class="p-3 font-bold text-amber-600 dark:text-amber-400">৩ রাকাত (বিতর)</td>
+              <td class="p-3 text-right font-black text-emerald-700 dark:text-emerald-400">১৭ রাকাত</td>
+            </tr>
+            <tr class="bg-emerald-50/50 dark:bg-emerald-950/20 font-bold">
+              <td class="p-3 text-emerald-700 dark:text-emerald-400">জুমু'আ (শুক্রবার)</td>
+              <td class="p-3">৪ (আগে) + ৪ (পরে)</td>
+              <td class="p-3 text-emerald-800 dark:text-white">২ রাকাত</td>
+              <td class="p-3">২ রাকাত (নফল)</td>
+              <td class="p-3 text-slate-400">-</td>
+              <td class="p-3 text-right font-black text-emerald-700 dark:text-emerald-400">১৪ রাকাত</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 2. Step by Step Wudu Guide -->
+    <section class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800 shadow-xs">
+      <div class="flex items-center space-x-3 mb-5">
+        <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">২</div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white">অজু করার সঠিক ধারাবাহিক নিয়ম</h2>
+          <p class="text-slate-400 text-xs">অজুর ৪টি ফরজ ও গুরুত্বপূর্ণ সুন্নতসমূহ</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div class="p-4 rounded-xl bg-stone-50/80 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-800 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">১</span>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-xs md:text-sm mb-0.5">নিয়ত ও বিসমিল্লাহ</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">মনে মনে অজুর নিয়ত করে "বিসমিল্লাহ" বলে শুরু করা।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-stone-50/80 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-800 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">২</span>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-xs md:text-sm mb-0.5">দুই হাত কবজি পর্যন্ত ধৌত করা</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">উভয় হাত কবজি পর্যন্ত ৩ বার উত্তমরূপে ধোয়া এবং আঙ্গুল খেলাল করা।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-stone-50/80 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-800 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">৩</span>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-xs md:text-sm mb-0.5">কুলি করা ও মেসওয়াক</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">ডান হাতে পানি নিয়ে ৩ বার কুলি করা এবং দাঁত পরিষ্কার করা।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-stone-50/80 dark:bg-slate-800/60 border border-stone-200/90 dark:border-slate-800 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">৪</span>
+          <div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-xs md:text-sm mb-0.5">নাকে পানি দেওয়া ও পরিষ্কার করা</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">ডান হাত দিয়ে নাকে ৩ বার পানি টেনে নেওয়া ও বাম হাত দিয়ে নাক পরিষ্কার করা।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-800/40 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">৫</span>
+          <div>
+            <h4 class="font-bold text-emerald-800 dark:text-emerald-300 text-xs md:text-sm mb-0.5">সমস্ত মুখমণ্ডল ধোয়া (ফরজ)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">কপালের চুলের গোড়া থেকে থুতনির নিচ এবং এক কান থেকে অন্য কান পর্যন্ত ৩ বার ধোয়া।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-800/40 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">৬</span>
+          <div>
+            <h4 class="font-bold text-emerald-800 dark:text-emerald-300 text-xs md:text-sm mb-0.5">দুই হাত কনুই পর্যন্ত ধোয়া (ফরজ)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">প্রথমে ডান হাত কনুইসহ ৩ বার, পরে বাম হাত কনুইসহ ৩ বার ধোয়া।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-800/40 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">৭</span>
+          <div>
+            <h4 class="font-bold text-emerald-800 dark:text-emerald-300 text-xs md:text-sm mb-0.5">মাথা মাসেহ করা (ফরজ)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">ভেজা হাত দিয়ে পুরো মাথা একবার মাসেহ করা এবং কানের ভেতর ও পিঠ মাসেহ করা।</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-800/40 flex items-start space-x-3">
+          <span class="w-6 h-6 rounded-md bg-emerald-600 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">৮</span>
+          <div>
+            <h4 class="font-bold text-emerald-800 dark:text-emerald-300 text-xs md:text-sm mb-0.5">দুই পা টাখনুসহ ধোয়া (ফরজ)</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">প্রথমে ডান পা টাখনুসহ ৩ বার এবং পরে বাম পা টাখনুসহ ৩ বার আঙ্গুল খেলাল করে ধোয়া।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Step by Step Prayer Posture Guide -->
+    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/20 text-primary dark:text-emerald-400 flex items-center justify-center font-bold text-base">৩</div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">নামাজ আদায়ের ধারাবাহিক অঙ্গভঙ্গি (ধাপে ধাপে)</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">রাসূলুল্লাহ (সা.)-এর সুন্নাহ মোতাবেক প্রতিটি রুকনের সঠিক পদ্ধতি</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+        
+        <!-- Step 1 -->
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80 flex flex-col justify-between hover:border-emerald-500/30 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-md border border-emerald-500/20">ধাপ ১</span>
+              <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">কিয়াম (Qiyam)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2">তাকবীরে তাহরীমা ও কিয়াম</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              কিবলামুখী হয়ে দাঁড়িয়ে "আল্লাহু আকবার" বলে দুই হাত কান বরাবর উঠিয়ে হাত বাঁধবেন। এরপর ছানা, আউযুবিল্লাহ, বিসমিল্লাহসহ সূরা ফাতিহা ও অন্য সূরা তিলাওয়াত করুন।
+            </p>
+          </div>
+          <div class="pt-3 border-t border-stone-200/70 dark:border-slate-700/60 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+            <span class="text-emerald-600 dark:text-emerald-400">✓</span> দৃষ্টি সিজদার স্থানে নিবদ্ধ রাখুন
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80 flex flex-col justify-between hover:border-emerald-500/30 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-md border border-emerald-500/20">ধাপ ২</span>
+              <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">রুকু (Ruku)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2">রুকুতে অবনত হওয়া</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              "আল্লাহু আকবার" বলে মাথা ও পিঠ সমান অনুভূমিক রেখে ঝুঁকবেন। দুই হাত দিয়ে দুই হাঁটু শক্ত করে চেপে ধরবেন। ৩ বার <strong class="text-emerald-700 dark:text-emerald-400">"সুবহানা রব্বিয়াল ‘আযীম"</strong> পাঠ করুন।
+            </p>
+          </div>
+          <div class="pt-3 border-t border-stone-200/70 dark:border-slate-700/60 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+            <span class="text-emerald-600 dark:text-emerald-400">✓</span> পিঠ ও ঘাড় সোজা রাখুন
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80 flex flex-col justify-between hover:border-emerald-500/30 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-md border border-emerald-500/20">ধাপ ৩</span>
+              <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">কওমা (Qawmah)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2">রুকু হতে সোজা হয়ে দাঁড়ানো</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              <strong class="text-emerald-700 dark:text-emerald-400">"সামি‘আল্লাহু লিমান হামিদাহ"</strong> বলে রুকু থেকে সম্পূর্ণ সোজা হয়ে দাঁড়িয়ে <strong class="text-emerald-700 dark:text-emerald-400">"রব্বানা ওয়া লাকাল হামদ"</strong> বলুন এবং স্থির হোন।
+            </p>
+          </div>
+          <div class="pt-3 border-t border-stone-200/70 dark:border-slate-700/60 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+            <span class="text-emerald-600 dark:text-emerald-400">✓</span> স্থির হয়ে দাঁড়ানো ওয়াজিব
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80 flex flex-col justify-between hover:border-emerald-500/30 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-md border border-emerald-500/20">ধাপ ৪</span>
+              <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">সিজদা (Sujud)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2">সিজদাবনত হওয়া</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              "আল্লাহু আকবার" বলে মাটিতে কপাল, নাক, দুই হাতের তালু, দুই হাঁটু ও দুই পায়ের আঙ্গুল দৃঢ়ভাবে স্থাপন করুন। ৩ বার <strong class="text-emerald-700 dark:text-emerald-400">"সুবহানা রব্বিয়াল আ‘লা"</strong> পাঠ করুন।
+            </p>
+          </div>
+          <div class="pt-3 border-t border-stone-200/70 dark:border-slate-700/60 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+            <span class="text-emerald-600 dark:text-emerald-400">✓</span> ৭টি অঙ্গের ওপর সিজদা সম্পন্ন করুন
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80 flex flex-col justify-between hover:border-emerald-500/30 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-md border border-emerald-500/20">ধাপ ৫</span>
+              <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">জলসা (Jalsah)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2">দুই সিজদার মাঝের বৈঠক</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              "আল্লাহু আকবার" বলে শান্তভাবে উঠে বসুন। বাম পায়ের ওপর বসবেন ও ডান পা খাড়া রাখবেন। বলুন: <strong class="text-emerald-700 dark:text-emerald-400">"রব্বিগফির লী"</strong> (হে আমার রব, আমাকে ক্ষমা করুন)। এরপর ২য় সিজদা করুন।
+            </p>
+          </div>
+          <div class="pt-3 border-t border-stone-200/70 dark:border-slate-700/60 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+            <span class="text-emerald-600 dark:text-emerald-400">✓</span> প্রশান্তির সাথে বসুন
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="p-5 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80 flex flex-col justify-between hover:border-emerald-500/30 transition-colors">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-semibold px-2.5 py-0.5 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 rounded-md border border-emerald-500/20">ধাপ ৬</span>
+              <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">সালাম (Taslim)</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base mb-2">শেষ বৈঠক ও সালাম</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              শেষ বৈঠকে তাশাহহুদ, দুরূদে ইব্রাহিম ও দো'আয়ে মাছুরা পড়া শেষ করে প্রথমে ডানে ও পরে বামে চেহারা ফিরিয়ে বলুন: <strong class="text-emerald-700 dark:text-emerald-400">"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ"</strong>।
+            </p>
+          </div>
+          <div class="pt-3 border-t border-stone-200/70 dark:border-slate-700/60 text-[11px] font-medium text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
+            <span class="text-emerald-600 dark:text-emerald-400">✓</span> সালামে নামাজ সমাপ্ত হয়
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. Essential Duas of Salah -->
+    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/20 text-primary dark:text-emerald-400 flex items-center justify-center font-bold text-base">৪</div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">নামাজে পঠিত জরুরি তাসবীহ ও দো'আ</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">সহীহ নিয়মে আরবী তিলাওয়াত, বাংলা উচ্চারণ ও অর্থ</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 md:space-y-5">
+        
+        <!-- Sana -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              ছানা (তাকবীরে তাহরীমার পর)
+            </h3>
+            <button onclick="window.copyToClipboard('সুবহানাকা আল্লাহুম্মা ওয়া বিহামদিকা, ওয়া তাবারাকাসমুকা ওয়া তাআলা জাদ্দুকা, ওয়া লা ইলাহা গাইরুক।')" class="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 py-1 px-3 rounded-lg border border-stone-200/80 dark:border-slate-700/80 hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30 transition-all">কপি করুন</button>
+          </div>
+          <p class="font-arabic text-xl md:text-2xl text-right leading-loose text-slate-900 dark:text-slate-100 mb-3" dir="rtl">سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ</p>
+          <div class="bg-white/70 dark:bg-slate-900/50 p-3.5 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1.5">
+            <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300"><strong class="text-emerald-700 dark:text-emerald-400">উচ্চারণ:</strong> সুবহানাকা আল্লাহুম্মা ওয়া বিহামদিকা, ওয়া তাবারাকাসমুকা ওয়া তা‘আলা জাদ্দুকা, ওয়া লা ইলাহা গাইরুক।</p>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"><strong class="text-slate-700 dark:text-slate-300">অর্থ:</strong> হে আল্লাহ! আমি আপনার পবিত্রতা বর্ণনা করছি এবং আপনার প্রশংসা করছি। আপনার নাম বরকতময়, আপনার মর্যাদা অতীব উচ্চ এবং আপনি ব্যতীত কোনো সত্য উপাস্য নেই।</p>
+          </div>
+        </div>
+
+        <!-- Ruku & Tasbih -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              রুকুর তাসবীহ ও ওঠার দো'আ
+            </h3>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <p class="font-arabic text-xl md:text-2xl text-right text-slate-900 dark:text-slate-100 mb-2" dir="rtl">سُبْحَانَ رَبِّيَ الْعَظِيمِ</p>
+              <div class="bg-white/70 dark:bg-slate-900/50 p-3 rounded-lg border border-stone-200/60 dark:border-slate-800">
+                <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300"><strong class="text-emerald-700 dark:text-emerald-400">রুকুর তাসবীহ (৩ বার):</strong> সুবহানা রব্বিয়াল ‘আযীম (আমার মহান প্রতিপালকের পবিত্রতা বর্ণনা করছি)।</p>
+              </div>
+            </div>
+            <div class="pt-2">
+              <p class="font-arabic text-xl md:text-2xl text-right text-slate-900 dark:text-slate-100 mb-2" dir="rtl">سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ • رَبَّنَا وَلَكَ الْحَمْدُ</p>
+              <div class="bg-white/70 dark:bg-slate-900/50 p-3 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1">
+                <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300"><strong class="text-emerald-700 dark:text-emerald-400">ওঠার সময়:</strong> সামি‘আল্লাহু লিমান হামিদাহ (যে আল্লাহর প্রশংসা করে আল্লাহ তা শোনেন)।</p>
+                <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300"><strong class="text-emerald-700 dark:text-emerald-400">সোজা হয়ে:</strong> রব্বানা ওয়া লাকাল হামদ (হে আমাদের রব! সকল প্রশংসা শুধুই আপনার)।</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sajdah Tasbih -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              সিজদার তাসবীহ (কমপক্ষে ৩ বার)
+            </h3>
+          </div>
+          <p class="font-arabic text-xl md:text-2xl text-right text-slate-900 dark:text-slate-100 mb-3" dir="rtl">سُبْحَانَ رَبِّيَ الْأَعْلَى</p>
+          <div class="bg-white/70 dark:bg-slate-900/50 p-3.5 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1.5">
+            <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300"><strong class="text-emerald-700 dark:text-emerald-400">উচ্চারণ:</strong> সুবহানা রব্বিয়াল আ‘লা।</p>
+            <p class="text-xs text-slate-600 dark:text-slate-400"><strong class="text-slate-700 dark:text-slate-300">অর্থ:</strong> আমার সর্বোচ্চ মহান প্রতিপালকের পবিত্রতা ঘোষণা করছি।</p>
+          </div>
+        </div>
+
+        <!-- Tashahhud (Attahiyyat) -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              তাশাহহুদ (আত্তাহিয়্যাতু)
+            </h3>
+            <button onclick="window.copyToClipboard('আত্তাহিয়্যাতু লিল্লাহি ওয়াস সালাওয়াতু ওয়াত তাইয়্যিবাতু, আসসালামু আলাইকা আইয়্যুহান নাবিয়্যু ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু, আসসালামু আলাইনা ওয়া আলা ইবাদিল্লাহিস সালিহীন। আশহাদু আল্লা ইলাহা ইল্লাল্লাহু ওয়া আশহাদু আন্না মুহাম্মাদান আবদুহু ওয়া রাসুলুহু।')" class="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 py-1 px-3 rounded-lg border border-stone-200/80 dark:border-slate-700/80 hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30 transition-all">কপি করুন</button>
+          </div>
+          <p class="font-arabic text-xl md:text-2xl text-right leading-loose text-slate-900 dark:text-slate-100 mb-3" dir="rtl">
+            التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ
+          </p>
+          <div class="bg-white/70 dark:bg-slate-900/50 p-3.5 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1.5">
+            <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              <strong class="text-emerald-700 dark:text-emerald-400">উচ্চারণ:</strong> আত্তাহিয়্যাতু লিল্লাহি ওয়াস-সালাওয়াতু ওয়াত-ত্বইয়্যিবাতু, আস-সালামু ‘আলাইকা আইয়্যুহান-নাবিয়্যু ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু, আস-সালামু ‘আলাইনা ওয়া ‘আলা ‘ইবাদিল্লাহিস-সালিহীন। আশহাদু আল-লা ইলাহা ইল্লাল্লাহু ওয়া আশহাদু আন্না মুহাম্মাদান ‘আবদুহু ওয়া রাসূলুহু।
+            </p>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <strong class="text-slate-700 dark:text-slate-300">অর্থ:</strong> যাবতীয় সম্মান ও মৌখিক ইবাদত, শারীরিক ও আর্থিক ইবাদত সবই আল্লাহর জন্য। হে নবী! আপনার প্রতি শান্তি, আল্লাহর রহমত ও বরকত বর্ষিত হোক। আমাদের প্রতি এবং আল্লাহর নেককার বান্দাদের প্রতি শান্তি বর্ষিত হোক। আমি সাক্ষ্য দিচ্ছি যে, আল্লাহ ব্যতীত কোনো উপাস্য নেই এবং আরও সাক্ষ্য দিচ্ছি মুহাম্মদ (সা.) তাঁর বান্দা ও রাসূল।
+            </p>
+          </div>
+        </div>
+
+        <!-- Durood Ibrahim -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              দুরূদে ইব্রাহিম
+            </h3>
+            <button onclick="window.copyToClipboard('আল্লাহুম্মা সাল্লি আলা মুহাম্মাদিওঁ ওয়া আলা আলি মুহাম্মাদ, কামা সাল্লাইতা আলা ইবরাহিমা ওয়া আলা আলি ইবরাহিম, ইন্নাকা হামিদুম মাজিদ। আল্লাহুম্মা বারিক আলা মুহাম্মাদিওঁ ওয়া আলা আলি মুহাম্মাদ, কামা বারাকতা আলা ইবরাহিমা ওয়া আলা আলি ইবরাহিম, ইন্নাকা হামিদুম মাজিদ।')" class="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 py-1 px-3 rounded-lg border border-stone-200/80 dark:border-slate-700/80 hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30 transition-all">কপি করুন</button>
+          </div>
+          <p class="font-arabic text-xl md:text-2xl text-right leading-loose text-slate-900 dark:text-slate-100 mb-3" dir="rtl">
+            اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ
+          </p>
+          <div class="bg-white/70 dark:bg-slate-900/50 p-3.5 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1.5">
+            <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              <strong class="text-emerald-700 dark:text-emerald-400">উচ্চারণ:</strong> আল্লাহুম্মা সাল্লি ‘আলা মুহাম্মাদিঁউ ওয়া ‘আলা আলি মুহাম্মাদ, কামা সাল্লাইতা ‘আলা ইবরাহীমা ওয়া ‘আলা আলি ইবরাহীম, ইন্নাকা হামীদুম মাজীদ। আল্লাহুম্মা বারিক ‘আলা মুহাম্মাদিঁউ ওয়া ‘আলা আলি মুহাম্মাদ, কামা বারাকতা ‘আলা ইবরাহীমা ওয়া ‘আলা আলি ইবরাহীম, ইন্নাকা হামীদুম মাজীদ।
+            </p>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <strong class="text-slate-700 dark:text-slate-300">অর্থ:</strong> হে আল্লাহ! আপনি মুহাম্মদ (সা.) এবং তাঁর বংশধরগণের ওপর রহমত বর্ষণ করুন, যেমন রহমত আপনি বর্ষণ করেছিলেন ইব্রাহিম (আ.) ও তাঁর বংশধরদের ওপর। নিশ্চয়ই আপনি প্রশংসিত ও সম্মানিত। হে আল্লাহ! আপনি মুহাম্মদ (সা.) ও তাঁর বংশধরদের বরকত দান করুন, যেমন বরকত দান করেছিলেন ইব্রাহিম (আ.) ও তাঁর বংশধরদের ওপর। নিশ্চয়ই আপনি প্রশংসিত ও মহিমান্বিত।
+            </p>
+          </div>
+        </div>
+
+        <!-- Dua Masura -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              দো'আয়ে মাছুরা
+            </h3>
+            <button onclick="window.copyToClipboard('আল্লাহুম্মা ইন্নি জালামতু নাফসি জুলমান কাসিরাওঁ ওয়ালা ইয়াগফিরুজ জুনুবা ইল্লা আনতা, ফাগফিরলি মাগফিরাতাম মিন ইনদিকা ওয়ারহামনি, ইন্নাকা আনতাল গাফুরুর রাহিম।')" class="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 py-1 px-3 rounded-lg border border-stone-200/80 dark:border-slate-700/80 hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30 transition-all">কপি করুন</button>
+          </div>
+          <p class="font-arabic text-xl md:text-2xl text-right leading-loose text-slate-900 dark:text-slate-100 mb-3" dir="rtl">
+            اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ وَارْحَمْنِي إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ
+          </p>
+          <div class="bg-white/70 dark:bg-slate-900/50 p-3.5 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1.5">
+            <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              <strong class="text-emerald-700 dark:text-emerald-400">উচ্চারণ:</strong> আল্লাহুম্মা ইন্নী জালামতু নাফসী জুলমান কাছীড়া, ওয়ালা ইয়াগফিরুজ জুনূবা ইল্লা আনতা, ফাগফির লী মাগফিরাতাম মিন ‘ইনদিকা ওয়ারহামনী, ইন্নাকা আনতাল গাফূরুর রাহীম।
+            </p>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <strong class="text-slate-700 dark:text-slate-300">অর্থ:</strong> হে আল্লাহ! আমি আমার নিজের ওপর বহু অত্যাচার করেছি। আপনি ছাড়া গুনাহ মাফ করার আর কেউ নেই। অতএব আপনি আমাকে নিজ অনুগ্রহে ক্ষমা করে দিন এবং আমার প্রতি দয়া করুন। নিশ্চয়ই আপনি পরম ক্ষমাশীল ও অতিশয় দয়ালু।
+            </p>
+          </div>
+        </div>
+
+        <!-- Dua Qunut -->
+        <div class="p-5 md:p-6 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-bold text-base text-emerald-800 dark:text-emerald-400 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              দো'আয়ে কুনূত (বিতর নামাজে পঠিত)
+            </h3>
+            <button onclick="window.copyToClipboard('আল্লাহুম্মা ইন্না নাস্তাঈনুকা ওয়া নাস্তাগফিরুকা...')" class="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 py-1 px-3 rounded-lg border border-stone-200/80 dark:border-slate-700/80 hover:bg-emerald-50/60 dark:hover:bg-emerald-950/30 transition-all">কপি করুন</button>
+          </div>
+          <p class="font-arabic text-xl md:text-2xl text-right leading-loose text-slate-900 dark:text-slate-100 mb-3" dir="rtl">
+            اللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِي عَلَيْكَ الْخَيْرَ وَنَشْكُرُكَ وَلَا نَكْفُرُكَ وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ، اللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّي وَنَسْجُدُ وَإِلَيْكَ نَسْعَى وَنَحْفِدُ وَنَرْجُو رَحْمَتَكَ وَنَخْشَى عَذَابَكَ إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ
+          </p>
+          <div class="bg-white/70 dark:bg-slate-900/50 p-3.5 rounded-lg border border-stone-200/60 dark:border-slate-800 space-y-1.5">
+            <p class="text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+              <strong class="text-emerald-700 dark:text-emerald-400">উচ্চারণ:</strong> আল্লাহুম্মা ইন্না নাস্তা‘ঈনুকা ওয়া নাস্তাগফিরুকা ওয়া নু’মিনু বিকা ওয়া নাতাওয়াক্কালু ‘আলাইকা ওয়া নুছনী ‘আলাইকাল খাইর, ওয়া নাশকুরুকা ওয়ালা নাকফুরুকা, ওয়া নাখলা‘উ ওয়া নাতরুকু মাইঁ ইয়াফজুরুক। আল্লাহুম্মা ইয়্যাকা না‘বুদু ওয়ালাকা নুছাল্লী ওয়া নাসজুদু, ওয়া ইলাইকা নাস‘আ ওয়া নাহফিদু, ওয়া নারজু রাহমাতাকা ওয়া নাখশা ‘আযাবাকা, ইন্না ‘আযাবাকা বিল কুফফারি মুলহিক্ব।
+            </p>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <strong class="text-slate-700 dark:text-slate-300">অর্থ:</strong> হে আল্লাহ! আমরা আপনারই সাহায্য প্রার্থনা করছি, আপনার কাছেই ক্ষমা চাচ্ছি, আপনার প্রতি বিশ্বাস স্থাপন করছি এবং আপনারই ওপর ভরসা রাখছি। আমরা আপনার উত্তম প্রশংসা করছি, আপনার শুকরিয়া আদায় করছি এবং অকৃতজ্ঞ হচ্ছি না। যারা আপনার অবাধ্য আমরা তাদের ত্যাগ করি। হে আল্লাহ! আমরা কেবল আপনারই ইবাদত করি, আপনার জন্যই নামাজ পড়ি এবং সিজদা করি। আপনার সান্নিধ্য লাভের জন্যই চেষ্টা করি। আমরা আপনার রহমতের আশা করি এবং আপনার শাস্তিকে ভয় পাই। নিশ্চয়ই আপনার শাস্তি কাফেরদের ওপর পতিত হবে।
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Mandatory Conditions of Salah -->
+    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/20 text-primary dark:text-emerald-400 flex items-center justify-center font-bold text-base">৫</div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white">নামাজের ১৪টি ফরজ (আহকাম ও আরকান)</h2>
+          <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">নামাজ শুদ্ধ হওয়ার জন্য অপরিহার্য শর্ত ও রুকনসমূহ</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div class="p-5 md:p-6 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-900/40">
+          <h4 class="font-bold text-emerald-800 dark:text-emerald-300 mb-3 text-sm md:text-base flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
+            নামাজের বাহিরের ৭টি ফরজ (আহকাম)
+          </h4>
+          <ol class="list-decimal list-inside space-y-2 text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <li>শরীর পবিত্র হওয়া।</li>
+            <li>পোশাক বা কাপড় পবিত্র হওয়া।</li>
+            <li>নামাজের জায়গা পবিত্র হওয়া।</li>
+            <li>সতর ঢাকা (পুরুষের নাভি থেকে হাঁটু এবং নারীর মুখ, হাত ও পা বাদে পুরো শরীর)।</li>
+            <li>কিবলামুখী হওয়া।</li>
+            <li>নামাজের সঠিক ওয়াক্ত হওয়া।</li>
+            <li>মনে মনে নির্দিষ্ট ওয়াক্তের নিয়ত করা।</li>
+          </ol>
+        </div>
+
+        <div class="p-5 md:p-6 rounded-xl bg-amber-50/40 dark:bg-amber-950/20 border border-amber-500/20 dark:border-amber-900/40">
+          <h4 class="font-bold text-amber-800 dark:text-amber-300 mb-3 text-sm md:text-base flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-amber-600 rounded-full"></span>
+            নামাজের ভিতরের ৭টি ফরজ (আরকান)
+          </h4>
+          <ol class="list-decimal list-inside space-y-2 text-xs md:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            <li>তাকবীরে তাহরীমা ("আল্লাহু আকবার" বলে নামাজ শুরু করা)।</li>
+            <li>দাঁড়িয়ে নামাজ পড়া (কিয়াম)।</li>
+            <li>কুরআন থেকে তিলাওয়াত করা (কিরাত)।</li>
+            <li>রুকু করা।</li>
+            <li>প্রতি রাকাতে দুই সিজদা করা।</li>
+            <li>শেষ বৈঠকে বসা (তাশাহহুদ পরিমাণ সময়)।</li>
+            <li>সালামের মাধ্যমে নামাজ সমাপ্ত করা।</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+</body>
+</html>

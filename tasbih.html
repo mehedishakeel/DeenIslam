@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ডিজিটাল তাসবীহ - DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes pulse-ring {
+      0% { transform: scale(.33); }
+      80%, 100% { opacity: 0; }
+    }
+    .pulse-animation {
+      animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    .tap-area:active { transform: scale(0.95); }
+  </style>
+</head>
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200">
+  <div id="navbar-placeholder"></div>
+
+  <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 relative max-w-xl mx-auto w-full">
+    
+    <!-- Dhikr Selector Dropdown / Pill -->
+    <div class="w-full mb-6">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-xs border border-stone-200/80 dark:border-slate-800 text-center">
+        <label for="dhikr-select" class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">নির্বাচিত জিকির</label>
+        <select id="dhikr-select" class="w-full bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 rounded-xl py-2.5 px-4 text-center font-bold text-slate-800 dark:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm md:text-base cursor-pointer">
+          <option value="সুবহানাল্লাহ" data-arabic="سُبْحَانَ اللَّهِ">সুবহানাল্লাহ (SubhanAllah)</option>
+          <option value="আলহামদুলিল্লাহ" data-arabic="الْحَمْدُ لِلَّهِ">আলহামদুলিল্লাহ (Alhamdulillah)</option>
+          <option value="লা ইলাহা ইল্লাল্লাহ" data-arabic="لَا إِلَهَ إِلَّا اللَّهُ">লা ইলাহা ইল্লাল্লাহ (La ilaha illallah)</option>
+          <option value="আল্লাহু আকবার" data-arabic="اللَّهُ أَكْبَرُ">আল্লাহু আকবার (Allahu Akbar)</option>
+          <option value="আস্তাগফিরুল্লাহ" data-arabic="أَسْتَغْفِرُ اللَّهَ">আস্তাগফিরুল্লাহ (Astaghfirullah)</option>
+          <option value="সুবহানাল্লাহি ওয়া বিহামদিহি" data-arabic="سُبْحَانَ اللَّهِ وَبِحَمْدِهِ">সুবহানাল্লাহি ওয়া বিহামদিহি</option>
+          <option value="আল্লাহুম্মা সাল্লি আলা মুহাম্মাদ" data-arabic="اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ">দরূদ শরীফ (Salawat)</option>
+        </select>
+        <div id="dhikr-arabic" class="font-arabic text-2xl md:text-3xl font-bold text-emerald-800 dark:text-emerald-400 mt-3 tracking-wide">
+          سُبْحَانَ اللَّهِ
+        </div>
+      </div>
+    </div>
+
+    <!-- Target & Stats Pills -->
+    <div class="flex items-center justify-between w-full px-2 mb-6">
+      <div class="flex items-center space-x-2 bg-white dark:bg-[#0f172a] px-3.5 py-1.5 rounded-lg border border-stone-200/80 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <span>লক্ষ্য:</span>
+        <span id="target-display" class="text-emerald-700 dark:text-emerald-400 font-bold font-mono">৩৩</span>
+      </div>
+      <div class="flex items-center space-x-2 bg-white dark:bg-[#0f172a] px-3.5 py-1.5 rounded-lg border border-stone-200/80 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <span>মোট জিকির:</span>
+        <span id="total-session-display" class="text-amber-700 dark:text-amber-400 font-bold font-mono">০</span>
+      </div>
+    </div>
+
+    <!-- Main Counter Luminous Sphere (Tactile & Clean) -->
+    <div class="relative my-4 flex items-center justify-center">
+      <div id="tap-area" class="tap-area relative w-64 h-64 md:w-72 md:h-72 rounded-full bg-gradient-to-br from-[#065f46] via-[#047857] to-[#022c22] shadow-md flex flex-col items-center justify-center cursor-pointer transition-transform duration-100 border-4 border-emerald-400/30 select-none group hover:scale-[1.01] active:scale-[0.96] overflow-hidden">
+        
+        <!-- Animated Circular Progress Ring -->
+        <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none">
+          <circle cx="50%" cy="50%" r="46%" stroke="currentColor" stroke-width="5" fill="none" class="text-white/15" />
+          <circle id="progress-circle" cx="50%" cy="50%" r="46%" stroke="currentColor" stroke-width="5" fill="none" class="text-amber-300 transition-all duration-300" stroke-dasharray="1000" stroke-dashoffset="1000" stroke-linecap="round" />
+        </svg>
+        
+        <div class="relative z-10 text-center flex flex-col items-center pointer-events-none">
+          <span id="counter" class="text-7xl md:text-8xl font-black text-white tabular-nums tracking-tighter">০</span>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-emerald-200 mt-1">ট্যাপ করুন • TAP</span>
+        </div>
+        
+        <!-- Ripple Effect Element -->
+        <div id="pulse" class="absolute inset-0 rounded-full border-2 border-white/60 opacity-0 pointer-events-none"></div>
+      </div>
+    </div>
+
+    <!-- Target quick presets -->
+    <div class="flex items-center space-x-2 mt-6">
+      <span class="text-xs font-bold text-slate-400">টার্গেট:</span>
+      <button onclick="setTarget(33)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="33">৩৩</button>
+      <button onclick="setTarget(99)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="99">৯৯</button>
+      <button onclick="setTarget(100)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="100">১০০</button>
+      <button onclick="setTarget(1000)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="1000">১০০০</button>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="mt-7 w-full max-w-sm grid grid-cols-3 gap-3">
+      <button id="reset-btn" class="flex flex-col items-center space-y-1.5 group p-2">
+        <div class="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-xs border border-stone-200/80 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:text-red-500 group-hover:border-red-200 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">রিসেট</span>
+      </button>
+
+      <button id="target-btn" class="flex flex-col items-center space-y-1.5 group p-2">
+        <div class="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-xs border border-stone-200/80 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">টার্গেট বদল</span>
+      </button>
+
+      <button id="sound-btn" class="flex flex-col items-center space-y-1.5 group p-2">
+        <div id="sound-icon-container" class="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-xs border border-stone-200/80 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all">
+          <svg id="sound-on" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+        </div>
+        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">শব্দ</span>
+      </button>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Reset Confirmation Modal -->
+  <div id="reset-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
+    <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white dark:bg-slate-900 w-full max-w-sm rounded-2xl p-8 shadow-xl border border-stone-200/90 dark:border-slate-800/80 text-center">
+      <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/40 text-red-500 flex items-center justify-center mx-auto mb-4 font-bold text-xl">⚠️</div>
+      <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">রিসেট করতে চান?</h3>
+      <p class="text-slate-500 text-sm mb-6">আপনার বর্তমান চক্রের গণনা শূন্য হয়ে যাবে।</p>
+      <div class="flex space-x-3">
+        <button id="cancel-reset" class="flex-grow py-3 bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold text-sm">না</button>
+        <button id="confirm-reset" class="flex-grow py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-sm shadow-md transition-all">হ্যাঁ, রিসেট</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/components.js"></script>
+  <script>
+    let target = parseInt(localStorage.getItem('tasbeeh_target')) || 33;
+    let updateDisplayFn = null;
+
+    function setTarget(t) {
+      target = t;
+      if (updateDisplayFn) updateDisplayFn();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const counterDisplay = document.getElementById('counter');
+      const targetDisplay = document.getElementById('target-display');
+      const totalSessionDisplay = document.getElementById('total-session-display');
+      const progressCircle = document.getElementById('progress-circle');
+      const tapArea = document.getElementById('tap-area');
+      const resetBtn = document.getElementById('reset-btn');
+      const targetBtn = document.getElementById('target-btn');
+      const soundBtn = document.getElementById('sound-btn');
+      const soundIconContainer = document.getElementById('sound-icon-container');
+      const resetModal = document.getElementById('reset-modal');
+      const confirmReset = document.getElementById('confirm-reset');
+      const cancelReset = document.getElementById('cancel-reset');
+      const pulse = document.getElementById('pulse');
+      const dhikrSelect = document.getElementById('dhikr-select');
+      const dhikrArabic = document.getElementById('dhikr-arabic');
+
+      let count = parseInt(localStorage.getItem('tasbeeh_count')) || 0;
+      let totalSession = parseInt(localStorage.getItem('tasbeeh_total_session')) || 0;
+      let soundEnabled = localStorage.getItem('tasbeeh_sound') !== 'false';
+
+      // Load saved dhikr
+      const savedDhikr = localStorage.getItem('tasbeeh_dhikr');
+      if (savedDhikr && dhikrSelect) {
+        dhikrSelect.value = savedDhikr;
+        const opt = dhikrSelect.options[dhikrSelect.selectedIndex];
+        if (opt) dhikrArabic.innerText = opt.getAttribute('data-arabic') || '';
+      }
+
+      dhikrSelect.addEventListener('change', () => {
+        const opt = dhikrSelect.options[dhikrSelect.selectedIndex];
+        dhikrArabic.innerText = opt.getAttribute('data-arabic') || '';
+        localStorage.setItem('tasbeeh_dhikr', dhikrSelect.value);
+      });
+
+      // Audio context for haptic-like sound
+      let audioCtx = null;
+      
+      const playTick = () => {
+        if (!soundEnabled) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.1);
+        } catch(e) {}
+      };
+
+      const updateDisplay = () => {
+        counterDisplay.innerText = window.toBengaliNumerals(count);
+        targetDisplay.innerText = window.toBengaliNumerals(target);
+        totalSessionDisplay.innerText = window.toBengaliNumerals(totalSession);
+        
+        const radius = progressCircle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        
+        const progress = (count % target) / target;
+        const offset = circumference - (progress * circumference);
+        progressCircle.style.strokeDashoffset = offset;
+
+        if (count > 0 && count % target === 0) {
+            progressCircle.classList.remove('text-emerald-600', 'dark:text-emerald-400');
+            progressCircle.classList.add('text-amber-500');
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        } else {
+            progressCircle.classList.remove('text-amber-500');
+            progressCircle.classList.add('text-emerald-600', 'dark:text-emerald-400');
+        }
+
+        // Highlight active target chip
+        document.querySelectorAll('.target-chip').forEach(chip => {
+          const tVal = parseInt(chip.getAttribute('data-target'));
+          if (tVal === target) {
+            chip.className = 'target-chip px-3 py-1 text-xs font-bold rounded-full border border-emerald-600 bg-emerald-600 text-white shadow-sm transition-all';
+          } else {
+            chip.className = 'target-chip px-3 py-1 text-xs font-bold rounded-full border border-stone-200 dark:border-slate-700 bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-emerald-300 transition-all';
+          }
+        });
+
+        localStorage.setItem('tasbeeh_count', count);
+        localStorage.setItem('tasbeeh_target', target);
+        localStorage.setItem('tasbeeh_total_session', totalSession);
+      };
+
+      updateDisplayFn = updateDisplay;
+
+      const updateSoundUI = () => {
+        if (soundEnabled) {
+          soundIconContainer.classList.add('text-emerald-600', 'bg-emerald-50', 'dark:bg-emerald-950/40');
+          soundIconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>';
+        } else {
+          soundIconContainer.classList.remove('text-emerald-600', 'bg-emerald-50', 'dark:bg-emerald-950/40');
+          soundIconContainer.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>';
+        }
+      };
+
+      tapArea.addEventListener('click', () => {
+        count++;
+        totalSession++;
+        playTick();
+        if (navigator.vibrate) navigator.vibrate(40);
+        
+        pulse.classList.remove('pulse-animation');
+        void pulse.offsetWidth;
+        pulse.classList.add('pulse-animation');
+        
+        updateDisplay();
+      });
+
+      resetBtn.onclick = () => resetModal.classList.remove('hidden');
+      cancelReset.onclick = () => resetModal.classList.add('hidden');
+      confirmReset.onclick = () => {
+        count = 0;
+        updateDisplay();
+        resetModal.classList.add('hidden');
+      };
+
+      targetBtn.onclick = () => {
+        const targets = [33, 99, 100, 1000];
+        const currentIndex = targets.indexOf(target);
+        target = targets[(currentIndex + 1) % targets.length];
+        updateDisplay();
+      };
+
+      soundBtn.onclick = () => {
+        soundEnabled = !soundEnabled;
+        localStorage.setItem('tasbeeh_sound', soundEnabled);
+        updateSoundUI();
+      };
+
+      window.onclick = (e) => {
+        if (e.target.id === 'reset-modal') resetModal.classList.add('hidden');
+      };
+
+      updateDisplay();
+      updateSoundUI();
+    });
+  </script>
+</body>
+</html>

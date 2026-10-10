@@ -1,0 +1,100 @@
+name: Build & Publish Android APK
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release tag (e.g. v1.0)'
+        required: false
+        default: 'v1.0'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build APK and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: |
+          cd mobile
+          flutter pub get
+
+      - name: Build Release APK
+        run: |
+          cd mobile
+          flutter build apk --release --no-tree-shake-icons
+
+      - name: Determine Release Tag
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "TAG_NAME=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          elif [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            echo "TAG_NAME=v1.0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Prepare APK for Artifact & Release
+        run: |
+          mkdir -p release-output
+          TAG="${{ steps.vars.outputs.TAG_NAME }}"
+          cp mobile/build/app/outputs/flutter-apk/app-release.apk "release-output/DeenIslam-${TAG}.apk"
+
+      - name: Upload APK to GitHub Artifacts (Backup Download)
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeenIslam-Android-APK
+          path: release-output/*.apk
+
+      - name: Create GitHub Release & Publish APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.vars.outputs.TAG_NAME }}
+          name: "DeenIslam Mobile App ${{ steps.vars.outputs.TAG_NAME }}"
+          body: |
+            ## 📱 দ্বীন ইসলাম (DeenIslam) - Official Android Release (${{ steps.vars.outputs.TAG_NAME }})
+
+            Android ফোনে সরাসরি ইনস্টল করার জন্য নিচের **`DeenIslam-${{ steps.vars.outputs.TAG_NAME }}.apk`** ফাইলটি ডাউনলোড করুন।
+
+            ---
+
+            ### ✨ DeenIslam v1.0 সম্পূর্ণ ফিচারসমূহ:
+            - 📖 **আল-কুরআনুল কারীম:** পূর্ণাঙ্গ ১১৪টি সূরা, আরবি-বাংলা অনুবাদ, নেটিভ অডিও তিলাওয়াত ও অফলাইন ক্যাশিং।
+            - 📚 **হাদিস শরীফ পাঠাগার:** সিহাহ সিত্তাহ ও মুয়াত্তা মালিক (৭টি হাদিস গ্রন্থ), অধ্যায়ভিত্তিক ব্রাউজিং ও অফলাইন সংরক্ষণ।
+            - 🕌 **নামাজের সময়সূচি (৬৪ জেলা):** বাংলাদেশের ৮টি বিভাগের সকল ৬৪ জেলার নির্ভুল নামাজ ও সাহরি-ইফতারের সময়সূচি এবং আজান অ্যালার্ম।
+            - 🧭 **লাইভ কিবলা কম্পাস:** ফোনের হার্ডওয়্যার ম্যাগনেটোমিটার ও অ্যাক্সিলারোমিটার সেন্সর ভিত্তিক রিয়েল-টাইম কিবলা কম্পাস।
+            - 🗓️ **হিজরি ক্যালেন্ডার ও ইসলামিক দিবস:** হিজরি ১২ মাসের পরিচিতি, গুরুত্বপূর্ণ ইসলামিক দিবস এবং আইয়ামে বীজ ও নফল রোজার তালিকা।
+            - 🤲 **হিসনুল মুসলিম, ৬ কালিমা ও আল্লাহর ৯৯ নাম:** বিশুদ্ধ হাদিস রেফারেন্স ও ফজিলতসহ প্রতিদিনের দোয়া ও যিকির।
+            - 🕋 **নামাজ শিক্ষা, রমজান গাইড (৩০ রোজা ট্র্যাকার), হজ্জ ও উমরাহ গাইড এবং যাকাত ক্যালকুলেটর।**
+            - 🔍 **গ্লোবাল সার্চ, ইসলামিক কুইজ, প্রবন্ধ ও মাল্টিমিডিয়া, ডিজিটাল তাসবীহ এবং বুকমার্ক ম্যানেজার।**
+          files: |
+            release-output/*.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

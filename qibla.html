@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ডিজিটাল কিবলা কম্পাস - সঠিক কাবার দিক নির্ণয় | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="সরাসরি আপনার অবস্থান থেকে পবিত্র কাবা শরীফের সঠিক দিক ও দূরত্ব নির্ণয় করুন ডিজিটাল কিবলা কম্পাসের মাধ্যমে।">
+  <meta name="keywords" content="কিবলা কম্পাস, কাবার দিক, Qibla Direction, Qibla Compass Bangla, Kaaba Direction">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;800;900&family=Amiri&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'], arabic: ['Amiri', 'serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .compass-dial {
+      transition: transform 0.15s cubic-bezier(0.1, 0.7, 0.1, 1);
+    }
+    .compass-needle {
+      transition: transform 0.15s cubic-bezier(0.1, 0.7, 0.1, 1);
+      transform-origin: center center;
+    }
+    @keyframes pulse-emerald {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.4); }
+      50% { box-shadow: 0 0 0 20px rgba(5, 150, 105, 0); }
+    }
+    .qibla-aligned {
+      animation: pulse-emerald 2s infinite;
+      border-color: #10b981 !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8 md:py-12 flex-grow flex flex-col items-center justify-center max-w-2xl">
+    
+    <!-- Header -->
+    <div class="text-center max-w-xl mx-auto mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        মক্কার পবিত্র কাবার দিক
+      </div>
+      <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">ডিজিটাল কিবলা কম্পাস</h1>
+      <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base">
+        আপনার জিপিএস অবস্থান অনুযায়ী পবিত্র কাবা শরীফের সঠিক দিক ও দূরত্ব জানুন।
+      </p>
+      <div class="w-16 h-1 bg-emerald-600 dark:bg-emerald-500 mx-auto rounded-full mt-5"></div>
+    </div>
+
+    <!-- Location & Status Card -->
+    <div class="w-full max-w-md bg-white dark:bg-slate-900 p-4 rounded-xl border border-stone-200/90 dark:border-slate-800 mb-6 flex items-center justify-between shadow-xs">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div>
+          <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">বর্তমান অবস্থান</p>
+          <h3 id="user-location-text" class="text-xs md:text-sm font-bold text-slate-900 dark:text-white">লোকেশন খোঁজা হচ্ছে...</h3>
+        </div>
+      </div>
+      <button onclick="initLocation(true)" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 bg-stone-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-500/40 transition-colors text-xs font-bold" title="লোকেশন রিলোড">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Main Architectural Compass Dial (Zero AI-slop Glows) -->
+    <div class="relative w-72 h-72 md:w-88 md:h-88 my-4 select-none flex items-center justify-center">
+      
+      <!-- Outer Dial Ring with Coordinates -->
+      <div id="compass-outer" class="compass-dial relative w-full h-full rounded-full bg-slate-950 border-[6px] border-slate-800 shadow-xl flex items-center justify-center transition-all duration-300 ring-1 ring-amber-500/20">
+        
+        <!-- Cardinal Marks -->
+        <span class="absolute top-3 font-bold text-xs text-amber-400 tracking-wider">N (উত্তর)</span>
+        <span class="absolute right-4 font-bold text-xs text-slate-400 tracking-wider">E</span>
+        <span class="absolute bottom-3 font-bold text-xs text-slate-400 tracking-wider">S</span>
+        <span class="absolute left-4 font-bold text-xs text-slate-400 tracking-wider">W (পশ্চিম)</span>
+
+        <!-- Concentric Astrolabe Rings & Degree Marks -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none p-3 opacity-30">
+          <circle cx="50%" cy="50%" r="48%" stroke="#f59e0b" stroke-width="1.2" fill="none" stroke-dasharray="3, 12" />
+          <circle cx="50%" cy="50%" r="42%" stroke="#ffffff" stroke-width="0.8" fill="none" stroke-dasharray="2, 6" />
+          <circle cx="50%" cy="50%" r="30%" stroke="#10b981" stroke-width="0.8" fill="none" />
+        </svg>
+
+        <!-- Kaaba Target Marker on Ring -->
+        <div id="kaaba-marker" class="absolute top-0 transform -translate-y-1/2 flex flex-col items-center transition-transform duration-300 z-10" style="transform-origin: 50% 144px;">
+          <div class="w-8 h-8 md:w-9 md:h-9 bg-slate-900 rounded-xl border-2 border-amber-400 flex items-center justify-center shadow-md text-base" title="পবিত্র কাবা শরীফ">
+            🕋
+          </div>
+          <span class="text-[9px] font-bold bg-amber-500 text-slate-950 px-2 py-0.2 rounded-full shadow-xs mt-0.5 tracking-wide">কাবা</span>
+        </div>
+
+        <!-- Compass Needle -->
+        <div id="needle" class="compass-needle w-full h-full absolute inset-0 flex items-center justify-center pointer-events-none">
+          <svg class="w-14 md:w-16 h-48 md:h-56 filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]" viewBox="0 0 100 300">
+            <!-- North / Qibla pointer -->
+            <polygon points="50,16 66,150 50,140" fill="#10b981" />
+            <polygon points="50,16 34,150 50,140" fill="#059669" />
+            <polygon points="50,16 54,145 50,140" fill="#f59e0b" />
+            <!-- South pointer -->
+            <polygon points="50,284 66,150 50,160" fill="#475569" opacity="0.8" />
+            <polygon points="50,284 34,150 50,160" fill="#334155" opacity="0.8" />
+            <!-- Center Pivot -->
+            <circle cx="50" cy="150" r="14" fill="#0f172a" stroke="#f59e0b" stroke-width="2.5" />
+            <circle cx="50" cy="150" r="6" fill="#10b981" />
+          </svg>
+        </div>
+
+        <!-- Center Readout -->
+        <div class="relative z-20 text-center bg-slate-900/90 backdrop-blur-sm px-4 py-2 rounded-xl border border-amber-400/30 shadow-md">
+          <div class="text-2xl md:text-3xl font-black text-amber-400 tabular-nums" id="angle-display">--°</div>
+          <p class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mt-0.5">কিবলা কোণ</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Direction Guidance Card -->
+    <div id="guidance-box" class="w-full max-w-md bg-white dark:bg-slate-900 p-5 md:p-6 rounded-xl border border-stone-200/90 dark:border-slate-800 text-center mt-5 shadow-xs">
+      <div id="alignment-status" class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1.5 flex items-center justify-center space-x-2">
+        <span>মোবাইল সমান্তরাল রেখে ধীরে ধীরে ঘোরান</span>
+      </div>
+      <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4" id="sensor-tip">
+        মোবাইলটি মাটির সমান্তরালে রাখুন। তিরচিহ্নটি কাবার সাথে মিললে আপনার মুখ কাবার অভিমুখে থাকবে।
+      </p>
+
+      <!-- Key Metrics: Distance & Angle -->
+      <div class="grid grid-cols-2 gap-3 pt-3.5 border-t border-stone-100 dark:border-slate-800">
+        <div class="bg-stone-50 dark:bg-slate-800/60 p-3 rounded-lg border border-stone-100 dark:border-slate-800">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">কাবার দূরত্ব</span>
+          <span id="distance-display" class="text-base md:text-lg font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">-- কিমি</span>
+        </div>
+        <div class="bg-stone-50 dark:bg-slate-800/60 p-3 rounded-lg border border-stone-100 dark:border-slate-800">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">দিক নির্দেশনা</span>
+          <span id="cardinal-display" class="text-base md:text-lg font-bold text-amber-600 dark:text-amber-400">পশ্চিম-দক্ষিণ</span>
+        </div>
+      </div>
+
+      <!-- iOS Sensor Permission Button -->
+      <button id="perm-btn" onclick="requestOrientationPermission()" class="hidden mt-3.5 w-full py-2.5 bg-emerald-600 text-white rounded-lg font-bold text-xs shadow-xs hover:bg-emerald-700 transition-all">
+        কম্পাস সেন্সর চালু করুন (অনুমতি দিন)
+      </button>
+
+      <!-- Manual City Selector Fallback -->
+      <div class="mt-3.5 pt-3.5 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs">
+        <span class="text-slate-400 font-medium">শহর নির্বাচন করুন:</span>
+        <select id="city-selector" onchange="handleCitySelect(this.value)" class="bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold px-3 py-1.5 rounded-lg border border-stone-200 dark:border-slate-700 outline-none cursor-pointer">
+          <option value="auto">স্বয়ংক্রিয় (GPS)</option>
+          <option value="dhaka">ঢাকা (২৫৮°)</option>
+          <option value="chittagong">চট্টগ্রাম (২৬১°)</option>
+          <option value="sylhet">সিলেট (২৫৬°)</option>
+          <option value="rajshahi">রাজশাহী (২৫৬°)</option>
+          <option value="khulna">খুলনা (২৬০°)</option>
+          <option value="barishal">বরিশাল (২৬০°)</option>
+          <option value="rangpur">রংপুর (২৫৩°)</option>
+          <option value="mymensingh">ময়মনসিংহ (২৫৬°)</option>
+          <option value="london">লন্ডন (১১৯°)</option>
+          <option value="newyork">নিউইয়র্ক (৫৮°)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Phone Orientation & Calibration Guide Card -->
+    <div class="w-full max-w-md bg-white dark:bg-slate-900 p-4 rounded-xl border border-stone-200/90 dark:border-slate-800 mt-4 flex items-center justify-between shadow-xs">
+      <div class="text-left">
+        <h4 class="font-bold text-xs text-slate-800 dark:text-white flex items-center space-x-1.5">
+          <span>📱</span>
+          <span>ফোন ওরিয়েন্টেশন ও ক্যালিব্রেশন গাইড</span>
+        </h4>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+          ফোনটি মাটির সমান্তরাল রেখে বাতাসে ৮-আকৃতিতে (Figure-8) কয়েকবার ঘুরিয়ে কম্পাস সেন্সর নিখুঁত করুন।
+        </p>
+      </div>
+      <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-500 flex items-center justify-center text-sm font-bold ml-3 shrink-0">
+        🔄
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    // Kaaba Latitude & Longitude in Makkah
+    const KAABA_LAT = 21.422487;
+    const KAABA_LNG = 39.826206;
+
+    let userLat = 23.8103; // Default Dhaka
+    let userLng = 90.4125;
+    let qiblaBearing = 258; // Calculated angle to Kaaba
+    let deviceHeading = 0;
+    let hasSensor = false;
+
+    const cityCoordinates = {
+      dhaka: { lat: 23.8103, lng: 90.4125, name: "ঢাকা, বাংলাদেশ" },
+      chittagong: { lat: 22.3569, lng: 91.7832, name: "চট্টগ্রাম, বাংলাদেশ" },
+      sylhet: { lat: 24.8949, lng: 91.8687, name: "সিলেট, বাংলাদেশ" },
+      rajshahi: { lat: 24.3636, lng: 88.6241, name: "রাজশাহী, বাংলাদেশ" },
+      khulna: { lat: 22.8456, lng: 89.5403, name: "খুলনা, বাংলাদেশ" },
+      barishal: { lat: 22.7010, lng: 90.3535, name: "বরিশাল, বাংলাদেশ" },
+      rangpur: { lat: 25.7439, lng: 89.2752, name: "রংপুর, বাংলাদেশ" },
+      mymensingh: { lat: 24.7471, lng: 90.4203, name: "ময়মনসিংহ, বাংলাদেশ" },
+      london: { lat: 51.5074, lng: -0.1278, name: "লন্ডন, যুক্তরাজ্য" },
+      newyork: { lat: 40.7128, lng: -74.0060, name: "নিউইয়র্ক, যুক্তরাষ্ট্র" }
+    };
+
+    // Calculate Qibla angle from user coordinates using Great-Circle spherical trigonometry
+    function calculateQibla(lat1, lon1) {
+      const phi1 = (lat1 * Math.PI) / 180;
+      const phi2 = (KAABA_LAT * Math.PI) / 180;
+      const deltaLambda = ((KAABA_LNG - lon1) * Math.PI) / 180;
+
+      const y = Math.sin(deltaLambda);
+      const x = Math.cos(phi1) * Math.tan(phi2) - Math.sin(phi1) * Math.cos(deltaLambda);
+      
+      let bearing = (Math.atan2(y, x) * 180) / Math.PI;
+      bearing = (bearing + 360) % 360;
+      return Math.round(bearing);
+    }
+
+    // Calculate distance to Kaaba in kilometers via Haversine formula
+    function calculateDistance(lat1, lon1) {
+      const R = 6371; // Earth's radius in km
+      const dLat = ((KAABA_LAT - lat1) * Math.PI) / 180;
+      const dLon = ((KAABA_LNG - lon1) * Math.PI) / 180;
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+          Math.cos((KAABA_LAT * Math.PI) / 180) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return Math.round(R * c);
+    }
+
+    // Get cardinal direction name in Bengali
+    function getCardinalDirection(angle) {
+      if (angle >= 337.5 || angle < 22.5) return "উত্তর";
+      if (angle >= 22.5 && angle < 67.5) return "উত্তর-পূর্ব";
+      if (angle >= 67.5 && angle < 112.5) return "পূর্ব";
+      if (angle >= 112.5 && angle < 157.5) return "দক্ষিণ-পূর্ব";
+      if (angle >= 157.5 && angle < 202.5) return "দক্ষিণ";
+      if (angle >= 202.5 && angle < 247.5) return "দক্ষিণ-পশ্চিম";
+      if (angle >= 247.5 && angle < 292.5) return "পশ্চিম-দক্ষিণ";
+      return "উত্তর-পশ্চিম";
+    }
+
+    // Update UI Elements
+    function updateQiblaUI() {
+      qiblaBearing = calculateQibla(userLat, userLng);
+      const distance = calculateDistance(userLat, userLng);
+
+      document.getElementById('angle-display').innerText = window.toBengaliNumerals(qiblaBearing) + '°';
+      document.getElementById('distance-display').innerText = window.toBengaliNumerals(distance.toLocaleString('bn-BD')) + ' কিমি';
+      document.getElementById('cardinal-display').innerText = getCardinalDirection(qiblaBearing);
+
+      // Position Kaaba marker on the compass ring relative to 0deg (North)
+      const marker = document.getElementById('kaaba-marker');
+      if (marker) {
+        marker.style.transform = `rotate(${qiblaBearing}deg) translateY(-50%)`;
+      }
+
+      updateNeedleOrientation();
+    }
+
+    function updateNeedleOrientation() {
+      const needle = document.getElementById('needle');
+      const compassOuter = document.getElementById('compass-outer');
+      const alignmentStatus = document.getElementById('alignment-status');
+
+      if (!hasSensor) {
+        // Desktop / No sensor: needle points directly to Qibla bearing
+        if (needle) needle.style.transform = `rotate(${qiblaBearing}deg)`;
+        return;
+      }
+
+      // Compass dial rotates counter to device heading so North stays North
+      if (compassOuter) {
+        compassOuter.style.transform = `rotate(${-deviceHeading}deg)`;
+      }
+
+      // Check alignment difference between device heading and Qibla
+      const diff = Math.abs(((deviceHeading - qiblaBearing + 180) % 360) - 180);
+      if (diff <= 4) {
+        alignmentStatus.innerHTML = `
+          <span class="text-emerald-500 font-extrabold flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+            মাশাআল্লাহ! আপনি সঠিক কিবলার অভিমুখে আছেন
+          </span>
+        `;
+        compassOuter.classList.add('qibla-aligned');
+        if (navigator.vibrate) navigator.vibrate(50);
+      } else {
+        alignmentStatus.innerHTML = `<span>পবিত্র কাবা থেকে ব্যবধান: ${window.toBengaliNumerals(Math.round(diff))}°</span>`;
+        compassOuter.classList.remove('qibla-aligned');
+      }
+    }
+
+    // Geolocation Handling
+    function initLocation(force = false) {
+      const locText = document.getElementById('user-location-text');
+      const cachedLat = localStorage.getItem('user_lat');
+      const cachedLon = localStorage.getItem('user_lon');
+      const cachedCity = localStorage.getItem('user_city');
+
+      if (!force && cachedLat && cachedLon) {
+        userLat = parseFloat(cachedLat);
+        userLng = parseFloat(cachedLon);
+        locText.innerText = cachedCity || "সংরক্ষিত লোকেশন";
+        updateQiblaUI();
+        return;
+      }
+
+      if (navigator.geolocation) {
+        locText.innerText = "GPS খোঁজা হচ্ছে...";
+        navigator.geolocation.getCurrentPosition(
+          async (pos) => {
+            userLat = pos.coords.latitude;
+            userLng = pos.coords.longitude;
+            localStorage.setItem('user_lat', userLat);
+            localStorage.setItem('user_lon', userLng);
+
+            try {
+              const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${userLat}&longitude=${userLng}&localityLanguage=bn`);
+              const data = await res.json();
+              const city = data.city || data.locality || "আপনার এলাকা";
+              localStorage.setItem('user_city', city);
+              locText.innerText = city;
+            } catch (e) {
+              locText.innerText = "GPS সক্রিয়";
+            }
+            updateQiblaUI();
+          },
+          (err) => {
+            fetchIPLocation();
+          },
+          { enableHighAccuracy: true, timeout: 8000 }
+        );
+      } else {
+        fetchIPLocation();
+      }
+    }
+
+    async function fetchIPLocation() {
+      const locText = document.getElementById('user-location-text');
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        if (data.latitude && data.longitude) {
+          userLat = data.latitude;
+          userLng = data.longitude;
+          locText.innerText = (data.city || "বাংলাদেশ") + " (IP)";
+          updateQiblaUI();
+        }
+      } catch (e) {
+        locText.innerText = "ঢাকা (ডিফল্ট)";
+        updateQiblaUI();
+      }
+    }
+
+    function handleCitySelect(val) {
+      if (val === 'auto') {
+        initLocation(true);
+        return;
+      }
+      const city = cityCoordinates[val];
+      if (city) {
+        userLat = city.lat;
+        userLng = city.lng;
+        document.getElementById('user-location-text').innerText = city.name;
+        updateQiblaUI();
+      }
+    }
+
+    // Orientation / Compass Sensors
+    function handleOrientation(e) {
+      let compass = null;
+      if (e.webkitCompassHeading) {
+        // iOS
+        compass = e.webkitCompassHeading;
+      } else if (e.alpha !== null) {
+        // Android (absolute or standard)
+        compass = e.absolute ? 360 - e.alpha : 360 - e.alpha;
+      }
+
+      if (compass !== null && !isNaN(compass)) {
+        hasSensor = true;
+        deviceHeading = Math.round(compass);
+        updateNeedleOrientation();
+      }
+    }
+
+    function requestOrientationPermission() {
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(response => {
+            if (response === 'granted') {
+              window.addEventListener('deviceorientation', handleOrientation, true);
+              document.getElementById('perm-btn').classList.add('hidden');
+            } else {
+              alert('সেন্সর ব্যবহারের অনুমতি পাওয়া যায়নি।');
+            }
+          })
+          .catch(console.error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initLocation();
+
+      // Check if iOS 13+ requires manual button click for permission
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        document.getElementById('perm-btn').classList.remove('hidden');
+      } else {
+        if ('ondeviceorientationabsolute' in window) {
+          window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+        } else if ('ondeviceorientation' in window) {
+          window.addEventListener('deviceorientation', handleOrientation, true);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

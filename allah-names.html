@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আসমাউল হুসনা - আল্লাহর ৯৯টি গুণবাচক নাম | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="আল্লাহ তায়ালার ৯৯টি পবিত্র গুণবাচক নাম আরবি, বাংলা উচ্চারণ, অর্থ ও ফজিলতসহ জানুন।">
+  <meta name="keywords" content="আল্লাহর ৯৯ নাম, আসমাউল হুসনা, 99 Names of Allah, Asmaul Husna Bangla">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;800;900&family=Amiri&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'], arabic: ['Amiri', 'serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Header -->
+  <!-- Header -->
+  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-amber-500/20 bg-amber-50/60 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 text-xs font-semibold uppercase tracking-wider mb-3">
+      <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+      আসমাউল হুসনা
+    </div>
+    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">আল্লাহ তায়ালার ৯৯টি গুণবাচক নাম</h1>
+    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+      রাসূলুল্লাহ (সা.) বলেছেন: "নিশ্চয়ই আল্লাহর নিরানব্বইটি নাম রয়েছে, যে ব্যক্তি এগুলো মুখস্থ করবে ও অনুধাবন করবে, সে জান্নাতে প্রবেশ করবে।" (সহীহ বুখারী)
+    </p>
+    <div class="w-16 h-1 bg-amber-500 mx-auto rounded-full mt-5"></div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-6xl">
+    
+    <!-- Search & Filter Controls -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-3.5 mb-8 max-w-3xl mx-auto">
+      <div class="relative w-full">
+        <input type="text" id="names-search" placeholder="নাম, উচ্চারণ বা অর্থ দিয়ে খুঁজুন..." 
+          class="w-full py-3.5 pl-11 pr-4 bg-white dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
+      </div>
+      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-3 py-2 bg-white dark:bg-slate-900 rounded-xl border border-stone-200/90 dark:border-slate-800">
+        মোট নাম: <span id="names-count" class="text-emerald-600 dark:text-emerald-400 font-black text-sm">৯৯</span> টি
+      </div>
+    </div>
+
+    <!-- 99 Names Grid -->
+    <div id="names-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-5">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800">
+      <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো নাম পাওয়া যায়নি</h3>
+      <p class="text-slate-400 text-xs mt-1">অন্য কোনো শব্দ লিখে পুনরায় অনুসন্ধান করুন</p>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    const allahNames = [
+      { id: 1, arabic: "الرَّحْمَنُ", transliteration: "আর-রহমান", meaning: "পরম দয়ালু", desc: "যিনি সমগ্র সৃষ্টির ওপর পরম করুণাময় ও দয়ার সাগর।" },
+      { id: 2, arabic: "الرَّحِيمُ", transliteration: "আর-রাহীম", meaning: "অতিশয় মেহেরবান", desc: "যিনি বিশেষ করে মুমিন বান্দাদের প্রতি অত্যন্ত স্নেহশীল ও দয়াবান।" },
+      { id: 3, arabic: "الْمَلِكُ", transliteration: "আল-মালিক", meaning: "সর্বভৌম ক্ষমতার অধিকারী", desc: "সমগ্র মহাবিশ্বের একমাত্র প্রকৃত মালিক ও অধিপতি।" },
+      { id: 4, arabic: "الْقُدُّوسُ", transliteration: "আল-কুদ্দুস", meaning: "নিষ্কলুষ, পরম পবিত্র", desc: "যিনি সকল প্রকার ত্রুটি, অপূর্ণতা ও দোষ থেকে সম্পূর্ণ মুক্ত।" },
+      { id: 5, arabic: "السَّلَامُ", transliteration: "আস-সালাম", meaning: "শান্তি দানকারী ও নিরাপত্তা প্রদানকারী", desc: "যিনি শান্তি ও নিরাপত্তার উৎস।" },
+      { id: 6, arabic: "الْمُؤْمِنُ", transliteration: "আল-মু'মিন", meaning: "নিরাপত্তা ও ঈমান দানকারী", desc: "যিনি তাঁর বান্দাদের ভয়ভীতি থেকে নিরাপত্তা ও নির্ভরতা দেন।" },
+      { id: 7, arabic: "الْمُهَيْمِنُ", transliteration: "আল-মুহাইমিন", meaning: "রক্ষক ও অভিভাবক", desc: "যিনি সকল সৃষ্টির তত্ত্বাবধায়ক ও প্রত্যক্ষদর্শী।" },
+      { id: 8, arabic: "الْعَزِيزُ", transliteration: "আল-আযীয", meaning: "পরাক্রমশালী, অপ্রতিরোধ্য", desc: "যাঁর শক্তি ও সম্মানের কোনো তুলনা নেই।" },
+      { id: 9, arabic: "الْجَبَّارُ", transliteration: "আল-জাব্বার", meaning: "মহাপ্রতাপশালী, সংশোধনকারী", desc: "যিনি প্রতিটি ভাঙা হৃদয়কে জোড়া লাগান ও সংশোধন করেন।" },
+      { id: 10, arabic: "الْمُتَكَبِّرُ", transliteration: "আল-মুতাকাব্বির", meaning: "সর্বশ্রেষ্ঠ, চরম গৌরবান্বিত", desc: "যাঁর শ্রেষ্ঠত্ব ও মহিমা অপরিসীম।" },
+      { id: 11, arabic: "الْخَالِقُ", transliteration: "আল-খালিক্ব", meaning: "সৃষ্টিকর্তা", desc: "যিনি কোনো নমুনা ছাড়াই শূন্য থেকে সব সৃষ্টি করেছেন।" },
+      { id: 12, arabic: "الْبَارِئُ", transliteration: "আল-বারি", meaning: "সঠিক রূপদাতা, উৎপাদক", desc: "যিনি প্রতিটি বস্তুকে নিখুঁতভাবে অস্তিত্ব দান করেন।" },
+      { id: 13, arabic: "الْمُصَوِّرُ", transliteration: "আল-মুছাওউয়ির", meaning: "আকৃতি দানকারী", desc: "যিনি প্রতিটি সৃষ্টিকে অনুপম রূপ ও আকৃতি দিয়েছেন।" },
+      { id: 14, arabic: "الْغَفَّارُ", transliteration: "আল-গাফফার", meaning: "পরম ক্ষমাশীল", desc: "যিনি বারবার বান্দার পাপ গোপন করেন ও ক্ষমা করে দেন।" },
+      { id: 15, arabic: "الْقَهَّارُ", transliteration: "আল-কাহ্হার", meaning: "কঠোর দমনকারী", desc: "যাঁর প্রভাব ও শক্তির সামনে সব সৃষ্টি বশীভূত।" },
+      { id: 16, arabic: "الْوَهَّابُ", transliteration: "আল-ওয়াহ্হাব", meaning: "মহাঅনুগ্রহকারী, নিস্বার্থ দাতা", desc: "যিনি কোনো প্রতিদান ছাড়াই অফুরন্ত দান করেন।" },
+      { id: 17, arabic: "الرَّزَّاقُ", transliteration: "আর-রাযযাক্ব", meaning: "জীবিকা ও রিজিকদাতা", desc: "যিনি প্রতিটি প্রাণীর রিজিকের ব্যবস্থা করেন।" },
+      { id: 18, arabic: "الْفَتَّاحُ", transliteration: "আল-ফাত্তাহ", meaning: "বিজয়দানকারী ও উন্মোচনকারী", desc: "যিনি রহমত ও সফলতার দ্বার উন্মুক্ত করেন।" },
+      { id: 19, arabic: "الْعَلِيمُ", transliteration: "আল-আলীম", meaning: "সর্বজ্ঞানী", desc: "যাঁর জ্ঞানের বাইরে কোনো কিছুই নেই।" },
+      { id: 20, arabic: "الْقَابِضُ", transliteration: "আল-ক্বাবিদ", meaning: "সংকোচনকারী", desc: "যিনি হিকমতের খাতিরে রিজিক ও রুহ সংকুচিত করেন।" },
+      { id: 21, arabic: "الْبَاسِطُ", transliteration: "আল-বাসিত", meaning: "প্রসারণকারী", desc: "যিনি বান্দার জন্য রিজিক ও কল্যাণ প্রশস্ত করেন।" },
+      { id: 22, arabic: "الْخَافِضُ", transliteration: "আল-খাফিদ", meaning: "অবনমিতকারী", desc: "যিনি অহংকারী ও পাপীদের পদমর্যাদা নামিয়ে দেন।" },
+      { id: 23, arabic: "الرَّافِعُ", transliteration: "আর-রাফি‘", meaning: "মর্যাদাদানকারী, উন্নতকারী", desc: "যিনি ঈমানদার ও বিনয়ীদের মর্যাদা বাড়িয়ে দেন।" },
+      { id: 24, arabic: "الْمُعِزُّ", transliteration: "আল-মু‘ইযয", meaning: "সম্মানদানকারী", desc: "যিনি যাকে ইচ্ছা সম্মান দান করেন।" },
+      { id: 25, arabic: "الْمُذِلُّ", transliteration: "আল-মুযিল্ল", meaning: "অপমানকারী", desc: "যিনি জালিমদের লাঞ্ছিত ও অপদস্থ করেন।" },
+      { id: 26, arabic: "السَّمِيعُ", transliteration: "আস-সামী‘", meaning: "সর্বশ্রোতা", desc: "যিনি হৃদয়ের গোপনতম ফিসফিসানিও শোনেন।" },
+      { id: 27, arabic: "الْبَصِيرُ", transliteration: "আল-বাছীর", meaning: "সর্বদ্রষ্টা", desc: "যিনি অন্ধকারের ক্ষুদ্রতম পিঁপড়ার চলাচলও প্রত্যক্ষ করেন।" },
+      { id: 28, arabic: "الْحَكَمُ", transliteration: "আল-হাকাম", meaning: "একচ্ছত্র বিচারক", desc: "যাঁর ফয়সালা চূড়ান্ত ও ন্যায়সংগত।" },
+      { id: 29, arabic: "الْعَدْلُ", transliteration: "আল-‘আদল", meaning: "পরম ন্যায়পরায়ণ", desc: "যাঁর কোনো ফয়সালায় কোনো অবিচার নেই।" },
+      { id: 30, arabic: "اللَّطِيفُ", transliteration: "আল-লাতীফ", meaning: "সূক্ষ্মদর্শী, পরম স্নেহশীল", desc: "যিনি প্রতিটি বিষয়ের সূক্ষ্ম রহস্য জানেন এবং করুণাময়।" },
+      { id: 31, arabic: "الْخَبِيرُ", transliteration: "আল-খাবীর", meaning: "সর্ববিষয়ে জ্ঞাত", desc: "যিনি প্রতিটি বিষয়ের আভ্যন্তরীণ তত্ত্ব অবগত।" },
+      { id: 32, arabic: "الْحَلِيمُ", transliteration: "আল-হালীম", meaning: "পরম ধৈর্যশীল ও সহনশীল", desc: "যিনি অবাধ্যতার পরও শাস্তি দিতে তাড়াহুড়ো করেন না।" },
+      { id: 33, arabic: "الْعَظِيمُ", transliteration: "আল-‘আযীম", meaning: "অনুপম মহিমান্বিত", desc: "যাঁর মহত্ত্ব ও শ্রেষ্ঠত্ব পরিমাপহীন।" },
+      { id: 34, arabic: "الْغَفُورُ", transliteration: "আল-গাফূর", meaning: "অতীব ক্ষমাশীল", desc: "যিনি অসংখ্য গুনাহ ক্ষমা করেন।" },
+      { id: 35, arabic: "الشَّكُورُ", transliteration: "আশ-শাকূর", meaning: "গুণগ্রাহী, মূল্যায়নকারী", desc: "যিনি বান্দার সামান্য সৎকাজের বিনিময়ে অফুরন্ত প্রতিদান দেন।" },
+      { id: 36, arabic: "الْعَلِيُّ", transliteration: "আল-‘আলী", meaning: "সর্বোচ্চ মর্যাদাবান", desc: "যিনি মর্যাদায় সকলের উর্ধ্বে।" },
+      { id: 37, arabic: "الْكَبِيرُ", transliteration: "আল-কাবীর", meaning: "সবচেয়ে মহান", desc: "যাঁর সমকক্ষ মহান আর কেউ নেই।" },
+      { id: 38, arabic: "الْحَفِيظُ", transliteration: "আল-হাফীয", meaning: "মহারক্ষক", desc: "যিনি আসমান-জমিনের সকল সৃষ্টিকে রক্ষা করেন।" },
+      { id: 39, arabic: "الْمُقِيتُ", transliteration: "আল-মুক্বীত", meaning: "শক্তি ও আহার্য যোগানদাতা", desc: "যিনি সব সৃষ্টির শক্তি ও খোরাক দেন।" },
+      { id: 40, arabic: "الْحَسِيبُ", transliteration: "আল-হাসীব", meaning: "হিসাব গ্রহণকারী ও যথেষ্ট", desc: "যিনি বান্দার হিসাব গ্রহণে স্বয়ংসম্পূর্ণ।" },
+      { id: 41, arabic: "الْجَلِيلُ", transliteration: "আল-জালীল", meaning: "প্রতাপশালী ও মহিমান্বিত", desc: "যাঁর রয়েছে অপরিসীম গাম্ভীর্য।" },
+      { id: 42, arabic: "الْكَرِيمُ", transliteration: "আল-কারীম", meaning: "পরম উদার ও দাতা", desc: "যিনি চাওয়া ছাড়াই অপরিমিত দান করেন।" },
+      { id: 43, arabic: "الرَّقِيبُ", transliteration: "আর-রক্বীব", meaning: "তীক্ষ্ণ দৃষ্টিতে প্রত্যক্ষকারী", desc: "যাঁর দৃষ্টির বাইরে কিছুই নেই।" },
+      { id: 44, arabic: "الْمُجِيبُ", transliteration: "আল-মুজীব", meaning: "দো'আ কবুলকারী", desc: "যিনি বান্দার ডাকে সাড়া দেন।" },
+      { id: 45, arabic: "الْوَاسِعُ", transliteration: "আল-ওয়াসি‘", meaning: "অসীম প্রাচুর্যময়", desc: "যাঁর রহমত ও জ্ঞান সব কিছুকে পরিবেষ্টন করে আছে।" },
+      { id: 46, arabic: "الْحَكِيمُ", transliteration: "আল-হাকীম", meaning: "প্রজ্ঞাময় ও তত্ত্বজ্ঞানী", desc: "যাঁর প্রতিটি কাজে অপার কৌশল রয়েছে।" },
+      { id: 47, arabic: "الْوَدُودُ", transliteration: "আল-ওয়াদূদ", meaning: "প্রেমময় ও পরম ভালোবাসার আধার", desc: "যিনি নেককার বান্দাদের গভীর ভালোবাসেন।" },
+      { id: 48, arabic: "الْمَجِيدُ", transliteration: "আল-মাজীদ", meaning: "মহিমান্বিত ও মর্যাদাবান", desc: "যাঁর সম্মান ও গৌরব নিখুঁত।" },
+      { id: 49, arabic: "الْبَاعِثُ", transliteration: "আল-বা‘ইছ", meaning: "পুনরুত্থানকারী", desc: "যিনি মৃত্যুর পর কিয়ামতের দিন সকলকে জীবিত করবেন।" },
+      { id: 50, arabic: "الشَّهِيدُ", transliteration: "আশ-শাহীদ", meaning: "উপস্থিত প্রত্যক্ষদর্শী", desc: "যাঁর সামনে সবকিছু উন্মুক্ত।" },
+      { id: 51, arabic: "الْحَقُّ", transliteration: "আল-হাক্ব", meaning: "চিরসত্য ও অবিনশ্বর", desc: "যাঁর অস্তিত্ব ও প্রতিশ্রুতি চিরন্তন সত্য।" },
+      { id: 52, arabic: "الْوَكِيلُ", transliteration: "আল-ওয়াকীল", meaning: "নির্ভরযোগ্য কর্মবিধায়ক", desc: "যাঁর ওপর পরম ভরসা করা যায়।" },
+      { id: 53, arabic: "الْقَوِيُّ", transliteration: "আল-ক্বউইয়্য", meaning: "মহাশক্তিধর", desc: "যাঁর শক্তির কোনো ক্ষয় নেই।" },
+      { id: 54, arabic: "الْمَتِينُ", transliteration: "আল-মাতীন", meaning: "সুদৃঢ় ও পরাক্রমশালী", desc: "যাঁর শক্তি অবিচল ও অপরাজেয়।" },
+      { id: 55, arabic: "الْوَلِيُّ", transliteration: "আল-ওয়ালিয়্য", meaning: "পরম অভিভাবক ও বন্ধু", desc: "যিনি বিশ্বাসীদের পরম শুভাকাঙ্ক্ষী।" },
+      { id: 56, arabic: "الْحَمِيدُ", transliteration: "আল-হামীদ", meaning: "সকল প্রশংসার একমাত্র যোগ্য", desc: "যিনি স্বতঃস্ফূর্তভাবে প্রশংসিত।" },
+      { id: 57, arabic: "الْمُحْصِي", transliteration: "আল-মুহছী", meaning: "পুঙ্খানুপুঙ্খ গণনাকারী", desc: "যিনি সব কিছুর সংখ্যা ও পরিমাণ জানেন।" },
+      { id: 58, arabic: "الْمُبْدِئُ", transliteration: "আল-মুবদি", meaning: "সূচনাকারী", desc: "যিনি প্রথমবার সৃষ্টিকে অস্তিত্ব দিয়েছেন।" },
+      { id: 59, arabic: "الْمُعِيدُ", transliteration: "আল-মু‘ঈদ", meaning: "পুনঃসৃষ্টিকারী", desc: "যিনি বিলুপ্তির পর পুনরায় সৃষ্টি করতে সক্ষম।" },
+      { id: 60, arabic: "الْمُحْيِي", transliteration: "আল-মুহ্য়ী", meaning: "জীবনদাতা", desc: "যিনি নির্জীবকে প্রাণ দান করেন।" },
+      { id: 61, arabic: "الْمُمِيتُ", transliteration: "আল-মুমীত", meaning: "মৃত্যুদাতা", desc: "যিনি জীবিতকে মৃত্যু ঘটান।" },
+      { id: 62, arabic: "الْحَيُّ", transliteration: "আল-হাইয়্য", meaning: "চিরঞ্জীব", desc: "যাঁর জীবনের কোনো শুরু ও শেষ নেই।" },
+      { id: 63, arabic: "الْقَيُّومُ", transliteration: "আল-ক্বাইয়্যূম", meaning: "স্বয়ংসম্পূর্ণ ধারক", desc: "যিনি নিজে قائم এবং সমগ্র মহাবিশ্বকে ধারণ করেন।" },
+      { id: 64, arabic: "الْوَاجِدُ", transliteration: "আল-ওয়াজিদ", meaning: "অফুরন্ত সম্পদের অধিকারী", desc: "যাঁর কোনো অভাব বা দীনতা নেই।" },
+      { id: 65, arabic: "الْمَاجِدُ", transliteration: "আল-মাজিদ", meaning: "মহিমান্বিত ও দানশীল", desc: "যাঁর শ্রেষ্ঠত্ব অনন্য।" },
+      { id: 66, arabic: "الْوَاحِدُ", transliteration: "আল-ওয়াহিদ", meaning: "একক ও অদ্বিতীয়", desc: "যাঁর সত্তা ও গুণে কোনো অংশীদার নেই।" },
+      { id: 67, arabic: "الْأَحَدُ", transliteration: "আল-আহাদ", meaning: "এক ও অনন্য", desc: "যিনি এক ও একক।" },
+      { id: 68, arabic: "الصَّمَدُ", transliteration: "আছ-ছমাদ", meaning: "অমুখাপেক্ষী", desc: "সবাই যাঁর মুখাপেক্ষী কিন্তু তিনি কারও মুখাপেক্ষী নন।" },
+      { id: 69, arabic: "الْقَادِرُ", transliteration: "আল-ক্বাদির", meaning: "সর্বশক্তিমান", desc: "যিনি যা ইচ্ছা তা করতে সক্ষম।" },
+      { id: 70, arabic: "الْمُقْتَدِرُ", transliteration: "আল-মুক্বতাদির", meaning: "পূর্ণ ক্ষমতার অধিকারী", desc: "যাঁর ক্ষমতা চূড়ান্ত রূপ লাভ করে।" },
+      { id: 71, arabic: "الْمُقَدِّمُ", transliteration: "আল-মুক্বাদ্দিম", meaning: "অগ্রসরকারী", desc: "যিনি যাকে ইচ্ছা এগিয়ে দেন।" },
+      { id: 72, arabic: "الْمُؤَخِّرُ", transliteration: "আল-মুআখ্খির", meaning: "পশ্চাতে প্রেরণকারী", desc: "যিনি যাকে ইচ্ছা পিছিয়ে দেন।" },
+      { id: 73, arabic: "الْأَوَّلُ", transliteration: "আল-আউওয়াল", meaning: "সর্বপ্রথম", desc: "যাঁর পূর্বে কোনো কিছুর অস্তিত্ব ছিল না।" },
+      { id: 74, arabic: "الْآخِرُ", transliteration: "আল-আখির", meaning: "সর্বশেষ", desc: "সবকিছু ধ্বংস হওয়ার পরও যিনি চিরকাল থাকবেন।" },
+      { id: 75, arabic: "الظَّاهِرُ", transliteration: "আজ-জাহির", meaning: "প্রকাশ্য ও স্পষ্ট", desc: "যাঁর অস্তিত্বের নিদর্শনসমূহ সর্বত্র দেদীপ্যমান।" },
+      { id: 76, arabic: "الْبَاطِنُ", transliteration: "আল-বাতিন", meaning: "অদৃশ্য ও গুপ্ত", desc: "যিনি পঞ্চইন্দ্রিয়ের অগম্য।" },
+      { id: 77, arabic: "الْوَالِي", transliteration: "আল-ওয়ালী", meaning: "সার্বভৌম শাসক ও অভিভাবক", desc: "যিনি বিশ্বজগত পরিচালনা করেন।" },
+      { id: 78, arabic: "الْمُتَعَالِي", transliteration: "আল-মুতা‘আলী", meaning: "সর্বোচ্চ উন্নত", desc: "যিনি মানুষের ধারণাতীত উর্ধ্বে।" },
+      { id: 79, arabic: "الْبَرُّ", transliteration: "আল-বারর", meaning: "পরম অনুগ্রহকারী ও সৎকর্মশীল", desc: "যিনি সৃষ্টির প্রতি অনন্ত কল্যাণকামী।" },
+      { id: 80, arabic: "التَّوَّابُ", transliteration: "আত-তাওয়াব", meaning: "তওবা কবুলকারী", desc: "যিনি বারবার বান্দার তাওবা গ্রহণ করেন।" },
+      { id: 81, arabic: "الْمُنْتَقِمُ", transliteration: "আল-মুনতাক্বিম", meaning: "প্রতিশোধ গ্রহণকারী", desc: "যিনি উদ্ধত অবাধ্যদের ন্যায্য শাস্তি দেন।" },
+      { id: 82, arabic: "الْعَفُوُّ", transliteration: "আল-‘আফুউ", meaning: "মার্জনাকারী", desc: "যিনি পাপের চিহ্ন পর্যন্ত মুছে দেন।" },
+      { id: 83, arabic: "الرَّءُوفُ", transliteration: "আর-রউফ", meaning: "পরম স্নেহশীল ও সহানুভূতিশীল", desc: "যাঁর অন্তহীন মমতা রয়েছে।" },
+      { id: 84, arabic: "مَالِكُ الْمُلْكِ", transliteration: "মালিকুল মুলক", meaning: "সমগ্র রাজ্যের একচ্ছত্র অধিপতি", desc: "যিনি মহাবিশ্বের চিরস্থায়ী বাদশাহ।" },
+      { id: 85, arabic: "ذُو الْجَلَالِ وَالْإِكْرَامِ", transliteration: "যুল জালালি ওয়াল ইকরাম", meaning: "মহিমান্বিত ও মর্যাদাবান", desc: "যিনি মহিমা ও শ্রদ্ধার অধিকারী।" },
+      { id: 86, arabic: "الْمُقْسِطُ", transliteration: "আল-মুক্বসিত", meaning: "ন্যায়পরায়ণ সমতা স্থাপনকারী", desc: "যিনি নিখুঁত ইনসাফ কায়েম করেন।" },
+      { id: 87, arabic: "الْجَامِعُ", transliteration: "আল-জামি‘", meaning: "একত্রকারী", desc: "যিনি বিচার দিবসে সকল মানবজাতিকে একত্র করবেন।" },
+      { id: 88, arabic: "الْغَنِيُّ", transliteration: "আল-গানিয়্য", meaning: "পরম সম্পদশালী ও অভাবমুক্ত", desc: "যাঁর কোনো কিছুর প্রয়োজন হয় না।" },
+      { id: 89, arabic: "الْمُغْنِي", transliteration: "আল-মুগনী", meaning: "ধনী ও অভাবমুক্তকারী", desc: "যিনি যাকে ইচ্ছা স্বাবলম্বী করেন।" },
+      { id: 90, arabic: "الْمَانِعُ", transliteration: "আল-মানি‘", meaning: "প্রতিহতকারী ও বাধাদানকারী", desc: "যিনি ক্ষতি প্রতিহত করেন।" },
+      { id: 91, arabic: "الضَّارُّ", transliteration: "আদ-দারর", meaning: "ক্ষতি পৌঁছাতে সক্ষম", desc: "যাঁর হুকুম ছাড়া কেউ কারও ক্ষতি করতে পারে না।" },
+      { id: 92, arabic: "النَّافِعُ", transliteration: "আন-নাফি‘", meaning: "কল্যাণ ও উপকারসাধনকারী", desc: "সকল মঙ্গলের একমাত্র উৎস।" },
+      { id: 93, arabic: "النُّورُ", transliteration: "আন-নূর", meaning: "জ্যোতি ও আলো", desc: "যিনি আসমান ও জমিনের জ্যোতি।" },
+      { id: 94, arabic: "الْهَادِي", transliteration: "আল-হাদী", meaning: "পথপ্রদর্শক", desc: "যিনি সত্য ও সরল পথের দিশা দেন।" },
+      { id: 95, arabic: "الْبَدِيعُ", transliteration: "আল-বাদী‘", meaning: "অনন্য উদ্ভাবক", desc: "যিনি কোনো পূর্বরূপ ছাড়া অপূর্ব সৃষ্টি উদ্ভাবন করেন।" },
+      { id: 96, arabic: "الْبَاقِي", transliteration: "আল-বাকী", meaning: "চিরস্থায়ী", desc: "সবকিছু লয় পেলেও যিনি অবিনশ্বর থাকবেন।" },
+      { id: 97, arabic: "الْوَارِثُ", transliteration: "আল-ওয়ারিছ", meaning: "চূড়ান্ত উত্তরাধিকারী", desc: "সব সৃষ্টির অবসানের পর যিনি সবকিছুর মালিক থাকবেন।" },
+      { id: 98, arabic: "الرَّشِيدُ", transliteration: "আর-রশীদ", meaning: "সঠিক পথের পরিচালক", desc: "যাঁর পরিচালনা নির্ভুল।" },
+      { id: 99, arabic: "الصَّبُورُ", transliteration: "আছ-ছবূর", meaning: "পরম ধৈর্যশীল", desc: "যাঁর ধৈর্য ও সহিষ্ণুতা সর্বশ্রেষ্ঠ।" }
+    ];
+
+    let searchQuery = '';
+
+    const colors = [
+      { border: 'hover:border-emerald-300 dark:hover:border-emerald-700', badge: 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300', light: 'bg-emerald-500/5' },
+      { border: 'hover:border-amber-300 dark:hover:border-amber-700', badge: 'bg-amber-50 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300', light: 'bg-amber-500/5' },
+      { border: 'hover:border-teal-300 dark:hover:border-teal-700', badge: 'bg-teal-50 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300', light: 'bg-teal-500/5' },
+      { border: 'hover:border-sky-300 dark:hover:border-sky-700', badge: 'bg-sky-50 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300', light: 'bg-sky-500/5' },
+    ];
+
+    function speakName(arabicText) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(arabicText);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('আপনার ব্রাউজারে ভয়েস উচ্চারণ সুবিধা সমর্থিত নয়।');
+      }
+    }
+
+    function renderNames() {
+      const container = document.getElementById('names-grid');
+      const emptyState = document.getElementById('empty-state');
+      
+      const filtered = allahNames.filter(n => {
+        if (!searchQuery) return true;
+        return n.transliteration.toLowerCase().includes(searchQuery) ||
+               n.meaning.toLowerCase().includes(searchQuery) ||
+               n.arabic.includes(searchQuery) ||
+               n.desc.toLowerCase().includes(searchQuery);
+      });
+
+      document.getElementById('names-count').innerText = window.toBengaliNumerals(filtered.length);
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = filtered.map((n, idx) => {
+        const bookmarkKey = `allah_name_${n.id}`;
+        const isBookmarked = window.isBookmarked ? window.isBookmarked(bookmarkKey) : false;
+
+        return `
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-stone-200/90 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
+            
+            <!-- Top Card Bar -->
+            <div>
+              <div class="flex justify-between items-center mb-3">
+                <span class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">
+                  ${window.toBengaliNumerals(n.id)}
+                </span>
+                <div class="flex items-center space-x-1">
+                  <button onclick="speakName('${n.arabic}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="উচ্চারণ শুনুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>
+                  </button>
+                  <button onclick="handleNameBookmark(event, ${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                  </button>
+                  <button onclick="copyName(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5H6a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Arabic Calligraphy Box -->
+              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-slate-800/60 rounded-xl border border-stone-200/60 dark:border-slate-800/80">
+                <p class="font-arabic text-3xl md:text-4xl text-slate-900 dark:text-emerald-200 font-normal leading-relaxed">${n.arabic}</p>
+              </div>
+
+              <!-- Transliteration & Meaning -->
+              <div class="text-center mt-2.5">
+                <h3 class="text-base font-bold text-emerald-800 dark:text-emerald-400 mb-0.5">${n.transliteration}</h3>
+                <p class="text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5">${n.meaning}</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed pt-2 border-t border-stone-100 dark:border-slate-800/60">${n.desc}</p>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="mt-3.5 pt-2 flex justify-center">
+              <button onclick="speakName('${n.arabic}')" class="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 hover:bg-emerald-100/80 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/60 rounded-lg transition-all border border-emerald-200/60 dark:border-emerald-800/40">
+                <span>🔊</span>
+                <span>উচ্চারণ শুনুন</span>
+              </button>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    function copyName(id) {
+      const name = allahNames.find(n => n.id === id);
+      if (!name) return;
+      const text = `${name.arabic} (${name.transliteration})\nঅর্থ: ${name.meaning}\nতাৎপর্য: ${name.desc}\n(DeenIslam - deenislam.org)`;
+      window.copyToClipboard(text);
+    }
+
+    function handleNameBookmark(event, id) {
+      const name = allahNames.find(n => n.id === id);
+      if (!name) return;
+      const key = `allah_name_${name.id}`;
+      const data = {
+        key: key,
+        type: 'allah_name',
+        subType: 'আসমাউল হুসনা',
+        title: `${name.transliteration} (${name.arabic})`,
+        arabic: name.arabic,
+        text: `${name.meaning} - ${name.desc}`,
+        url: `allah-names.html`
+      };
+      const isAdded = window.toggleBookmark(data);
+      document.querySelectorAll(`.bookmark-btn[data-key="${key}"]`).forEach(btn => {
+        const svg = btn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isAdded ? 'currentColor' : 'none');
+      });
+    }
+
+    const searchInput = document.getElementById('names-search');
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      renderNames();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderNames();
+    });
+  </script>
+</body>
+</html>

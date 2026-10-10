@@ -1,0 +1,20 @@
+{
+  "name": "DeenIslam - ইসলামিক জ্ঞান ও গাইড",
+  "short_name": "DeenIslam",
+  "description": "শুদ্ধ ও সঠিক ইসলামিক তথ্য, কুরআন, হাদিস, নামাজের সময়সূচী, কিবলা ও দো'আ নিয়ে আপনার দ্বীনি জীবনের ডিজিটাল সফর।",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#059669",
+  "categories": ["education", "lifestyle", "books"],
+  "icons": [
+    {
+      "src": "favicon/deenislam.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    }
+  ]
+}

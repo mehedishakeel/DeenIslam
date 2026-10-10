@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>হাদিস বিস্তারিত - বাংলা অনুবাদসহ | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="বিশুদ্ধ হাদিস গ্রন্থের হাদিসসমূহ বাংলা অনুবাদ ও মানসহ অনলাইনে পড়ুন।">
+  <meta name="keywords" content="হাদিস, বাংলা হাদিস, হাদিস শরীফ, Hadith Reading, Bangla Hadith">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#059669', // Emerald 600
+            secondary: '#d97706', // Amber 600
+          },
+          fontFamily: {
+            bengali: ['Noto Sans Bengali', 'sans-serif'],
+            arabic: ['Amiri', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 flex flex-col min-h-screen font-bengali">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8 md:p-12 flex-grow">
+    
+    <!-- Hadith Header -->
+    <div id="hadith-header" class="text-center mb-8 p-6 md:p-8 bg-white dark:bg-slate-900/90 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+      <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 text-[11px] font-medium mb-2.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400"></span>
+        <span>হাদিস পাঠাগার</span>
+      </div>
+      <h1 id="book-name" class="text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1.5">লোড হচ্ছে...</h1>
+      <p id="hadith-count" class="text-xs md:text-sm font-medium text-emerald-700 dark:text-emerald-400">অনুগ্রহ করে অপেক্ষা করুন</p>
+    </div>
+
+    <!-- Search Section -->
+    <div class="flex flex-col items-center mb-10 max-w-2xl mx-auto w-full">
+      <div class="relative w-full">
+        <input type="text" id="hadith-search" placeholder="হাদিস নম্বর বা শব্দ দিয়ে খুঁজুন..." class="py-2.5 pl-10 pr-4 bg-white dark:bg-slate-900/90 border border-stone-200/90 dark:border-slate-700/80 rounded-xl w-full text-xs md:text-sm text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 shadow-sm transition-all">
+        <span class="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
+      </div>
+      <p class="mt-2 text-xs text-slate-500 dark:text-slate-400 leading-relaxed text-center px-4">
+        <span class="font-semibold text-emerald-700 dark:text-emerald-400">পরামর্শ:</span> নির্দিষ্ট নম্বরের হাদিসে যেতে "১" লিখুন, অথবা কোনো শব্দ লিখে অনুসন্ধান করুন।
+      </p>
+    </div>
+
+    <!-- Hadiths Container -->
+    <div id="hadith-container" class="space-y-5 max-w-4xl mx-auto">
+      <div class="animate-pulse space-y-3">
+        <div class="h-6 bg-slate-200 dark:bg-slate-800 rounded-lg w-1/4"></div>
+        <div class="h-28 bg-slate-200 dark:bg-slate-800 rounded-2xl"></div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center items-center space-x-4 mt-16 flex-wrap gap-y-4" id="pagination-controls"></div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookSlug = urlParams.get('book');
+    const targetHadithNumber = urlParams.get('num');
+    const bookMapping = {
+        'bukhari': 'সহীহ বুখারী',
+        'muslim': 'সহীহ মুসলিম',
+        'abudawud': 'সুনানে আবু দাউদ',
+        'tirmidhi': 'জামে আত-তিরমিযী',
+        'nasai': 'সুনানে আন-নাসায়ী',
+        'ibnmajah': 'সুনানে ইবনে মাজাহ',
+        'malik': 'মুয়াত্তা ইমাম মালিক',
+        'ahmad': 'মুসনাদে আহমাদ'
+    };
+
+    let currentPage = 1;
+    const itemsPerPage = 50;
+    let allHadiths = [];
+    let currentFilteredHadiths = [];
+    let isSearchMode = false;
+
+    if (!bookSlug || !bookMapping[bookSlug]) {
+      document.getElementById('book-name').innerText = "গ্রন্থ পাওয়া যায়নি";
+    } else {
+      document.getElementById('book-name').innerText = bookMapping[bookSlug];
+      fetchHadiths(bookSlug);
+    }
+
+    // IndexedDB Helper for Client-Side Hadith Caching
+    function getHadithFromDB(slug) {
+      return new Promise((resolve) => {
+        if (!window.indexedDB) return resolve(null);
+        try {
+          const req = indexedDB.open('deen_hadith_db', 1);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('hadiths')) {
+              db.createObjectStore('hadiths');
+            }
+          };
+          req.onsuccess = (e) => {
+            const db = e.target.result;
+            const tx = db.transaction('hadiths', 'readonly');
+            const store = tx.objectStore('hadiths');
+            const getReq = store.get(slug);
+            getReq.onsuccess = () => resolve(getReq.result || null);
+            getReq.onerror = () => resolve(null);
+          };
+          req.onerror = () => resolve(null);
+        } catch (e) { resolve(null); }
+      });
+    }
+
+    function saveHadithToDB(slug, data) {
+      if (!window.indexedDB) return;
+      try {
+        const req = indexedDB.open('deen_hadith_db', 1);
+        req.onsuccess = (e) => {
+          const db = e.target.result;
+          const tx = db.transaction('hadiths', 'readwrite');
+          const store = tx.objectStore('hadiths');
+          store.put(data, slug);
+        };
+      } catch (e) {}
+    }
+
+    async function fetchHadiths(slug) {
+      try {
+        // 1. Try to load from IndexedDB first for instant rendering
+        const cachedHadiths = await getHadithFromDB(slug);
+        if (cachedHadiths && cachedHadiths.length > 0) {
+          processHadithsData(cachedHadiths);
+          return;
+        }
+
+        // 2. Fetch both Bengali and Arabic in parallel
+        const [benRes, araRes] = await Promise.all([
+            fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ben-${slug}.json`),
+            fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/ara-${slug}.json`)
+        ]);
+
+        const benData = await benRes.json();
+        let araData = { hadiths: [] };
+        try { araData = await araRes.json(); } catch(e) { console.warn("Arabic not available for this book"); }
+
+        if (benData && benData.hadiths) {
+          // Merge Bengali and Arabic
+          const mergedHadiths = benData.hadiths.map((h, i) => {
+              const matchedAra = araData.hadiths.find(ah => ah.hadithnumber == h.hadithnumber) || araData.hadiths[i];
+              return {
+                  ...h,
+                  arabic: matchedAra ? matchedAra.text : ''
+              };
+          });
+
+          // Cache in IndexedDB for subsequent visits
+          saveHadithToDB(slug, mergedHadiths);
+          processHadithsData(mergedHadiths);
+        } else { showError(); }
+      } catch (error) { showError(); }
+    }
+
+    function processHadithsData(data) {
+      allHadiths = data;
+      // Handle URL Parameters (num or q)
+      const urlQuery = urlParams.get('q');
+      if (targetHadithNumber) {
+          const num = parseInt(toEnglishNumerals(targetHadithNumber));
+          const index = allHadiths.findIndex(h => h.hadithnumber == num);
+          if (index !== -1) {
+              currentPage = Math.floor(index / itemsPerPage) + 1;
+              currentFilteredHadiths = allHadiths;
+          }
+      } else if (urlQuery) {
+          const decodedQuery = decodeURIComponent(urlQuery);
+          document.getElementById('hadith-search').value = decodedQuery;
+          isSearchMode = true;
+          currentFilteredHadiths = allHadiths.filter(h => 
+              h.text && h.text.toLowerCase().includes(decodedQuery.toLowerCase())
+          );
+      } else {
+          currentFilteredHadiths = allHadiths;
+      }
+      
+      renderCurrentPage();
+      document.getElementById('hadith-count').innerText = `মোট হাদিস: ${toBengaliNumerals(allHadiths.length)}`;
+      
+      if (targetHadithNumber) {
+          setTimeout(() => {
+              const element = document.querySelector(`[data-num="${targetHadithNumber}"]`);
+              if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  element.classList.add('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary');
+                  setTimeout(() => element.classList.remove('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary'), 3000);
+              }
+          }, 800);
+      }
+    }
+
+    function renderCurrentPage() {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedHadiths = currentFilteredHadiths.slice(startIndex, endIndex);
+      
+      renderHadiths(paginatedHadiths);
+      renderPagination();
+      if (!targetHadithNumber || isSearchMode) window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderHadiths(hadiths) {
+      const container = document.getElementById('hadith-container');
+      container.innerHTML = ''; 
+
+      if (bookSlug === 'muslim' && currentPage === 1 && !isSearchMode) {
+          const notice = document.createElement('div');
+          notice.className = "bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-500/20 dark:border-emerald-900/30 p-6 md:p-8 rounded-2xl mb-8 text-center shadow-xs";
+          notice.innerHTML = `
+            <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 rounded-xl flex items-center justify-center font-bold text-lg mx-auto mb-3">!</div>
+            <h3 class="text-slate-900 dark:text-white text-lg font-bold mb-2">সহীহ মুসলিম পাঠকদের জন্য বিশেষ দ্রষ্টব্য</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed max-w-xl mx-auto mb-5">
+              সহীহ মুসলিমের প্রথম ৯৩টি হাদিস মূলত 'মুকাদ্দিমাহ' বা ভূমিকা অংশের অন্তর্ভুক্ত। আমাদের এই সংগ্রহে ভূমিকা অংশের বাংলা অনুবাদ সংরক্ষিত না থাকায় প্রথম পৃষ্ঠাটি ফাঁকা দেখাচ্ছে।
+              অনুগ্রহ করে ২য় পৃষ্ঠা থেকে মূল হাদিসসমূহ পড়া শুরু করুন।
+            </p>
+            <button onclick="currentPage=2; renderCurrentPage();" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-xs font-semibold transition-all">
+              ২য় পৃষ্ঠায় যান →
+            </button>
+          `;
+          container.appendChild(notice);
+      }
+
+      hadiths.forEach((hadith, index) => {
+        if (!hadith.text || hadith.text.trim().length < 2) return;
+
+        // Clean up the text: remove leading '।' and whitespace
+        const cleanBengaliText = hadith.text.trim().replace(/^[।\s]+/, '');
+
+        const card = document.createElement('div');
+        const hNum = hadith.hadithnumber || ((currentPage - 1) * itemsPerPage + index + 1);
+        const bookmarkKey = `hadith_${bookSlug}_${hNum}`;
+        const isBookmarked = window.isBookmarked(bookmarkKey);
+
+        card.setAttribute('data-num', hNum);
+        card.className = "bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 hover:border-emerald-500/30 transition-all duration-200 relative group";
+        card.innerHTML = `
+          <div class="flex justify-between items-center mb-5 border-b border-stone-100 dark:border-slate-800/80 pb-4">
+            <div class="flex items-center space-x-2.5">
+                <span class="w-8 h-8 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 rounded-lg flex items-center justify-center font-bold text-xs border border-emerald-500/20">
+                ${toBengaliNumerals(hNum)}
+                </span>
+                <span class="inline-flex items-center space-x-1 px-2.5 py-0.5 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20 rounded-md text-[11px] font-semibold">
+                  <span>✓</span>
+                  <span>সহীহ</span>
+                </span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+                <button onclick="handleHadithBookmark(event, ${hNum}, ${JSON.stringify(hadith).replace(/"/g, '&quot;')})" class="p-2 bg-stone-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/30 border border-stone-200/80 dark:border-slate-700/80 rounded-lg transition-all bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                </button>
+                <button onclick="window.copyToClipboard('${hadith.arabic.replace(/'/g, "\\'").replace(/\n/g, "\\n")}\\n\\n${hadith.text.replace(/'/g, "\\'").replace(/\n/g, "\\n")}')" class="p-2 bg-stone-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/30 border border-stone-200/80 dark:border-slate-700/80 rounded-lg transition-all" title="কপি করুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                </button>
+                <button onclick="shareHadithAsImage(${hNum})" class="p-2 bg-stone-50 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/30 border border-stone-200/80 dark:border-slate-700/80 rounded-lg transition-all" title="ছবি হিসেবে শেয়ার করুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                </button>
+            </div>
+          </div>
+          
+          ${hadith.arabic ? `
+            <div class="mb-5 text-right">
+              <p class="text-xl md:text-2xl leading-[2.2] font-arabic text-slate-900 dark:text-slate-100 font-medium" dir="rtl">${hadith.arabic}</p>
+            </div>
+          ` : ''}
+
+          <div class="text-slate-700 dark:text-slate-300 text-xs md:text-sm leading-relaxed mb-4 ${hadith.arabic ? 'pt-4 border-t border-stone-100 dark:border-slate-800/70' : ''}">
+            ${cleanBengaliText}
+          </div>
+          
+          ${hadith.grades && hadith.grades.length > 0 ? `
+            <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800/60 flex flex-wrap gap-2">
+              ${hadith.grades.map(g => `<span class="text-[11px] px-2.5 py-0.5 bg-stone-50 dark:bg-slate-800/60 rounded-md border border-stone-200/70 dark:border-slate-700/60 text-slate-600 dark:text-slate-400 font-medium">${g.grade}: ${g.name}</span>`).join('')}
+            </div>
+          ` : ''}
+        `;
+        container.appendChild(card);
+      });
+
+      if (container.innerHTML === '') {
+          container.innerHTML = '<div class="text-center py-16 text-slate-400 text-xs md:text-sm">কোন হাদিস পাওয়া যায়নি।</div>';
+      }
+    }
+
+    function renderPagination() {
+      const controls = document.getElementById('pagination-controls');
+      controls.innerHTML = '';
+      const totalPages = Math.ceil(currentFilteredHadiths.length / itemsPerPage);
+      
+      if (totalPages <= 1) return;
+
+      const startPage = Math.max(1, currentPage - 2);
+      const endPage = Math.min(totalPages, currentPage + 2);
+
+      if (currentPage > 1) {
+          addPageBtn(1, 'প্রথম');
+          addPageBtn(currentPage - 1, 'পূর্ববর্তী');
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+          addPageBtn(i, toBengaliNumerals(i), i === currentPage);
+      }
+
+      if (currentPage < totalPages) {
+          addPageBtn(currentPage + 1, 'পরবর্তী');
+          addPageBtn(totalPages, 'শেষ');
+      }
+    }
+
+    function addPageBtn(page, text, isActive = false) {
+      const btn = document.createElement('button');
+      btn.innerText = text;
+      btn.className = `px-3.5 py-1.5 rounded-xl font-semibold text-xs transition-all ${
+        isActive 
+        ? 'bg-emerald-600 text-white shadow-xs' 
+        : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-stone-50 dark:hover:bg-slate-800 border border-stone-200/80 dark:border-slate-800'
+      }`;
+      btn.onclick = () => {
+        currentPage = page;
+        renderCurrentPage();
+      };
+      document.getElementById('pagination-controls').appendChild(btn);
+    }
+
+    // Search Helper
+    const toEnglishNumerals = (str) => {
+      const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+      return str.replace(/[০-৯]/g, d => bengaliDigits.indexOf(d));
+    };
+
+    let searchTimeout;
+    const searchInput = document.getElementById('hadith-search');
+
+    searchInput.addEventListener('input', (e) => {
+        const rawQuery = e.target.value.trim();
+        
+        clearTimeout(searchTimeout);
+
+        if (!rawQuery) {
+            currentFilteredHadiths = allHadiths;
+            isSearchMode = false;
+            currentPage = 1;
+            renderCurrentPage();
+            return;
+        }
+
+        const engQuery = toEnglishNumerals(rawQuery);
+        // Check if the query is strictly a number (English or Bengali)
+        const isStrictNumber = /^\d+$/.test(engQuery);
+        const extractedNumber = parseInt(engQuery);
+
+        searchTimeout = setTimeout(() => {
+            isSearchMode = true;
+            
+            if (isStrictNumber) {
+                // Show ONLY the specific hadith number
+                currentFilteredHadiths = allHadiths.filter(h => h.hadithnumber == extractedNumber);
+            } else {
+                // Text search (and allow number match if one exists in the query)
+                const lowerQuery = rawQuery.toLowerCase();
+                currentFilteredHadiths = allHadiths.filter(h => {
+                    const numMatch = !isNaN(extractedNumber) && h.hadithnumber == extractedNumber;
+                    const textMatch = h.text && h.text.toLowerCase().includes(lowerQuery);
+                    return numMatch || textMatch;
+                });
+            }
+            
+            currentPage = 1;
+            renderCurrentPage();
+        }, 400);
+    });
+
+    function showError() {
+      document.getElementById('book-name').innerText = "ত্রুটি হয়েছে";
+      document.getElementById('hadith-container').innerHTML = '<div class="text-center text-red-500 font-bold">তথ্য লোড করতে সমস্যা হচ্ছে।</div>';
+    }
+
+    window.handleHadithBookmark = (event, hNum, hadith) => {
+        const key = `hadith_${bookSlug}_${hNum}`;
+        const bookName = document.getElementById('book-name').innerText;
+        
+        const data = {
+            key: key,
+            type: 'hadith',
+            subType: bookName,
+            title: `হাদিস নং: ${toBengaliNumerals(hNum)}`,
+            arabic: hadith.arabic,
+            text: hadith.text,
+            url: `hadith-view.html?book=${bookSlug}&num=${hNum}`
+        };
+        
+        const isAdded = window.toggleBookmark(data);
+        
+        document.querySelectorAll(`.bookmark-btn[data-key="${key}"]`).forEach(btn => {
+            const svg = btn.querySelector('svg');
+            svg.setAttribute('fill', isAdded ? 'currentColor' : 'none');
+        });
+    };
+
+    window.shareHadithAsImage = (hNum) => {
+        const element = document.querySelector(`[data-num="${hNum}"]`);
+        if (!element) return;
+        
+        window.showToast('ছবি তৈরি হচ্ছে...');
+        
+        // Hide buttons for a clean share image
+        const headerButtons = element.querySelector('.flex.items-center.space-x-2');
+        if (headerButtons) headerButtons.style.visibility = 'hidden';
+        
+        html2canvas(element, {
+            backgroundColor: document.documentElement.classList.contains('dark') ? '#0f172a' : '#ffffff',
+            scale: 3,
+            useCORS: true,
+            logging: false,
+            borderRadius: 20
+        }).then(canvas => {
+            if (headerButtons) headerButtons.style.visibility = 'visible';
+            
+            const link = document.createElement('a');
+            link.download = `DeenIslam-Hadith-${bookSlug}-${hNum}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            window.showToast('ছবি ডাউনলোড সম্পন্ন হয়েছে!');
+        }).catch(err => {
+            if (headerButtons) headerButtons.style.visibility = 'visible';
+            console.error('Sharing failed:', err);
+            window.showToast('দুঃখিত, ছবি তৈরিতে সমস্যা হয়েছে।');
+        });
+    };
+
+    // Initialize Recent Search
+    if (window.initRecentSearch) {
+        initRecentSearch('hadith-search', 'recent_hadith_searches');
+    }
+  </script>
+
+</body>
+</html>
