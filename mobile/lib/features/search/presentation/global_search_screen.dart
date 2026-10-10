@@ -6,9 +6,11 @@ import '../../../core/utils/bengali_numerals.dart';
 import '../../../data/repositories/allah_names_data.dart';
 import '../../../data/repositories/dua_data.dart';
 import '../../../data/repositories/hadith_repository.dart';
+import '../../../data/repositories/seerah_data.dart';
 import '../../../data/repositories/surah_data.dart';
 import '../../hadith/presentation/hadith_reader_screen.dart';
 import '../../quran/presentation/surah_reader_screen.dart';
+import '../../seerah/presentation/seerah_screen.dart';
 
 class GlobalSearchScreen extends StatefulWidget {
   const GlobalSearchScreen({super.key});
@@ -40,6 +42,33 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
                 s.nameArabic.contains(q) ||
                 s.number.toString() == q ||
                 BengaliNumerals.toBengali(s.number) == q;
+          }).toList();
+
+    final seerahEventMatches = q.isEmpty
+        ? SeerahData.events.take(3).toList()
+        : SeerahData.events.where((e) {
+            return e.titleBn.toLowerCase().contains(q) ||
+                e.titleAr.contains(q) ||
+                e.placeBn.toLowerCase().contains(q) ||
+                e.summaryBn.toLowerCase().contains(q);
+          }).toList();
+
+    final companionMatches = q.isEmpty
+        ? SeerahData.companions.take(3).toList()
+        : SeerahData.companions.where((c) {
+            return c.nameBn.toLowerCase().contains(q) ||
+                c.nameAr.contains(q) ||
+                c.laqabBn.toLowerCase().contains(q) ||
+                c.bioBn.toLowerCase().contains(q);
+          }).toList();
+
+    final battleMatches = q.isEmpty
+        ? SeerahData.battles.take(2).toList()
+        : SeerahData.battles.where((b) {
+            return b.nameBn.toLowerCase().contains(q) ||
+                b.nameAr.contains(q) ||
+                b.locationBn.toLowerCase().contains(q) ||
+                b.summaryBn.toLowerCase().contains(q);
           }).toList();
 
     final duaMatches = q.isEmpty
@@ -86,7 +115,7 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
               onChanged: (val) => setState(() => _query = val),
               style: GoogleFonts.hindSiliguri(fontSize: 14),
               decoration: InputDecoration(
-                hintText: 'সূরা, হাদিস গ্রন্থ, দোয়া বা আল্লাহর নাম খুঁজুন...',
+                hintText: 'সূরা, সীরাত, সাহাবী, গাযওয়া, হাদিস বা দোয়া খুঁজুন...',
                 hintStyle: GoogleFonts.hindSiliguri(fontSize: 13.5),
                 prefixIcon: const Icon(Icons.search, color: AppColors.emerald),
                 suffixIcon: _query.isNotEmpty
@@ -280,10 +309,112 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
                     );
                   }),
                 ],
+                if (seerahEventMatches.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  _sectionHeader(isDark, 'সীরাত ও ঐতিহাসিক ঘটনা (${BengaliNumerals.convert(seerahEventMatches.length)})'),
+                  ...seerahEventMatches.take(6).map((e) {
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                      leading: const CircleAvatar(
+                        backgroundColor: AppColors.emeraldSoft,
+                        child: Icon(Icons.map_outlined, color: AppColors.emerald, size: 18),
+                      ),
+                      title: Text(
+                        e.titleBn,
+                        style: GoogleFonts.hindSiliguri(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.5,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${e.yearCe} • ${e.placeBn}',
+                        style: GoogleFonts.hindSiliguri(fontSize: 12),
+                      ),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SeerahScreen(initialTabIndex: 0),
+                          ),
+                        );
+                      },
+                    );
+                  }),
+                ],
+                if (companionMatches.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  _sectionHeader(isDark, 'সাহাবী ডিরেক্টরি (${BengaliNumerals.convert(companionMatches.length)})'),
+                  ...companionMatches.take(6).map((c) {
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                      leading: const CircleAvatar(
+                        backgroundColor: AppColors.amberSoft,
+                        child: Icon(Icons.people_outline, color: AppColors.amberDark, size: 18),
+                      ),
+                      title: Text(
+                        c.nameBn,
+                        style: GoogleFonts.hindSiliguri(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.5,
+                        ),
+                      ),
+                      subtitle: Text(
+                        c.laqabBn,
+                        style: GoogleFonts.hindSiliguri(fontSize: 12),
+                      ),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SeerahScreen(initialTabIndex: 3),
+                          ),
+                        );
+                      },
+                    );
+                  }),
+                ],
+                if (battleMatches.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  _sectionHeader(isDark, 'গাযওয়া ও অভিযান (${BengaliNumerals.convert(battleMatches.length)})'),
+                  ...battleMatches.take(6).map((b) {
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                      leading: const CircleAvatar(
+                        backgroundColor: AppColors.emeraldSoft,
+                        child: Icon(Icons.shield_outlined, color: AppColors.emerald, size: 18),
+                      ),
+                      title: Text(
+                        '${b.nameBn} (${b.yearAh})',
+                        style: GoogleFonts.hindSiliguri(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.5,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${b.locationBn} • ${b.outcomeBn}',
+                        style: GoogleFonts.hindSiliguri(fontSize: 12),
+                      ),
+                      trailing: const Icon(Icons.chevron_right_rounded),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SeerahScreen(initialTabIndex: 4),
+                          ),
+                        );
+                      },
+                    );
+                  }),
+                ],
                 if (surahMatches.isEmpty &&
                     hadithBookMatches.isEmpty &&
                     duaMatches.isEmpty &&
-                    nameMatches.isEmpty)
+                    nameMatches.isEmpty &&
+                    seerahEventMatches.isEmpty &&
+                    companionMatches.isEmpty &&
+                    battleMatches.isEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 48),
                     child: Center(

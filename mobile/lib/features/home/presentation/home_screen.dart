@@ -24,6 +24,7 @@ import '../../quran/presentation/quran_screen.dart';
 import '../../ramadan/presentation/ramadan_screen.dart';
 import '../../salat/presentation/salat_guide_screen.dart';
 import '../../search/presentation/global_search_screen.dart';
+import '../../seerah/presentation/seerah_screen.dart';
 import '../../tasbih/presentation/tasbih_screen.dart';
 import '../../zakat/presentation/zakat_screen.dart';
 
@@ -226,9 +227,13 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
             // 4. Bento Card 4: Quran Audio Recitation Deck
             _buildQuranAudioCard(isDark),
+            const SizedBox(height: 12),
+
+            // 5. Featured Seerah Encyclopedia Banner Card
+            _buildSeerahBannerCard(context, isDark),
             const SizedBox(height: 16),
 
-            // 5. Quick Access Grid Services
+            // 6. Quick Access Grid Services
             _buildQuickServicesGrid(context, isDark),
             const SizedBox(height: 24),
           ],
@@ -821,27 +826,101 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
+  // --- CARD 5: Featured Seerah Encyclopedia Card ---
+  Widget _buildSeerahBannerCard(BuildContext context, bool isDark) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const SeerahScreen()),
+        );
+      },
+      borderRadius: BorderRadius.circular(18),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: isDark
+                ? [const Color(0xFF064E3B), const Color(0xFF0F172A)]
+                : [const Color(0xFF065F46), const Color(0xFF047857)],
+          ),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: AppColors.amber.withOpacity(0.4),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.14),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.map_outlined,
+                color: AppColors.amber,
+                size: 26,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'সীরাতুন্নবী (ﷺ) বিশ্বকোষ • Seerah',
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 14.5,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'সীরাত মানচিত্র, ৫০ প্রজন্মের বংশলতিকা, আহলে বাইত, সাহাবী ও গাযওয়া',
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 11.5,
+                      color: Colors.white.withOpacity(0.88),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: AppColors.amber,
+              size: 16,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // --- Quick Access Services Grid ---
   Widget _buildQuickServicesGrid(BuildContext context, bool isDark) {
     final services = [
       {'title': 'আল-কুরআন', 'icon': Icons.menu_book, 'color': AppColors.emerald, 'screen': const QuranScreen()},
-      {'title': 'হাদিস শরীফ', 'icon': Icons.library_books_outlined, 'color': AppColors.amber, 'screen': const HadithScreen()},
-      {'title': 'নিত্যদিনের দোয়া', 'icon': Icons.favorite, 'color': AppColors.emerald, 'screen': const DuaScreen()},
-      {'title': '৬ কালিমা ও ঈমান', 'icon': Icons.verified_outlined, 'color': AppColors.amber, 'screen': const KalimaScreen()},
-      {'title': 'সালাত ও অজু শিক্ষা', 'icon': Icons.mosque_outlined, 'color': AppColors.emerald, 'screen': const SalatGuideScreen()},
-      {'title': 'রমজান ও রোজা', 'icon': Icons.nights_stay_outlined, 'color': AppColors.amber, 'screen': const RamadanScreen()},
-      {'title': 'হজ্জ ও উমরাহ গাইড', 'icon': Icons.public_outlined, 'color': AppColors.emerald, 'screen': const HajjScreen()},
-      {'title': 'প্রবন্ধ ও মিডিয়া', 'icon': Icons.play_circle_outline, 'color': AppColors.amber, 'screen': const ArticlesMediaScreen()},
-      {'title': 'নামাজ ও আজান', 'icon': Icons.notifications_active_outlined, 'color': AppColors.emerald, 'screen': const PrayerScreen()},
-      {'title': 'ডিজিটাল তাসবীহ', 'icon': Icons.fingerprint, 'color': AppColors.amber, 'screen': const TasbihScreen()},
-      {'title': 'কিবলা কম্পাস', 'icon': Icons.explore_outlined, 'color': AppColors.emerald, 'screen': const QiblaScreen()},
-      {'title': 'যাকাত ক্যালকুলেটর', 'icon': Icons.calculate_outlined, 'color': AppColors.amber, 'screen': const ZakatScreen()},
-      {'title': 'আল্লাহর ৯৯ নাম', 'icon': Icons.auto_awesome, 'color': AppColors.emerald, 'screen': const AllahNamesScreen()},
-      {'title': 'সংরক্ষিত বুকমার্ক', 'icon': Icons.bookmarks_outlined, 'color': AppColors.amber, 'screen': const BookmarksScreen()},
-      {'title': 'হিজরি ক্যালেন্ডার', 'icon': Icons.calendar_month_outlined, 'color': AppColors.emerald, 'screen': const HijriCalendarScreen()},
-      {'title': 'ইসলামিক কুইজ ও প্রশ্ন', 'icon': Icons.quiz_outlined, 'color': AppColors.amber, 'screen': const QuizScreen()},
-      {'title': 'পরিচিতি ও সদকা', 'icon': Icons.volunteer_activism_outlined, 'color': AppColors.emerald, 'screen': const AboutScreen()},
-      {'title': 'সর্বজনীন অনুসন্ধান', 'icon': Icons.search_rounded, 'color': AppColors.amber, 'screen': const GlobalSearchScreen()},
+      {'title': 'সীরাতুন্নবী (ﷺ)', 'icon': Icons.map_outlined, 'color': AppColors.amber, 'screen': const SeerahScreen()},
+      {'title': 'হাদিস শরীফ', 'icon': Icons.library_books_outlined, 'color': AppColors.emerald, 'screen': const HadithScreen()},
+      {'title': 'নিত্যদিনের দোয়া', 'icon': Icons.favorite, 'color': AppColors.amber, 'screen': const DuaScreen()},
+      {'title': '৬ কালিমা ও ঈমান', 'icon': Icons.verified_outlined, 'color': AppColors.emerald, 'screen': const KalimaScreen()},
+      {'title': 'সালাত ও অজু শিক্ষা', 'icon': Icons.mosque_outlined, 'color': AppColors.amber, 'screen': const SalatGuideScreen()},
+      {'title': 'রমজান ও রোজা', 'icon': Icons.nights_stay_outlined, 'color': AppColors.emerald, 'screen': const RamadanScreen()},
+      {'title': 'হজ্জ ও উমরাহ গাইড', 'icon': Icons.public_outlined, 'color': AppColors.amber, 'screen': const HajjScreen()},
+      {'title': 'প্রবন্ধ ও মিডিয়া', 'icon': Icons.play_circle_outline, 'color': AppColors.emerald, 'screen': const ArticlesMediaScreen()},
+      {'title': 'নামাজ ও আজান', 'icon': Icons.notifications_active_outlined, 'color': AppColors.amber, 'screen': const PrayerScreen()},
+      {'title': 'ডিজিটাল তাসবীহ', 'icon': Icons.fingerprint, 'color': AppColors.emerald, 'screen': const TasbihScreen()},
+      {'title': 'কিবলা কম্পাস', 'icon': Icons.explore_outlined, 'color': AppColors.amber, 'screen': const QiblaScreen()},
+      {'title': 'যাকাত ক্যালকুলেটর', 'icon': Icons.calculate_outlined, 'color': AppColors.emerald, 'screen': const ZakatScreen()},
+      {'title': 'আল্লাহর ৯৯ নাম', 'icon': Icons.auto_awesome, 'color': AppColors.amber, 'screen': const AllahNamesScreen()},
+      {'title': 'সংরক্ষিত বুকমার্ক', 'icon': Icons.bookmarks_outlined, 'color': AppColors.emerald, 'screen': const BookmarksScreen()},
+      {'title': 'হিজরি ক্যালেন্ডার', 'icon': Icons.calendar_month_outlined, 'color': AppColors.amber, 'screen': const HijriCalendarScreen()},
+      {'title': 'ইসলামিক কুইজ ও প্রশ্ন', 'icon': Icons.quiz_outlined, 'color': AppColors.emerald, 'screen': const QuizScreen()},
+      {'title': 'পরিচিতি ও সদকা', 'icon': Icons.volunteer_activism_outlined, 'color': AppColors.amber, 'screen': const AboutScreen()},
+      {'title': 'সর্বজনীন অনুসন্ধান', 'icon': Icons.search_rounded, 'color': AppColors.emerald, 'screen': const GlobalSearchScreen()},
     ];
 
     return Column(

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সীরাতুন্নবী (ﷺ) বিশ্বকোষ — মানচিত্র, বংশলতিকা, পরিবার, সাহাবী ও গাযওয়া | DeenIslam</title>
+  <meta name="description" content="রাসূলুল্লাহ মুহাম্মাদ (ﷺ)-এর পূর্ণাঙ্গ জীবনচরিত: সপ্তম শতাব্দীর আরব মানচিত্রে সীরাত টাইমলাইন, আদম (আ.) থেকে ৫০ প্রজন্মের বংশলতিকা, আহলে বাইত ও নবী পরিবার, সাহাবী ডিরেক্টরি এবং সকল গাযওয়া ও সারিয়্যাহ।">
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS for Interactive Seerah Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#059669',
+            secondary: '#10b981',
+            accent: '#d97706'
+          },
+          fontFamily: {
+            sans: ['Hind Siliguri', 'sans-serif'],
+            arabic: ['Amiri', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="js/theme.js"></script>
+
+  <style>
+    body { font-family: 'Hind Siliguri', sans-serif; }
+    .font-arabic { font-family: 'Amiri', serif; }
+    #seerah-map { height: 460px; width: 100%; z-index: 10; }
+    @media (max-width: 640px) {
+      #seerah-map { height: 340px; }
+    }
+    .dark .leaflet-tile-pane {
+      filter: brightness(0.78) contrast(1.12) saturate(0.85);
+    }
+    .gen-connector {
+      position: relative;
+    }
+    .gen-connector::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 24px;
+      width: 2px;
+      background: linear-gradient(to bottom, #10b981, #d97706);
+      opacity: 0.35;
+    }
+  </style>
+</head>
+<body class="bg-[#faf8f5] dark:bg-[#070b14] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
+
+  <!-- Dynamic Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-emerald-950 via-emerald-900 to-[#062c21] text-white border-b border-emerald-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div class="space-y-3 max-w-3xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold">
+            <span>ﷺ</span>
+            <span>সীরাতুন্নবী (ﷺ) বিশ্বকোষ • Seerah Encyclopedia</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
+            মুহাম্মাদুর রাসূলুল্লাহ (ﷺ) — জীবন, বংশলতিকা, পরিবার, সাহাবী ও গাযওয়া
+          </h1>
+          <p class="text-emerald-100/85 text-sm sm:text-base leading-relaxed">
+            সপ্তম শতাব্দীর আরব উপদ্বীপের ইন্টারেক্টিভ সীরাত মানচিত্র, আদম (আ.) থেকে ৫০ প্রজন্মের বংশধারা, আহলে বাইত ও উম্মাহাতুল মুমিনীন, আসহাবে রাসূল এবং বদর থেকে তাবুক পর্যন্ত সকল গাযওয়া ও সারিয়্যাহর প্রামাণ্য তথ্যভাণ্ডার।
+          </p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0">
+          <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-3.5 text-center">
+            <div class="text-xl sm:text-2xl font-black text-amber-400">৫০</div>
+            <div class="text-[11px] text-emerald-100/80 font-semibold">প্রজন্মের বংশলতিকা</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-3.5 text-center">
+            <div class="text-xl sm:text-2xl font-black text-amber-400">৭৩+</div>
+            <div class="text-[11px] text-emerald-100/80 font-semibold">নবী পরিবার ও পরিজন</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-3.5 text-center">
+            <div class="text-xl sm:text-2xl font-black text-amber-400">২৮</div>
+            <div class="text-[11px] text-emerald-100/80 font-semibold">গাযওয়া ও সারিয়্যাহ</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-3.5 text-center">
+            <div class="text-xl sm:text-2xl font-black text-amber-400">৬৩</div>
+            <div class="text-[11px] text-emerald-100/80 font-semibold">বছরের বরকতময় জীবন</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 Module Navigation Bar (Matching discovermuhammad.com) -->
+      <div class="mt-8 pt-4 border-t border-emerald-800/60 flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar" role="tablist">
+        <button onclick="switchSeerahTab('map')" id="tab-btn-map" class="seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-amber-500 text-slate-950 shadow-md">
+          🗺️ মানচিত্র ও টাইমলাইন
+        </button>
+        <button onclick="switchSeerahTab('genealogy')" id="tab-btn-genealogy" class="seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-white/10 text-emerald-100 hover:bg-white/20">
+          🌳 বংশলতিকা (৫০ প্রজন্ম)
+        </button>
+        <button onclick="switchSeerahTab('family')" id="tab-btn-family" class="seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-white/10 text-emerald-100 hover:bg-white/20">
+          👨‍👩‍👧‍👦 আহলে বাইত ও পরিবার
+        </button>
+        <button onclick="switchSeerahTab('companions')" id="tab-btn-companions" class="seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-white/10 text-emerald-100 hover:bg-white/20">
+          🌟 সাহাবী ডিরেক্টরি
+        </button>
+        <button onclick="switchSeerahTab('battles')" id="tab-btn-battles" class="seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-white/10 text-emerald-100 hover:bg-white/20">
+          ⚔️ গাযওয়া ও অভিযান
+        </button>
+        <button onclick="switchSeerahTab('hadith')" id="tab-btn-hadith" class="seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-white/10 text-emerald-100 hover:bg-white/20">
+          📚 সিহাহ সিত্তাহ ও হাদিস
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+    <!-- ==========================================
+         TAB 1: INTERACTIVE SEERAH MAP & TIMELINE
+         ========================================== -->
+    <section id="panel-map" class="seerah-panel space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white">সপ্তম শতাব্দীর আরব ও সীরাত মানচিত্র (৫৭০–৬৩২ খ্রি.)</h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">যেকোনো ঘটনায় ক্লিক করলে মানচিত্রে সেই ঐতিহাসিক স্থানটি জুম হয়ে দেখাবে</p>
+        </div>
+
+        <!-- Era Filter Pills -->
+        <div class="flex flex-wrap gap-2" id="map-era-filters">
+          <button onclick="filterMapEvents('all')" data-era="all" class="map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-primary text-white">সকল যুগ (২০)</button>
+          <button onclick="filterMapEvents('pre_prophethood')" data-era="pre_prophethood" class="map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-stone-200 dark:border-slate-700">নবুওয়াত-পূর্ব</button>
+          <button onclick="filterMapEvents('makki')" data-era="makki" class="map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-stone-200 dark:border-slate-700">মক্কী জীবন</button>
+          <button onclick="filterMapEvents('hijrah')" data-era="hijrah" class="map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-stone-200 dark:border-slate-700">হিজরত</button>
+          <button onclick="filterMapEvents('madani')" data-era="madani" class="map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-stone-200 dark:border-slate-700">মাদানী জীবন ও বিজয়</button>
+        </div>
+      </div>
+
+      <!-- Map + Active Event Spotlight Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-7 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/90 dark:border-slate-800 overflow-hidden shadow-sm">
+          <div id="seerah-map"></div>
+          <div class="p-3.5 bg-stone-50 dark:bg-slate-900/90 border-t border-stone-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center space-x-4">
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block"></span> মক্কা ও মদিনার ঘটনা</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> হিজরত ও গাযওয়া রুট</span>
+            </div>
+            <button onclick="resetSeerahMapView()" class="text-primary font-bold hover:underline">পুরো আরব মানচিত্র দেখুন ↺</button>
+          </div>
+        </div>
+
+        <!-- Selected Event Detail Card + Scrollable Timeline -->
+        <div class="lg:col-span-5 space-y-4">
+          <div id="active-event-card" class="bg-gradient-to-br from-emerald-900 to-emerald-950 text-white rounded-2xl p-5 border border-emerald-700/60 shadow-md">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-4">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-sm text-slate-800 dark:text-white">কালানুক্রমিক ঘটনাবলি (ক্লিক করুন)</h3>
+              <span id="timeline-count-badge" class="text-[11px] font-bold text-primary bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-lg">২০টি ঘটনা</span>
+            </div>
+            <div id="seerah-timeline-list" class="space-y-2.5 max-h-[320px] overflow-y-auto pr-1">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: GENEALOGY (50 GENERATIONS)
+         ========================================== -->
+    <section id="panel-genealogy" class="seerah-panel hidden space-y-6">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">نسب النبي ﷺ</p>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mt-0.5">আদম (আ.) থেকে মুহাম্মাদ (ﷺ) — ৫০ প্রজন্মের পূর্ণাঙ্গ বংশলতিকা</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              আদনান (২১তম পূর্বপুরুষ) থেকে রাসূলুল্লাহ (ﷺ) পর্যন্ত বংশধারা সকল মুহাদ্দিস ও সীরাত বিশারদের ঐকমত্যে প্রমাণিত (সহীহ বুখারী)। আদনান-পূর্ব বংশধারা ইবনে ইসহাক ও তাবাকাত ইবনে সা'দের বর্ণনা অনুসারে সংকলিত।
+            </p>
+          </div>
+          <div class="w-full md:w-72 shrink-0">
+            <input type="text" id="genealogy-search" oninput="renderGenealogy()" placeholder="পূর্বপুরুষ বা গোত্র খুঁজুন (যেমন: ইবরাহীম, হাশিম)..." class="w-full px-4 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 text-sm focus:outline-none focus:border-primary">
+          </div>
+        </div>
+
+        <!-- Era Quick Jump Pills -->
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-stone-100 dark:border-slate-800" id="genealogy-era-nav">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <div id="genealogy-container" class="space-y-8">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: PROPHET'S FAMILY & HOUSEHOLD
+         ========================================== -->
+    <section id="panel-family" class="seerah-panel hidden space-y-6">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">أهل بيت النبي ﷺ</p>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mt-0.5">আহলে বাইত ও নবী পরিবার</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              উম্মাহাতুল মুমিনীন (১১ জন সহধর্মিণী), ৭ সন্তান (৩ পুত্র ও ৪ কন্যা), ৭ দৌহিত্র-দৌহিত্রী, পিতা-মাতা, চাচা-ফুফু এবং দুধ-মাতা ও গৃহপরিজন।
+            </p>
+          </div>
+          <div class="w-full md:w-72 shrink-0">
+            <input type="text" id="family-search" oninput="renderFamily()" placeholder="পরিবারের সদস্য খুঁজুন (যেমন: খাদিজা, ফাতিমা)..." class="w-full px-4 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 text-sm focus:outline-none focus:border-primary">
+          </div>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-stone-100 dark:border-slate-800" id="family-cat-filters">
+          <button onclick="setFamilyCategory('all')" data-cat="all" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-primary text-white">সকল সদস্য</button>
+          <button onclick="setFamilyCategory('wives')" data-cat="wives" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">উম্মাহাতুল মুমিনীন (১১)</button>
+          <button onclick="setFamilyCategory('children')" data-cat="children" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">সন্তানগণ (৭)</button>
+          <button onclick="setFamilyCategory('grandchildren')" data-cat="grandchildren" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">দৌহিত্র-দৌহিত্রী (৭)</button>
+          <button onclick="setFamilyCategory('parents_grandparents')" data-cat="parents_grandparents" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">পিতা-মাতা ও দাদা-দাদী (৬)</button>
+          <button onclick="setFamilyCategory('uncles_aunts')" data-cat="uncles_aunts" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">চাচা, ফুফু ও চাচাতো ভাই</button>
+          <button onclick="setFamilyCategory('foster_household')" data-cat="foster_household" class="fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">দুধ-মাতা ও গৃহপরিজন (৬)</button>
+        </div>
+      </div>
+
+      <div id="family-container" class="space-y-8">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 4: COMPANIONS (SAHABAH) DIRECTORY
+         ========================================== -->
+    <section id="panel-companions" class="seerah-panel hidden space-y-6">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">أصحاب النبي ﷺ</p>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mt-0.5">আসহাবে রাসূল (ﷺ) — সাহাবী ডিরেক্টরি</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              খুলাফায়ে রাশেদীন, আশারায়ে মুবাশশারাহ (জান্নাতের সুসংবাদপ্রাপ্ত ১০ জন), মুহাজির, আনসার, বদরী সাহাবী, শহীদ, সেনাপতি ও রাসূলের দূতগণের জীবনী।
+            </p>
+          </div>
+          <div class="w-full md:w-72 shrink-0">
+            <input type="text" id="companion-search" oninput="renderCompanions()" placeholder="সাহাবীর নাম বা উপাধি খুঁজুন..." class="w-full px-4 py-2.5 rounded-xl bg-stone-50 dark:bg-slate-800 border border-stone-200 dark:border-slate-700 text-sm focus:outline-none focus:border-primary">
+          </div>
+        </div>
+
+        <!-- Role Filters -->
+        <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-stone-100 dark:border-slate-800" id="companion-role-filters">
+          <button onclick="setCompanionRole('all')" data-role="all" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-primary text-white">সকল সাহাবী</button>
+          <button onclick="setCompanionRole('caliph')" data-role="caliph" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">খুলাফায়ে রাশেদীন (৪)</button>
+          <button onclick="setCompanionRole('asharah')" data-role="asharah" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">আশারায়ে মুবাশশারাহ (১০)</button>
+          <button onclick="setCompanionRole('muhajir')" data-role="muhajir" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">মুহাজির</button>
+          <button onclick="setCompanionRole('ansar')" data-role="ansar" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">আনসার</button>
+          <button onclick="setCompanionRole('badri')" data-role="badri" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">বদরী সাহাবী</button>
+          <button onclick="setCompanionRole('martyr')" data-role="martyr" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">শহীদ (শুহাদা)</button>
+          <button onclick="setCompanionRole('commander')" data-role="commander" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">সেনাপতি</button>
+          <button onclick="setCompanionRole('envoy')" data-role="envoy" class="comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">রাসূলের দূত</button>
+        </div>
+      </div>
+
+      <div id="companions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 5: BATTLES & EXPEDITIONS (GHAZWAT & SARAYA)
+         ========================================== -->
+    <section id="panel-battles" class="seerah-panel hidden space-y-6">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">الغزوات والسرايا</p>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mt-0.5">গাযওয়া ও সারিয়্যাহ — সকল যুদ্ধ ও অভিযান (১–১১ হিজরি)</h2>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              রাসূলুল্লাহ (ﷺ) স্বয়ং যেসব অভিযানে নেতৃত্ব দিয়েছেন সেগুলোকে <b>গাযওয়া (Ghazwah)</b> এবং যেসব অভিযানে সাহাবীদের প্রেরণ করেছেন সেগুলোকে <b>সারিয়্যাহ (Sariyyah)</b> বলা হয়। অধিকাংশ অভিযানই রক্তপাতহীন সন্ধিতে সমাপ্ত হয়েছে।
+            </p>
+          </div>
+          <div class="flex gap-2 shrink-0">
+            <button onclick="setBattleFilter('all')" data-btype="all" class="bat-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-primary text-white">সকল অভিযান</button>
+            <button onclick="setBattleFilter('ghazwah')" data-btype="ghazwah" class="bat-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">গাযওয়া (রাসূল ﷺ-এর নেতৃত্বে)</button>
+            <button onclick="setBattleFilter('sariyyah')" data-btype="sariyyah" class="bat-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">সারিয়্যাহ (প্রেরিত দল)</button>
+          </div>
+        </div>
+
+        <!-- Visual Army Size Comparison Chart (Matching discovermuhammad.com/battles/) -->
+        <div class="mt-6 pt-5 border-t border-stone-100 dark:border-slate-800">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+            <div>
+              <h3 class="text-sm font-bold text-slate-800 dark:text-white">অভিযানসমূহে সৈন্যসংখ্যার তুলনামূলক চিত্র (১ হিজরি – ৯ হিজরি)</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">সবুজ বার: মুসলিম বাহিনী • লালচে বার: প্রতিপক্ষ বাহিনী (লগারিদমিক স্কেল)</p>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-semibold">
+              <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> মুসলিম বাহিনী</span>
+              <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-500/80 inline-block"></span> প্রতিপক্ষ বাহিনী</span>
+            </div>
+          </div>
+          <div id="battles-chart-container" class="overflow-x-auto pb-2">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <div id="battles-list" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 6: THE SIX HADITH BOOKS (AL-KUTUB AL-SITTAH)
+         ========================================== -->
+    <section id="panel-hadith" class="seerah-panel hidden space-y-6">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800">
+        <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">الكتب الستة وموطأ مالك</p>
+        <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mt-0.5">রাসূলুল্লাহ (ﷺ)-এর বাণী ও সুন্নাহ — প্রধান হাদিস গ্রন্থসমূহ</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          কুরআনুল কারীমের পর ইসলামের দ্বিতীয় প্রধান উৎস হলো রাসূলুল্লাহ (ﷺ)-এর হাদিস। নিচের যেকোনো হাদিস গ্রন্থে ক্লিক করে সরাসরি অধ্যায়ভিত্তিক বাংলা হাদিস পাঠ করুন।
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <a href="hadith-view.html?book=bukhari" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-md transition-all group">
+          <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">صحيح البخاري</p>
+          <h3 class="text-lg font-black text-slate-800 dark:text-white group-hover:text-primary mt-1">সহীহ আল-বুখারী</h3>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5">ইমাম মুহাম্মাদ ইবনে ইসমাঈল আল-বুখারী (রহ.) • ওফাত: ২৫৬ হিজরি</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">মানব রচিত সর্বাধিক বিশুদ্ধ গ্রন্থ; দীর্ঘ ১৬ বছর কঠোর যাচাই-বাছাই করে সংকলিত ৭,৫৬৩টি হাদিস ও ৯৭টি অধ্যায়।</p>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-primary">
+            <span>৭,৫৬৩ হাদিস • ৯৭ অধ্যায়</span>
+            <span>পাঠ করুন →</span>
+          </div>
+        </a>
+
+        <a href="hadith-view.html?book=muslim" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-md transition-all group">
+          <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">صحيح مسلم</p>
+          <h3 class="text-lg font-black text-slate-800 dark:text-white group-hover:text-primary mt-1">সহীহ মুসলিম</h3>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5">ইমাম মুসলিম ইবনুল হাজ্জাজ (রহ.) • ওফাত: ২৬১ হিজরি</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">সহীহ বুখারীর পর সর্বাধিক বিশুদ্ধ হাদিস গ্রন্থ; একই বিষয়ের সমান্তরাল সনদসমূহ একত্রে বিন্যস্ত।</p>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-primary">
+            <span>৭,৫৬৩ হাদিস • ৫৭ অধ্যায়</span>
+            <span>পাঠ করুন →</span>
+          </div>
+        </a>
+
+        <a href="hadith-view.html?book=abudawud" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-md transition-all group">
+          <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">سنن أبي داود</p>
+          <h3 class="text-lg font-black text-slate-800 dark:text-white group-hover:text-primary mt-1">সুনানে আবু দাউদ</h3>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5">ইমাম আবু দাউদ আস-সিজিস্তানী (রহ.) • ওফাত: ২৭৫ হিজরি</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">ফিকহ ও শরীয়তের বিধি-বিধান সংক্রান্ত হাদিসের অন্যতম প্রধান সংকলন (৫ লক্ষ হাদিস থেকে বাছাইকৃত)।</p>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-primary">
+            <span>৫,২৭৪ হাদিস • ৪৩ অধ্যায়</span>
+            <span>পাঠ করুন →</span>
+          </div>
+        </a>
+
+        <a href="hadith-view.html?book=tirmidhi" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-md transition-all group">
+          <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">جامع الترمذي</p>
+          <h3 class="text-lg font-black text-slate-800 dark:text-white group-hover:text-primary mt-1">জামে আত-তিরমিযী</h3>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5">ইমাম আবু ঈসা আত-তিরমিযী (রহ.) • ওফাত: ২৭৯ হিজরি</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">আকীদা, আহকাম, আদব ও শামায়েলের সমন্বিত গ্রন্থ, যেখানে প্রতিটি হাদিসের মান ও ফকিহদের মতামত উল্লেখ করা হয়েছে।</p>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-primary">
+            <span>৩,৯৫৬ হাদিস • ৪৯ অধ্যায়</span>
+            <span>পাঠ করুন →</span>
+          </div>
+        </a>
+
+        <a href="hadith-view.html?book=nasai" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-md transition-all group">
+          <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">سنن النسائي</p>
+          <h3 class="text-lg font-black text-slate-800 dark:text-white group-hover:text-primary mt-1">সুনানে আন-নাসায়ী</h3>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5">ইমাম আহমাদ ইবনে শুআইব আন-নাসায়ী (রহ.) • ওফাত: ৩০৩ হিজরি</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">রাবীদের সূক্ষ্ম যাচাই ও কঠোর শর্তের জন্য সুনান গ্রন্থসমূহের মধ্যে বিশুদ্ধতার দিক থেকে অত্যন্ত উঁচু মর্যাদার অধিকারী।</p>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-primary">
+            <span>৫,৭৫৮ হাদিস • ৫১ অধ্যায়</span>
+            <span>পাঠ করুন →</span>
+          </div>
+        </a>
+
+        <a href="hadith-view.html?book=ibnmajah" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-md transition-all group">
+          <p class="font-arabic text-xl text-amber-600 dark:text-amber-400">سنن ابن ماجه</p>
+          <h3 class="text-lg font-black text-slate-800 dark:text-white group-hover:text-primary mt-1">সুনানে ইবনে মাজাহ</h3>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-0.5">ইমাম ইবনে মাজাহ আল-কাযউইনী (রহ.) • ওফাত: ২৭৩ হিজরি</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">সিহাহ সিত্তাহর ষষ্ঠ গ্রন্থ; চমৎকার অধ্যায় বিন্যাস এবং অনন্য ফিকহী ও আখলাকী হাদিসে সমৃদ্ধ।</p>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-xs font-bold text-primary">
+            <span>৪,৩৪১ হাদিস • ৩৮ অধ্যায়</span>
+            <span>পাঠ করুন →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Dynamic Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="js/components.js"></script>
+  <script src="js/seerah-data.js"></script>
+  <script>
+    let seerahMap = null;
+    let mapMarkers = [];
+    let routeLine = null;
+    let currentMapEra = 'all';
+    let currentFamilyCat = 'all';
+    let currentCompRole = 'all';
+    let currentBattleType = 'all';
+    let selectedEventId = 'year-of-the-elephant';
+
+    function switchSeerahTab(tabName) {
+      document.querySelectorAll('.seerah-panel').forEach(el => el.classList.add('hidden'));
+      const activePanel = document.getElementById('panel-' + tabName);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      document.querySelectorAll('.seerah-tab-btn').forEach(btn => {
+        btn.className = 'seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-white/10 text-emerald-100 hover:bg-white/20';
+      });
+      const activeBtn = document.getElementById('tab-btn-' + tabName);
+      if (activeBtn) {
+        activeBtn.className = 'seerah-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-amber-500 text-slate-950 shadow-md';
+      }
+
+      if (tabName === 'map' && seerahMap) {
+        setTimeout(() => seerahMap.invalidateSize(), 100);
+      }
+    }
+
+    // 1. Initialize Interactive Map & Timeline
+    function initSeerahMap() {
+      const mapEl = document.getElementById('seerah-map');
+      if (!mapEl || !window.L) return;
+
+      seerahMap = L.map('seerah-map', {
+        center: [23.2, 39.4],
+        zoom: 6,
+        scrollWheelZoom: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap • DeenIslam Seerah Atlas',
+        maxZoom: 14
+      }).addTo(seerahMap);
+
+      renderMapAndTimeline();
+    }
+
+    function filterMapEvents(era) {
+      currentMapEra = era;
+      document.querySelectorAll('.map-era-btn').forEach(btn => {
+        if (btn.dataset.era === era) {
+          btn.className = 'map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-primary text-white';
+        } else {
+          btn.className = 'map-era-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-stone-200 dark:border-slate-700';
+        }
+      });
+      renderMapAndTimeline();
+    }
+
+    function renderMapAndTimeline() {
+      const events = (window.SEERAH_DATA?.events || []).filter(ev =>
+        currentMapEra === 'all' ? true : ev.era === currentMapEra
+      );
+
+      const badge = document.getElementById('timeline-count-badge');
+      if (badge) badge.innerText = window.toBengaliNumerals(events.length) + 'টি ঘটনা';
+
+      if (events.length > 0 && !events.some(e => e.id === selectedEventId)) {
+        selectedEventId = events[0].id;
+      }
+
+      // Clear markers
+      if (seerahMap) {
+        mapMarkers.forEach(m => seerahMap.removeLayer(m));
+        mapMarkers = [];
+        if (routeLine) seerahMap.removeLayer(routeLine);
+
+        const coords = [];
+        events.forEach((ev, idx) => {
+          coords.push([ev.lat, ev.lng]);
+          const isSelected = ev.id === selectedEventId;
+          const markerHtml = `
+            <div style="
+              width:${isSelected ? '30px' : '24px'};
+              height:${isSelected ? '30px' : '24px'};
+              background:${isSelected ? '#d97706' : '#059669'};
+              color:white;
+              border:2px solid white;
+              border-radius:9999px;
+              display:flex;
+              align-items:center;
+              justify-content:center;
+              font-size:11px;
+              font-weight:800;
+              box-shadow:0 4px 10px rgba(0,0,0,0.3);
+            ">${window.toBengaliNumerals(idx + 1)}</div>
+          `;
+          const icon = L.divIcon({
+            html: markerHtml,
+            className: '',
+            iconSize: [28, 28],
+            iconAnchor: [14, 14]
+          });
+          const marker = L.marker([ev.lat, ev.lng], { icon }).addTo(seerahMap);
+          marker.bindPopup(`
+            <div style="font-family:'Hind Siliguri',sans-serif;min-width:200px;">
+              <div style="font-size:11px;font-weight:700;color:#059669;">${ev.yearCe} • ${ev.yearAh}</div>
+              <div style="font-size:14px;font-weight:800;margin:2px 0;">${ev.titleBn}</div>
+              <div style="font-size:11px;color:#64748b;">📍 ${ev.placeBn}</div>
+            </div>
+          `);
+          marker.on('click', () => selectTimelineEvent(ev.id, false));
+          mapMarkers.push(marker);
+        });
+
+        if (coords.length > 1) {
+          routeLine = L.polyline(coords, {
+            color: '#d97706',
+            weight: 2.5,
+            opacity: 0.65,
+            dashArray: '6, 6'
+          }).addTo(seerahMap);
+        }
+      }
+
+      // Render Timeline List
+      const listEl = document.getElementById('seerah-timeline-list');
+      if (listEl) {
+        listEl.innerHTML = events.map((ev, idx) => {
+          const active = ev.id === selectedEventId;
+          return `
+            <button onclick="selectTimelineEvent('${ev.id}', true)" class="w-full text-left p-3 rounded-xl border transition-all flex items-start gap-3 ${active ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500/60 shadow-xs' : 'bg-stone-50/70 dark:bg-slate-800/50 border-stone-200/70 dark:border-slate-800 hover:border-emerald-400/40'}">
+              <span class="w-6 h-6 rounded-full ${active ? 'bg-amber-500 text-slate-950' : 'bg-emerald-600 text-white'} text-xs font-extrabold flex items-center justify-center shrink-0 mt-0.5">
+                ${window.toBengaliNumerals(idx + 1)}
+              </span>
+              <div class="min-w-0 flex-grow">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400">${ev.yearCe} (${ev.yearAh})</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded bg-stone-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold">${ev.eraBn}</span>
+                </div>
+                <h4 class="font-bold text-sm text-slate-800 dark:text-white mt-0.5 leading-snug">${ev.titleBn}</h4>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">📍 ${ev.placeBn}</p>
+              </div>
+            </button>
+          `;
+        }).join('');
+      }
+
+      renderActiveEventSpotlight();
+    }
+
+    function selectTimelineEvent(eventId, panMap = true) {
+      selectedEventId = eventId;
+      const ev = (window.SEERAH_DATA?.events || []).find(e => e.id === eventId);
+      renderMapAndTimeline();
+      if (ev && seerahMap && panMap) {
+        seerahMap.flyTo([ev.lat, ev.lng], 8, { duration: 0.9 });
+      }
+    }
+
+    function resetSeerahMapView() {
+      if (seerahMap) seerahMap.flyTo([23.2, 39.4], 5, { duration: 0.8 });
+    }
+
+    function renderActiveEventSpotlight() {
+      const card = document.getElementById('active-event-card');
+      const ev = (window.SEERAH_DATA?.events || []).find(e => e.id === selectedEventId);
+      if (!card || !ev) return;
+
+      card.innerHTML = `
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-[11px] font-bold">
+            ${ev.yearCe} • ${ev.yearAh}
+          </span>
+          <span class="text-xs font-arabic text-amber-200" dir="rtl">${ev.titleAr}</span>
+        </div>
+        <h3 class="text-lg font-black text-white leading-snug">${ev.titleBn}</h3>
+        <div class="text-xs text-emerald-200 font-semibold mt-1">📍 স্থান: ${ev.placeBn}</div>
+        <p class="text-xs sm:text-sm text-emerald-50/90 mt-3 leading-relaxed">${ev.summaryBn}</p>
+        <div class="mt-3 pt-2.5 border-t border-emerald-800/80 text-[11px] text-emerald-300 font-medium">
+          📚 দলিল ও উৎস: ${ev.sourcesBn}
+        </div>
+      `;
+    }
+
+    // 2. Render 50-Generation Genealogy
+    function renderGenealogy() {
+      const eras = window.SEERAH_DATA?.genealogyEras || [];
+      const query = (document.getElementById('genealogy-search')?.value || '').trim().toLowerCase();
+
+      const navEl = document.getElementById('genealogy-era-nav');
+      if (navEl && navEl.innerHTML.trim() === '') {
+        navEl.innerHTML = eras.map(era => `
+          <a href="#${era.id}" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 text-slate-700 dark:text-slate-300 hover:text-primary transition-colors">
+            <span class="text-amber-600 dark:text-amber-400 mr-1">${era.roman}.</span>${era.titleBn.split(':')[1] || era.titleBn}
+          </a>
+        `).join('');
+      }
+
+      const container = document.getElementById('genealogy-container');
+      if (!container) return;
+
+      container.innerHTML = eras.map(era => {
+        const filteredGens = era.generations.filter(g => {
+          if (!query) return true;
+          return g.nameBn.toLowerCase().includes(query) ||
+                 g.nameAr.includes(query) ||
+                 (g.noteBn && g.noteBn.toLowerCase().includes(query)) ||
+                 (g.branchesBn && g.branchesBn.toLowerCase().includes(query));
+        });
+        if (filteredGens.length === 0) return '';
+
+        return `
+          <div id="${era.id}" class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-stone-100 dark:border-slate-800">
+              <div class="flex items-center gap-3">
+                <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white font-black text-sm flex items-center justify-center">${era.roman}</span>
+                <div>
+                  <h3 class="font-black text-base sm:text-lg text-slate-800 dark:text-white">${era.titleBn}</h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">${era.subtitleBn}</p>
+                </div>
+              </div>
+              <span class="px-3 py-1 rounded-full text-[11px] font-bold ${era.agreed ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' : 'bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800'}">
+                ${era.agreed ? '✓ সর্বসম্মত বংশধারা' : 'ইবনে ইসহাকের তালিকা'}
+              </span>
+            </div>
+
+            <div class="gen-connector space-y-4">
+              ${filteredGens.map(g => `
+                <div class="relative pl-14 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl border ${g.gen === 0 ? 'bg-gradient-to-r from-emerald-900 to-emerald-950 text-white border-amber-400/60 shadow-md' : 'bg-stone-50/70 dark:bg-slate-800/50 border-stone-200/70 dark:border-slate-800'}">
+                  <span class="absolute left-2.5 top-4 w-8 h-8 rounded-full ${g.gen === 0 ? 'bg-amber-500 text-slate-950' : g.isProphet ? 'bg-emerald-600 text-white' : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-emerald-400'} text-xs font-black flex items-center justify-center shadow-xs">
+                    ${g.gen === 0 ? 'ﷺ' : window.toBengaliNumerals(g.gen)}
+                  </span>
+
+                  <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <h4 class="font-black text-base ${g.gen === 0 ? 'text-amber-300 text-lg' : 'text-slate-800 dark:text-white'}">${g.nameBn}</h4>
+                      <span class="font-arabic text-base ${g.gen === 0 ? 'text-white' : 'text-emerald-700 dark:text-emerald-400'}" dir="rtl">${g.nameAr}</span>
+                      ${g.isProphet ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-400/40">✦ নবী ও রাসূল</span>` : ''}
+                    </div>
+                    <p class="text-xs ${g.gen === 0 ? 'text-emerald-100' : 'text-slate-600 dark:text-slate-300'}">${g.noteBn}</p>
+                    ${g.motherBn ? `<p class="text-[11px] ${g.gen === 0 ? 'text-amber-200' : 'text-slate-500 dark:text-slate-400'}">মাতা: <b>${g.motherBn}</b></p>` : ''}
+                  </div>
+
+                  ${g.branchesBn ? `
+                    <div class="sm:max-w-xs shrink-0 px-3 py-2 rounded-xl ${g.gen === 0 ? 'bg-white/10 text-emerald-100' : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-stone-200/80 dark:border-slate-700'} text-[11px]">
+                      <span class="font-bold text-amber-600 dark:text-amber-400 block">শাখা ও বংশধর:</span>
+                      ${g.branchesBn}
+                    </div>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. Render Prophet's Family & Household
+    function setFamilyCategory(cat) {
+      currentFamilyCat = cat;
+      document.querySelectorAll('.fam-cat-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-primary text-white';
+        } else {
+          btn.className = 'fam-cat-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+        }
+      });
+      renderFamily();
+    }
+
+    function renderFamily() {
+      const cats = window.SEERAH_DATA?.familyCategories || [];
+      const query = (document.getElementById('family-search')?.value || '').trim().toLowerCase();
+      const container = document.getElementById('family-container');
+      if (!container) return;
+
+      container.innerHTML = cats
+        .filter(c => currentFamilyCat === 'all' ? true : c.key === currentFamilyCat)
+        .map(cat => {
+          const members = cat.members.filter(m => {
+            if (!query) return true;
+            return m.nameBn.toLowerCase().includes(query) ||
+                   m.nameAr.includes(query) ||
+                   m.relationBn.toLowerCase().includes(query) ||
+                   m.descBn.toLowerCase().includes(query);
+          });
+          if (members.length === 0) return '';
+
+          return `
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg sm:text-xl font-black text-slate-800 dark:text-white">${cat.titleBn}</h3>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/50 text-primary">${cat.countBn}</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                ${members.map(m => `
+                  <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 rounded-lg text-[11px] font-bold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/40">${m.relationBn}</span>
+                        <span class="text-[11px] text-slate-400 font-medium">${m.lifeBn}</span>
+                      </div>
+                      <h4 class="font-black text-base text-slate-800 dark:text-white">${m.nameBn}</h4>
+                      <p class="font-arabic text-base text-emerald-700 dark:text-emerald-400 mt-0.5" dir="rtl">${m.nameAr}</p>
+                      <p class="text-xs text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">${m.descBn}</p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }).join('');
+    }
+
+    // 4. Render Companions Directory
+    function setCompanionRole(role) {
+      currentCompRole = role;
+      document.querySelectorAll('.comp-role-btn').forEach(btn => {
+        if (btn.dataset.role === role) {
+          btn.className = 'comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-primary text-white';
+        } else {
+          btn.className = 'comp-role-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+        }
+      });
+      renderCompanions();
+    }
+
+    function renderCompanions() {
+      const list = window.SEERAH_DATA?.companions || [];
+      const query = (document.getElementById('companion-search')?.value || '').trim().toLowerCase();
+      const grid = document.getElementById('companions-grid');
+      if (!grid) return;
+
+      const filtered = list.filter(c => {
+        const matchesRole = currentCompRole === 'all' ? true : c.roles.includes(currentCompRole);
+        const matchesQuery = !query ||
+          c.nameBn.toLowerCase().includes(query) ||
+          c.nameAr.includes(query) ||
+          c.laqabBn.toLowerCase().includes(query) ||
+          c.bioBn.toLowerCase().includes(query);
+        return matchesRole && matchesQuery;
+      });
+
+      grid.innerHTML = filtered.map(c => `
+        <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-2.5">
+              ${c.rolesBn.map(r => `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40">${r}</span>`).join('')}
+            </div>
+            <h3 class="font-black text-base text-slate-800 dark:text-white">${c.nameBn}</h3>
+            <p class="font-arabic text-base text-amber-600 dark:text-amber-400 mt-0.5" dir="rtl">${c.nameAr}</p>
+            <p class="text-xs font-bold text-emerald-700 dark:text-emerald-400 mt-1">✦ উপাধি: ${c.laqabBn}</p>
+            <p class="text-xs text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">${c.bioBn}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-semibold">
+            <span>ইসলাম গ্রহণ: ${c.acceptedBn}</span>
+            <span>${c.lifeBn}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 5. Render Battles & Army Comparison Chart
+    function setBattleFilter(btype) {
+      currentBattleType = btype;
+      document.querySelectorAll('.bat-filter-btn').forEach(btn => {
+        if (btn.dataset.btype === btype) {
+          btn.className = 'bat-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-primary text-white';
+        } else {
+          btn.className = 'bat-filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+        }
+      });
+      renderBattles();
+    }
+
+    function renderBattles() {
+      const allBattles = window.SEERAH_DATA?.battles || [];
+      const filtered = allBattles.filter(b => currentBattleType === 'all' ? true : b.type === currentBattleType);
+
+      // Render SVG Bar Chart
+      const chartEl = document.getElementById('battles-chart-container');
+      if (chartEl) {
+        const maxLog = Math.log10(100000);
+        chartEl.innerHTML = `
+          <div class="flex items-end gap-3 min-w-[680px] h-44 pt-6 pb-2 px-2 bg-stone-50/70 dark:bg-slate-900/60 rounded-xl border border-stone-200/60 dark:border-slate-800">
+            ${allBattles.map(b => {
+              const mHeight = Math.max(10, Math.round((Math.log10(Math.max(10, b.muslimForceNum)) / maxLog) * 115));
+              const eHeight = Math.max(10, Math.round((Math.log10(Math.max(10, b.enemyForceNum)) / maxLog) * 115));
+              return `
+                <a href="#battle-${b.id}" class="flex-1 flex flex-col items-center group cursor-pointer" title="${b.nameBn}">
+                  <div class="flex items-end gap-1 h-32">
+                    <div style="height:${mHeight}px" class="w-3 sm:w-3.5 bg-emerald-500 group-hover:bg-emerald-400 rounded-t transition-all"></div>
+                    <div style="height:${eHeight}px" class="w-3 sm:w-3.5 bg-rose-500/80 group-hover:bg-rose-400 rounded-t transition-all"></div>
+                  </div>
+                  <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 mt-1.5 truncate max-w-[54px] group-hover:text-primary">${b.yearAh}</span>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      // Render Battle Cards
+      const listEl = document.getElementById('battles-list');
+      if (!listEl) return;
+
+      const outcomeBadge = (outcome, text) => {
+        if (outcome === 'victory') return `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">✓ ${text}</span>`;
+        if (outcome === 'treaty') return `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">🤝 ${text}</span>`;
+        if (outcome === 'trial') return `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">⚔️ ${text}</span>`;
+        return `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${text}</span>`;
+      };
+
+      listEl.innerHTML = filtered.map(b => `
+        <article id="battle-${b.id}" class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 transition-all flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[10px] font-bold ${b.type === 'ghazwah' ? 'bg-emerald-600 text-white' : 'bg-stone-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300'}">${b.typeBn}</span>
+              ${outcomeBadge(b.outcome, b.outcomeBn)}
+            </div>
+
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-black text-base sm:text-lg text-slate-800 dark:text-white">${b.nameBn}</h3>
+              <span class="font-arabic text-base text-amber-600 dark:text-amber-400 shrink-0" dir="rtl">${b.nameAr}</span>
+            </div>
+            <p class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 mt-0.5">🗓️ ${b.dateBn} • 📍 ${b.locationBn}</p>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">${b.summaryBn}</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-stone-50 dark:bg-slate-900/70 border border-stone-200/60 dark:border-slate-800 text-xs">
+            <div>
+              <div class="font-bold text-emerald-700 dark:text-emerald-400">মুসলিম বাহিনী</div>
+              <div class="font-semibold text-slate-800 dark:text-white mt-0.5">${b.muslimForceBn}</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">নেতৃত্ব: ${b.muslimCmdBn}</div>
+            </div>
+            <div class="sm:border-l border-stone-200 dark:border-slate-800 sm:pl-3">
+              <div class="font-bold text-rose-600 dark:text-rose-400">প্রতিপক্ষ বাহিনী</div>
+              <div class="font-semibold text-slate-800 dark:text-white mt-0.5">${b.enemyForceBn}</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">নেতৃত্ব: ${b.enemyCmdBn}</div>
+            </div>
+            <div class="sm:col-span-2 pt-2 border-t border-stone-200/70 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
+              <b>ফলাফল ও ক্ষয়ক্ষতি:</b> ${b.lossesBn}
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initSeerahMap();
+      renderGenealogy();
+      renderFamily();
+      renderCompanions();
+      renderBattles();
+    });
+  </script>
+</body>
+</html>

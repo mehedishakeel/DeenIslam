@@ -405,6 +405,7 @@ document.head.appendChild(toastStyle);
 // --- Universal Command Palette (Ctrl + K) ---
 const commandPaletteIndex = [
     // Tools & Main Sections
+    { title: "সীরাতুন্নবী (ﷺ) বিশ্বকোষ (মানচিত্র, বংশলতিকা, পরিবার, সাহাবী ও গাযওয়া)", category: "প্রধান পাতা", url: "seerah.html", keywords: "seerah sirat prophet muhammad map genealogy family companions sahaba battles ghazwa badr uhud" },
     { title: "আল-কুরআন (১১৪টি সূরা ও ৩০ পারা)", category: "প্রধান পাতা", url: "quran.html", keywords: "quran quranul karim koran surah juz para" },
     { title: "হাদিস গ্রন্থসমূহ (বুখারী, মুসলিম, তিরমিযী...)", category: "প্রধান পাতা", url: "hadith.html", keywords: "hadith bukhari muslim tirmizi nasai abu dawood ibn majah" },
     { title: "কিবলা কম্পাস (ডিজিটাল দিক নির্ণয়)", category: "টুলস ও ইবাদত", url: "qibla.html", keywords: "qibla compass kaaba mecca direction kaba kibla" },
@@ -666,6 +667,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                 হাদিস
                             </a>
                         </li>
+                        <li>
+                            <a href="${basePath}seerah.html" class="${currentPage === 'seerah.html' ? 'text-primary font-bold border-b-2 border-primary pb-0.5' : 'text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors'}">
+                                সীরাতুন্নবী (ﷺ)
+                            </a>
+                        </li>
 
                         <!-- Ibadah & Tools Dropdown -->
                         <li class="relative group">
@@ -770,6 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="${basePath}salat.html" class="block p-2.5 rounded-xl ${currentPage === 'salat.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সালাতের সময়সূচি</a>
                 <a href="${basePath}quran.html" class="block p-2.5 rounded-xl ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">পবিত্র কুরআন</a>
                 <a href="${basePath}hadith.html" class="block p-2.5 rounded-xl ${currentPage === 'hadith.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সহীহ হাদিস</a>
+                <a href="${basePath}seerah.html" class="block p-2.5 rounded-xl ${currentPage === 'seerah.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সীরাতুন্নবী (ﷺ) বিশ্বকোষ</a>
                 
                 <!-- Mobile Ibadah & Tools -->
                 <div>
