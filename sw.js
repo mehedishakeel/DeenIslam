@@ -1,7 +1,8 @@
-const CACHE_NAME = 'deenislam-v8';
+const CACHE_NAME = 'deenislam-v10';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './seerah.html',
   './quran.html',
   './surah.html',
   './hadith.html',
@@ -24,6 +25,7 @@ const CORE_ASSETS = [
   './hajj.html',
   './js/theme.js',
   './js/components.js',
+  './js/seerah-data.js',
   './favicon/deenislam.ico',
   './manifest.json'
 ];
@@ -33,7 +35,6 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(async (cache) => {
-      // Use allSettled so a single missing file or CDN error never aborts installation
       const promises = CORE_ASSETS.map(url => 
         cache.add(url).catch(err => console.warn('PWA Asset caching skipped:', url, err))
       );
@@ -53,13 +54,19 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch Event - Stale-While-Revalidate with Network Fallback
+// Fetch Event - Network-First for HTML/JS/CSS, Stale-While-Revalidate for media/fonts
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
 
-  // For HTML navigation requests: Network first with Cache fallback
-  if (request.mode === 'navigate') {
+  const url = new URL(request.url);
+  const isCodeOrDoc =
+    request.mode === 'navigate' ||
+    url.pathname.endsWith('.html') ||
+    url.pathname.endsWith('.js') ||
+    url.pathname.endsWith('.css');
+
+  if (isCodeOrDoc) {
     event.respondWith(
       fetch(request)
         .then((networkResponse) => {
@@ -74,7 +81,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For static assets (CSS, JS, Fonts, Icons, Images): Cache First with Background Update
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       const fetchPromise = fetch(request)

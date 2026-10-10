@@ -610,6 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
             .dark ::-webkit-scrollbar-thumb { background: #334155; }
             ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+            header > nav, .dark header > nav, .dark nav { background: transparent !important; background-color: transparent !important; border: none !important; }
         `;
         document.head.appendChild(globalUiStyle);
     }
@@ -631,8 +632,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOthersActive = ['community.html', 'about.html', 'credits.html'].includes(currentPage);
 
         navbarPlaceholder.innerHTML = `
-        <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 transition-colors duration-200">
-            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center gap-4 bg-transparent">
+        <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 transition-colors duration-200" style="background-color: var(--navbar-bg);">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center gap-4 bg-transparent" style="background: transparent !important; background-color: transparent !important; border: none !important;">
                 <!-- Brand Logo -->
                 <a href="${basePath}index.html" class="flex items-center space-x-2.5 shrink-0 group">
                     <div class="w-9 h-9 bg-emerald-600 group-hover:bg-emerald-700 rounded-xl flex items-center justify-center text-white shadow-sm transition-all group-hover:scale-105">
