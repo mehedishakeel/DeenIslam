@@ -766,10 +766,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <!-- Mobile Drawer Menu -->
             <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-200/80 dark:border-slate-800 bg-white dark:bg-[#0b1120] px-4 sm:px-6 py-4 space-y-2 shadow-lg overflow-y-auto max-h-[80vh]">
-                <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs font-semibold border border-emerald-100 dark:border-emerald-800/40 mb-1">
-                    <span>🌙</span>
-                    <span id="navbar-mobile-hijri-date">২৪ রবিউস সানি, ১৪৪৮ হিজরি</span>
-                </div>
                 <a href="${basePath}index.html" class="block p-2.5 rounded-xl ${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">হোম</a>
                 <a href="${basePath}salat.html" class="block p-2.5 rounded-xl ${currentPage === 'salat.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সালাতের সময়সূচি</a>
                 <a href="${basePath}quran.html" class="block p-2.5 rounded-xl ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">পবিত্র কুরআন</a>
@@ -817,12 +813,8 @@ document.addEventListener('DOMContentLoaded', () => {
         </header>
         `;
 
-        // Update Navbar & Footer Hijri Date immediately
+        // Update Footer Hijri Date immediately
         const instantHijri = (window.getInstantHijriDate && window.getInstantHijriDate()) || localStorage.getItem('deen_hijri_date') || "২৪ রবিউস সানি, ১৪৪৮ হিজরি";
-        const navHijri = document.getElementById('navbar-hijri-date');
-        if (navHijri) navHijri.innerText = instantHijri;
-        const navMobileHijri = document.getElementById('navbar-mobile-hijri-date');
-        if (navMobileHijri) navMobileHijri.innerText = instantHijri;
         const footHijri = document.getElementById('footer-hijri-date');
         if (footHijri) footHijri.innerText = instantHijri;
 
