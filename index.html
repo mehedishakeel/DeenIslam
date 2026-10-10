@@ -135,13 +135,10 @@
 
               <!-- Central Content Inside Ring -->
               <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center select-none">
-                <span class="text-[11px] uppercase font-bold tracking-widest text-emerald-200/90 mb-0.5">পরবর্তী ওয়াক্ত</span>
-                <h2 id="next-prayer-name" class="text-3xl sm:text-4xl font-black text-white tracking-tight my-0.5">ফজর</h2>
-                <div class="flex items-center space-x-1 text-sm text-amber-300 font-bold mb-2 font-mono">
+                <span class="text-[11px] uppercase font-bold tracking-widest text-emerald-200/90 mb-1">পরবর্তী ওয়াক্ত</span>
+                <h2 id="next-prayer-name" class="text-3xl sm:text-4xl font-black text-white tracking-tight my-1">ফজর</h2>
+                <div class="flex items-center space-x-1 text-base text-amber-300 font-bold font-mono mt-0.5">
                   <span id="next-prayer-time">--:--</span>
-                </div>
-                <div class="px-3.5 py-1 bg-white/15 rounded-lg text-xs font-semibold text-emerald-50 border border-white/10">
-                  <span id="next-prayer-countdown">গণনা হচ্ছে...</span>
                 </div>
               </div>
 
@@ -970,7 +967,6 @@
       // Update Center Ring Text
       const nameEl = document.getElementById('next-prayer-name');
       const timeEl = document.getElementById('next-prayer-time');
-      const countdownEl = document.getElementById('next-prayer-countdown');
       const circleEl = document.getElementById('prayer-progress-circle');
 
       if (nameEl) nameEl.innerText = nextPrayer.name;
@@ -978,18 +974,6 @@
 
       const diffMs = nextPrayerDate - now;
       if (diffMs > 0) {
-        const totalSec = Math.floor(diffMs / 1000);
-        const hrs = Math.floor(totalSec / 3600);
-        const mins = Math.floor((totalSec % 3600) / 60);
-        const secs = totalSec % 60;
-
-        let countdownStr = "আর মাত্র ";
-        if (hrs > 0) countdownStr += `${window.toBengaliNumerals(hrs)} ঘণ্টা `;
-        countdownStr += `${window.toBengaliNumerals(mins)} মিনিট `;
-        if (hrs === 0) countdownStr += `${window.toBengaliNumerals(secs)} সেকেন্ড`;
-
-        if (countdownEl) countdownEl.innerText = countdownStr;
-
         // Circular Progress Ring Math
         // Circumference = 2 * PI * 64 = 402.12
         const totalInterval = nextPrayerDate - prevPrayerDate;
