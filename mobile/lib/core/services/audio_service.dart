@@ -62,6 +62,22 @@ class AudioService extends ChangeNotifier {
     }
   }
 
+  /// Plays a bundled Adhan (Android res/raw name such as `adhan_1`).
+  Future<void> playRaw(String name) async {
+    _currentUrl = 'raw:$name';
+    _isLoading = true;
+    _isPlaying = false;
+    _onCompletedCallback = null;
+    notifyListeners();
+    try {
+      await _channel.invokeMethod('playRaw', {'name': name});
+    } catch (_) {
+      _isLoading = false;
+      _isPlaying = false;
+      notifyListeners();
+    }
+  }
+
   Future<void> pause() async {
     try {
       await _channel.invokeMethod('pause');

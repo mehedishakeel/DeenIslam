@@ -1,0 +1,36 @@
+name: Analyze & Test
+
+on:
+  push:
+    branches: [main, rebrand-mishkat]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+          channel: 'stable'
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze
+        run: |
+          flutter analyze --no-fatal-infos --no-fatal-warnings 2>&1 | tee analyze.log
+          grep -E "^\s*error •" analyze.log | while read -r l; do echo "::error::$l"; done
+          ! grep -qE "^\s*error •" analyze.log
+      - name: Unit tests
+        run: |
+          flutter test 2>&1 | tee test.log
+          status=${PIPESTATUS[0]}
+          grep -E "\[E\]|Expected|Actual|reason" test.log | head -30 | while read -r l; do echo "::error::$l"; done
+          exit $status

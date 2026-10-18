@@ -1,6 +1,6 @@
-# DeenIslam Design System & Visual Specification
+# MISHKAT Design System & Visual Specification
 
-This document defines the visual direction, design tokens, and craftsmanship rules for DeenIslam, complying with the **anti-slop** design philosophy.
+This document defines the visual direction, design tokens, and craftsmanship rules for MISHKAT, complying with the **anti-slop** design philosophy.
 
 ---
 

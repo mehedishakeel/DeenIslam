@@ -1,5 +1,5 @@
 /**
- * DeenIslam Theme Initialization
+ * MISHKAT Theme Initialization
  * Executed in <head> to prevent theme flashing (FOUC).
  */
 (function() {
@@ -35,7 +35,7 @@
             const isSubDir = window.location.pathname.includes('/articles/');
             const swPath = isSubDir ? '../sw.js' : './sw.js';
             navigator.serviceWorker.register(swPath)
-                .then(reg => console.log('DeenIslam Service Worker registered:', reg.scope))
+                .then(reg => console.log('MISHKAT Service Worker registered:', reg.scope))
                 .catch(err => console.warn('Service Worker registration skipped/failed:', err));
         });
     }

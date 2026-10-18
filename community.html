@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>মুসলিম কমিউনিটি ও দ্বীনি প্রশ্নোত্তর - DeenIslam</title>
+  <title>মুসলিম কমিউনিটি ও দ্বীনি প্রশ্নোত্তর - MISHKAT</title>
   <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
   <meta name="description" content="দ্বীনি প্রশ্নোত্তর, জরুরি ইসলামিক মাসআলা ও মুসলিম কমিউনিটি আলোচনা।">
-  <meta name="keywords" content="ইসলামিক প্রশ্নোত্তর, মাসআলা, দ্বীনি আলোচনা, কমিউনিটি, DeenIslam Community">
+  <meta name="keywords" content="ইসলামিক প্রশ্নোত্তর, মাসআলা, দ্বীনি আলোচনা, কমিউনিটি, MISHKAT Community">
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
@@ -111,28 +111,8 @@
       <!-- Injected via JavaScript -->
     </div>
 
-    <!-- Community Engagement Banner (Facebook + Ask Form) -->
+    <!-- Community Engagement Banner (Ask Form) -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-      <!-- Facebook Group Card -->
-      <div class="bg-white dark:bg-slate-900 p-6 sm:p-7 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-xs flex flex-col justify-between">
-        <div>
-          <div class="w-11 h-11 bg-blue-50 dark:bg-blue-950/40 text-blue-600 rounded-xl flex items-center justify-center mb-5 border border-blue-100 dark:border-blue-900/40">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-0.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </div>
-          <div class="flex items-center space-x-2 mb-2">
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white">অফিসিয়াল ফেসবুক কমিউনিটি</h3>
-            <span class="text-[10px] bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold px-2 py-0.5 rounded-full">সক্রিয় ফোরাম</span>
-          </div>
-          <p class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
-            আমাদের অফিশিয়াল ফেসবুক গ্রুপে যুক্ত হয়ে প্রতিদিন নতুন নতুন সহীহ দ্বীনি পোস্ট, হাদিসের ব্যাখ্যা ও সমসাময়িক জরুরি মাসআলা নিয়ে আলোচনা ও প্রশ্নোত্তর কার্যক্রমে অংশ নিন।
-          </p>
-        </div>
-        <a href="https://www.facebook.com/groups/deenislam.org/" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-[#1877F2] hover:bg-[#166fe5] text-white rounded-xl font-bold text-xs sm:text-sm text-center shadow-xs transition-all flex items-center justify-center space-x-2">
-          <span>গ্রুপে যুক্ত হোন</span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-        </a>
-      </div>
-
       <!-- Ask Question Form -->
       <div class="bg-white dark:bg-slate-900 p-6 sm:p-7 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-xs">
         <div class="w-11 h-11 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mb-5 border border-emerald-100 dark:border-emerald-800/40">
@@ -326,7 +306,7 @@
     function copyFaq(id) {
       const item = faqs.find(f => f.id === id);
       if (!item) return;
-      const text = `প্রশ্ন: ${item.q}\n\nউত্তর: ${item.a}\n\nদলিল: ${item.ref}\n— DeenIslam.org`;
+      const text = `প্রশ্ন: ${item.q}\n\nউত্তর: ${item.a}\n\nদলিল: ${item.ref}\n— MISHKAT`;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
           if (typeof showToast === 'function') showToast('মাসআলা কপি করা হয়েছে!');
@@ -361,7 +341,7 @@
       if (!subject || !body) return;
 
       const emailSubject = `[প্রশ্ন - ${cat}] ${subject}`;
-      const mailtoUrl = `mailto:contact@deenislam.org?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(body)}`;
+      const mailtoUrl = `mailto:ahmedshariarhossaintasnim@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailtoUrl;
 
       if (typeof showToast === 'function') {
@@ -379,7 +359,7 @@
         if (typeof showToast === 'function') showToast('দয়া করে প্রশ্ন ও বিষয় লিখুন');
         return;
       }
-      const draft = `[বিষয়: ${cat}] ${subject}\n\n${body}\n\n— প্রেরক: DeenIslam ইউজার`;
+      const draft = `[বিষয়: ${cat}] ${subject}\n\n${body}\n\n— প্রেরক: MISHKAT ইউজার`;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(draft).then(() => {
           if (typeof showToast === 'function') showToast('প্রশ্ন কপি করা হয়েছে! ইমেইলে পেস্ট করতে পারেন');

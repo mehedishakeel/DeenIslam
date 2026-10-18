@@ -1,4 +1,4 @@
-package com.mehedishakeel.deenislam
+package com.miskat.app
 
 import android.content.Context
 import android.hardware.Sensor
@@ -71,6 +71,18 @@ class MainActivity : FlutterActivity(), SensorEventListener {
                 "stop" -> {
                     releasePlayer()
                     result.success(true)
+                }
+                "hasAdhanSound" -> {
+                    // True only when the bundled Adhan files (res/raw/adhan_1..) exist
+                    result.success(resources.getIdentifier("adhan_1", "raw", packageName) != 0)
+                }
+                "playRaw" -> {
+                    val name = call.argument<String>("name")
+                    if (name.isNullOrEmpty()) {
+                        result.error("INVALID_NAME", "Raw resource name is empty", null)
+                    } else {
+                        playRawResource(name, result)
+                    }
                 }
                 else -> result.notImplemented()
             }
@@ -190,6 +202,53 @@ class MainActivity : FlutterActivity(), SensorEventListener {
                         "onError",
                         mapOf("what" to what, "extra" to extra)
                     )
+                }
+                true
+            }
+            mp.prepareAsync()
+            result.success(true)
+        } catch (e: Exception) {
+            result.error("PLAY_ERR", e.message, null)
+        }
+    }
+
+    /// Preview of a bundled Adhan (res/raw/<name>). Only names that exist are played.
+    private fun playRawResource(name: String, result: MethodChannel.Result) {
+        val id = resources.getIdentifier(name, "raw", packageName)
+        if (id == 0) {
+            result.error("NOT_FOUND", "Raw resource not found: $name", null)
+            return
+        }
+        releasePlayer()
+        try {
+            val afd = resources.openRawResourceFd(id)
+            val mp = MediaPlayer()
+            mediaPlayer = mp
+            mp.setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .build()
+            )
+            mp.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+            afd.close()
+            mp.setOnPreparedListener { player ->
+                player.start()
+                mainHandler.post {
+                    audioChannel?.invokeMethod(
+                        "onPrepared",
+                        mapOf("url" to name, "duration" to player.duration)
+                    )
+                }
+            }
+            mp.setOnCompletionListener {
+                mainHandler.post {
+                    audioChannel?.invokeMethod("onCompleted", mapOf("url" to name))
+                }
+            }
+            mp.setOnErrorListener { _, what, extra ->
+                mainHandler.post {
+                    audioChannel?.invokeMethod("onError", mapOf("what" to what, "extra" to extra))
                 }
                 true
             }

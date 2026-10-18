@@ -1,5 +1,5 @@
 name: deen_islam
-description: "DeenIslam - Modern Islamic Client-Side Portal & Native Mobile Application"
+description: "MISHKAT - Modern Islamic Client-Side Portal & Native Mobile Application"
 publish_to: "none"
 version: 1.0.3+4
 
@@ -14,6 +14,10 @@ dependencies:
   intl: ^0.19.0
   shared_preferences: ^2.3.2
   font_awesome_flutter: ^10.7.0
+  adhan_dart: ^2.0.1
+  geolocator: ^12.0.0
+  flutter_local_notifications: ^17.2.4
+  timezone: ^0.9.4
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +28,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/data/
+    - assets/images/
+
+# geolocator_android >=4.6.2 needs a newer Flutter Gradle plugin than 3.24.3.
+dependency_overrides:
+  geolocator_android: 4.6.1

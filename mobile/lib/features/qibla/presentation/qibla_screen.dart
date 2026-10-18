@@ -2,7 +2,9 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../core/services/storage_service.dart';
+import '../../../core/services/location_service.dart';
+import '../../../core/services/prayer_service.dart';
+import '../../../data/models/app_location.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
 
@@ -18,23 +20,10 @@ class _QiblaScreenState extends State<QiblaScreen> {
       MethodChannel('com.mehedishakeel.deenislam/compass');
 
   double _heading = 0.0;
-  double _qiblaAngle = 277.6; // Exact Qibla bearing from Dhaka (277.6° WNW)
-  String _selectedCity = 'ঢাকা';
+  double _qiblaAngle = 277.6; // replaced by the bearing computed from the saved location
+  AppLocation _location = LocationService.manual('ঢাকা');
   bool _hasHardwareSensor = false;
   bool _wasAligned = false;
-
-  static const Map<String, double> _cityQiblaAngles = {
-    'ঢাকা': 277.6,
-    'চট্টগ্রাম': 278.9,
-    'সিলেট': 276.8,
-    'রাজশাহী': 276.5,
-    'খুলনা': 278.1,
-    'বরিশাল': 278.3,
-    'রংপুর': 275.9,
-    'ময়মনসিংহ': 277.0,
-    'কুমিল্লা': 278.1,
-    'বগুড়া': 276.6,
-  };
 
   @override
   void initState() {
@@ -43,11 +32,11 @@ class _QiblaScreenState extends State<QiblaScreen> {
   }
 
   Future<void> _loadCityAndStartCompass() async {
-    final city = await StorageService.getSelectedCity();
+    final loc = await LocationService.load();
     if (mounted) {
       setState(() {
-        _selectedCity = city;
-        _qiblaAngle = _cityQiblaAngles[city] ?? 277.6;
+        _location = loc;
+        _qiblaAngle = PrayerService.qiblaBearing(loc.latitude, loc.longitude);
       });
     }
 
@@ -163,7 +152,7 @@ class _QiblaScreenState extends State<QiblaScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '$_selectedCity, বাংলাদেশ',
+                          _location.isGps ? _location.label : '${_location.label}, বাংলাদেশ',
                           style: GoogleFonts.hindSiliguri(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

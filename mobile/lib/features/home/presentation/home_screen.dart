@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/services/audio_service.dart';
 import '../../../core/services/storage_service.dart';
+import '../../../core/services/location_service.dart';
+import '../../../data/models/app_location.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
 import '../../../data/models/allah_name.dart';
+import '../../../data/models/calc_config.dart';
 import '../../../data/models/prayer_times_model.dart';
 import '../../../data/repositories/allah_names_data.dart';
 import '../../about/presentation/about_screen.dart';
@@ -46,10 +50,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   late Timer _timer;
   DateTime _now = DateTime.now();
   late PrayerTimesModel _prayerTimes;
-  String _selectedCity = 'ঢাকা';
+  late AppLocation _location;
   
   // Bento 99 Names State (Mobile view: exactly 5 names per batch)
   int _bentoNameBatchIndex = 0;
+  int _calcRev = CalcConfig.revision.value;
   
   // Audio state
   bool _isPlayingQuran = false;
@@ -58,12 +63,20 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _prayerTimes = PrayerTimesModel.forCity(_now, _selectedCity);
+    _location = LocationService.manual('ঢাকা');
+    _prayerTimes = PrayerTimesModel.forLocation(_now, _location);
     _loadSelectedCity();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted) {
         setState(() {
-          _now = DateTime.now();
+          final next = DateTime.now();
+          // Recalculate when the calendar day changes (e.g. after midnight).
+          final today = PrayerTimesModel.placeToday(next, _location);
+          if (!_prayerTimes.isSameDay(today) || _calcRev != CalcConfig.revision.value) {
+            _calcRev = CalcConfig.revision.value;
+            _prayerTimes = PrayerTimesModel.forLocation(today, _location);
+          }
+          _now = next;
         });
       }
     });
@@ -110,11 +123,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Future<void> _loadSelectedCity() async {
-    final city = await StorageService.getSelectedCity();
+    final loc = await LocationService.load();
     if (!mounted) return;
     setState(() {
-      _selectedCity = city;
-      _prayerTimes = PrayerTimesModel.forCity(_now, city);
+      _location = loc;
+      _prayerTimes = PrayerTimesModel.forLocation(PrayerTimesModel.placeToday(_now, loc), loc);
     });
   }
 
@@ -132,8 +145,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    final prayerStatus = _prayerTimes.getUpcomingStatus(_now);
-    final fastingStatus = _prayerTimes.getFastingStatus(_now);
+    final prayerStatus = _prayerTimes.getUpcomingStatus(_prayerTimes.wallNow(_now));
+    final fastingStatus = _prayerTimes.getFastingStatus(_prayerTimes.wallNow(_now));
     final isDark = widget.isDark;
 
     return Scaffold(
@@ -157,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "দ্বীন ইসলাম",
+                  "MISHKAT",
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -165,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ),
                 ),
                 Text(
-                  "$_selectedCity, বাংলাদেশ",
+                  _location.isGps ? _location.label : "${_location.label}, বাংলাদেশ",
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 11,
                     color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
@@ -261,30 +274,41 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Stack the panels on narrow cards instead of forcing both into one row.
+          final compact = constraints.maxWidth < 330;
+          final secondary =
+              isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+
+          final nextInfo = Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(status.icon, color: AppColors.emerald, size: 18),
                   const SizedBox(width: 6),
-                  Text(
-                    "পরবর্তী ওয়াক্ত",
-                    style: GoogleFonts.hindSiliguri(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                  Flexible(
+                    child: Text(
+                      "পরবর্তী ওয়াক্ত",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.hindSiliguri(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: secondary,
+                      ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 4),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 10,
+                runSpacing: 6,
                 children: [
                   Text(
                     status.nextName,
@@ -294,7 +318,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       color: AppColors.emerald,
                     ),
                   ),
-                  const SizedBox(width: 10),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
@@ -316,8 +339,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ],
               ),
             ],
-          ),
-          Container(
+          );
+
+          final currentPanel = Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             decoration: BoxDecoration(
               color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
@@ -327,16 +351,20 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               ),
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment:
+                  compact ? CrossAxisAlignment.start : CrossAxisAlignment.center,
               children: [
                 Text(
-                  "বর্তমান ওয়াক্ত",
-                  style: GoogleFonts.hindSiliguri(
-                    fontSize: 10,
-                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                  ),
+                  "বর্তমান ওয়াক্ত",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.hindSiliguri(fontSize: 11, color: secondary),
                 ),
                 Text(
                   status.currentName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -345,13 +373,34 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 ),
               ],
             ),
-          ),
-        ],
+          );
+
+          if (compact) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                nextInfo,
+                const SizedBox(height: 12),
+                currentPanel,
+              ],
+            );
+          }
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: nextInfo),
+              const SizedBox(width: 12),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.38),
+                child: currentPanel,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  // --- CARD 2: Fasting Tracker Card ---
   Widget _buildFastingTrackerCard(FastingStatus status, bool isDark) {
     return Container(
       padding: const EdgeInsets.all(16),

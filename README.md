@@ -1,16 +1,16 @@
-# 🌙 DeenIslam (দ্বীন ইসলাম)
+# 🌙 MISHKAT
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Language: Bengali](https://img.shields.io/badge/Language-Bengali-green.svg)](#)
 [![Tech: TailwindCSS](https://img.shields.io/badge/Tech-TailwindCSS-38B2AC.svg)](#)
 [![GitHub Pages](https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-blue.svg)](https://deenislam.org/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Ready-emerald.svg)](#)
-[![Android APK v1.0](https://img.shields.io/badge/Android%20APK-v1.0%20Download-047857.svg)](https://github.com/mehedishakeel/DeenIslam/releases/download/v1.0/DeenIslam-v1.0.apk)
+[![Android APK v1.0](https://img.shields.io/badge/Android%20APK-v1.0%20Download-047857.svg)](https://github.com/HGg940977/DeenIslam/releases/latest/download/MISHKAT-v1.0.apk)
 
-**DeenIslam** is an ad-free, privacy-first Islamic web portal and native Android application (`mobile/`) providing authentic Islamic resources in Bengali.
+**MISHKAT** is an ad-free, privacy-first Islamic web portal and native Android application (`mobile/`) providing authentic Islamic resources in Bengali.
 
 - **Live Website:** [https://deenislam.org/](https://deenislam.org/)
-- **Android App (APK v1.0):** [Download DeenIslam-v1.0.apk](https://github.com/mehedishakeel/DeenIslam/releases/download/v1.0/DeenIslam-v1.0.apk)
+- **Android App (APK v1.0):** [Download MISHKAT-v1.0.apk](https://github.com/HGg940977/DeenIslam/releases/latest/download/MISHKAT-v1.0.apk)
 
 ---
 
@@ -98,8 +98,8 @@ flutter build apk --release
 
 ```bash
 # Clone the repository
-git clone https://github.com/mehedishakeel/DeenIslam.git
-cd DeenIslam
+git clone https://github.com/HGg940977/DeenIslam.git
+cd MISHKAT
 
 # Run Web Portal locally
 python3 -m http.server 8000
@@ -111,3 +111,6 @@ python3 -m http.server 8000
 
 Distributed under the MIT License.
 
+## Acknowledgements
+
+This project began as a fork of the open-source DeenIslam project by Mehedi Shakeel (https://github.com/mehedishakeel/DeenIslam). The original repository did not include a license file at the time of forking; the original author retains credit for the upstream work.

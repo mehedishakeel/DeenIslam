@@ -23,3 +23,7 @@ release-output/
 # iOS
 **/ios/.generated/
 **/ios/Pods/
+
+# Signing secrets
+mobile/android/key.properties
+mobile/android/app/*.keystore

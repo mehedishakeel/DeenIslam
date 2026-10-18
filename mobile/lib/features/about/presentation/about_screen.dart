@@ -73,7 +73,7 @@ class AboutScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'DeenIslam • দ্বীন ইসলাম',
+                            'MISHKAT',
                             style: GoogleFonts.hindSiliguri(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class AboutScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'দ্বীন ইসলাম একটি সম্পূর্ণ বিজ্ঞাপনমুক্ত, ট্র্যাকারমুক্ত ও সদকায়ে জারিয়া মূলক ইসলামিক অ্যাপ। কুরআন, সহীহ হাদিস, সালাত, সিয়াম, যাকাত ও নিত্যদিনের সুন্নাহ আমল বাংলাভাষী মুসলিমদের হাতের মুঠোয় পৌঁছে দেওয়াই এর মূল লক্ষ্য।',
+                  'MISHKAT একটি সম্পূর্ণ বিজ্ঞাপনমুক্ত, ট্র্যাকারমুক্ত ও সদকায়ে জারিয়া মূলক ইসলামিক অ্যাপ। কুরআন, সহীহ হাদিস, সালাত, সিয়াম, যাকাত ও নিত্যদিনের সুন্নাহ আমল বাংলাভাষী মুসলিমদের হাতের মুঠোয় পৌঁছে দেওয়াই এর মূল লক্ষ্য।',
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 13,
                     height: 1.5,
@@ -150,7 +150,7 @@ class AboutScreen extends StatelessWidget {
                       Clipboard.setData(
                         const ClipboardData(
                           text:
-                              'DeenIslam (দ্বীন ইসলাম) — কুরআন, সহীহ হাদিস, নামাজের সময়সূচি ও দোয়ার বিজ্ঞাপনমুক্ত ইসলামিক অ্যাপ: https://github.com/mehedishakeel/DeenIslam/releases',
+                              'MISHKAT — কুরআন, সহীহ হাদিস, নামাজের সময়সূচি ও দোয়ার বিজ্ঞাপনমুক্ত ইসলামিক অ্যাপ: https://github.com/HGg940977/DeenIslam/releases',
                         ),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -229,6 +229,19 @@ class AboutScreen extends StatelessWidget {
               ),
             );
           }),
+          const SizedBox(height: 8),
+          Center(
+            child: Text(
+              'Created by Ahmed Shariar Hossain Tasnim\nahmedshariarhossaintasnim@gmail.com',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.hindSiliguri(
+                fontSize: 12,
+                color: isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight,
+              ),
+            ),
+          ),
         ],
       ),
     );

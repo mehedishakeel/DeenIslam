@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/services/storage_service.dart';
+import '../../../core/services/location_service.dart';
+import '../../../data/models/app_location.dart';
+
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
+import '../../../data/models/calc_config.dart';
 import '../../../data/models/prayer_times_model.dart';
 
 class RamadanScreen extends StatefulWidget {
@@ -14,7 +18,7 @@ class RamadanScreen extends StatefulWidget {
 }
 
 class _RamadanScreenState extends State<RamadanScreen> {
-  String _selectedCity = 'ঢাকা';
+  AppLocation _location = LocationService.manual('ঢাকা');
   late PrayerTimesModel _prayerTimes;
   final Set<int> _completedRozaDays = {1, 2, 3};
   final Map<String, bool> _dailyAmals = {
@@ -30,18 +34,32 @@ class _RamadanScreenState extends State<RamadanScreen> {
   @override
   void initState() {
     super.initState();
-    _prayerTimes = PrayerTimesModel.forCity(DateTime.now(), _selectedCity);
+    _prayerTimes = PrayerTimesModel.forLocation(DateTime.now(), _location);
     _loadCity();
+    CalcConfig.revision.addListener(_onCalcChanged);
+  }
+
+  void _onCalcChanged() {
+    if (!mounted) return;
+    setState(() {
+      _prayerTimes = PrayerTimesModel.forLocation(PrayerTimesModel.placeToday(DateTime.now(), _location), _location);
+    });
+  }
+
+  @override
+  void dispose() {
+    CalcConfig.revision.removeListener(_onCalcChanged);
+    super.dispose();
   }
 
   Future<void> _loadCity() async {
-    final city = await StorageService.getSelectedCity();
+    final loc = await LocationService.load();
     final rozaDays = await StorageService.getRamadanRozaDays();
     final amals = await StorageService.getRamadanDailyAmals(_dailyAmals);
     if (!mounted) return;
     setState(() {
-      _selectedCity = city;
-      _prayerTimes = PrayerTimesModel.forCity(DateTime.now(), city);
+      _location = loc;
+      _prayerTimes = PrayerTimesModel.forLocation(PrayerTimesModel.placeToday(DateTime.now(), loc), loc);
       _completedRozaDays
         ..clear()
         ..addAll(rozaDays);
@@ -151,7 +169,7 @@ class _RamadanScreenState extends State<RamadanScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'আজকের সেহরি ও ইফতার ($_selectedCity)',
+                    'আজকের সেহরি ও ইফতার (${_location.label})',
                     style: GoogleFonts.hindSiliguri(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,

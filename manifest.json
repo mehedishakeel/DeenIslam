@@ -1,6 +1,6 @@
 {
-  "name": "DeenIslam - ইসলামিক জ্ঞান ও গাইড",
-  "short_name": "DeenIslam",
+  "name": "MISHKAT - ইসলামিক জ্ঞান ও গাইড",
+  "short_name": "MISHKAT",
   "description": "শুদ্ধ ও সঠিক ইসলামিক তথ্য, কুরআন, হাদিস, নামাজের সময়সূচী, কিবলা ও দো'আ নিয়ে আপনার দ্বীনি জীবনের ডিজিটাল সফর।",
   "start_url": "./index.html",
   "scope": "./",
@@ -15,6 +15,18 @@
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon",
       "purpose": "any maskable"
+    },
+    {
+      "src": "favicon/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

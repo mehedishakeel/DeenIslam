@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeenIslam - ইসলামিক জ্ঞান, কুরআন, হাদিস ও সালাত টাইমলাইন</title>
+  <title>MISHKAT - ইসলামিক জ্ঞান, কুরআন, হাদিস ও সালাত টাইমলাইন</title>
   <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
-  <meta name="description" content="DeenIslam.org - আধুনিক ইসলামিক ওয়েব পোর্টাল। শুদ্ধ ও সঠিক ইসলামিক তথ্য, আল-কুরআন, হাদিস, নামাজের সালাত টাইমলাইন, কিবলা কম্পাস ও প্রাত্যহিক দো'আ।">
-  <meta name="keywords" content="Islam, Quran, Hadith, Prayer Times, Qibla, Dua, 99 Names of Allah, Zakat, দ্বীন ইসলাম, কুরআন, হাদিস, নামাজের সময়সূচি">
+  <meta name="description" content="MISHKAT - আধুনিক ইসলামিক ওয়েব পোর্টাল। শুদ্ধ ও সঠিক ইসলামিক তথ্য, আল-কুরআন, হাদিস, নামাজের সালাত টাইমলাইন, কিবলা কম্পাস ও প্রাত্যহিক দো'আ।">
+  <meta name="keywords" content="Islam, Quran, Hadith, Prayer Times, Qibla, Dua, 99 Names of Allah, Zakat, কুরআন, হাদিস, নামাজের সময়সূচি">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://deenislam.org/">
-  <meta property="og:title" content="DeenIslam - ইসলামিক জ্ঞান, কুরআন ও হাদিস গাইড">
+  <meta property="og:title" content="MISHKAT - ইসলামিক জ্ঞান, কুরআন ও হাদিস গাইড">
   <meta property="og:description" content="শুদ্ধ ও সঠিক ইসলামিক তথ্য নিয়ে আপনার দ্বীনি জীবনের সফরকে আরও সহজ ও সুন্দর করতে আধুনিক মিনিমালিস্ট পোর্টাল।">
   <meta property="og:image" content="https://deenislam.org/favicon/deenislam.ico">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://deenislam.org/">
-  <meta property="twitter:title" content="DeenIslam - ইসলামিক জ্ঞান, কুরআন ও হাদিস গাইড">
+  <meta property="twitter:title" content="MISHKAT - ইসলামিক জ্ঞান, কুরআন ও হাদিস গাইড">
   <meta property="twitter:description" content="শুদ্ধ ও সঠিক ইসলামিক তথ্য নিয়ে আপনার দ্বীনি জীবনের সফরকে আরও সহজ ও সুন্দর করতে আধুনিক মিনিমালিস্ট পোর্টাল।">
   <meta property="twitter:image" content="https://deenislam.org/favicon/deenislam.ico">
 
@@ -99,13 +99,16 @@
               <span id="hero-hijri-date">২৪ রবিউস সানি, ১৪৪৮ হিজরি</span>
             </div>
 
-            <div class="flex items-center space-x-2">
+            <div class="flex flex-wrap items-center gap-2">
               <div id="location-text" class="inline-flex items-center text-xs text-emerald-50 bg-white/10 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 <span>ঢাকা (ডিফল্ট)</span>
               </div>
               <button onclick="getPrayerTimes(true)" class="text-xs font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-xl transition-all border border-white/10" title="জিপিএস লোকেশন রিফ্রেশ">
                 GPS
+              </button>
+              <button id="web-notify-btn" type="button" onclick="toggleWebNotify()" aria-pressed="false" class="text-xs font-bold bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded-xl transition-all border border-white/10" title="পেজ খোলা থাকলে ওয়াক্তে নোটিফিকেশন">
+                🔔 রিমাইন্ডার
               </button>
             </div>
           </div>
@@ -666,14 +669,14 @@
       <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
           <span class="inline-block text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1.5">Android App • v1.0</span>
-          <h2 class="text-lg sm:text-xl font-black text-slate-800 dark:text-white mb-1.5">DeenIslam অ্যান্ড্রয়েড অ্যাপ ডাউনলোড করুন</h2>
+          <h2 class="text-lg sm:text-xl font-black text-slate-800 dark:text-white mb-1.5">MISHKAT অ্যান্ড্রয়েড অ্যাপ ডাউনলোড করুন</h2>
           <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">অফলাইন আল-কুরআন ও সহীহ হাদিস, সুমধুর কুরআন তিলাওয়াত অডিও, ৬৪ জেলার নামাজের সময়সূচি, লাইভ কিবলা কম্পাস এবং ডিজিটাল তাসবীহ—সবকিছু একটি বিজ্ঞাপনমুক্ত অ্যাপে।</p>
         </div>
         <div class="flex flex-wrap items-center gap-3 shrink-0">
-          <a href="https://github.com/mehedishakeel/DeenIslam/releases/download/v1.0/DeenIslam-v1.0.apk" class="inline-flex items-center px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm transition-colors">
+          <a href="https://github.com/HGg940977/DeenIslam/releases/latest/download/MISHKAT-v1.0.apk" class="inline-flex items-center px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm transition-colors">
             <span>APK ডাউনলোড করুন (v1.0)</span>
           </a>
-          <a href="https://github.com/mehedishakeel/DeenIslam/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-3 rounded-xl border border-stone-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-emerald-500/40 font-bold text-xs sm:text-sm transition-colors">
+          <a href="https://github.com/HGg940977/DeenIslam/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-3 rounded-xl border border-stone-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-emerald-500/40 font-bold text-xs sm:text-sm transition-colors">
             <span>রিলিজ নোট দেখুন</span>
           </a>
         </div>
@@ -858,34 +861,67 @@
       fetchTimings(23.8103, 90.4125); 
     }
 
+    let timingsDate = null;
+
+    function todayKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    }
+
+    function renderTimings(timings) {
+      currentTimings = timings;
+      timingsDate = todayKey();
+      document.getElementById('fajr-time').innerText = formatTime(timings.Fajr);
+      document.getElementById('dhuhr-time').innerText = formatTime(timings.Dhuhr);
+      document.getElementById('asr-time').innerText = formatTime(timings.Asr);
+      document.getElementById('maghrib-time').innerText = formatTime(timings.Maghrib);
+      document.getElementById('isha-time').innerText = formatTime(timings.Isha);
+      updatePrayerCountdown();
+    }
+
+    function showTimingsError() {
+      const el = document.getElementById('location-text');
+      if (el) el.innerHTML = '<span>সময় লোড হয়নি — ইন্টারনেট দেখে GPS চাপুন</span>';
+    }
+
+    // Prayer times come from the Aladhan API (Karachi method, school from the
+    // user's setting). The last successful result for today is cached so the
+    // page still works offline; a cache from another day is never reused.
     async function fetchTimings(lat, lon) {
       try {
         const school = localStorage.getItem('prayer_school') || '1';
-        const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&school=${school}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000);
+        const response = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=1&school=${school}`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
-        if (data.code === 200) {
-          currentTimings = data.data.timings;
-          
-          document.getElementById('fajr-time').innerText = formatTime(currentTimings.Fajr);
-          document.getElementById('dhuhr-time').innerText = formatTime(currentTimings.Dhuhr);
-          document.getElementById('asr-time').innerText = formatTime(currentTimings.Asr);
-          document.getElementById('maghrib-time').innerText = formatTime(currentTimings.Maghrib);
-          document.getElementById('isha-time').innerText = formatTime(currentTimings.Isha);
+        if (data.code !== 200 || !data.data || !data.data.timings) throw new Error('bad payload');
 
-          // Update Hijri date from API if available
-          if (data.data.date && data.data.date.hijri) {
-            const hijriText = window.formatHijriDate(data.data.date.hijri);
-            localStorage.setItem('deen_hijri_date', hijriText);
-            const heroBadge = document.getElementById('hero-hijri-date');
-            if (heroBadge) heroBadge.innerText = hijriText;
-            const footBadge = document.getElementById('footer-hijri-date');
-            if (footBadge) footBadge.innerText = hijriText;
-          }
+        renderTimings(data.data.timings);
+        try {
+          localStorage.setItem('deen_timings_cache', JSON.stringify({ day: todayKey(), lat: String(lat), lon: String(lon), school, timings: data.data.timings }));
+        } catch (e) {}
 
-          updatePrayerCountdown();
+        // Update Hijri date from API if available
+        if (data.data.date && data.data.date.hijri) {
+          const hijriText = window.formatHijriDate(data.data.date.hijri);
+          localStorage.setItem('deen_hijri_date', hijriText);
+          const heroBadge = document.getElementById('hero-hijri-date');
+          if (heroBadge) heroBadge.innerText = hijriText;
+          const footBadge = document.getElementById('footer-hijri-date');
+          if (footBadge) footBadge.innerText = hijriText;
         }
       } catch (e) {
         console.error("Prayer times fetch error:", e);
+        try {
+          const c = JSON.parse(localStorage.getItem('deen_timings_cache') || 'null');
+          if (c && c.day === todayKey() && c.lat === String(lat) && c.lon === String(lon)) {
+            renderTimings(c.timings);
+            return;
+          }
+        } catch (e2) {}
+        showTimingsError();
       }
     }
 
@@ -1047,9 +1083,57 @@
 
     // Run countdown every 1 second
     setInterval(() => {
+      // Day changed while the page stayed open: refresh today's schedule.
+      if (timingsDate && timingsDate !== todayKey()) {
+        timingsDate = null;
+        getPrayerTimes();
+      }
       updatePrayerCountdown();
       updateBentoFasting();
+      checkWebReminder();
     }, 1000);
+
+    // Browser reminders work only while this page is open (a website cannot
+    // guarantee background delivery or play the full Adhan when closed).
+    function webNotifyOn() {
+      return localStorage.getItem('deen_web_notify') === '1' &&
+        'Notification' in window && Notification.permission === 'granted';
+    }
+    function refreshWebNotifyBtn() {
+      const b = document.getElementById('web-notify-btn');
+      if (!b) return;
+      const on = webNotifyOn();
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.innerText = on ? '🔔 চালু' : '🔕 রিমাইন্ডার';
+    }
+    window.toggleWebNotify = async function () {
+      if (!('Notification' in window)) { alert('এই ব্রাউজার নোটিফিকেশন সমর্থন করে না।'); return; }
+      if (webNotifyOn()) { localStorage.setItem('deen_web_notify', '0'); refreshWebNotifyBtn(); return; }
+      if (Notification.permission === 'denied') { alert('ব্রাউজারে নোটিফিকেশন বন্ধ করা আছে। ব্রাউজারের সাইট সেটিংস থেকে অনুমতি দিন।'); return; }
+      const perm = await Notification.requestPermission();
+      if (perm === 'granted') {
+        localStorage.setItem('deen_web_notify', '1');
+        alert('চালু হয়েছে। এই পেজ খোলা থাকলে ওয়াক্ত হলে নোটিফিকেশন আসবে।');
+      }
+      refreshWebNotifyBtn();
+    };
+    function checkWebReminder() {
+      if (!currentTimings || !webNotifyOn()) return;
+      const now = new Date();
+      if (now.getSeconds() > 5) return;
+      const list = [['Fajr', 'ফজর'], ['Dhuhr', 'যোহর'], ['Asr', 'আসর'], ['Maghrib', 'মাগরিব'], ['Isha', 'ইশা']];
+      for (const [k, name] of list) {
+        const [h, m] = (currentTimings[k] || '').split(':').map(Number);
+        if (h === now.getHours() && m === now.getMinutes()) {
+          const key = 'deen_web_notified_' + todayKey() + k;
+          if (localStorage.getItem(key)) return;
+          localStorage.setItem(key, '1');
+          new Notification('MISHKAT', { body: name + '-এর ওয়াক্ত হয়েছে', icon: 'favicon/icon-192.png' });
+          return;
+        }
+      }
+    }
+    refreshWebNotifyBtn();
     getPrayerTimes();
 
     // 5. Bento 99 Names Interactive Logic (9 on Desktop, 5 on Mobile)

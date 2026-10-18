@@ -1,6 +1,6 @@
-# DeenIslam Project Guidelines
+# MISHKAT Project Guidelines
 
-DeenIslam is a client-side Islamic web portal built with HTML5, Vanilla JavaScript, and TailwindCSS.
+MISHKAT is a client-side Islamic web portal built with HTML5, Vanilla JavaScript, and TailwindCSS.
 
 <!-- antislop:start -->
 ## antislop

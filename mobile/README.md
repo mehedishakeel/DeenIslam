@@ -1,4 +1,4 @@
-# দ্বীন ইসলাম (DeenIslam) - Native Mobile Application
+# MISHKAT - Native Mobile Application
 
 একটি সম্পূর্ণ ইসলামিক মোবাইল অ্যাপ্লিকেশন যা **Flutter (Dart)** ফ্রেমওয়ার্ক দিয়ে তৈরি করা হয়েছে। একই কোডবেস থেকে সরাসরি **Android (APK & AAB)** এবং **iOS (IPA)** বিল্ড করা যায়।
 

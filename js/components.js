@@ -464,7 +464,7 @@ window.initCommandPalette = (basePath) => {
                     <span><kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded shadow-sm">↑</kbd> <kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded shadow-sm">↓</kbd> নেভিগেশন</span>
                     <span><kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded shadow-sm">↵</kbd> খুলুন</span>
                 </div>
-                <span>DeenIslam কুইক সার্চ</span>
+                <span>MISHKAT কুইক সার্চ</span>
             </div>
         </div>
     `;
@@ -585,7 +585,7 @@ window.initCommandPalette = (basePath) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DeenIslam Components Loaded - v2.0.0');
+    console.log('MISHKAT Components Loaded - v2.0.0');
 
     // Global UI Styles & Waveform Animations
     if (!document.getElementById('deen-global-ui-style')) {
@@ -640,8 +640,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="text-base select-none">🌙</span>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-primary transition-colors leading-tight">DeenIslam</span>
-                        <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider leading-none hidden sm:block">দ্বীন ইসলাম</span>
+                        <span class="text-xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-primary transition-colors leading-tight">MISHKAT</span>
+                        <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider leading-none hidden sm:block">Your Faith. Your Light.</span>
                     </div>
                 </a>
                 
@@ -885,8 +885,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="text-base select-none">🌙</span>
                             </div>
                             <div class="flex flex-col">
-                                <span class="text-2xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-primary transition-colors leading-tight">DeenIslam</span>
-                                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider uppercase leading-none">দ্বীন ইসলাম • ইসলামিক নলেজ পোর্টাল</span>
+                                <span class="text-2xl font-black text-slate-800 dark:text-white tracking-tight group-hover:text-primary transition-colors leading-tight">MISHKAT</span>
+                                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold tracking-wider uppercase leading-none">Your Faith. Your Light. • ইসলামিক নলেজ পোর্টাল</span>
                             </div>
                         </a>
 
@@ -902,7 +902,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         <div class="pt-1">
                             <span class="text-xs text-slate-400 dark:text-slate-500 font-medium">অফিশিয়াল ওয়েবসাইট: </span>
-                            <a href="${basePath}index.html" class="text-xs font-bold text-primary dark:text-emerald-400 hover:underline">deenislam.org</a>
+                            <a href="${basePath}index.html" class="text-xs font-bold text-primary dark:text-emerald-400 hover:underline">MISHKAT</a>
                         </div>
                     </div>
 
@@ -937,13 +937,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <!-- Col 4: Community & Support (2 cols on lg) -->
                     <div class="lg:col-span-2">
                         <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">যুক্ত হোন</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 font-mono">contact@deenislam.org</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 font-mono">ahmedshariarhossaintasnim@gmail.com</p>
                         
                         <div class="space-y-2.5">
-                            <a href="https://www.facebook.com/groups/deenislam.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-[#1877F2] text-white px-3.5 py-2 rounded-xl font-bold text-xs hover:bg-[#166fe5] transition-all shadow-sm w-full justify-center">
-                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-0.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                                <span>ফেসবুক গ্রুপ</span>
-                            </a>
                             <a href="${basePath}community.html" class="block text-center py-2 px-3 rounded-xl bg-stone-100/90 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-xs font-semibold transition-all border border-stone-200 dark:border-slate-700">
                                 প্রশ্নোত্তর ফোরাম →
                             </a>
@@ -958,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Bottom Bar -->
                 <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
                     <div class="flex items-center space-x-2">
-                        <span>© 2026 DeenIslam.org</span>
+                        <span>© 2026 MISHKAT</span>
                         <span>•</span>
                         <span>শুদ্ধ দ্বীনি জ্ঞানের উন্মুক্ত ভাণ্ডার</span>
                     </div>

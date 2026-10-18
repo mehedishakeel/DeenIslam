@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// DeenIslam Core Color Palette
+/// MISHKAT Core Color Palette
 /// Strict adherence to the web portal's authentic Emerald & Amber visual identity
 class AppColors {
   // Brand Primary & Accent

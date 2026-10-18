@@ -1,5 +1,11 @@
+import 'package:adhan_dart/adhan_dart.dart' as adhan;
 import 'package:flutter/material.dart';
+import '../../core/services/prayer_service.dart';
+import '../../core/services/timezone_service.dart';
 import '../../core/utils/bengali_numerals.dart';
+import 'app_location.dart';
+import 'district_coordinates.dart';
+import 'calc_config.dart';
 
 class PrayerTimesModel {
   final DateTime date;
@@ -11,6 +17,10 @@ class PrayerTimesModel {
   final TimeOfDay isha;
   final TimeOfDay imsak;
 
+  /// UTC offset of the place the times were calculated for, or null when the
+  /// device time zone applies. Times above are wall-clock at that place.
+  final Duration? utcOffset;
+
   const PrayerTimesModel({
     required this.date,
     required this.fajr,
@@ -20,112 +30,117 @@ class PrayerTimesModel {
     required this.maghrib,
     required this.isha,
     required this.imsak,
+    this.utcOffset,
   });
 
-  /// Factory preset for Dhaka, Bangladesh
+  /// Default schedule (Dhaka) used only until a location has been loaded.
   factory PrayerTimesModel.defaultDhaka(DateTime date) {
     return PrayerTimesModel.forCity(date, 'ঢাকা');
   }
 
-  static TimeOfDay _shiftTime(TimeOfDay base, int offsetMinutes) {
-    final totalMinutes = (base.hour * 60 + base.minute + offsetMinutes) % (24 * 60);
-    return TimeOfDay(
-      hour: totalMinutes ~/ 60,
-      minute: totalMinutes % 60,
+  /// All selectable districts (manual location fallback).
+  static List<String> get allDistricts => districtCoordinates.keys.toList();
+
+  /// Prayer times for a manually selected district, calculated astronomically
+  /// from the district's coordinates.
+  factory PrayerTimesModel.forCity(DateTime date, String city) {
+    final c = districtCoordinates[city] ?? districtCoordinates['ঢাকা']!;
+    return PrayerTimesModel.forCoordinates(date, c[0], c[1]);
+  }
+
+  /// Calendar day at [location] right now (differs from the device day when a
+  /// place in another time zone was chosen).
+  static DateTime placeToday(DateTime now, AppLocation location) {
+    final off = TimeZoneService.offsetFor(location.timezone, now);
+    if (off == null) return DateTime(now.year, now.month, now.day);
+    final u = now.toUtc().add(off);
+    return DateTime(u.year, u.month, u.day);
+  }
+
+  /// Prayer times for the app's current location (GPS or manual).
+  factory PrayerTimesModel.forLocation(DateTime date, AppLocation location) {
+    return PrayerTimesModel.forCoordinates(
+      date,
+      location.latitude,
+      location.longitude,
+      utcOffset: TimeZoneService.offsetFor(location.timezone, date),
     );
   }
 
-  /// Minute offsets for all 64 districts of Bangladesh relative to Dhaka
-  static const Map<String, int> allDistrictOffsets = <String, int>{
-    // ঢাকা বিভাগ (13)
-    'ঢাকা': 0,
-    'গাজীপুর': 0,
-    'নারায়ণগঞ্জ': -1,
-    'নরসিংদী': -2,
-    'মানিকগঞ্জ': 2,
-    'মুন্সীগঞ্জ': 0,
-    'টাঙ্গাইল': 2,
-    'কিশোরগঞ্জ': -2,
-    'ফরিদপুর': 3,
-    'গোপালগঞ্জ': 2,
-    'মাদারীপুর': 1,
-    'রাজবাড়ী': 4,
-    'শরীয়তপুর': 1,
-    // চট্টগ্রাম বিভাগ (11)
-    'চট্টগ্রাম': -6,
-    'কক্সবাজার': -6,
-    'কুমিল্লা': -3,
-    'ব্রাহ্মণবাড়িয়া': -3,
-    'চাঁদপুর': -1,
-    'নোয়াখালী': -3,
-    'ফেনী': -4,
-    'লক্ষ্মীপুর': -2,
-    'রাঙ্গামাটি': -7,
-    'বান্দরবান': -7,
-    'খাগড়াছড়ি': -6,
-    // সিলেট বিভাগ (4)
-    'সিলেট': -6,
-    'মৌলভীবাজার': -6,
-    'হবিগঞ্জ': -4,
-    'সুনামগঞ্জ': -4,
-    // রাজশাহী বিভাগ (8)
-    'রাজশাহী': 7,
-    'বগুড়া': 4,
-    'পাবনা': 5,
-    'সিরাজগঞ্জ': 3,
-    'নাটোর': 6,
-    'নওগাঁ': 6,
-    'চাঁপাইনবাবগঞ্জ': 9,
-    'জয়পুরহাট': 5,
-    // খুলনা বিভাগ (10)
-    'খুলনা': 4,
-    'যশোর': 5,
-    'সাতক্ষীরা': 6,
-    'কুষ্টিয়া': 6,
-    'ঝিনাইদহ': 5,
-    'মাগুরা': 4,
-    'নড়াইল': 4,
-    'বাগেরহাট': 3,
-    'চুয়াডাঙ্গা': 7,
-    'মেহেরপুর': 8,
-    // বরিশাল বিভাগ (6)
-    'বরিশাল': 1,
-    'পটুয়াখালী': 1,
-    'ভোলা': -1,
-    'পিরোজপুর': 2,
-    'বরগুনা': 2,
-    'ঝালকাঠি': 2,
-    // রংপুর বিভাগ (8)
-    'রংপুর': 5,
-    'দিনাজপুর': 7,
-    'কুড়িগ্রাম': 3,
-    'গাইবান্ধা': 4,
-    'নীলফামারী': 6,
-    'পঞ্চগড়': 8,
-    'ঠাকুরগাঁও': 8,
-    'লালমনিরহাট': 4,
-    // ময়মনসিংহ বিভাগ (4)
-    'ময়মনসিংহ': -1,
-    'জামালপুর': 2,
-    'শেরপুর': 1,
-    'নেত্রকোনা': -2,
-  };
+  /// Real astronomical calculation (solar position, Fajr/Isha twilight angles,
+  /// Asr shadow length) using the maintained `adhan_dart` library.
+  ///
+  /// Method and Asr rule come from [CalcConfig.current] unless [config] is
+  /// given (default: Karachi, Fajr/Isha 18 deg, with the Hanafi Asr rule).
+  /// Results are converted to the device's local time zone, or to
+  /// [utcOffset] when given (used by tests for reproducibility).
+  /// Throws [ArgumentError] for invalid coordinates; never invents a schedule.
+  factory PrayerTimesModel.forCoordinates(
+    DateTime date,
+    double latitude,
+    double longitude, {
+    Duration? utcOffset,
+    CalcConfig? config,
+  }) {
+    if (!PrayerService.isValidCoordinate(latitude, longitude)) {
+      throw ArgumentError('Invalid coordinates: $latitude, $longitude');
+    }
+    // The user's chosen method and Asr rule (default Karachi + Hanafi).
+    final params = (config ?? CalcConfig.current).parameters(latitude);
 
-  static List<String> get allDistricts => allDistrictOffsets.keys.toList();
-
-  /// Calculate prayer times for all 64 Bangladesh districts relative to Dhaka
-  factory PrayerTimesModel.forCity(DateTime date, String city) {
-    final offset = allDistrictOffsets[city] ?? 0;
-    return PrayerTimesModel(
-      date: date,
-      fajr: _shiftTime(const TimeOfDay(hour: 5, minute: 4), offset),
-      sunrise: _shiftTime(const TimeOfDay(hour: 6, minute: 18), offset),
-      dhuhr: _shiftTime(const TimeOfDay(hour: 11, minute: 56), offset),
-      asr: _shiftTime(const TimeOfDay(hour: 15, minute: 52), offset),
-      maghrib: _shiftTime(const TimeOfDay(hour: 17, minute: 32), offset),
-      isha: _shiftTime(const TimeOfDay(hour: 18, minute: 48), offset),
-      imsak: _shiftTime(const TimeOfDay(hour: 4, minute: 54), offset),
+    final times = adhan.PrayerTimes(
+      coordinates: adhan.Coordinates(latitude, longitude),
+      date: DateTime.utc(date.year, date.month, date.day),
+      calculationParameters: params,
+      precision: true,
     );
+
+    DateTime toLocalTime(DateTime utc) {
+      final u = utc.toUtc();
+      return utcOffset != null ? u.add(utcOffset) : u.toLocal();
+    }
+
+    // Round to the nearest minute.
+    TimeOfDay tod(DateTime utc) {
+      final l = toLocalTime(utc).add(const Duration(seconds: 30));
+      return TimeOfDay(hour: l.hour, minute: l.minute);
+    }
+
+    return PrayerTimesModel(
+      date: DateTime(date.year, date.month, date.day),
+      fajr: tod(times.fajr),
+      sunrise: tod(times.sunrise),
+      dhuhr: tod(times.dhuhr),
+      asr: tod(times.asr),
+      maghrib: tod(times.maghrib),
+      isha: tod(times.isha),
+      imsak: tod(times.fajr.subtract(const Duration(minutes: 10))),
+      utcOffset: utcOffset,
+    );
+  }
+
+  /// Whether this schedule belongs to the same calendar day as [other].
+  bool isSameDay(DateTime other) =>
+      date.year == other.year &&
+      date.month == other.month &&
+      date.day == other.day;
+
+  /// The current moment expressed as wall-clock time at the schedule's place.
+  /// Use this (not the raw device time) with [getUpcomingStatus] and
+  /// [isSameDay] so a city in another time zone counts down correctly.
+  DateTime wallNow(DateTime now) {
+    final off = utcOffset;
+    if (off == null) return now;
+    final u = now.toUtc().add(off);
+    return DateTime(u.year, u.month, u.day, u.hour, u.minute, u.second);
+  }
+
+  /// The absolute instant of [time] on this schedule's day (for alarms).
+  DateTime instant(TimeOfDay time) {
+    final off = utcOffset;
+    if (off == null) return toDateTime(time);
+    return DateTime.utc(date.year, date.month, date.day, time.hour, time.minute)
+        .subtract(off);
   }
 
   DateTime toDateTime(TimeOfDay time) {
