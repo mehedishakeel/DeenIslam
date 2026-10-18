@@ -40,13 +40,8 @@
   <main class="container mx-auto px-4 md:px-6 py-10 md:py-14 flex-grow max-w-7xl">
     <!-- Architectural Header -->
     <div class="text-center mb-10">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-        ঐশী বাণী ও হেদায়াত
-      </div>
       <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-3">পবিত্র আল-কুরআন</h1>
       <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">১১৪টি সূরা ও ৩০টি পারার বিশুদ্ধ তিলাওয়াত, বাংলা অনুবাদ ও অডিও সংকলন।</p>
-      <div class="w-16 h-1 bg-emerald-600 dark:bg-emerald-500 mx-auto rounded-full mt-5"></div>
     </div>
     
     <!-- Last Read Ayah Card (Architectural Sanctuary) -->
@@ -96,9 +91,6 @@
         </div>
       </div>
     </div>
-    <p id="search-tip-text" class="mt-[-1.5rem] mb-10 text-xs text-slate-500 dark:text-slate-400 text-center px-4">
-      <span class="font-bold text-emerald-600 dark:text-emerald-400">পরামর্শ:</span> "১" লিখে প্রথম সূরা, "বাকারা" লিখে নির্দিষ্ট সূরা, অথবা "আয়াত ২৫৫" লিখে সেই আয়াতটি যে সূরায় আছে তা খুঁজে পাবেন।
-    </p>
 
     <!-- Surah Grid Container -->
     <div id="quran-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
@@ -706,7 +698,6 @@
       const juzGrid = document.getElementById('juz-grid');
       const pagination = document.getElementById('pagination-controls');
       const surahControls = document.getElementById('surah-controls');
-      const searchTip = document.getElementById('search-tip-text');
 
       if (mode === 'juz') {
         surahBtn.className = "px-5 py-2 rounded-lg font-bold text-xs md:text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400";
@@ -715,7 +706,6 @@
         juzGrid.classList.remove('hidden');
         pagination.classList.add('hidden');
         surahControls.classList.add('hidden');
-        searchTip.classList.add('hidden');
         renderJuzList();
       } else {
         juzBtn.className = "px-5 py-2 rounded-lg font-bold text-xs md:text-sm transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400";
@@ -724,7 +714,6 @@
         surahGrid.classList.remove('hidden');
         pagination.classList.remove('hidden');
         surahControls.classList.remove('hidden');
-        searchTip.classList.remove('hidden');
         renderSurahs();
       }
     };

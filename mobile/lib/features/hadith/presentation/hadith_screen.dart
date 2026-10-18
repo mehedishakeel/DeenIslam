@@ -65,7 +65,7 @@ class _HadithScreenState extends State<HadithScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'হাদিস শরীফ সংকলন',
+          'বিশুদ্ধ হাদিস গ্রন্থসমূহ',
           style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold),
         ),
       ),
@@ -75,12 +75,12 @@ class _HadithScreenState extends State<HadithScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Header Banner Card
+            // Search & Selection Card
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: isDark ? AppColors.cardDark : Colors.white,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: isDark ? AppColors.borderDark : AppColors.borderLight,
                   width: 0.8,
@@ -89,44 +89,6 @@ class _HadithScreenState extends State<HadithScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'সিহাহ সিত্তাহ ও মুয়াত্তা',
-                          style: GoogleFonts.hindSiliguri(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.emerald,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'বিশুদ্ধ হাদিস গ্রন্থসমূহ',
-                    style: GoogleFonts.hindSiliguri(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? Colors.white : AppColors.textPrimaryLight,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'রাসূলুল্লাহ (সা.)-এর সুন্নাহ ও দিকনির্দেশনার নির্ভরযোগ্য সংকলন ও বাংলা অনুবাদ',
-                    style: GoogleFonts.hindSiliguri(
-                      fontSize: 12,
-                      color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-
                   // Book Dropdown + Search Bar
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),

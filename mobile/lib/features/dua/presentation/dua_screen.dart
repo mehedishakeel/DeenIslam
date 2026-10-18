@@ -106,7 +106,7 @@ class _DuaScreenState extends State<DuaScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "হিসনুল মুসলিম - নিত্যদিনের দোয়া",
+          "দৈনন্দিন দো'আ ও জিকির",
           style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold),
         ),
       ),
