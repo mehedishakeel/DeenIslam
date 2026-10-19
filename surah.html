@@ -670,34 +670,24 @@
     };
 
     window.shareVerseAsImage = (index) => {
-        const element = document.getElementById(`verse-${index}`);
-        if (!element) return;
-        
-        window.showToast('ছবি তৈরি হচ্ছে...');
-        
-        // Get the header part to hide buttons
-        const actionButtons = element.querySelector('.flex.justify-between.items-start');
-        if (actionButtons) actionButtons.style.visibility = 'hidden';
-        
-        html2canvas(element, {
-            backgroundColor: document.documentElement.classList.contains('dark') ? '#0f172a' : '#ffffff',
-            scale: 3,
-            useCORS: true,
-            logging: false,
-            borderRadius: 20
-        }).then(canvas => {
-            if (actionButtons) actionButtons.style.visibility = 'visible';
-            
-            const link = document.createElement('a');
-            link.download = `DeenIslam-Ayah-${surahId}-${index + 1}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            window.showToast('ছবি ডাউনলোড সম্পন্ন হয়েছে!');
-        }).catch(err => {
-            if (actionButtons) actionButtons.style.visibility = 'visible';
-            console.error('Sharing failed:', err);
-            window.showToast('দুঃখিত, ছবি তৈরিতে সমস্যা হয়েছে।');
-        });
+        const arabicAyah = allAyahs[index];
+        const bengaliAyah = bengaliData && bengaliData.ayahs ? bengaliData.ayahs[index] : null;
+        if (!arabicAyah || !bengaliAyah) return;
+
+        const surahMeta = surahs.find(s => s.id === parseInt(surahId));
+        const sName = surahMeta ? surahMeta.name : `সূরা ${surahId}`;
+        const ayahNum = arabicAyah.numberInSurah || (index + 1);
+
+        if (window.openShareCardModal) {
+            window.openShareCardModal({
+                category: "পবিত্র আল-কুরআন",
+                title: `${sName} [${toBengaliNumerals(surahId)}:${toBengaliNumerals(ayahNum)}]`,
+                arabic: arabicAyah.text,
+                translation: bengaliAyah.text,
+                reference: `${sName} • আয়াত: ${toBengaliNumerals(ayahNum)}`,
+                fileName: `DeenIslam-Ayah-${surahId}-${ayahNum}`
+            });
+        }
     };
     </script>
 

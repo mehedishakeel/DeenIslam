@@ -974,3 +974,388 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 });
+
+// =========================================================================
+// UNIVERSAL BRANDED SHARE CARD ENGINE (DeenIslam Share Engine)
+// =========================================================================
+(function() {
+    let currentShareData = null;
+    let currentTheme = 'emerald'; // 'emerald' | 'ivory' | 'midnight'
+
+    function loadHtml2Canvas() {
+        if (window.html2canvas) return Promise.resolve(window.html2canvas);
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+            script.onload = () => resolve(window.html2canvas);
+            script.onerror = () => reject(new Error('html2canvas লোড হতে ব্যর্থ হয়েছে'));
+            document.head.appendChild(script);
+        });
+    }
+
+    function createModalIfNeeded() {
+        let modal = document.getElementById('deen-share-modal');
+        if (modal) return modal;
+
+        modal = document.createElement('div');
+        modal.id = 'deen-share-modal';
+        modal.className = 'fixed inset-0 z-[600] hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto transition-opacity duration-200';
+        modal.innerHTML = `
+            <div class="bg-white dark:bg-[#0f172a] rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl border border-stone-200/90 dark:border-slate-800 flex flex-col my-auto max-h-[94vh]">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-stone-100 dark:border-slate-800 shrink-0">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
+                            <span>📤</span>
+                            <span>শেয়ার ইমেজ কার্ড</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">সোশ্যাল মিডিয়ায় শেয়ার করার জন্য ব্র্যান্ডেড ইমেজ তৈরি করুন</p>
+                    </div>
+                    <button onclick="window.closeShareCardModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center font-bold text-sm" title="বন্ধ করুন">
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Theme Selection Segmented Bar -->
+                <div class="flex items-center justify-between mb-4 gap-2 flex-wrap shrink-0">
+                    <span class="text-xs font-bold text-slate-600 dark:text-slate-300">কার্ড থিম:</span>
+                    <div class="inline-flex bg-stone-100 dark:bg-slate-800/80 p-1 rounded-xl border border-stone-200/70 dark:border-slate-700/70 text-xs font-bold">
+                        <button onclick="window.setShareCardTheme('emerald')" id="theme-btn-emerald" class="px-3 py-1.5 rounded-lg transition-all bg-emerald-600 text-white shadow-xs">
+                            🌿 এমারেল্ড
+                        </button>
+                        <button onclick="window.setShareCardTheme('ivory')" id="theme-btn-ivory" class="px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600">
+                            📜 আইভরি
+                        </button>
+                        <button onclick="window.setShareCardTheme('midnight')" id="theme-btn-midnight" class="px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600">
+                            🌙 মিডনাইট
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Scroll Container -->
+                <div class="overflow-y-auto flex-grow rounded-2xl mb-4 p-2 bg-stone-100/60 dark:bg-slate-950/60 border border-stone-200/60 dark:border-slate-800 flex justify-center items-center">
+                    <div id="share-card-container" class="w-full max-w-[620px]">
+                        <!-- Card rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-stone-100 dark:border-slate-800 shrink-0">
+                    <button onclick="window.copyShareCardText()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-stone-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-slate-800 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <span>📋</span>
+                        <span>টেক্সট কপি</span>
+                    </button>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <button id="native-share-btn" onclick="window.nativeShareCard()" class="hidden sm:inline-flex px-4 py-2.5 rounded-xl border border-emerald-500/40 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-xs font-bold transition-all items-center justify-center gap-2">
+                            <span>📲</span>
+                            <span>শেয়ার</span>
+                        </button>
+                        <button onclick="window.downloadShareCardImage()" id="download-card-btn" class="flex-grow sm:flex-initial px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            <span>ডাউনলোড (HD PNG)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) window.closeShareCardModal();
+        });
+
+        // Show native share button if supported
+        if (navigator.share) {
+            const nativeBtn = modal.querySelector('#native-share-btn');
+            if (nativeBtn) nativeBtn.classList.remove('hidden');
+        }
+
+        return modal;
+    }
+
+    function renderCardHTML(data, theme) {
+        // Theme configs
+        let cardStyle = '';
+        let headerPillStyle = '';
+        let logoBg = '';
+        let arabicColor = '';
+        let dividerColor = '';
+        let textColor = '';
+        let footerBorder = '';
+        let footerMuted = '';
+        let footerUrl = '';
+
+        if (theme === 'emerald') {
+            cardStyle = 'background: linear-gradient(135deg, #064e3b 0%, #022c22 55%, #064e3b 100%); color: #ffffff; border: 1.5px solid rgba(52, 211, 153, 0.35); box-shadow: 0 20px 40px -15px rgba(2, 44, 34, 0.7);';
+            headerPillStyle = 'background: rgba(255, 255, 255, 0.12); color: #fef08a; border: 1px solid rgba(255, 255, 255, 0.2);';
+            logoBg = 'background: #10b981; color: #ffffff;';
+            arabicColor = 'color: #fef08a;';
+            dividerColor = 'border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;';
+            textColor = 'color: #f0fdf4;';
+            footerBorder = 'border-color: rgba(255, 255, 255, 0.15);';
+            footerMuted = 'color: #a7f3d0;';
+            footerUrl = 'color: #34d399;';
+        } else if (theme === 'ivory') {
+            cardStyle = 'background: #fbfaf8; color: #0f172a; border: 1.5px solid #e2e8f0; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);';
+            headerPillStyle = 'background: #ecfdf5; color: #065f46; border: 1px solid rgba(5, 150, 105, 0.25);';
+            logoBg = 'background: #059669; color: #ffffff;';
+            arabicColor = 'color: #064e3b;';
+            dividerColor = 'border-color: rgba(5, 150, 105, 0.3); color: #059669;';
+            textColor = 'color: #1e293b;';
+            footerBorder = 'border-color: #e2e8f0;';
+            footerMuted = 'color: #64748b;';
+            footerUrl = 'color: #059669;';
+        } else { // midnight
+            cardStyle = 'background: linear-gradient(135deg, #0b1120 0%, #020617 100%); color: #f8fafc; border: 1.5px solid #1e293b; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);';
+            headerPillStyle = 'background: rgba(30, 41, 59, 0.8); color: #6ee7b7; border: 1px solid #334155;';
+            logoBg = 'background: #10b981; color: #ffffff;';
+            arabicColor = 'color: #34d399;';
+            dividerColor = 'border-color: rgba(16, 185, 129, 0.3); color: #10b981;';
+            textColor = 'color: #e2e8f0;';
+            footerBorder = 'border-color: #1e293b;';
+            footerMuted = 'color: #94a3b8;';
+            footerUrl = 'color: #34d399;';
+        }
+
+        const isQuran = data.category && data.category.includes('কুরআন');
+        const ayahMarker = isQuran ? ' ۝' : '';
+
+        return `
+            <div id="the-rendered-share-card" class="w-full rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all select-none" style="${cardStyle} font-family: 'Hind Siliguri', sans-serif;">
+                <!-- Header Branding -->
+                <div class="flex items-center justify-between gap-3 pb-4 border-b" style="${footerBorder}">
+                    <!-- Logo & Brand Name -->
+                    <div class="flex items-center space-x-2.5">
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-base shadow-sm" style="${logoBg}">
+                            <span>🌙</span>
+                        </div>
+                        <div class="flex flex-col text-left">
+                            <span class="text-base sm:text-lg font-black tracking-tight leading-none">DeenIslam</span>
+                            <span class="text-[10px] font-bold tracking-wider leading-none mt-1 opacity-80">দ্বীন ইসলাম</span>
+                        </div>
+                    </div>
+
+                    <!-- Category & Title Pill -->
+                    <div class="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold tracking-wide" style="${headerPillStyle}">
+                        ${data.category} • ${data.title}
+                    </div>
+                </div>
+
+                <!-- Sacred Arabic Content -->
+                ${data.arabic ? `
+                    <div class="my-6 sm:my-8 text-center" dir="rtl">
+                        <p class="font-arabic text-2xl sm:text-3xl lg:text-[32px] leading-[2.4] font-normal" style="${arabicColor} font-family: 'Amiri', serif;">
+                            ${data.arabic}${ayahMarker}
+                        </p>
+                    </div>
+                ` : ''}
+
+                <!-- Ornamental Islamic Divider -->
+                <div class="flex items-center justify-center my-3 opacity-75">
+                    <div class="h-[1px] w-12 sm:w-16 border-t" style="${dividerColor}"></div>
+                    <span class="mx-3 text-[11px] sm:text-xs tracking-widest font-serif" style="${dividerColor}">❖ ۞ ❖</span>
+                    <div class="h-[1px] w-12 sm:w-16 border-t" style="${dividerColor}"></div>
+                </div>
+
+                <!-- Bengali Translation -->
+                <div class="text-center px-2 sm:px-4 my-4">
+                    <p class="text-base sm:text-lg leading-relaxed font-medium" style="${textColor}">
+                        “${data.translation}”
+                    </p>
+                </div>
+
+                <!-- Transliteration (if provided) -->
+                ${data.transliteration ? `
+                    <div class="text-center px-4 mb-4">
+                        <p class="text-xs sm:text-sm italic opacity-75" style="${textColor}">
+                            উচ্চারণ: ${data.transliteration}
+                        </p>
+                    </div>
+                ` : ''}
+
+                <!-- Footer Attribution & Authentic Source -->
+                <div class="mt-6 pt-4 border-t flex flex-wrap items-center justify-between gap-3 text-xs" style="${footerBorder}">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                        <span class="font-mono font-bold tracking-wider" style="${footerUrl}">deenislam.org</span>
+                        <span class="opacity-40">•</span>
+                        <span class="text-[11px] font-medium" style="${footerMuted}">সত্য ও হেদায়াতের বার্তা</span>
+                    </div>
+                    <div class="font-bold text-[11px] sm:text-xs tracking-wide" style="${footerMuted}">
+                        ${data.reference || 'পবিত্র আল-কুরআন'}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function updatePreview() {
+        if (!currentShareData) return;
+        const container = document.getElementById('share-card-container');
+        if (container) {
+            container.innerHTML = renderCardHTML(currentShareData, currentTheme);
+        }
+
+        // Update active theme button styling
+        ['emerald', 'ivory', 'midnight'].forEach(t => {
+            const btn = document.getElementById(`theme-btn-${t}`);
+            if (!btn) return;
+            if (t === currentTheme) {
+                btn.className = 'px-3 py-1.5 rounded-lg transition-all bg-emerald-600 text-white shadow-xs';
+            } else {
+                btn.className = 'px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600';
+            }
+        });
+    }
+
+    window.openShareCardModal = function(data) {
+        currentShareData = {
+            category: data.category || 'পবিত্র আল-কুরআন',
+            title: data.title || 'আয়াত',
+            arabic: data.arabic || '',
+            translation: data.translation || data.text || '',
+            transliteration: data.transliteration || '',
+            reference: data.reference || 'আল-কুরআন',
+            fileName: data.fileName || 'DeenIslam-Share'
+        };
+
+        const modal = createModalIfNeeded();
+        updatePreview();
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeShareCardModal = function() {
+        const modal = document.getElementById('deen-share-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    };
+
+    window.setShareCardTheme = function(theme) {
+        currentTheme = theme;
+        updatePreview();
+    };
+
+    window.downloadShareCardImage = async function() {
+        const card = document.getElementById('the-rendered-share-card');
+        if (!card) return;
+
+        const downloadBtn = document.getElementById('download-card-btn');
+        const origText = downloadBtn ? downloadBtn.innerHTML : '';
+        if (downloadBtn) {
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = `
+                <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                </svg>
+                <span>তৈরি হচ্ছে...</span>
+            `;
+        }
+
+        try {
+            const html2canvas = await loadHtml2Canvas();
+
+            // Render high-res 800px width canvas
+            const origWidth = card.style.width;
+            card.style.width = '780px';
+            card.style.maxWidth = '780px';
+
+            const canvas = await html2canvas(card, {
+                scale: 2.5,
+                useCORS: true,
+                backgroundColor: null,
+                logging: false
+            });
+
+            card.style.width = origWidth;
+            card.style.maxWidth = '';
+
+            const link = document.createElement('a');
+            const safeName = (currentShareData?.fileName || 'DeenIslam-Verse').replace(/[\/\?<>\\:\*\|":]/g, '-');
+            link.download = `${safeName}-${currentTheme}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+
+            if (window.showToast) {
+                window.showToast('ব্র্যান্ডেড ছবি ডাউনলোড সম্পন্ন হয়েছে!');
+            }
+        } catch (err) {
+            console.error('Card generation failed:', err);
+            if (window.showToast) {
+                window.showToast('দুঃখিত, ছবি তৈরিতে সমস্যা হয়েছে।');
+            }
+        } finally {
+            if (downloadBtn) {
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = origText;
+            }
+        }
+    };
+
+    window.copyShareCardText = function() {
+        if (!currentShareData) return;
+        const text = `${currentShareData.category} • ${currentShareData.title}\n\n${currentShareData.arabic ? currentShareData.arabic + '\n\n' : ''}“${currentShareData.translation}”\n\nরেফারেন্স: ${currentShareData.reference}\nউৎস: deenislam.org`;
+        if (window.copyToClipboard) {
+            window.copyToClipboard(text);
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => {
+                if (window.showToast) window.showToast('টেক্সট কপি করা হয়েছে!');
+            });
+        }
+    };
+
+    window.nativeShareCard = async function() {
+        if (!navigator.share) {
+            window.downloadShareCardImage();
+            return;
+        }
+
+        const card = document.getElementById('the-rendered-share-card');
+        if (!card) return;
+
+        try {
+            const html2canvas = await loadHtml2Canvas();
+            const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null });
+            
+            canvas.toBlob(async (blob) => {
+                if (!blob) {
+                    window.downloadShareCardImage();
+                    return;
+                }
+                const file = new File([blob], `${currentShareData?.fileName || 'DeenIslam'}.png`, { type: 'image/png' });
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        title: currentShareData?.title || 'DeenIslam Verse',
+                        text: `“${currentShareData?.translation || ''}” — ${currentShareData?.reference || 'deenislam.org'}`,
+                        files: [file]
+                    });
+                } else {
+                    await navigator.share({
+                        title: currentShareData?.title || 'DeenIslam Verse',
+                        text: `“${currentShareData?.translation || ''}” — ${currentShareData?.reference || 'deenislam.org'}`,
+                        url: 'https://deenislam.org'
+                    });
+                }
+            });
+        } catch (e) {
+            console.log('Native share skipped or failed:', e);
+        }
+    };
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('deen-share-modal');
+            if (modal && !modal.classList.contains('hidden')) {
+                window.closeShareCardModal();
+            }
+        }
+    });
+})();
+

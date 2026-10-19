@@ -415,34 +415,23 @@
     };
 
     window.shareHadithAsImage = (hNum) => {
-        const element = document.querySelector(`[data-num="${hNum}"]`);
-        if (!element) return;
-        
-        window.showToast('ছবি তৈরি হচ্ছে...');
-        
-        // Hide buttons for a clean share image
-        const headerButtons = element.querySelector('.flex.items-center.space-x-2');
-        if (headerButtons) headerButtons.style.visibility = 'hidden';
-        
-        html2canvas(element, {
-            backgroundColor: document.documentElement.classList.contains('dark') ? '#0f172a' : '#ffffff',
-            scale: 3,
-            useCORS: true,
-            logging: false,
-            borderRadius: 20
-        }).then(canvas => {
-            if (headerButtons) headerButtons.style.visibility = 'visible';
-            
-            const link = document.createElement('a');
-            link.download = `DeenIslam-Hadith-${bookSlug}-${hNum}.png`;
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-            window.showToast('ছবি ডাউনলোড সম্পন্ন হয়েছে!');
-        }).catch(err => {
-            if (headerButtons) headerButtons.style.visibility = 'visible';
-            console.error('Sharing failed:', err);
-            window.showToast('দুঃখিত, ছবি তৈরিতে সমস্যা হয়েছে।');
-        });
+        const hadith = allHadiths.find(h => String(h.hadithNumber) === String(hNum));
+        if (!hadith) return;
+
+        const bName = bookMapping[bookSlug] || 'হাদিস শরীফ';
+        const formattedNum = toBengaliNumerals(hNum);
+        const cleanText = (hadith.text || '').replace(/<[^>]*>?/gm, '').trim();
+
+        if (window.openShareCardModal) {
+            window.openShareCardModal({
+                category: "বিশুদ্ধ হাদিস শরীফ",
+                title: `${bName} : হাদিস ${formattedNum}`,
+                arabic: hadith.arabic || '',
+                translation: cleanText,
+                reference: `${bName} • হাদিস নং ${formattedNum}`,
+                fileName: `DeenIslam-Hadith-${bookSlug}-${hNum}`
+            });
+        }
     };
 
     // Initialize Recent Search
