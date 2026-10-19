@@ -1132,21 +1132,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return `
             <div id="the-rendered-share-card" class="w-full rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all select-none" style="${cardStyle} font-family: 'Hind Siliguri', sans-serif;">
                 <!-- Header Branding -->
-                <div class="flex items-center justify-between gap-3 pb-4 border-b" style="${footerBorder}">
+                <div class="flex items-center justify-between gap-3 pb-4 border-b flex-wrap sm:flex-nowrap" style="${footerBorder}">
                     <!-- Logo & Brand Name -->
-                    <div class="flex items-center space-x-2.5">
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-base shadow-sm" style="${logoBg}">
-                            <span>🌙</span>
+                    <div class="flex items-center gap-2.5 shrink-0">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm shrink-0" style="${logoBg}">
+                            <svg class="w-5 h-5 shrink-0 ${theme === 'ivory' ? 'text-white' : 'text-amber-300'}" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                            </svg>
                         </div>
-                        <div class="flex flex-col text-left">
+                        <div class="flex flex-col justify-center text-left">
                             <span class="text-base sm:text-lg font-black tracking-tight leading-none">DeenIslam</span>
-                            <span class="text-[10px] font-bold tracking-wider leading-none mt-1 opacity-80">দ্বীন ইসলাম</span>
+                            <span class="text-[10px] sm:text-[11px] font-semibold tracking-wider leading-none mt-1 opacity-80">দ্বীন ইসলাম</span>
                         </div>
                     </div>
 
                     <!-- Category & Title Pill -->
-                    <div class="px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold tracking-wide" style="${headerPillStyle}">
-                        ${data.category} • ${data.title}
+                    <div class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide text-center shrink-0 border shadow-xs" style="${headerPillStyle} line-height: 1.4;">
+                        <span>${data.category} • ${data.title}</span>
                     </div>
                 </div>
 
@@ -1184,13 +1186,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <!-- Footer Attribution & Authentic Source -->
                 <div class="mt-6 pt-4 border-t flex flex-wrap items-center justify-between gap-3 text-xs" style="${footerBorder}">
-                    <div class="flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-                        <span class="font-mono font-bold tracking-wider" style="${footerUrl}">deenislam.org</span>
-                        <span class="opacity-40">•</span>
-                        <span class="text-[11px] font-medium" style="${footerMuted}">সত্য ও হেদায়াতের বার্তা</span>
+                    <div class="inline-flex items-center gap-2 leading-none">
+                        <svg class="w-3.5 h-3.5 shrink-0" style="${footerUrl}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                        <span class="font-mono font-bold tracking-wider text-xs inline-flex items-center" style="${footerUrl}">deenislam.org</span>
+                        <span class="opacity-40 text-xs inline-flex items-center">•</span>
+                        <span class="text-[11px] font-medium inline-flex items-center" style="${footerMuted}">সত্য ও হেদায়াতের বার্তা</span>
                     </div>
-                    <div class="font-bold text-[11px] sm:text-xs tracking-wide" style="${footerMuted}">
+                    <div class="font-bold text-[11px] sm:text-xs tracking-wide inline-flex items-center" style="${footerMuted}">
                         ${data.reference || 'পবিত্র আল-কুরআন'}
                     </div>
                 </div>
