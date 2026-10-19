@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -415,12 +415,19 @@
     };
 
     window.shareHadithAsImage = (hNum) => {
-        const hadith = allHadiths.find(h => String(h.hadithNumber) === String(hNum));
+        const hadith = allHadiths.find(h => 
+            String(h.hadithnumber) === String(hNum) || 
+            String(h.hadithNumber) === String(hNum) ||
+            String(h.hadith_number) === String(hNum)
+        ) || (currentFilteredHadiths && currentFilteredHadiths.find(h => 
+            String(h.hadithnumber) === String(hNum) || 
+            String(h.hadithNumber) === String(hNum)
+        ));
         if (!hadith) return;
 
         const bName = bookMapping[bookSlug] || 'হাদিস শরীফ';
         const formattedNum = toBengaliNumerals(hNum);
-        const cleanText = (hadith.text || '').replace(/<[^>]*>?/gm, '').trim();
+        const cleanText = (hadith.text || '').replace(/<[^>]*>?/gm, '').replace(/^[।\s]+/, '').trim();
 
         if (window.openShareCardModal) {
             window.openShareCardModal({

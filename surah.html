@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -279,6 +279,8 @@
     let isPaused = false;
     let currentVerseIndex = 0;
     let allAyahs = [];
+    let allArabicAyahs = [];
+    let allBengaliAyahs = [];
     let activeVerseIndex = -1;
     let selectedReciter = localStorage.getItem('selected_reciter') || 'ar.alafasy';
     let repeatCount = parseInt(localStorage.getItem('quran_repeat_mode')) || 1;
@@ -367,7 +369,9 @@
       const surahMeta = surahs.find(s => s.id === parseInt(surahId));
       const displayName = surahMeta ? surahMeta.name : arabicData.englishName;
 
-      allAyahs = audioData.ayahs;
+      allAyahs = audioData.ayahs || [];
+      allArabicAyahs = arabicData.ayahs || [];
+      allBengaliAyahs = bengaliData.ayahs || [];
 
       document.getElementById('surah-name').innerText = `সূরা ${displayName}`; 
       document.getElementById('bar-surah-name').innerText = `সূরা ${displayName}`; 
@@ -670,8 +674,8 @@
     };
 
     window.shareVerseAsImage = (index) => {
-        const arabicAyah = allAyahs[index];
-        const bengaliAyah = bengaliData && bengaliData.ayahs ? bengaliData.ayahs[index] : null;
+        const arabicAyah = allArabicAyahs[index] || allAyahs[index];
+        const bengaliAyah = allBengaliAyahs[index];
         if (!arabicAyah || !bengaliAyah) return;
 
         const surahMeta = surahs.find(s => s.id === parseInt(surahId));
@@ -682,8 +686,8 @@
             window.openShareCardModal({
                 category: "পবিত্র আল-কুরআন",
                 title: `${sName} [${toBengaliNumerals(surahId)}:${toBengaliNumerals(ayahNum)}]`,
-                arabic: arabicAyah.text,
-                translation: bengaliAyah.text,
+                arabic: arabicAyah.text || '',
+                translation: bengaliAyah.text || '',
                 reference: `${sName} • আয়াত: ${toBengaliNumerals(ayahNum)}`,
                 fileName: `DeenIslam-Ayah-${surahId}-${ayahNum}`
             });

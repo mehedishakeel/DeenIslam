@@ -986,9 +986,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.html2canvas) return Promise.resolve(window.html2canvas);
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
             script.onload = () => resolve(window.html2canvas);
-            script.onerror = () => reject(new Error('html2canvas লোড হতে ব্যর্থ হয়েছে'));
+            script.onerror = () => {
+                const fallback = document.createElement('script');
+                fallback.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+                fallback.onload = () => resolve(window.html2canvas);
+                fallback.onerror = () => reject(new Error('html2canvas লোড হতে ব্যর্থ হয়েছে'));
+                document.head.appendChild(fallback);
+            };
             document.head.appendChild(script);
         });
     }
@@ -1280,7 +1286,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const safeName = (currentShareData?.fileName || 'DeenIslam-Verse').replace(/[\/\?<>\\:\*\|":]/g, '-');
             link.download = `${safeName}-${currentTheme}.png`;
             link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
             link.click();
+            setTimeout(() => {
+                if (link.parentNode) link.parentNode.removeChild(link);
+            }, 100);
 
             if (window.showToast) {
                 window.showToast('ব্র্যান্ডেড ছবি ডাউনলোড সম্পন্ন হয়েছে!');
