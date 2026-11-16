@@ -3,6 +3,17 @@ window.toBengaliNumerals = (n) => {
     return n.toString().replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
 };
 
+// Safe HTML Escaping (XSS Prevention)
+window.escapeHTML = (str) => {
+    if (str === null || str === undefined) return "";
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+};
+
 // Hijri Date Formatter (Bengali)
 window.formatHijriDate = (hijriObj) => {
     if (!hijriObj) return "";
@@ -423,19 +434,136 @@ const commandPaletteIndex = [
     { title: "মুসলিম কমিউনিটি ও প্রশ্নোত্তর (মাসআলা)", category: "কমিউনিটি", url: "community.html", keywords: "community forum masala faq ask question" },
     { title: "আপনার বুকমার্কসমূহ", category: "টুলস", url: "bookmarks.html", keywords: "bookmarks saved favorites verses hadith" },
 
-    // Important Surahs
-    { title: "সূরা ১: আল-ফাতিহা (Al-Fatihah)", category: "কুরআন সূরা", url: "surah.html?id=1", keywords: "fatihah 1 quran fatiha" },
-    { title: "সূরা ২: আল-বাকারা (Al-Baqarah)", category: "কুরআন সূরা", url: "surah.html?id=2", keywords: "baqarah 2 bakara ayatul kursi" },
-    { title: "সূরা ৩: আল-ইমরান (Ali 'Imran)", category: "কুরআন সূরা", url: "surah.html?id=3", keywords: "imran ali imran 3" },
-    { title: "সূরা ১৮: আল-কাহফ (Al-Kahf)", category: "কুরআন সূরা", url: "surah.html?id=18", keywords: "kahf kahaf 18 jummah" },
-    { title: "সূরা ৩৬: ইয়াসীন (Ya-Sin)", category: "কুরআন সূরা", url: "surah.html?id=36", keywords: "yasin yaseen 36 quran heart" },
-    { title: "সূরা ৫৫: আর-রাহমান (Ar-Rahman)", category: "কুরআন সূরা", url: "surah.html?id=55", keywords: "rahman rahman 55" },
-    { title: "সূরা ৫৬: আল-ওয়াকিয়াহ (Al-Waqi'ah)", category: "কুরআন সূরা", url: "surah.html?id=56", keywords: "waqiah waqia 56" },
-    { title: "সূরা ৬৭: আল-মুলক (Al-Mulk)", category: "কুরআন সূরা", url: "surah.html?id=67", keywords: "mulk tabarakal lazi 67" },
-    { title: "সূরা ১১২: আল-ইখলাস (Al-Ikhlas)", category: "কুরআন সূরা", url: "surah.html?id=112", keywords: "ikhlas qul huwallah 112" },
-    { title: "সূরা ১১৩: আল-ফালাক্ব (Al-Falaq)", category: "কুরআন সূরা", url: "surah.html?id=113", keywords: "falaq falaq 113" },
-    { title: "সূরা ১১৪: আন-নাস (An-Nas)", category: "কুরআন সূরা", url: "surah.html?id=114", keywords: "nas naas 114" }
+    // All 114 Surahs populated below
 ];
+
+// --- All 114 Quran Surahs for Instant Search ---
+const ALL_114_SURAHS = [
+    [1, "আল-ফাতিহা", "Al-Fatihah", "الفاتحة"],
+    [2, "আল-বাকারা", "Al-Baqarah", "البقرة"],
+    [3, "আলে ইমরান", "Ali 'Imran", "آل عمران"],
+    [4, "আন-নিসা", "An-Nisa", "النساء"],
+    [5, "আল-মায়েদা", "Al-Ma'idah", "المائدة"],
+    [6, "আল-আনআম", "Al-An'am", "الأنعام"],
+    [7, "আল-আরাফ", "Al-A'raf", "الأعراف"],
+    [8, "আল-আনফাল", "Al-Anfal", "الأنفال"],
+    [9, "আত-তাওবাহ", "At-Tawbah", "التوبة"],
+    [10, "ইউনুস", "Yunus", "يونس"],
+    [11, "হূদ", "Hud", "هود"],
+    [12, "ইউসুফ", "Yusuf", "يوسف"],
+    [13, "আর-রাদ", "Ar-Ra'd", "الرعد"],
+    [14, "ইবরাহীম", "Ibrahim", "إبراهيم"],
+    [15, "আল-হিজর", "Al-Hijr", "الحجر"],
+    [16, "আন-নাহল", "An-Nahl", "النحل"],
+    [17, "বনী ইসরাঈল", "Al-Isra", "الإسراء"],
+    [18, "আল-কাহফ", "Al-Kahf", "الكهف"],
+    [19, "মারইয়াম", "Maryam", "مريم"],
+    [20, "ত্বা-হা", "Taha", "طه"],
+    [21, "আল-আম্বিয়া", "Al-Anbiya", "الأنبياء"],
+    [22, "আল-হাজ্জ", "Al-Hajj", "الحج"],
+    [23, "আল-মু'মিনূন", "Al-Mu'minun", "المؤمنون"],
+    [24, "আন-নূর", "An-Nur", "النور"],
+    [25, "আল-ফুরকান", "Al-Furqan", "الفرقان"],
+    [26, "আশ-শুআরা", "Ash-Shu'ara", "الشعراء"],
+    [27, "আন-নামল", "An-Naml", "النمل"],
+    [28, "আল-কাসাস", "Al-Qasas", "القصص"],
+    [29, "আল-আনকাবূত", "Al-Ankabut", "العنكبوت"],
+    [30, "আর-রূম", "Ar-Rum", "الروم"],
+    [31, "লুকমান", "Luqman", "لقمان"],
+    [32, "আস-সাজদাহ", "As-Sajdah", "السجدة"],
+    [33, "আল-আহযাব", "Al-Ahzab", "الأحزاب"],
+    [34, "সাবা", "Saba", "سبأ"],
+    [35, "ফাতির", "Fatir", "فاطر"],
+    [36, "ইয়াসীন", "Ya-Sin", "يس"],
+    [37, "আস-সাফফাত", "As-Saffat", "الصافات"],
+    [38, "সোয়াদ", "Sad", "ص"],
+    [39, "আজ-জুমার", "Az-Zumar", "الزمر"],
+    [40, "গাফির", "Ghafir", "غافر"],
+    [41, "ফুসসিলাত", "Fussilat", "فصلت"],
+    [42, "আশ-শূরা", "Ash-Shura", "الشورى"],
+    [43, "আজ-যুখরুফ", "Az-Zukhruf", "الزخرف"],
+    [44, "আদ-দুখান", "Ad-Dukhan", "الدخان"],
+    [45, "আল-জাসিয়াহ", "Al-Jathiyah", "الجاثية"],
+    [46, "আল-আহকাফ", "Al-Ahqaf", "الأحقاف"],
+    [47, "মুহাম্মদ", "Muhammad", "محمد"],
+    [48, "আল-ফাতহ", "Al-Fath", "الفتح"],
+    [49, "আল-হুজুরাত", "Al-Hujurat", "الحجرات"],
+    [50, "ক্বাফ", "Qaf", "ق"],
+    [51, "আয-যারিয়াত", "Adh-Dhariyat", "الذاريات"],
+    [52, "আত-তূর", "At-Tur", "الطور"],
+    [53, "আন-নাজম", "An-Najm", "النجم"],
+    [54, "আল-কামার", "Al-Qamar", "القمر"],
+    [55, "আর-রাহমান", "Ar-Rahman", "الرحمن"],
+    [56, "আল-ওয়াকিয়া", "Al-Waqi'ah", "الواقعة"],
+    [57, "আল-হাদীদ", "Al-Hadid", "الحديد"],
+    [58, "আল-মুজাদালাহ", "Al-Mujadila", "المجادلة"],
+    [59, "আল-হাশর", "Al-Hashr", "الحشر"],
+    [60, "আল-মুমতাহিনাহ", "Al-Mumtahanah", "الممتحنة"],
+    [61, "আস-সাফ", "As-Saf", "الصف"],
+    [62, "আল-জুমুআহ", "Al-Jumu'ah", "الجمعة"],
+    [63, "আল-মুনাফিকুন", "Al-Munafiqun", "المنافقون"],
+    [64, "আত-তাগাবুন", "At-Taghabun", "التغابن"],
+    [65, "আত-তালাক", "At-Talaq", "الطلاق"],
+    [66, "আত-তাহরীম", "At-Tahrim", "التحريم"],
+    [67, "আল-মুলক", "Al-Mulk", "الملك"],
+    [68, "আল-কলম", "Al-Qalam", "القلم"],
+    [69, "আল-হাক্কাহ", "Al-Haqqah", "الحاقة"],
+    [70, "আল-মাআরিজ", "Al-Ma'arij", "المعارج"],
+    [71, "নূহ", "Nuh", "نوح"],
+    [72, "আল-জ্বিন", "Al-Jinn", "الجن"],
+    [73, "আল-মুযযাম্মিল", "Al-Muzzammil", "المزمل"],
+    [74, "আল-মুদ্দাসসির", "Al-Muddaththir", "المدثر"],
+    [75, "আল-কিয়ামাহ", "Al-Qiyamah", "القيامة"],
+    [76, "আল-ইনসান", "Al-Insan", "الإنسان"],
+    [77, "আল-মুরসালাত", "Al-Mursalat", "المرسلات"],
+    [78, "আন-নাবা", "An-Naba", "النبأ"],
+    [79, "আন-নাযিআত", "An-Nazi'at", "الনাزعات"],
+    [80, "আবাসা", "Abasa", "عبس"],
+    [81, "আত-তাকবীর", "At-Takwir", "التكوير"],
+    [82, "আল-ইনফিতার", "Al-Infitar", "الانفطار"],
+    [83, "আল-মুতাফফিফীন", "Al-Mutaffifin", "المطففين"],
+    [84, "আল-ইনশিকাক", "Al-Inshiqaq", "الانشقاق"],
+    [85, "আল-বুরূজ", "Al-Buruj", "البروج"],
+    [86, "আত-তারিক", "At-Tariq", "الطارق"],
+    [87, "আল-আলা", "Al-A'la", "الأعلى"],
+    [88, "আল-গাশিয়াহ", "Al-Ghashiyah", "الغاشية"],
+    [89, "আল-ফজর", "Al-Fajr", "الفجر"],
+    [90, "আল-বালাদ", "Al-Balad", "البلد"],
+    [91, "আশ-শামস", "Ash-Shams", "الشمس"],
+    [92, "আল-লাইল", "Al-Layl", "الليل"],
+    [93, "আদ-দুহা", "Ad-Duha", "الضحى"],
+    [94, "আশ-শারহ", "Ash-Sharh", "الشرح"],
+    [95, "আত-তীন", "At-Tin", "التين"],
+    [96, "আল-আলাক", "Al-Alaq", "العلق"],
+    [97, "আল-ক্বদর", "Al-Qadr", "القدر"],
+    [98, "আল-বাইয়্যিনাহ", "Al-Bayyinah", "البينة"],
+    [99, "আয-যালযালাহ", "Az-Zalzalah", "الزلزلة"],
+    [100, "আল-আদিয়াত", "Al-Adiyat", "العاديات"],
+    [101, "আল-ক্বারিয়াহ", "Al-Qari'ah", "القارعة"],
+    [102, "আত-তাকাসুর", "At-Takathur", "التكاثر"],
+    [103, "আল-আসর", "Al-Asr", "العصر"],
+    [104, "আল-হুমাযাহ", "Al-Humazah", "الهمزة"],
+    [105, "আল-ফিল", "Al-Fil", "الفيل"],
+    [106, "কুরাইশ", "Quraysh", "قريش"],
+    [107, "আল-মাউন", "Al-Ma'un", "الماعون"],
+    [108, "আল-কাউসার", "Al-Kawthar", "الکوثر"],
+    [109, "আল-কাফিরুন", "Al-Kafirun", "الكافرون"],
+    [110, "আন-নাসর", "An-Nasr", "النصر"],
+    [111, "আল-লাহাব", "Al-Masad", "المসদ"],
+    [112, "আল-ইখলাস", "Al-Ikhlas", "الإخلاص"],
+    [113, "আল-ফালাক", "Al-Falaq", "الفلق"],
+    [114, "আন-নাস", "An-Nas", "الناس"]
+];
+
+ALL_114_SURAHS.forEach(s => {
+    commandPaletteIndex.push({
+        title: `সূরা ${s[0]}: ${s[1]} (${s[2]})`,
+        category: "কুরআন সূরা",
+        url: `surah.html?id=${s[0]}`,
+        keywords: `${s[0]} ${window.toBengaliNumerals(s[0])} ${s[1]} ${s[2]} ${s[3]} surah quran koran`
+    });
+});
+window.commandPaletteIndex = commandPaletteIndex;
 
 window.initCommandPalette = (basePath) => {
     let modal = document.getElementById('deen-command-palette');
@@ -582,6 +710,217 @@ window.initCommandPalette = (basePath) => {
             }
         });
     }
+};
+
+// --- All 64 Districts of Bangladesh with Minute Offsets (Parity with Mobile) ---
+window.BD_DISTRICTS = [
+    // ঢাকা বিভাগ (13)
+    { name: "ঢাকা", division: "ঢাকা", lat: 23.8103, lon: 90.4125, offset: 0 },
+    { name: "গাজীপুর", division: "ঢাকা", lat: 24.0023, lon: 90.4264, offset: 0 },
+    { name: "নারায়ণগঞ্জ", division: "ঢাকা", lat: 23.6238, lon: 90.5000, offset: -1 },
+    { name: "নরসিংদী", division: "ঢাকা", lat: 23.9322, lon: 90.7154, offset: -2 },
+    { name: "মানিকগঞ্জ", division: "ঢাকা", lat: 23.8617, lon: 90.0003, offset: 2 },
+    { name: "মুন্সীগঞ্জ", division: "ঢাকা", lat: 23.5422, lon: 90.5305, offset: 0 },
+    { name: "টাঙ্গাইল", division: "ঢাকা", lat: 24.2513, lon: 89.9167, offset: 2 },
+    { name: "কিশোরগঞ্জ", division: "ঢাকা", lat: 24.4449, lon: 90.7766, offset: -2 },
+    { name: "ফরিদপুর", division: "ঢাকা", lat: 23.6071, lon: 89.8426, offset: 3 },
+    { name: "গোপালগঞ্জ", division: "ঢাকা", lat: 23.0051, lon: 89.8266, offset: 2 },
+    { name: "মাদারীপুর", division: "ঢাকা", lat: 23.1641, lon: 90.1897, offset: 1 },
+    { name: "রাজবাড়ী", division: "ঢাকা", lat: 23.7574, lon: 89.6445, offset: 4 },
+    { name: "শরীয়তপুর", division: "ঢাকা", lat: 23.2423, lon: 90.3547, offset: 1 },
+
+    // চট্টগ্রাম বিভাগ (11)
+    { name: "চট্টগ্রাম", division: "চট্টগ্রাম", lat: 22.3569, lon: 91.7832, offset: -6 },
+    { name: "কক্সবাজার", division: "চট্টগ্রাম", lat: 21.4272, lon: 92.0058, offset: -6 },
+    { name: "কুমিল্লা", division: "চট্টগ্রাম", lat: 23.4682, lon: 91.1788, offset: -3 },
+    { name: "ব্রাহ্মণবাড়িয়া", division: "চট্টগ্রাম", lat: 23.9571, lon: 91.1119, offset: -3 },
+    { name: "চাঁদপুর", division: "চট্টগ্রাম", lat: 23.2321, lon: 90.6631, offset: -1 },
+    { name: "নোয়াখালী", division: "চট্টগ্রাম", lat: 22.8696, lon: 91.0993, offset: -3 },
+    { name: "ফেনী", division: "চট্টগ্রাম", lat: 23.0159, lon: 91.3976, offset: -4 },
+    { name: "লক্ষ্মীপুর", division: "চট্টগ্রাম", lat: 22.9425, lon: 90.8412, offset: -2 },
+    { name: "রাঙ্গামাটি", division: "চট্টগ্রাম", lat: 22.7324, lon: 92.2985, offset: -7 },
+    { name: "বান্দরবান", division: "চট্টগ্রাম", lat: 22.1953, lon: 92.2184, offset: -7 },
+    { name: "খাগড়াছড়ি", division: "চট্টগ্রাম", lat: 23.1193, lon: 91.9847, offset: -6 },
+
+    // সিলেট বিভাগ (4)
+    { name: "সিলেট", division: "সিলেট", lat: 24.8949, lon: 91.8687, offset: -6 },
+    { name: "মৌলভীবাজার", division: "সিলেট", lat: 24.4829, lon: 91.7774, offset: -6 },
+    { name: "হবিগঞ্জ", division: "সিলেট", lat: 24.3749, lon: 91.4155, offset: -4 },
+    { name: "সুনামগঞ্জ", division: "সিলেট", lat: 25.0658, lon: 91.3950, offset: -4 },
+
+    // রাজশাহী বিভাগ (8)
+    { name: "রাজশাহী", division: "রাজশাহী", lat: 24.3745, lon: 88.6042, offset: 7 },
+    { name: "বগুড়া", division: "রাজশাহী", lat: 24.8465, lon: 89.3770, offset: 4 },
+    { name: "পাবনা", division: "রাজশাহী", lat: 24.0064, lon: 89.2372, offset: 5 },
+    { name: "সিরাজগঞ্জ", division: "রাজশাহী", lat: 24.4534, lon: 89.7008, offset: 3 },
+    { name: "নাটোর", division: "রাজশাহী", lat: 24.4206, lon: 88.9324, offset: 6 },
+    { name: "নওগাঁ", division: "রাজশাহী", lat: 24.7936, lon: 88.9318, offset: 6 },
+    { name: "চাঁপাইনবাবগঞ্জ", division: "রাজশাহী", lat: 24.5965, lon: 88.2775, offset: 9 },
+    { name: "জয়পুরহাট", division: "রাজশাহী", lat: 25.1015, lon: 89.0275, offset: 5 },
+
+    // খুলনা বিভাগ (10)
+    { name: "খুলনা", division: "খুলনা", lat: 22.8456, lon: 89.5403, offset: 4 },
+    { name: "যশোর", division: "খুলনা", lat: 23.1664, lon: 89.2182, offset: 5 },
+    { name: "সাতক্ষীরা", division: "খুলনা", lat: 22.7185, lon: 89.0705, offset: 6 },
+    { name: "কুষ্টিয়া", division: "খুলনা", lat: 23.9013, lon: 89.1205, offset: 6 },
+    { name: "ঝিনাইদহ", division: "খুলনা", lat: 23.5450, lon: 89.1726, offset: 5 },
+    { name: "মাগুরা", division: "খুলনা", lat: 23.4873, lon: 89.4198, offset: 4 },
+    { name: "নড়াইল", division: "খুলনা", lat: 23.1725, lon: 89.5127, offset: 4 },
+    { name: "বাগেরহাট", division: "খুলনা", lat: 22.6516, lon: 89.7859, offset: 3 },
+    { name: "চুয়াডাঙ্গা", division: "খুলনা", lat: 23.6402, lon: 88.8418, offset: 7 },
+    { name: "মেহেরপুর", division: "খুলনা", lat: 23.7622, lon: 88.6318, offset: 8 },
+
+    // বরিশাল বিভাগ (6)
+    { name: "বরিশাল", division: "বরিশাল", lat: 22.7010, lon: 90.3535, offset: 1 },
+    { name: "পটুয়াখালী", division: "বরিশাল", lat: 22.3596, lon: 90.3299, offset: 1 },
+    { name: "ভোলা", division: "বরিশাল", lat: 22.6859, lon: 90.6481, offset: -1 },
+    { name: "পিরোজপুর", division: "বরিশাল", lat: 22.5841, lon: 89.9720, offset: 2 },
+    { name: "বরগুনা", division: "বরিশাল", lat: 22.0953, lon: 90.1121, offset: 2 },
+    { name: "ঝালকাঠি", division: "বরিশাল", lat: 22.6406, lon: 90.1987, offset: 2 },
+
+    // রংপুর বিভাগ (8)
+    { name: "রংপুর", division: "রংপুর", lat: 25.7439, lon: 89.2752, offset: 5 },
+    { name: "দিনাজপুর", division: "রংপুর", lat: 25.6217, lon: 88.6355, offset: 7 },
+    { name: "কুড়িগ্রাম", division: "রংপুর", lat: 25.8054, lon: 89.6362, offset: 3 },
+    { name: "গাইবান্ধা", division: "রংপুর", lat: 25.3288, lon: 89.5430, offset: 4 },
+    { name: "নীলফামারী", division: "রংপুর", lat: 25.9318, lon: 88.8560, offset: 6 },
+    { name: "পঞ্চগড়", division: "রংপুর", lat: 26.3411, lon: 88.5542, offset: 8 },
+    { name: "ঠাকুরগাঁও", division: "রংপুর", lat: 26.0337, lon: 88.4617, offset: 8 },
+    { name: "লালমনিরহাট", division: "রংপুর", lat: 25.9923, lon: 89.2847, offset: 4 },
+
+    // ময়মনসিংহ বিভাগ (4)
+    { name: "ময়মনসিংহ", division: "ময়মনসিংহ", lat: 24.7471, lon: 90.4203, offset: -1 },
+    { name: "জামালপুর", division: "ময়মনসিংহ", lat: 24.9375, lon: 89.9378, offset: 2 },
+    { name: "শেরপুর", division: "ময়মনসিংহ", lat: 25.0205, lon: 90.0153, offset: 1 },
+    { name: "নেত্রকোনা", division: "ময়মনসিংহ", lat: 24.8709, lon: 90.7279, offset: -2 }
+];
+
+window.openDistrictSelector = (callback) => {
+    let modal = document.getElementById('deen-district-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'deen-district-modal';
+        modal.className = "fixed inset-0 z-[600] hidden bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-200";
+        modal.innerHTML = `
+            <div class="bg-white dark:bg-slate-900 w-full max-w-xl rounded-2xl shadow-2xl border border-stone-200/90 dark:border-slate-800 p-5 sm:p-6 flex flex-col max-h-[85vh]">
+                <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-slate-800">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xl">📍</span>
+                        <h3 class="text-lg font-bold text-slate-800 dark:text-white">জেলা নির্বাচন করুন (৬৪ জেলা)</h3>
+                    </div>
+                    <button id="close-district-modal" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-lg p-1">✕</button>
+                </div>
+
+                <!-- Search Input -->
+                <div class="my-3 relative">
+                    <input type="text" id="district-search-input" placeholder="আপনার জেলা খুঁজুন (যেমন: চট্টগ্রাম, সিলেট, বগুড়া)..." class="w-full bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+
+                <!-- Division Filter Tabs -->
+                <div id="division-tabs" class="flex gap-1.5 overflow-x-auto pb-2 scrollbar-none text-xs font-semibold">
+                    <button class="division-tab-btn active px-3 py-1 rounded-lg bg-emerald-600 text-white shrink-0" data-div="all">সব বিভাগ</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="ঢাকা">ঢাকা</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="চট্টগ্রাম">চট্টগ্রাম</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="সিলেট">সিলেট</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="রাজশাহী">রাজশাহী</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="খুলনা">খুলনা</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="বরিশাল">বরিশাল</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="রংপুর">রংপুর</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="ময়মনসিংহ">ময়মনসিংহ</button>
+                </div>
+
+                <!-- District Grid -->
+                <div id="district-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 overflow-y-auto mt-2 p-1 flex-grow"></div>
+
+                <div class="mt-3 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+                    <span>* ঢাকা থেকে মিনিট পার্থক্য ব্র্যাকেটে দেখানো হয়েছে</span>
+                    <button id="district-use-gps" class="text-primary font-bold hover:underline flex items-center gap-1">
+                        <span>🎯 বর্তমান জিপিএস লোকেশন</span>
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('close-district-modal').onclick = () => modal.classList.add('hidden');
+        modal.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
+
+        document.getElementById('district-use-gps').onclick = () => {
+            modal.classList.add('hidden');
+            if (typeof getPrayerTimes === 'function') getPrayerTimes(true);
+        };
+    }
+
+    const grid = document.getElementById('district-grid');
+    const input = document.getElementById('district-search-input');
+    const tabBtns = document.querySelectorAll('.division-tab-btn');
+    let selectedDiv = 'all';
+
+    function renderDistricts() {
+        const q = (input.value || '').trim().toLowerCase();
+        const filtered = window.BD_DISTRICTS.filter(d => {
+            const matchesDiv = selectedDiv === 'all' || d.division === selectedDiv;
+            const matchesSearch = !q || d.name.toLowerCase().includes(q) || d.division.toLowerCase().includes(q);
+            return matchesDiv && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '<div class="col-span-full py-6 text-center text-xs text-slate-400">কোনো জেলা পাওয়া যায়নি</div>';
+            return;
+        }
+
+        const currentCity = localStorage.getItem('user_city') || 'ঢাকা';
+        grid.innerHTML = filtered.map(d => {
+            const isSelected = d.name === currentCity;
+            const offsetSign = d.offset > 0 ? `+${window.toBengaliNumerals(d.offset)}` : (d.offset < 0 ? window.toBengaliNumerals(d.offset) : '০');
+            return `
+                <button class="district-select-btn p-2.5 rounded-xl border text-left transition-all flex items-center justify-between ${isSelected ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 text-primary font-bold' : 'border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:bg-stone-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 font-medium'}" data-name="${d.name}">
+                    <span class="text-xs truncate">${d.name}</span>
+                    <span class="text-[10px] font-mono opacity-60 ml-1">(${offsetSign} মি.)</span>
+                </button>
+            `;
+        }).join('');
+
+        grid.querySelectorAll('.district-select-btn').forEach(btn => {
+            btn.onclick = () => {
+                const name = btn.getAttribute('data-name');
+                const targetDistrict = window.BD_DISTRICTS.find(d => d.name === name);
+                if (targetDistrict) {
+                    localStorage.setItem('user_city', targetDistrict.name);
+                    localStorage.setItem('user_lat', targetDistrict.lat);
+                    localStorage.setItem('user_lon', targetDistrict.lon);
+                    localStorage.setItem('user_offset', targetDistrict.offset);
+                    modal.classList.add('hidden');
+                    if (window.showToast) window.showToast(`${targetDistrict.name} জেলা নির্বাচিত হয়েছে`);
+                    window.dispatchEvent(new CustomEvent('deen:district-changed', { detail: targetDistrict }));
+                    if (typeof callback === 'function') {
+                        callback(targetDistrict);
+                    } else if (typeof getPrayerTimes === 'function') {
+                        getPrayerTimes();
+                    }
+                }
+            };
+        });
+    }
+
+    tabBtns.forEach(btn => {
+        btn.onclick = () => {
+            tabBtns.forEach(b => {
+                b.className = 'division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0';
+            });
+            btn.className = 'division-tab-btn active px-3 py-1 rounded-lg bg-emerald-600 text-white shrink-0';
+            selectedDiv = btn.getAttribute('data-div');
+            renderDistricts();
+        };
+    });
+
+    input.oninput = () => renderDistricts();
+
+    input.value = '';
+    renderDistricts();
+    modal.classList.remove('hidden');
+    setTimeout(() => input.focus(), 100);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1129,6 +1468,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const isQuran = data.category && data.category.includes('কুরআন');
         const ayahMarker = isQuran ? ' ۝' : '';
 
+        const safeCategory = window.escapeHTML(data.category || 'পবিত্র আল-কুরআন');
+        const safeTitle = window.escapeHTML(data.title || 'আয়াত');
+        const safeArabic = window.escapeHTML(data.arabic || '');
+        const safeTranslation = window.escapeHTML(data.translation || data.text || '');
+        const safeTransliteration = window.escapeHTML(data.transliteration || '');
+        const safeReference = window.escapeHTML(data.reference || 'পবিত্র আল-কুরআন');
+
         return `
             <div id="the-rendered-share-card" class="w-full rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all select-none" style="${cardStyle} font-family: 'Hind Siliguri', sans-serif;">
                 <!-- Header Branding -->
@@ -1148,15 +1494,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <!-- Category & Title Pill -->
                     <div class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide text-center shrink-0 border shadow-xs" style="${headerPillStyle} line-height: 1.4;">
-                        <span>${data.category} • ${data.title}</span>
+                        <span>${safeCategory} • ${safeTitle}</span>
                     </div>
                 </div>
 
                 <!-- Sacred Arabic Content -->
-                ${data.arabic ? `
+                ${safeArabic ? `
                     <div class="my-6 sm:my-8 text-center" dir="rtl">
                         <p class="font-arabic text-2xl sm:text-3xl lg:text-[32px] leading-[2.4] font-normal" style="${arabicColor} font-family: 'Amiri', serif;">
-                            ${data.arabic}${ayahMarker}
+                            ${safeArabic}${ayahMarker}
                         </p>
                     </div>
                 ` : ''}
@@ -1171,15 +1517,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Bengali Translation -->
                 <div class="text-center px-2 sm:px-4 my-4">
                     <p class="text-base sm:text-lg leading-relaxed font-medium" style="${textColor}">
-                        “${data.translation}”
+                        “${safeTranslation}”
                     </p>
                 </div>
 
                 <!-- Transliteration (if provided) -->
-                ${data.transliteration ? `
+                ${safeTransliteration ? `
                     <div class="text-center px-4 mb-4">
                         <p class="text-xs sm:text-sm italic opacity-75" style="${textColor}">
-                            উচ্চারণ: ${data.transliteration}
+                            উচ্চারণ: ${safeTransliteration}
                         </p>
                     </div>
                 ` : ''}
@@ -1197,12 +1543,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="text-[11px] font-medium inline-flex items-center" style="${footerMuted}">সত্য ও হেদায়াতের বার্তা</span>
                     </div>
                     <div class="font-bold text-[11px] sm:text-xs tracking-wide inline-flex items-center" style="${footerMuted}">
-                        ${data.reference || 'পবিত্র আল-কুরআন'}
+                        ${safeReference}
                     </div>
                 </div>
             </div>
         `;
     }
+    window.renderCardHTML = renderCardHTML;
 
     function updatePreview() {
         if (!currentShareData) return;

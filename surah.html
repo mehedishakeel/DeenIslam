@@ -6,6 +6,8 @@
   <title>সূরা বিস্তারিত - অডিও ও বাংলা অনুবাদ | DeenIslam</title>
   <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
   <meta name="description" content="পবিত্র কুরআনের সূরাসমূহ বাংলা অনুবাদ ও অডিও তেলাওয়াতসহ অনলাইনে পড়ুন।">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Amiri&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
@@ -336,27 +338,100 @@
         loadSurahData();
     });
 
-    function loadSurahData() {
+    // --- IndexedDB Offline Storage for Quran Surahs ---
+    const QURAN_DB_NAME = 'deen_quran_cache_db';
+    const QURAN_STORE_NAME = 'surahs';
+
+    function openQuranDB() {
+        return new Promise((resolve) => {
+            if (!('indexedDB' in window)) return resolve(null);
+            const req = indexedDB.open(QURAN_DB_NAME, 1);
+            req.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains(QURAN_STORE_NAME)) {
+                    db.createObjectStore(QURAN_STORE_NAME, { keyPath: 'key' });
+                }
+            };
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => resolve(null);
+        });
+    }
+
+    async function getCachedSurah(key) {
+        try {
+            const db = await openQuranDB();
+            if (!db) return null;
+            return new Promise((resolve) => {
+                const tx = db.transaction(QURAN_STORE_NAME, 'readonly');
+                const store = tx.objectStore(QURAN_STORE_NAME);
+                const req = store.get(key);
+                req.onsuccess = () => resolve(req.result ? req.result.data : null);
+                req.onerror = () => resolve(null);
+            });
+        } catch (_) {
+            return null;
+        }
+    }
+
+    async function setCachedSurah(key, data) {
+        try {
+            const db = await openQuranDB();
+            if (!db) return;
+            const tx = db.transaction(QURAN_STORE_NAME, 'readwrite');
+            const store = tx.objectStore(QURAN_STORE_NAME);
+            store.put({ key, data, timestamp: Date.now() });
+        } catch (_) {}
+    }
+
+    async function loadSurahData() {
         if (!surahId) return;
+        const cacheKey = `surah_${surahId}_${selectedReciter}`;
+        let renderedFromCache = false;
+
+        // 1. Instant render from IndexedDB cache
+        const cached = await getCachedSurah(cacheKey);
+        if (cached && Array.isArray(cached) && cached.length >= 3) {
+            renderSurah(cached);
+            renderedFromCache = true;
+            if (targetAyahIndex >= 0) {
+                setTimeout(() => {
+                    const el = document.getElementById(`verse-${targetAyahIndex}`);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        el.classList.add('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary');
+                        setTimeout(() => el.classList.remove('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary'), 3000);
+                    }
+                }, 300);
+            }
+        }
+
+        // 2. Network fetch & cache update
         fetch(`https://api.alquran.cloud/v1/surah/${surahId}/editions/quran-uthmani,bn.bengali,${selectedReciter}`)
             .then(response => response.json())
             .then(data => {
-                if(data.code === 200) { 
-                    renderSurah(data.data); 
-                    if (targetAyahIndex >= 0) {
-                        setTimeout(() => {
-                            const element = document.getElementById(`verse-${targetAyahIndex}`);
-                            if (element) {
-                                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                element.classList.add('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary');
-                                setTimeout(() => element.classList.remove('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary'), 3000);
-                            }
-                        }, 500);
+                if (data.code === 200 && data.data) { 
+                    setCachedSurah(cacheKey, data.data);
+                    if (!renderedFromCache) {
+                        renderSurah(data.data); 
+                        if (targetAyahIndex >= 0) {
+                            setTimeout(() => {
+                                const element = document.getElementById(`verse-${targetAyahIndex}`);
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    element.classList.add('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary');
+                                    setTimeout(() => element.classList.remove('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary'), 3000);
+                                }
+                            }, 500);
+                        }
                     }
                 }
-                else { showError(); }
+                else if (!renderedFromCache) {
+                    showError();
+                }
             })
-            .catch(err => showError());
+            .catch(err => {
+                if (!renderedFromCache) showError();
+            });
     }
 
     loadSurahData();

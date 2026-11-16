@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ডিজিটাল তাসবীহ - DeenIslam</title>
   <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="js/theme.js"></script>
@@ -202,6 +204,36 @@
         } catch(e) {}
       };
 
+      const playCompletionChime = () => {
+        if (!soundEnabled) return;
+        try {
+          if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const now = audioCtx.currentTime;
+          const osc1 = audioCtx.createOscillator();
+          const gain1 = audioCtx.createGain();
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(523.25, now);
+          gain1.gain.setValueAtTime(0.15, now);
+          gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc1.connect(gain1);
+          gain1.connect(audioCtx.destination);
+          osc1.start(now);
+          osc1.stop(now + 0.35);
+
+          const osc2 = audioCtx.createOscillator();
+          const gain2 = audioCtx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(659.25, now + 0.15);
+          gain2.gain.setValueAtTime(0.18, now + 0.15);
+          gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+          osc2.connect(gain2);
+          gain2.connect(audioCtx.destination);
+          osc2.start(now + 0.15);
+          osc2.stop(now + 0.6);
+        } catch(e) {}
+      };
+
       const updateDisplay = () => {
         counterDisplay.innerText = window.toBengaliNumerals(count);
         targetDisplay.innerText = window.toBengaliNumerals(target);
@@ -218,7 +250,8 @@
         if (count > 0 && count % target === 0) {
             progressCircle.classList.remove('text-emerald-600', 'dark:text-emerald-400');
             progressCircle.classList.add('text-amber-500');
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            playCompletionChime();
+            if (navigator.vibrate) navigator.vibrate([100, 50, 150]);
         } else {
             progressCircle.classList.remove('text-amber-500');
             progressCircle.classList.add('text-emerald-600', 'dark:text-emerald-400');
