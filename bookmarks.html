@@ -20,21 +20,37 @@
       }
     }
   </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-300">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
   <div id="navbar-placeholder"></div>
 
-  <!-- Header -->
-  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
-    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">আপনার বুকমার্কসমূহ</h1>
-    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-      আপনার সংরক্ষিত সকল আয়াত, হাদিস, দো'আ ও আল্লাহর পবিত্র নাম এখানে এক নজরে দেখুন।
-    </p>
-  </header>
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-5xl">
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🔖</span>
+        <span>সংরক্ষিত তালিকা</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        আপনার বুকমার্কসমূহ
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        আপনার সংরক্ষিত সকল আয়াত, হাদিস, দো'আ ও আল্লাহর পবিত্র নাম এখানে এক নজরে দেখুন।
+      </p>
+    </div>
 
-  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl">
     <!-- Action Toolbar (Backup, Restore, Clear) -->
-    <div class="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white dark:bg-slate-900/90 p-4 rounded-xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-6 bg-white dark:bg-[#0f172a] p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs">
       <div class="flex items-center space-x-2 text-xs font-medium text-slate-500 dark:text-slate-400">
         <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
         <span>অফলাইন লোকালস্টোরেজ ব্যাকআপ</span>
@@ -60,7 +76,7 @@
 
     <!-- Category Tabs -->
     <div class="flex justify-center mb-8 overflow-x-auto no-scrollbar">
-      <div class="inline-flex bg-stone-100/80 dark:bg-slate-800/60 p-1 rounded-xl border border-stone-200/80 dark:border-slate-800 space-x-1">
+      <div class="inline-flex bg-stone-100/80 dark:bg-[#0f172a] p-1 rounded-xl border border-stone-200/80 dark:border-slate-800 space-x-1">
         <button onclick="showSection('all')" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-xs transition-all bg-emerald-600 text-white shadow-xs" id="tab-all">সবগুলো (<span id="count-all">০</span>)</button>
         <button onclick="showSection('quran')" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800" id="tab-quran">কুরআন (<span id="count-quran">০</span>)</button>
         <button onclick="showSection('hadith')" class="tab-btn px-3.5 py-1.5 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800" id="tab-hadith">হাদিস (<span id="count-hadith">০</span>)</button>
@@ -77,7 +93,7 @@
     <div id="media-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 hidden max-w-5xl mx-auto"></div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-12 bg-white dark:bg-slate-900/90 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm p-6 md:p-8 max-w-md mx-auto">
+    <div id="empty-state" class="hidden text-center py-12 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs p-6 md:p-8 max-w-md mx-auto">
       <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 rounded-xl flex items-center justify-center mx-auto mb-3 border border-emerald-500/20">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
       </div>
@@ -172,7 +188,7 @@
 
     function createStandardCard(item) {
       const card = document.createElement('div');
-      card.className = "bg-white dark:bg-slate-900/90 p-5 md:p-6 rounded-xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 relative group transition-all hover:border-emerald-500/30";
+      card.className = "bg-white dark:bg-[#0f172a] p-5 md:p-6 rounded-2xl shadow-xs border border-stone-200/80 dark:border-slate-800 relative group transition-all hover:border-emerald-500/30";
       card.innerHTML = `
         <div class="flex justify-between items-start mb-3">
           <span class="px-2.5 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 rounded-md text-[11px] font-semibold border border-emerald-500/20">
@@ -188,7 +204,7 @@
           </div>
         </div>
         <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">${item.title}</h3>
-        ${item.arabic ? `<p class="text-right text-xl md:text-2xl font-arabic leading-loose text-slate-900 dark:text-slate-100 mb-3 py-2.5 px-3 bg-stone-50/70 dark:bg-slate-800/60 rounded-lg border border-stone-200/60 dark:border-slate-700/60" dir="rtl">${item.arabic}</p>` : ''}
+        ${item.arabic ? `<p class="text-right text-xl md:text-2xl font-arabic leading-loose text-slate-900 dark:text-slate-100 mb-3 py-2.5 px-3 bg-stone-50/70 dark:bg-slate-800/60 rounded-xl border border-stone-200/60 dark:border-slate-700/60 font-medium" dir="rtl">${item.arabic}</p>` : ''}
         <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4 text-xs md:text-sm font-bengali-content">${item.text}</p>
         ${item.url ? `<a href="${item.url}" class="inline-flex items-center text-emerald-700 dark:text-emerald-400 font-semibold text-xs hover:underline bg-emerald-50/60 dark:bg-emerald-950/40 px-3 py-1 rounded-md border border-emerald-500/20">বিস্তারিত পড়ুন <span class="ml-1">→</span></a>` : ''}
       `;
@@ -197,7 +213,7 @@
 
     function createDuaCard(item) {
       const card = document.createElement('div');
-      card.className = "bg-white dark:bg-slate-900/90 p-5 md:p-6 rounded-xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 relative group transition-all hover:border-emerald-500/30";
+      card.className = "bg-white dark:bg-[#0f172a] p-5 md:p-6 rounded-2xl shadow-xs border border-stone-200/80 dark:border-slate-800 relative group transition-all hover:border-emerald-500/30";
       card.innerHTML = `
         <div class="flex justify-between items-start mb-3">
           <span class="px-2.5 py-0.5 bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 rounded-md text-[11px] font-semibold border border-teal-500/20">
@@ -213,7 +229,7 @@
           </div>
         </div>
         <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">${item.title}</h3>
-        ${item.arabic ? `<p class="text-right text-xl md:text-2xl font-arabic leading-loose text-slate-900 dark:text-slate-100 mb-3 py-2.5 px-3 bg-stone-50/70 dark:bg-slate-800/60 rounded-lg border border-stone-200/60 dark:border-slate-700/60" dir="rtl">${item.arabic}</p>` : ''}
+        ${item.arabic ? `<p class="text-right text-xl md:text-2xl font-arabic leading-loose text-slate-900 dark:text-slate-100 mb-3 py-2.5 px-3 bg-stone-50/70 dark:bg-slate-800/60 rounded-xl border border-stone-200/60 dark:border-slate-700/60 font-medium" dir="rtl">${item.arabic}</p>` : ''}
         ${item.pronunciation ? `<p class="text-xs text-slate-500 dark:text-slate-400 italic mb-2 leading-relaxed">উচ্চারণ: ${item.pronunciation}</p>` : ''}
         <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-3">অর্থ: ${item.text}</p>
         <div class="flex justify-between items-center pt-2.5 border-t border-stone-100 dark:border-slate-800">
@@ -226,7 +242,7 @@
 
     function createAllahNameCard(item) {
       const card = document.createElement('div');
-      card.className = "bg-white dark:bg-slate-900/90 p-5 md:p-6 rounded-xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 relative group transition-all hover:border-emerald-500/30";
+      card.className = "bg-white dark:bg-[#0f172a] p-5 md:p-6 rounded-2xl shadow-xs border border-stone-200/80 dark:border-slate-800 relative group transition-all hover:border-emerald-500/30";
       card.innerHTML = `
         <div class="flex justify-between items-start mb-3">
           <span class="px-2.5 py-0.5 bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 rounded-md text-[11px] font-semibold border border-amber-500/20">
@@ -241,7 +257,7 @@
             <h3 class="text-lg font-bold text-slate-900 dark:text-white">${item.title}</h3>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">${item.meaning || ''}</p>
           </div>
-          <span class="font-arabic text-2xl text-emerald-700 dark:text-emerald-400 py-1.5 px-3 bg-stone-50/70 dark:bg-slate-800/60 rounded-lg border border-stone-200/60 dark:border-slate-700/60" dir="rtl">${item.arabic}</span>
+          <span class="font-arabic text-2xl text-emerald-700 dark:text-emerald-400 py-1.5 px-3 bg-stone-50/70 dark:bg-slate-800/60 rounded-xl border border-stone-200/60 dark:border-slate-700/60" dir="rtl">${item.arabic}</span>
         </div>
         <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-3">${item.text || ''}</p>
         <div class="pt-2.5 border-t border-stone-100 dark:border-slate-800 flex justify-end">
@@ -254,7 +270,7 @@
     function createMediaCard(item) {
       const card = document.createElement('div');
       const thumbUrl = `https://img.youtube.com/vi/${item.id}/hqdefault.jpg`;
-      card.className = "bg-white dark:bg-slate-900/90 rounded-xl overflow-hidden shadow-sm border border-stone-200/90 dark:border-slate-800/80 group hover:border-emerald-500/30 transition-all";
+      card.className = "bg-white dark:bg-[#0f172a] rounded-2xl overflow-hidden shadow-xs border border-stone-200/80 dark:border-slate-800 group hover:border-emerald-500/30 transition-all";
       card.innerHTML = `
         <div class="aspect-video relative overflow-hidden cursor-pointer" onclick="window.location.href='media.html?id=${item.id}'">
           <img src="${thumbUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">

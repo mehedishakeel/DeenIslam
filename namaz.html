@@ -25,36 +25,52 @@
       }
     }
   </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Header -->
-  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
-    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">নামাজ শিক্ষা ও পূর্ণাঙ্গ সালাত গাইড</h1>
-    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-      রাসূলুল্লাহ (সা.) বলেছেন: "তোমরা সেভাবে নামাজ আদায় করো, যেভাবে আমাকে নামাজ আদায় করতে দেখছ।" (সহীহ বুখারী)
-    </p>
-    <div class="flex justify-center flex-wrap gap-3 mt-6">
-      <a href="salat.html" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center space-x-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span>আজকের নামাজের সময়সূচী</span>
-      </a>
-      <a href="qibla.html" class="px-5 py-2.5 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:border-amber-500/50 border border-stone-200/90 dark:border-slate-800 font-bold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center space-x-2">
-        <span>🕋 কিবলা কম্পাস</span>
-      </a>
-    </div>
-  </header>
-
   <!-- Main Content Container -->
-  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl space-y-10">
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-5xl space-y-8">
+    
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🕌</span>
+        <span>নামাজ শিক্ষা ও সহীহ পদ্ধতি</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        নামাজ শিক্ষা ও পূর্ণাঙ্গ সালাত গাইড
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        রাসূলুল্লাহ (সা.) বলেছেন: "তোমরা সেভাবে নামাজ আদায় করো, যেভাবে আমাকে নামাজ আদায় করতে দেখছ।" (সহীহ বুখারী)
+      </p>
+      <div class="flex justify-center flex-wrap gap-2.5 mt-5">
+        <a href="salat.html" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center space-x-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>আজকের নামাজের সময়সূচী</span>
+        </a>
+        <a href="qibla.html" class="px-4 py-2 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:border-amber-500/50 border border-stone-200/80 dark:border-slate-800 font-bold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center space-x-1.5">
+          <span>🕋 কিবলা কম্পাস</span>
+        </a>
+      </div>
+    </div>
     
     <!-- 1. Five Times Prayer Rakat Breakdown Table -->
-    <section class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800 shadow-xs">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs">
       <div class="flex items-center space-x-3 mb-5">
         <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">১</div>
         <h2 class="text-xl md:text-2xl font-black text-slate-900 dark:text-white">৫ ওয়াক্ত নামাজের রাকাতের হিসাব</h2>
@@ -128,7 +144,7 @@
     </section>
 
     <!-- 2. Step by Step Wudu Guide -->
-    <section class="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800 shadow-xs">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs">
       <div class="flex items-center space-x-3 mb-5">
         <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">২</div>
         <div>
@@ -205,7 +221,7 @@
     </section>
 
     <!-- 3. Step by Step Prayer Posture Guide -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs">
       <div class="flex items-center space-x-3 mb-6">
         <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/20 text-primary dark:text-emerald-400 flex items-center justify-center font-bold text-base">৩</div>
         <div>
@@ -322,7 +338,7 @@
     </section>
 
     <!-- 4. Essential Duas of Salah -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs">
       <div class="flex items-center space-x-3 mb-6">
         <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/20 text-primary dark:text-emerald-400 flex items-center justify-center font-bold text-base">৪</div>
         <div>
@@ -481,7 +497,7 @@
     </section>
 
     <!-- 5. Mandatory Conditions of Salah -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 shadow-sm">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs">
       <div class="flex items-center space-x-3 mb-6">
         <div class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-500/20 text-primary dark:text-emerald-400 flex items-center justify-center font-bold text-base">৫</div>
         <div>

@@ -32,21 +32,33 @@
       background: linear-gradient(135deg, #065f46 0%, #047857 100%);
       border-color: rgba(5, 150, 105, 0.4);
     }
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
   </style>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
   <div id="navbar-placeholder"></div>
 
-  <main class="container mx-auto px-4 md:px-6 py-10 flex-grow">
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-6xl">
     <!-- Header -->
-    <div class="text-center mb-10">
-      <h1 class="text-3xl md:text-5xl font-black text-slate-800 dark:text-white mb-3 tracking-tight">সালাত ও নামাজের সময়সূচী</h1>
-      <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🕰️</span>
+        <span>সালাত ও ওয়াক্ত</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white mb-2.5 tracking-tight">সালাত ও নামাজের সময়সূচী</h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
         আপনার ভৌগোলিক অবস্থান অনুযায়ী নির্ভুল ওয়াক্ত, সেহরি-ইফতার এবং নামাজের নিষিদ্ধ সময়।
       </p>
 
       <!-- Hijri Date & Quick Links Bar -->
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-2.5">
         <span id="hijri-date-badge" class="px-3.5 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg border border-emerald-200/60 dark:border-emerald-800/40 flex items-center">
           🌙 হিজরি তারিখ লোড হচ্ছে...
         </span>

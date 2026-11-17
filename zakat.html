@@ -27,25 +27,41 @@
       }
     }
   </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Header -->
-  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
-    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">যাকাত ও স্মার্ট যাকাত ক্যালকুলেটর</h1>
-    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-      সামাজিক ও অর্থনৈতিক ভারসাম্য রক্ষা এবং নিজের সম্পদকে পবিত্র করার ঐশী বিধান।
-    </p>
-  </header>
-
   <!-- Content Section -->
-  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl space-y-8">
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-5xl space-y-8">
+    
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>💎</span>
+        <span>যাকাত হিসাব ও বিধান</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        যাকাত ও স্মার্ট যাকাত ক্যালকুলেটর
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        সামাজিক ও অর্থনৈতিক ভারসাম্য রক্ষা এবং নিজের সম্পদকে পবিত্র করার ঐশী বিধান।
+      </p>
+    </div>
     
     <!-- 1. Interactive Full Zakat Calculator -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/80 dark:border-slate-800">
       <div class="flex items-center space-x-3.5 mb-6">
         <div class="w-10 h-10 bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 rounded-xl flex items-center justify-center font-bold text-xl border border-amber-500/20">৳</div>
         <div>
@@ -161,7 +177,7 @@
             </p>
           </div>
 
-          <button onclick="resetZakatForm()" class="mt-5 py-2 px-4 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold hover:text-red-500 hover:border-red-300 transition-all border border-stone-200/90 dark:border-slate-800 shadow-2xs">
+          <button onclick="resetZakatForm()" class="mt-5 py-2 px-4 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold hover:text-red-500 hover:border-red-300 transition-all border border-stone-200/80 dark:border-slate-800 shadow-2xs">
             রিসেট করুন
           </button>
         </div>
@@ -170,7 +186,7 @@
 
     <!-- 2. What is Zakat & Importance -->
     <section class="space-y-4">
-      <div class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 leading-relaxed text-slate-700 dark:text-slate-300">
+      <div class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/80 dark:border-slate-800 leading-relaxed text-slate-700 dark:text-slate-300">
         <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
           <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
           যাকাত কি ও এর হুকুম?
@@ -193,7 +209,7 @@
     </section>
 
     <!-- 3. Zakat Nisab Table -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/80 dark:border-slate-800">
       <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
         <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
         যাকাতের নিসাব (কার ওপর যাকাত ফরজ?)
@@ -218,7 +234,7 @@
     </section>
 
     <!-- 4. Eight Recipients of Zakat (Surah At-Tawbah: 60) -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/80 dark:border-slate-800">
       <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-1.5 flex items-center gap-2">
         <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
         যাকাত ব্যয়ের ৮টি খাত (কুরআনের আলোকে)

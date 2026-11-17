@@ -27,32 +27,47 @@
       }
     }
   </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Header -->
-  <!-- Header -->
-  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
-    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">আল্লাহ তায়ালার ৯৯টি গুণবাচক নাম</h1>
-    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-      রাসূলুল্লাহ (সা.) বলেছেন: "নিশ্চয়ই আল্লাহর নিরানব্বইটি নাম রয়েছে, যে ব্যক্তি এগুলো মুখস্থ করবে ও অনুধাবন করবে, সে জান্নাতে প্রবেশ করবে।" (সহীহ বুখারী)
-    </p>
-  </header>
-
   <!-- Main Container -->
-  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-6xl">
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-6xl">
     
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🌟</span>
+        <span>আসমাউল হুসনা</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        আল্লাহ তায়ালার ৯৯টি গুণবাচক নাম
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        রাসূলুল্লাহ (সা.) বলেছেন: "নিশ্চয়ই আল্লাহর নিরানব্বইটি নাম রয়েছে, যে ব্যক্তি এগুলো মুখস্থ করবে ও অনুধাবন করবে, সে জান্নাতে প্রবেশ করবে।" (সহীহ বুখারী)
+      </p>
+    </div>
+
     <!-- Search & Filter Controls -->
     <div class="flex flex-col sm:flex-row items-center justify-between gap-3.5 mb-8 max-w-3xl mx-auto">
       <div class="relative w-full">
         <input type="text" id="names-search" placeholder="নাম, উচ্চারণ বা অর্থ দিয়ে খুঁজুন..." 
-          class="w-full py-3.5 pl-11 pr-4 bg-white dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+          class="w-full py-3.5 pl-11 pr-4 bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
         <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
       </div>
-      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-3 py-2 bg-white dark:bg-slate-900 rounded-xl border border-stone-200/90 dark:border-slate-800">
+      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-3.5 py-2.5 bg-white dark:bg-[#0f172a] rounded-xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
         মোট নাম: <span id="names-count" class="text-emerald-600 dark:text-emerald-400 font-black text-sm">৯৯</span> টি
       </div>
     </div>
@@ -63,7 +78,7 @@
     </div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800">
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800">
       <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো নাম পাওয়া যায়নি</h3>
       <p class="text-slate-400 text-xs mt-1">অন্য কোনো শব্দ লিখে পুনরায় অনুসন্ধান করুন</p>
     </div>
@@ -224,7 +239,7 @@
         const isBookmarked = window.isBookmarked ? window.isBookmarked(bookmarkKey) : false;
 
         return `
-          <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-stone-200/90 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
+          <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
             
             <!-- Top Card Bar -->
             <div>
@@ -252,7 +267,7 @@
               </div>
 
               <!-- Arabic Calligraphy Box -->
-              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-slate-800/60 rounded-xl border border-stone-200/60 dark:border-slate-800/80">
+              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-slate-800/80 rounded-xl border border-stone-200/60 dark:border-slate-700/60">
                 <p class="font-arabic text-3xl md:text-4xl text-slate-900 dark:text-emerald-200 font-normal leading-relaxed">${n.arabic}</p>
               </div>
 

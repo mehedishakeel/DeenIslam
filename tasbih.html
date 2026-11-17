@@ -30,13 +30,35 @@
       animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
     }
     .tap-area:active { transform: scale(0.95); }
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
   </style>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
   <div id="navbar-placeholder"></div>
 
-  <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 relative max-w-xl mx-auto w-full">
+  <main class="flex-grow flex flex-col items-center justify-center px-4 pt-6 pb-16 relative max-w-xl mx-auto w-full">
     
+    <!-- Header Hero -->
+    <div class="text-center mb-6">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>📿</span>
+        <span>ডিজিটাল তাসবীহ</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        ডিজিটাল তাসবীহ ও যিকির
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-md mx-auto leading-relaxed">
+        আল্লাহর স্মরণ ও প্রাত্যহিক যিকির গণনায় সুমধুর অডিও এবং স্পর্শীয় হ্যাপটিক ফিডব্যাক।
+      </p>
+    </div>
+
     <!-- Dhikr Selector Dropdown / Pill -->
     <div class="w-full mb-6">
       <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-xs border border-stone-200/80 dark:border-slate-800 text-center">

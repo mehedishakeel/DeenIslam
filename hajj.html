@@ -27,30 +27,46 @@
       }
     }
   </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-300">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Header -->
-  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
-    <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">পবিত্র হজ ও উমরাহ গাইড</h1>
-    <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-      আল্লাহর পবিত্র ঘরের জিয়ারত ও বিশ্ব মুসলিম ভ্রাতৃত্বের শ্রেষ্ঠ মিলনমেলা।
-    </p>
-    <div class="flex flex-wrap justify-center gap-2.5 mt-5">
-      <a href="#talbiyah" class="px-3.5 py-1.5 bg-white dark:bg-slate-900 text-emerald-800 dark:text-emerald-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/90 dark:border-slate-800 hover:border-emerald-500/40 transition-all">তালবিয়া পড়ুন ও শুনুন</a>
-      <a href="#farz-wajib" class="px-3.5 py-1.5 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/90 dark:border-slate-800 hover:border-emerald-500/40 transition-all">হজের ফরজ ও ওয়াজিব</a>
-      <a href="#days" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-xs transition-all shadow-2xs">হজের ৫ দিনের কর্মসূচি →</a>
-    </div>
-  </header>
-
   <!-- Content Section -->
-  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-4xl space-y-8">
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-4xl space-y-8">
+    
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🕋</span>
+        <span>হজ ও উমরাহ বিধান</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        পবিত্র হজ ও উমরাহ গাইড
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        আল্লাহর পবিত্র ঘরের জিয়ারত ও বিশ্ব মুসলিম ভ্রাতৃত্বের শ্রেষ্ঠ মিলনমেলা।
+      </p>
+      <div class="flex flex-wrap justify-center gap-2.5 mt-5">
+        <a href="#talbiyah" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-emerald-800 dark:text-emerald-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all">তালবিয়া পড়ুন ও শুনুন</a>
+        <a href="#farz-wajib" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all">হজের ফরজ ও ওয়াজিব</a>
+        <a href="#days" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-xs transition-all shadow-2xs">হজের ৫ দিনের কর্মসূচি →</a>
+      </div>
+    </div>
     
     <!-- What is it -->
-    <section class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 leading-relaxed text-slate-700 dark:text-slate-300 space-y-4">
+    <section class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/80 dark:border-slate-800 leading-relaxed text-slate-700 dark:text-slate-300 space-y-4">
       <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
         <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
         হজ কি ও কার ওপর ফরজ?
@@ -58,7 +74,7 @@
       <p class="text-xs md:text-sm leading-relaxed text-slate-600 dark:text-slate-400">
         হজ হলো নির্দিষ্ট দিনসমূহে (৮ই জিলহজ্জ থেকে ১২ই জিলহজ্জ পর্যন্ত) নির্দিষ্ট নিয়মে মহান আল্লাহর সন্তুষ্টির উদ্দেশ্যে কাবা শরীফ এবং মক্কার সংলগ্ন আরাফাত, মিনা ও মুযদালিফায় নির্ধারিত ইবাদত সম্পাদন করা। শারীরিক ও আর্থিকভাবে সামর্থ্যবান প্রতিটি মুসলিম নর-নারীর ওপর জীবনে একবার হজ করা ফরজ।
       </p>
-      <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/90 dark:border-slate-800/80">
+      <div class="p-4 rounded-xl bg-stone-50/60 dark:bg-slate-800/40 border border-stone-200/80 dark:border-slate-800">
         <h4 class="font-bold text-emerald-800 dark:text-emerald-300 mb-2 text-xs md:text-sm">হজ ফরজ হওয়ার প্রধান শর্তাবলি:</h4>
         <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-slate-600 dark:text-slate-400">
           <li>✓ মুসলিম হওয়া</li>
@@ -72,7 +88,7 @@
     </section>
 
     <!-- Talbiyah Section -->
-    <section id="talbiyah" class="bg-white dark:bg-slate-900/90 p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/90 dark:border-slate-800/80 space-y-4">
+    <section id="talbiyah" class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-sm border border-stone-200/80 dark:border-slate-800 space-y-4">
       <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
         <span class="w-1.5 h-4 bg-amber-500 rounded-full"></span>
         তালবিয়া (হজের মূল ধ্বনি)
@@ -118,7 +134,7 @@
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- Farz -->
-        <div class="bg-white dark:bg-slate-900/90 p-5 md:p-6 rounded-2xl border border-emerald-500/20 dark:border-emerald-900/40 shadow-sm">
+        <div class="bg-white dark:bg-[#0f172a] p-5 md:p-6 rounded-2xl border border-emerald-500/20 dark:border-emerald-900/40 shadow-sm">
           <div class="flex items-center space-x-2.5 mb-3">
             <span class="px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-md">ফরজ</span>
             <h3 class="text-base font-bold text-slate-900 dark:text-white">হজের ৩টি ফরজ</h3>
@@ -132,7 +148,7 @@
         </div>
 
         <!-- Wajib -->
-        <div class="bg-white dark:bg-slate-900/90 p-5 md:p-6 rounded-2xl border border-amber-500/20 dark:border-amber-900/40 shadow-sm">
+        <div class="bg-white dark:bg-[#0f172a] p-5 md:p-6 rounded-2xl border border-amber-500/20 dark:border-amber-900/40 shadow-sm">
           <div class="flex items-center space-x-2.5 mb-3">
             <span class="px-2 py-0.5 bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-semibold text-xs rounded-md">ওয়াজিব</span>
             <h3 class="text-base font-bold text-slate-900 dark:text-white">হজের ৬টি ওয়াজিব</h3>
@@ -157,21 +173,21 @@
         হজের ৩টি প্রকারভেদ
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white dark:bg-slate-900/90 p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
           <span class="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2.5">১</span>
           <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">হজে তামাত্তু</h3>
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
             হজের মাসসমূহে প্রথমে কেবল উমরাহর ইহরাম বেঁধে তা সম্পন্ন করে ইহরাম খুলে ফেলা। এরপর ৮ই জিলহজ্জ নতুন করে হজের ইহরাম বেঁধে হজ পালন করা। (বাংলাদেশীদের জন্য সবচেয়ে সহজ ও প্রচলিত)।
           </p>
         </div>
-        <div class="bg-white dark:bg-slate-900/90 p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
           <span class="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2.5">২</span>
           <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">হজে কিরান</h3>
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
             একসাথে উমরাহ ও হজ উভয়ের নিয়তে ইহরাম বাঁধা। উমরাহ শেষে ইহরাম না খুলে একই ইহরামে ৮ই জিলহজ্জ থেকে হজের সমস্ত কাজ সম্পন্ন করা।
           </p>
         </div>
-        <div class="bg-white dark:bg-slate-900/90 p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
           <span class="w-7 h-7 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center mb-2.5">৩</span>
           <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1.5">হজে ইফরাদ</h3>
           <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -188,7 +204,7 @@
         হজের ৫ দিনের ধারাবাহিক কার্যাবলি
       </h2>
       <div class="space-y-3">
-        <div class="bg-white dark:bg-slate-900/90 p-4 md:p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-4 md:p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
           <div class="w-24 shrink-0 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg text-center border border-emerald-500/20">
             ৮ই জিলহজ্জ
           </div>
@@ -198,7 +214,7 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-900/90 p-4 md:p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-4 md:p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
           <div class="w-24 shrink-0 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg text-center border border-emerald-500/20">
             ৯ই জিলহজ্জ
           </div>
@@ -208,7 +224,7 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-900/90 p-4 md:p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-4 md:p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
           <div class="w-24 shrink-0 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg text-center border border-emerald-500/20">
             ১০ই জিলহজ্জ
           </div>
@@ -218,7 +234,7 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-900/90 p-4 md:p-5 rounded-xl border border-stone-200/90 dark:border-slate-800/80 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
+        <div class="bg-white dark:bg-[#0f172a] p-4 md:p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 flex flex-col md:flex-row md:items-center gap-3.5 shadow-2xs">
           <div class="w-24 shrink-0 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg text-center border border-emerald-500/20">
             ১১ ও ১২ই জিলহজ্জ
           </div>
