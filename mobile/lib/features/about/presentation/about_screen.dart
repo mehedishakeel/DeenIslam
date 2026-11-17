@@ -81,7 +81,7 @@ class AboutScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'সংস্করণ v1.0 • ১০০% বিজ্ঞাপনমুক্ত ও উন্মুক্ত',
+                            'সংস্করণ v1.1 • ১০০% বিজ্ঞাপনমুক্ত ও উন্মুক্ত',
                             style: GoogleFonts.hindSiliguri(
                               fontSize: 12,
                               color: Colors.white70,
