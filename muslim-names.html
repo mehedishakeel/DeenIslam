@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>মুসলিম শিশুদের সুন্দর নাম ও অর্থ | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="কুরআন ও হাদিসের আলোকে নবজাতক ছেলে ও মেয়েদের অর্থপূর্ণ ও বরকতময় ইসলামিক নাম, নবীদের নাম, সাহাবীদের নাম এবং নাম রাখার সুন্নাত নীতিমালা।">
+  <meta name="keywords" content="ইসলামিক নাম, মুসলিম শিশুদের নাম, ছেলেদের ইসলামিক নাম, মেয়েদের ইসলামিক নাম, Islamic Baby Names Bangla, Muslim Names Meaning">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { primary: '#059669', secondary: '#d97706' },
+          fontFamily: { bengali: ['Noto Sans Bengali', 'sans-serif'], arabic: ['Amiri', 'serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-6xl">
+    
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>👶</span>
+        <span>ইসলামিক নাম ও অর্থ</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        মুসলিম শিশুদের সুন্দর ও অর্থবহ নাম
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        রাসূলুল্লাহ (ﷺ) বলেছেন: "কিয়ামতের দিন তোমাদেরকে তোমাদের নাম ও পিতার নাম ধরে ডাকা হবে। সুতরাং তোমরা সুন্দর নাম রাখো।" (আবু দাউদ)
+      </p>
+    </div>
+
+    <!-- Quick Stats Cards -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-8">
+      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">মোট নাম</span>
+        <span id="stat-total" class="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">১১৫</span>
+      </div>
+      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">ছেলেদের নাম</span>
+        <span id="stat-boys" class="text-xl sm:text-2xl font-black text-teal-600 dark:text-teal-400">৬৫</span>
+      </div>
+      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">মেয়েদের নাম</span>
+        <span id="stat-girls" class="text-xl sm:text-2xl font-black text-rose-600 dark:text-rose-400">৫০</span>
+      </div>
+      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">পছন্দের তালিকা</span>
+        <span id="stat-favorites" class="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400">০</span>
+      </div>
+    </div>
+
+    <!-- Category Tabs Navigation -->
+    <div class="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-2 mb-6 scrollbar-none">
+      <button onclick="setTab('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-emerald-600 text-white shadow-2xs">
+        সবগুলো
+      </button>
+      <button onclick="setTab('boy')" id="tab-boy" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+        👦 ছেলে
+      </button>
+      <button onclick="setTab('girl')" id="tab-girl" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+        👧 মেয়ে
+      </button>
+      <button onclick="setTab('prophet')" id="tab-prophet" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+        🌟 নবী ও রাসূল
+      </button>
+      <button onclick="setTab('sahabi')" id="tab-sahabi" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+        🛡️ সাহাবী ও সাহাবীয়া
+      </button>
+      <button onclick="setTab('favorites')" id="tab-favorites" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+        ❤️ পছন্দ
+      </button>
+      <button onclick="setTab('guidelines')" id="tab-guidelines" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+        📜 সুন্নাত নীতিমালা
+      </button>
+      <button onclick="setTab('prohibited')" id="tab-prohibited" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-rose-600 border border-stone-200/80 dark:border-slate-800">
+        ⚠️ বর্জনীয় নাম
+      </button>
+    </div>
+
+    <!-- Letter Filter Strip (Visible on names views) -->
+    <div id="letter-filter-section" class="mb-6">
+      <div class="flex items-center gap-1.5 flex-wrap justify-center bg-white dark:bg-[#0f172a] p-3 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+        <span class="text-xs font-bold text-slate-400 dark:text-slate-500 mr-1 hidden sm:inline">হরফ অনুযায়ী:</span>
+        <button onclick="setLetter('all')" id="letter-all" class="letter-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all bg-emerald-600 text-white">সকল</button>
+        <button onclick="setLetter('অ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">অ</button>
+        <button onclick="setLetter('আ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">আ</button>
+        <button onclick="setLetter('ই')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ই</button>
+        <button onclick="setLetter('ঈ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ঈ</button>
+        <button onclick="setLetter('উ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">উ</button>
+        <button onclick="setLetter('ও')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ও</button>
+        <button onclick="setLetter('ক')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ক</button>
+        <button onclick="setLetter('খ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">খ</button>
+        <button onclick="setLetter('গ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">গ</button>
+        <button onclick="setLetter('জ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">জ</button>
+        <button onclick="setLetter('ত')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ত</button>
+        <button onclick="setLetter('দ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">দ</button>
+        <button onclick="setLetter('ন')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ন</button>
+        <button onclick="setLetter('ফ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ফ</button>
+        <button onclick="setLetter('ব')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ব</button>
+        <button onclick="setLetter('ম')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ম</button>
+        <button onclick="setLetter('য')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">য</button>
+        <button onclick="setLetter('র')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">র</button>
+        <button onclick="setLetter('ল')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">ল</button>
+        <button onclick="setLetter('শ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">শ</button>
+        <button onclick="setLetter('স')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">স</button>
+        <button onclick="setLetter('হ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">হ</button>
+      </div>
+    </div>
+
+    <!-- Search Controls -->
+    <div id="search-section" class="flex flex-col sm:flex-row items-center justify-between gap-3.5 mb-8 max-w-3xl mx-auto">
+      <div class="relative w-full">
+        <input type="text" id="names-search" placeholder="বাংলা নাম, ইংরেজি বানান বা অর্থ দিয়ে সহজে খুঁজুন..." 
+          class="w-full py-3.5 pl-11 pr-10 bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
+        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold p-1">✕</button>
+      </div>
+      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-3.5 py-2.5 bg-white dark:bg-[#0f172a] rounded-xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+        মোট নাম: <span id="filtered-count" class="text-emerald-600 dark:text-emerald-400 font-black text-sm">১১৫</span> টি
+      </div>
+    </div>
+
+    <!-- Names Grid Container -->
+    <div id="names-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Guidelines Container (Visible when guidelines tab active) -->
+    <div id="guidelines-container" class="hidden max-w-4xl mx-auto space-y-4">
+      <div class="bg-white dark:bg-[#0f172a] p-6 sm:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs mb-6">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl">
+            📜
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">ইসলামিক নাম রাখার সুন্নাত নীতিমালা</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400">কুরআন ও সহীহ সুন্নাহ মোতাবেক নবজাতকের নাম নির্বাচনের সঠিক দিকনির্দেশনা</p>
+          </div>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          সন্তান জন্মলাভের পর পিতা-মাতার ওপর অন্যতম প্রধান দায়িত্ব হলো তার একটি সুন্দর ও অর্থবহ ইসলামিক নাম রাখা। নামের গভীর প্রভাব মানুষের ব্যক্তিত্ব, আত্মমর্যাদা এবং ঈমানী চেতনার ওপর পড়ে। নিচে নাম রাখার মূল নীতিমালা ও সুন্নাত তুলে ধরা হলো:
+        </p>
+      </div>
+
+      <div id="guidelines-cards" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Rendered from JS data -->
+      </div>
+    </div>
+
+    <!-- Prohibited Names Container (Visible when prohibited tab active) -->
+    <div id="prohibited-container" class="hidden max-w-4xl mx-auto space-y-4">
+      <div class="bg-rose-50/70 dark:bg-rose-950/20 p-6 sm:p-8 rounded-2xl border border-rose-200/70 dark:border-rose-900/40 shadow-2xs mb-6">
+        <div class="flex items-center space-x-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-xl">
+            ⚠️
+          </div>
+          <div>
+            <h2 class="text-xl sm:text-2xl font-black text-rose-900 dark:text-rose-300">ইসলামে যে সকল নাম রাখা হারাম বা বর্জনীয়</h2>
+            <p class="text-xs text-rose-700/80 dark:text-rose-400">শিরকী, অহংকারসূচক ও মন্দ অর্থবোধক নাম বর্জনের সতর্কবার্তা</p>
+          </div>
+        </div>
+        <p class="text-xs sm:text-sm text-rose-800 dark:text-rose-200 leading-relaxed">
+          ইসলামে এমন কোনো নাম রাখা সম্পূর্ণ নিষিদ্ধ যা তাওহীদের মূল চেতনার পরিপন্থী, যাতে আল্লাহ ছাড়া অন্য কারো দাসত্ব বা আরাধনা প্রকাশ পায়, কিংবা যা অহংকার বা অশুভ অর্থ বহন করে। রাসূলুল্লাহ (ﷺ) মদিনায় হিজরতের পর বহু সাহাবীর মন্দ নাম পরিবর্তন করে সুন্দর অর্থপূর্ণ নাম রেখেছিলেন।
+        </p>
+      </div>
+
+      <div id="prohibited-cards" class="space-y-3">
+        <!-- Rendered from JS data -->
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 max-w-xl mx-auto">
+      <div class="text-4xl mb-3">🔍</div>
+      <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো নাম পাওয়া যায়নি</h3>
+      <p class="text-slate-400 text-xs mt-1 mb-4">অন্য কোনো হরফ বা শব্দ দিয়ে অনুসন্ধান করে দেখুন</p>
+      <button onclick="resetFilters()" class="px-4 py-2 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 rounded-xl text-xs font-bold transition-all border border-emerald-200/60 dark:border-emerald-800/40">
+        সব ফিল্টার রিসেট করুন
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Data & Logic Scripts -->
+  <script src="js/muslim-names-data.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    let currentTab = 'all';
+    let currentLetter = 'all';
+    let searchQuery = '';
+
+    const namesList = window.muslimNamesData ? window.muslimNamesData.names : [];
+    const guidelinesList = window.muslimNamesData ? window.muslimNamesData.guidelines : [];
+    const prohibitedList = window.muslimNamesData ? window.muslimNamesData.prohibitedNames : [];
+
+    function updateStats() {
+      const boysCount = namesList.filter(n => n.gender === 'boy').length;
+      const girlsCount = namesList.filter(n => n.gender === 'girl').length;
+      
+      const bookmarks = JSON.parse(localStorage.getItem('deen_bookmarks') || '[]');
+      const favoriteNamesCount = bookmarks.filter(b => b.type === 'muslim_name').length;
+
+      document.getElementById('stat-total').innerText = window.toBengaliNumerals(namesList.length);
+      document.getElementById('stat-boys').innerText = window.toBengaliNumerals(boysCount);
+      document.getElementById('stat-girls').innerText = window.toBengaliNumerals(girlsCount);
+      document.getElementById('stat-favorites').innerText = window.toBengaliNumerals(favoriteNamesCount);
+    }
+
+    function setTab(tab) {
+      currentTab = tab;
+      
+      // Update tab button styles
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800';
+      });
+      const activeBtn = document.getElementById(`tab-${tab}`);
+      if (activeBtn) {
+        if (tab === 'prohibited') {
+          activeBtn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-rose-600 text-white shadow-2xs';
+        } else {
+          activeBtn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-emerald-600 text-white shadow-2xs';
+        }
+      }
+
+      const letterSection = document.getElementById('letter-filter-section');
+      const searchSection = document.getElementById('search-section');
+      const namesGrid = document.getElementById('names-grid');
+      const guidelinesContainer = document.getElementById('guidelines-container');
+      const prohibitedContainer = document.getElementById('prohibited-container');
+      const emptyState = document.getElementById('empty-state');
+
+      if (tab === 'guidelines') {
+        letterSection.classList.add('hidden');
+        searchSection.classList.add('hidden');
+        namesGrid.classList.add('hidden');
+        emptyState.classList.add('hidden');
+        prohibitedContainer.classList.add('hidden');
+        guidelinesContainer.classList.remove('hidden');
+        renderGuidelines();
+      } else if (tab === 'prohibited') {
+        letterSection.classList.add('hidden');
+        searchSection.classList.add('hidden');
+        namesGrid.classList.add('hidden');
+        emptyState.classList.add('hidden');
+        guidelinesContainer.classList.add('hidden');
+        prohibitedContainer.classList.remove('hidden');
+        renderProhibited();
+      } else {
+        letterSection.classList.remove('hidden');
+        searchSection.classList.remove('hidden');
+        namesGrid.classList.remove('hidden');
+        guidelinesContainer.classList.add('hidden');
+        prohibitedContainer.classList.add('hidden');
+        renderNames();
+      }
+    }
+
+    function setLetter(letter) {
+      currentLetter = letter;
+      document.querySelectorAll('.letter-btn').forEach(btn => {
+        btn.className = 'letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40';
+      });
+      event.target.className = 'letter-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all bg-emerald-600 text-white shadow-2xs';
+      renderNames();
+    }
+
+    function renderNames() {
+      const container = document.getElementById('names-grid');
+      const emptyState = document.getElementById('empty-state');
+      const bookmarks = JSON.parse(localStorage.getItem('deen_bookmarks') || '[]');
+      const favoriteKeys = new Set(bookmarks.filter(b => b.type === 'muslim_name').map(b => b.key));
+
+      let filtered = namesList.filter(n => {
+        // Tab filter
+        if (currentTab === 'boy' && n.gender !== 'boy') return false;
+        if (currentTab === 'girl' && n.gender !== 'girl') return false;
+        if (currentTab === 'prophet' && n.tag !== 'prophet') return false;
+        if (currentTab === 'sahabi' && n.tag !== 'sahabi' && n.tag !== 'sahabiyyah') return false;
+        if (currentTab === 'favorites') {
+          if (!favoriteKeys.has(`muslim_name_${n.id}`)) return false;
+        }
+
+        // Letter filter
+        if (currentLetter !== 'all' && n.letter !== currentLetter) return false;
+
+        // Search query
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchName = n.name.toLowerCase().includes(q);
+          const matchEng = n.english.toLowerCase().includes(q);
+          const matchAr = n.arabic.includes(q);
+          const matchMeaning = n.meaning.toLowerCase().includes(q);
+          const matchRef = (n.ref || '').toLowerCase().includes(q);
+          return matchName || matchEng || matchAr || matchMeaning || matchRef;
+        }
+
+        return true;
+      });
+
+      document.getElementById('filtered-count').innerText = window.toBengaliNumerals(filtered.length);
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      container.innerHTML = filtered.map(n => {
+        const bookmarkKey = `muslim_name_${n.id}`;
+        const isBookmarked = window.isBookmarked ? window.isBookmarked(bookmarkKey) : false;
+
+        // Gender & Tag badges
+        let tagBadge = '';
+        if (n.tag === 'prophet') {
+          tagBadge = '<span class="px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 text-[10px] font-bold border border-amber-200/60 dark:border-amber-800/40">🌟 নবী</span>';
+        } else if (n.tag === 'sahabi') {
+          tagBadge = '<span class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold border border-emerald-200/60 dark:border-emerald-800/40">🛡️ সাহাবী</span>';
+        } else if (n.tag === 'sahabiyyah') {
+          tagBadge = '<span class="px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/50 text-purple-800 dark:text-purple-300 text-[10px] font-bold border border-purple-200/60 dark:border-purple-800/40">🛡️ সাহাবীয়া</span>';
+        } else if (n.tag === 'beloved') {
+          tagBadge = '<span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-300 text-[10px] font-bold border border-rose-200/60 dark:border-rose-800/40">❤️ প্রিয় নাম</span>';
+        }
+
+        const genderBadge = n.gender === 'boy'
+          ? '<span class="px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/50 text-teal-800 dark:text-teal-300 text-[10px] font-bold border border-teal-200/60 dark:border-teal-800/40">👦 ছেলে</span>'
+          : '<span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-300 text-[10px] font-bold border border-rose-200/60 dark:border-rose-800/40">👧 মেয়ে</span>';
+
+        return `
+          <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
+            <div>
+              <!-- Top Row Badges & Actions -->
+              <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
+                  ${genderBadge}
+                  ${tagBadge}
+                </div>
+                <div class="flex items-center space-x-1">
+                  <!-- Audio Speech -->
+                  <button onclick="speakName('${n.arabic}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="আরবি উচ্চারণ শুনুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                    </svg>
+                  </button>
+                  <!-- Copy Button -->
+                  <button onclick="copyName(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5H6a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                  </button>
+                  <!-- Bookmark Button -->
+                  <button onclick="handleNameBookmark(event, ${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="পছন্দের তালিকায় রাখুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                  </button>
+                  <!-- Share Image Button -->
+                  <button onclick="shareNameCard(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কার্ড শেয়ার করুন">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Arabic Calligraphy Box -->
+              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-slate-800/80 rounded-xl border border-stone-200/60 dark:border-slate-700/60">
+                <p class="font-arabic text-3xl md:text-4xl text-slate-900 dark:text-emerald-200 font-normal leading-relaxed" dir="rtl">${n.arabic}</p>
+              </div>
+
+              <!-- Bengali Name & English Transliteration -->
+              <div class="text-center mt-2.5">
+                <h3 class="text-lg font-black text-slate-800 dark:text-white mb-0.5">${n.name}</h3>
+                <p class="text-xs font-mono font-semibold text-emerald-700 dark:text-emerald-400 mb-2">${n.english}</p>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal pt-2 border-t border-stone-100 dark:border-slate-800/60">
+                  <span class="font-semibold text-slate-700 dark:text-slate-200">অর্থ:</span> ${n.meaning}
+                </p>
+              </div>
+            </div>
+
+            <!-- Footer Reference Tag -->
+            <div class="mt-4 pt-2.5 border-t border-stone-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
+              <span class="inline-flex items-center space-x-1">
+                <span>📖</span>
+                <span>${n.ref || 'ইসলামিক ঐতিহ্য'}</span>
+              </span>
+              <button onclick="shareNameCard(${n.id})" class="text-emerald-600 dark:text-emerald-400 font-bold hover:underline">
+                শেয়ার কার্ড →
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderGuidelines() {
+      const container = document.getElementById('guidelines-cards');
+      container.innerHTML = guidelinesList.map((g, idx) => `
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+          <div class="flex items-center space-x-2.5 mb-2.5">
+            <span class="w-6 h-6 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs">
+              ${window.toBengaliNumerals(idx + 1)}
+            </span>
+            <h3 class="text-sm font-bold text-slate-800 dark:text-white">${g.title}</h3>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${g.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderProhibited() {
+      const container = document.getElementById('prohibited-cards');
+      container.innerHTML = prohibitedList.map(p => `
+        <div class="bg-white dark:bg-[#0f172a] p-4 sm:p-5 rounded-2xl border border-rose-200/80 dark:border-rose-900/40 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="text-rose-500 text-xs">🚫</span>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white">${p.name}</h4>
+              <span class="font-arabic text-sm text-slate-600 dark:text-slate-300" dir="rtl">${p.arabic}</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400"><span class="font-semibold text-rose-700 dark:text-rose-400">কারণ:</span> ${p.reason}</p>
+          </div>
+          <span class="self-start sm:self-center px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-[11px] font-bold shrink-0 border border-rose-200/60 dark:border-rose-800/40">
+            বর্জনীয়
+          </span>
+        </div>
+      `).join('');
+    }
+
+    function speakName(arabicText) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(arabicText);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert('আপনার ব্রাউজারে ভয়েস উচ্চারণ সুবিধা সমর্থিত নয়।');
+      }
+    }
+
+    function copyName(id) {
+      const name = namesList.find(n => n.id === id);
+      if (!name) return;
+      const text = `${name.name} (${name.arabic} - ${name.english})\nঅর্থ: ${name.meaning}\nসূত্র: ${name.ref || 'ইসলামিক নাম'}\n(DeenIslam - deenislam.org/muslim-names.html)`;
+      window.copyToClipboard(text);
+    }
+
+    function handleNameBookmark(event, id) {
+      const name = namesList.find(n => n.id === id);
+      if (!name) return;
+      const key = `muslim_name_${name.id}`;
+      const data = {
+        key: key,
+        type: 'muslim_name',
+        subType: name.gender === 'boy' ? 'ছেলেদের ইসলামিক নাম' : 'মেয়েদের ইসলামিক নাম',
+        title: `${name.name} (${name.english})`,
+        arabic: name.arabic,
+        text: `অর্থ: ${name.meaning} (${name.ref || 'ইসলামিক নাম'})`,
+        url: 'muslim-names.html'
+      };
+      const isAdded = window.toggleBookmark(data);
+      document.querySelectorAll(`.bookmark-btn[data-key="${key}"]`).forEach(btn => {
+        const svg = btn.querySelector('svg');
+        if (svg) svg.setAttribute('fill', isAdded ? 'currentColor' : 'none');
+      });
+      updateStats();
+      if (currentTab === 'favorites') {
+        renderNames();
+      }
+    }
+
+    function shareNameCard(id) {
+      const name = namesList.find(n => n.id === id);
+      if (!name) return;
+      window.openShareCardModal({
+        category: '👶 ইসলামিক নাম ও অর্থ',
+        title: `${name.name} (${name.english})`,
+        arabic: name.arabic,
+        translation: `অর্থ: ${name.meaning}`,
+        reference: name.ref || (name.gender === 'boy' ? 'ছেলেদের ইসলামিক নাম' : 'মেয়েদের ইসলামিক নাম'),
+        fileName: `DeenIslam-Name-${name.english}`
+      });
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('names-search');
+      input.value = '';
+      searchQuery = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      renderNames();
+    }
+
+    function resetFilters() {
+      searchQuery = '';
+      document.getElementById('names-search').value = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      currentLetter = 'all';
+      setTab('all');
+    }
+
+    const searchInput = document.getElementById('names-search');
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (searchQuery.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderNames();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateStats();
+      renderNames();
+    });
+  </script>
+</body>
+</html>

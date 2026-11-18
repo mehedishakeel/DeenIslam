@@ -422,6 +422,7 @@ const commandPaletteIndex = [
     { title: "কিবলা কম্পাস (ডিজিটাল দিক নির্ণয়)", category: "টুলস ও ইবাদত", url: "qibla.html", keywords: "qibla compass kaaba mecca direction kaba kibla" },
     { title: "দৈনন্দিন দো'আ ও জিকির (হিসনুল মুসলিম)", category: "টুলস ও ইবাদত", url: "dua.html", keywords: "dua hisnul muslim zikr azkar rabbana shokal shondha" },
     { title: "আল্লাহর ৯৯টি গুণবাচক নাম (আসমাউল হুসনা)", category: "টুলস ও ইবাদত", url: "allah-names.html", keywords: "allah 99 names asmaul husna sifat ar-rahman ar-rahim" },
+    { title: "মুসলিম শিশুদের সুন্দর নাম ও অর্থ (অর্থসহ ইসলামিক নাম)", category: "টুলস ও ইবাদত", url: "muslim-names.html", keywords: "muslim names baby islamic nam boy girl shishu orthosho অর্থসহ নাম শিশুর নাম" },
     { title: "নামাজ শিক্ষা ও সহীহ পদ্ধতি", category: "টুলস ও ইবাদত", url: "namaz.html", keywords: "namaz salah prayer shikkha wudu tayammum rakat ruku sajdah" },
     { title: "সালাতের সময়সূচি ও সেহরি-ইফতার", category: "টুলস ও ইবাদত", url: "salat.html", keywords: "salat prayer times fajr dhuhr asr maghrib isha sehri iftar" },
     { title: "যাকাত ক্যালকুলেটর (সহজ হিসাব)", category: "টুলস ও ইবাদত", url: "zakat.html", keywords: "zakat calculator nisab gold silver cash calculation" },
@@ -967,7 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Inject Navbar
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
     if (navbarPlaceholder) {
-        const isIbadahActive = ['salat.html', 'qibla.html', 'dua.html', 'allah-names.html', 'namaz.html', 'zakat.html', 'tasbih.html', 'roja.html', 'hajj.html', 'kalima.html', 'media.html', 'community.html'].includes(currentPage) || isSubDir;
+        const isIbadahActive = ['salat.html', 'qibla.html', 'dua.html', 'allah-names.html', 'muslim-names.html', 'namaz.html', 'zakat.html', 'tasbih.html', 'roja.html', 'hajj.html', 'kalima.html', 'media.html', 'community.html'].includes(currentPage) || isSubDir;
         const isOthersActive = ['community.html', 'about.html', 'credits.html'].includes(currentPage);
 
         navbarPlaceholder.innerHTML = `
@@ -1031,6 +1032,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <a href="${basePath}allah-names.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">🌟</span>
                                         <span>আল্লাহর ৯৯ নাম</span>
+                                    </a>
+                                    <a href="${basePath}muslim-names.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'muslim-names.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">👶</span>
+                                        <span>ইসলামিক নাম ও অর্থ</span>
                                     </a>
                                     <a href="${basePath}namaz.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">🕌</span>
@@ -1125,6 +1130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="${basePath}qibla.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'qibla.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🧭 কিবলা কম্পাস</a>
                         <a href="${basePath}dua.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'dua.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🤲 দো'আ ও জিকির</a>
                         <a href="${basePath}allah-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🌟 আল্লাহর ৯৯ নাম</a>
+                        <a href="${basePath}muslim-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'muslim-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">👶 ইসলামিক নাম ও অর্থ</a>
                         <a href="${basePath}namaz.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🕌 নামাজ শিক্ষা</a>
                         <a href="${basePath}zakat.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'zakat.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">💎 যাকাত ক্যালকুলেটর</a>
                         <a href="${basePath}tasbih.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'tasbih.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">📿 ডিজিটাল তাসবীহ</a>
@@ -1267,6 +1273,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li><a href="${basePath}tasbih.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>📿</span><span>ডিজিটাল তাসবীহ</span></a></li>
                             <li><a href="${basePath}dua.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🤲</span><span>হিসনুল মুসলিম দো'আ</span></a></li>
                             <li><a href="${basePath}allah-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌟</span><span>আল্লাহর ৯৯ নাম</span></a></li>
+                            <li><a href="${basePath}muslim-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>👶</span><span>ইসলামিক নাম ও অর্থ</span></a></li>
                             <li><a href="${basePath}zakat.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>💎</span><span>যাকাত ক্যালকুলেটর</span></a></li>
                             <li><a href="${basePath}roja.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌙</span><span>রোজা ও সেহরি-ইফতার</span></a></li>
                             <li><a href="${basePath}hajj.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🕋</span><span>হজ ও উমরাহ গাইড</span></a></li>
@@ -1425,44 +1432,72 @@ document.addEventListener('DOMContentLoaded', () => {
         // Theme configs
         let cardStyle = '';
         let headerPillStyle = '';
-        let logoBg = '';
+        let pillDotColor = '';
+        let pillTextColor = '';
+        let logoBadgeStyle = '';
+        let logoIconStyle = '';
+        let brandTitleColor = '';
+        let brandSubColor = '';
         let arabicColor = '';
         let dividerColor = '';
         let textColor = '';
-        let footerBorder = '';
-        let footerMuted = '';
-        let footerUrl = '';
+        let footerBorderColor = '';
+        let urlBadgeStyle = '';
+        let footerTextColor = '';
+        let taglineColor = '';
+        let refBadgeStyle = '';
 
         if (theme === 'emerald') {
-            cardStyle = 'background: linear-gradient(135deg, #064e3b 0%, #022c22 55%, #064e3b 100%); color: #ffffff; border: 1.5px solid rgba(52, 211, 153, 0.35); box-shadow: 0 20px 40px -15px rgba(2, 44, 34, 0.7);';
-            headerPillStyle = 'background: rgba(255, 255, 255, 0.12); color: #fef08a; border: 1px solid rgba(255, 255, 255, 0.2);';
-            logoBg = 'background: #10b981; color: #ffffff;';
+            cardStyle = 'background: linear-gradient(145deg, #064e3b 0%, #022c22 55%, #04382c 100%); color: #ffffff; border: 1.5px solid rgba(52, 211, 153, 0.35); box-shadow: 0 24px 48px -12px rgba(2, 44, 34, 0.75);';
+            headerPillStyle = 'background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.22); box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.08);';
+            pillDotColor = '#f59e0b';
+            pillTextColor = '#fef08a';
+            logoBadgeStyle = 'background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.38); border: 1px solid rgba(255, 255, 255, 0.2);';
+            logoIconStyle = 'color: #fef08a;';
+            brandTitleColor = '#ffffff';
+            brandSubColor = 'rgba(167, 243, 208, 0.9)';
             arabicColor = 'color: #fef08a;';
-            dividerColor = 'border-color: rgba(245, 158, 11, 0.4); color: #f59e0b;';
+            dividerColor = 'rgba(245, 158, 11, 0.35)';
             textColor = 'color: #f0fdf4;';
-            footerBorder = 'border-color: rgba(255, 255, 255, 0.15);';
-            footerMuted = 'color: #a7f3d0;';
-            footerUrl = 'color: #34d399;';
+            footerBorderColor = 'rgba(255, 255, 255, 0.14)';
+            urlBadgeStyle = 'background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(52, 211, 153, 0.35); color: #34d399;';
+            footerTextColor = 'color: rgba(255, 255, 255, 0.4);';
+            taglineColor = 'color: #a7f3d0;';
+            refBadgeStyle = 'background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #a7f3d0;';
         } else if (theme === 'ivory') {
-            cardStyle = 'background: #fbfaf8; color: #0f172a; border: 1.5px solid #e2e8f0; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);';
-            headerPillStyle = 'background: #ecfdf5; color: #065f46; border: 1px solid rgba(5, 150, 105, 0.25);';
-            logoBg = 'background: #059669; color: #ffffff;';
+            cardStyle = 'background: #fbfaf8; color: #0f172a; border: 1.5px solid #e2e8f0; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.09);';
+            headerPillStyle = 'background: #ecfdf5; border: 1px solid rgba(5, 150, 105, 0.3); box-shadow: inset 0 1px 2px rgba(5, 150, 105, 0.06);';
+            pillDotColor = '#059669';
+            pillTextColor = '#065f46';
+            logoBadgeStyle = 'background: linear-gradient(135deg, #059669 0%, #047857 100%); box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25); border: 1px solid rgba(5, 150, 105, 0.2);';
+            logoIconStyle = 'color: #ffffff;';
+            brandTitleColor = '#0f172a';
+            brandSubColor = '#059669';
             arabicColor = 'color: #064e3b;';
-            dividerColor = 'border-color: rgba(5, 150, 105, 0.3); color: #059669;';
+            dividerColor = 'rgba(5, 150, 105, 0.3)';
             textColor = 'color: #1e293b;';
-            footerBorder = 'border-color: #e2e8f0;';
-            footerMuted = 'color: #64748b;';
-            footerUrl = 'color: #059669;';
+            footerBorderColor = '#e2e8f0';
+            urlBadgeStyle = 'background: #ecfdf5; border: 1px solid rgba(5, 150, 105, 0.25); color: #059669;';
+            footerTextColor = 'color: rgba(100, 116, 139, 0.4);';
+            taglineColor = 'color: #64748b;';
+            refBadgeStyle = 'background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569;';
         } else { // midnight
-            cardStyle = 'background: linear-gradient(135deg, #0b1120 0%, #020617 100%); color: #f8fafc; border: 1.5px solid #1e293b; box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);';
-            headerPillStyle = 'background: rgba(30, 41, 59, 0.8); color: #6ee7b7; border: 1px solid #334155;';
-            logoBg = 'background: #10b981; color: #ffffff;';
+            cardStyle = 'background: linear-gradient(145deg, #0b1120 0%, #020617 60%, #0b1120 100%); color: #f8fafc; border: 1.5px solid #1e293b; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.85);';
+            headerPillStyle = 'background: rgba(30, 41, 59, 0.85); border: 1px solid #334155; box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.04);';
+            pillDotColor = '#34d399';
+            pillTextColor = '#6ee7b7';
+            logoBadgeStyle = 'background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3); border: 1px solid rgba(255, 255, 255, 0.15);';
+            logoIconStyle = 'color: #ffffff;';
+            brandTitleColor = '#f8fafc';
+            brandSubColor = 'rgba(110, 231, 183, 0.85)';
             arabicColor = 'color: #34d399;';
-            dividerColor = 'border-color: rgba(16, 185, 129, 0.3); color: #10b981;';
+            dividerColor = 'rgba(16, 185, 129, 0.3)';
             textColor = 'color: #e2e8f0;';
-            footerBorder = 'border-color: #1e293b;';
-            footerMuted = 'color: #94a3b8;';
-            footerUrl = 'color: #34d399;';
+            footerBorderColor = '#1e293b';
+            urlBadgeStyle = 'background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(52, 211, 153, 0.3); color: #34d399;';
+            footerTextColor = 'color: rgba(148, 163, 184, 0.4);';
+            taglineColor = 'color: #94a3b8;';
+            refBadgeStyle = 'background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; color: #94a3b8;';
         }
 
         const isQuran = data.category && data.category.includes('কুরআন');
@@ -1475,26 +1510,33 @@ document.addEventListener('DOMContentLoaded', () => {
         const safeTransliteration = window.escapeHTML(data.transliteration || '');
         const safeReference = window.escapeHTML(data.reference || 'পবিত্র আল-কুরআন');
 
+        const pillText = (safeCategory && safeTitle && safeCategory !== safeTitle)
+            ? `${safeCategory} • ${safeTitle}`
+            : (safeCategory || safeTitle);
+
         return `
-            <div id="the-rendered-share-card" class="w-full rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all select-none" style="${cardStyle} font-family: 'Hind Siliguri', sans-serif;">
+            <div id="the-rendered-share-card" style="${cardStyle} font-family: 'Hind Siliguri', sans-serif; width: 100%; border-radius: 24px; padding: 28px 30px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s ease; user-select: none;">
                 <!-- Header Branding -->
-                <div class="flex items-center justify-between gap-3 pb-4 border-b flex-wrap sm:flex-nowrap" style="${footerBorder}">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-bottom: 18px; margin-bottom: 20px; border-bottom: 1px solid ${footerBorderColor}; width: 100%; box-sizing: border-box;">
                     <!-- Logo & Brand Name -->
-                    <div class="flex items-center gap-2.5 shrink-0">
-                        <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm shrink-0" style="${logoBg}">
-                            <svg class="w-5 h-5 shrink-0 ${theme === 'ivory' ? 'text-white' : 'text-amber-300'}" viewBox="0 0 24 24" fill="currentColor">
+                    <div style="display: flex; align-items: center; gap: 11px; flex-shrink: 0;">
+                        <div style="width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; ${logoBadgeStyle}">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="display: block; ${logoIconStyle}">
                                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
                             </svg>
                         </div>
-                        <div class="flex flex-col justify-center text-left">
-                            <span class="text-base sm:text-lg font-black tracking-tight leading-none">DeenIslam</span>
-                            <span class="text-[10px] sm:text-[11px] font-semibold tracking-wider leading-none mt-1 opacity-80">দ্বীন ইসলাম</span>
+                        <div style="display: flex; flex-direction: column; justify-content: center; text-align: left;">
+                            <span style="font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; font-size: 19px; font-weight: 900; letter-spacing: -0.025em; line-height: 1.15; color: ${brandTitleColor};">DeenIslam</span>
+                            <span style="font-family: 'Hind Siliguri', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; line-height: 1; margin-top: 3px; color: ${brandSubColor};">দ্বীন ইসলাম</span>
                         </div>
                     </div>
 
                     <!-- Category & Title Pill -->
-                    <div class="inline-flex items-center justify-center px-4 py-2 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide text-center shrink-0 border shadow-xs" style="${headerPillStyle} line-height: 1.4;">
-                        <span>${safeCategory} • ${safeTitle}</span>
+                    <div style="display: inline-flex; align-items: center; justify-content: center; height: 34px; padding: 0 16px; border-radius: 9999px; ${headerPillStyle} box-sizing: border-box; flex-shrink: 0;">
+                        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: ${pillDotColor}; margin-right: 8px; flex-shrink: 0;"></span>
+                        <span style="font-family: 'Hind Siliguri', sans-serif; font-size: 12.5px; font-weight: 700; line-height: 1; letter-spacing: 0.015em; display: inline-flex; align-items: center; transform: translateY(-0.5px); color: ${pillTextColor};">
+                            ${pillText}
+                        </span>
                     </div>
                 </div>
 
@@ -1531,19 +1573,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 ` : ''}
 
                 <!-- Footer Attribution & Authentic Source -->
-                <div class="mt-6 pt-4 border-t flex flex-wrap items-center justify-between gap-3 text-xs" style="${footerBorder}">
-                    <div class="inline-flex items-center gap-2 leading-none">
-                        <svg class="w-3.5 h-3.5 shrink-0" style="${footerUrl}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                        </svg>
-                        <span class="font-mono font-bold tracking-wider text-xs inline-flex items-center" style="${footerUrl}">deenislam.org</span>
-                        <span class="opacity-40 text-xs inline-flex items-center">•</span>
-                        <span class="text-[11px] font-medium inline-flex items-center" style="${footerMuted}">সত্য ও হেদায়াতের বার্তা</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 18px; margin-top: 20px; border-top: 1px solid ${footerBorderColor}; width: 100%; box-sizing: border-box;">
+                    <!-- Left: Website Pill & Tagline -->
+                    <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                        <div style="display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 8px; ${urlBadgeStyle} box-sizing: border-box;">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; flex-shrink: 0;">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            <span style="font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; font-size: 11.5px; font-weight: 700; letter-spacing: 0.02em; line-height: 1;">deenislam.org</span>
+                        </div>
+                        <span style="opacity: 0.35; font-size: 11px; line-height: 1; ${footerTextColor}">•</span>
+                        <span style="font-family: 'Hind Siliguri', sans-serif; font-size: 11.5px; font-weight: 500; line-height: 1; ${taglineColor}">সত্য ও হেদায়াতের বার্তা</span>
                     </div>
-                    <div class="font-bold text-[11px] sm:text-xs tracking-wide inline-flex items-center" style="${footerMuted}">
-                        ${safeReference}
+
+                    <!-- Right: Authentic Reference Citation Badge -->
+                    <div style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 8px; ${refBadgeStyle} box-sizing: border-box; flex-shrink: 0;">
+                        <span style="font-family: 'Hind Siliguri', sans-serif; font-size: 11.5px; font-weight: 700; line-height: 1; letter-spacing: 0.01em;">
+                            ${safeReference}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1620,20 +1669,28 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const html2canvas = await loadHtml2Canvas();
 
-            // Render high-res 800px width canvas
-            const origWidth = card.style.width;
-            card.style.width = '780px';
-            card.style.maxWidth = '780px';
+            // Render high-res 780px offscreen clone to avoid modal distortion & viewport jitter
+            const clone = card.cloneNode(true);
+            clone.style.width = '780px';
+            clone.style.maxWidth = '780px';
+            clone.style.minWidth = '780px';
+            clone.style.position = 'fixed';
+            clone.style.left = '-9999px';
+            clone.style.top = '0';
+            clone.style.zIndex = '-9999';
+            clone.style.margin = '0';
+            document.body.appendChild(clone);
 
-            const canvas = await html2canvas(card, {
+            const canvas = await html2canvas(clone, {
                 scale: 2.5,
                 useCORS: true,
                 backgroundColor: null,
                 logging: false
             });
 
-            card.style.width = origWidth;
-            card.style.maxWidth = '';
+            if (clone.parentNode) {
+                clone.parentNode.removeChild(clone);
+            }
 
             const link = document.createElement('a');
             const safeName = (currentShareData?.fileName || 'DeenIslam-Verse').replace(/[\/\?<>\\:\*\|":]/g, '-');

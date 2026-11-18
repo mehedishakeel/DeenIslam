@@ -23,9 +23,12 @@ global.localStorage = {
     removeItem: function(k) { delete this._data[k]; }
 };
 
-// Load components.js into context
+// Load components.js and muslim-names-data.js into context
 const componentsCode = fs.readFileSync(path.join(__dirname, '../js/components.js'), 'utf8');
 eval(componentsCode);
+
+const muslimNamesCode = fs.readFileSync(path.join(__dirname, '../js/muslim-names-data.js'), 'utf8');
+eval(muslimNamesCode);
 
 let totalTests = 0;
 let passedTests = 0;
@@ -163,6 +166,40 @@ describe('6. Security: Share Card XSS Defense', () => {
         assert.strictEqual(html.includes('href="javascript:attack()"'), false);
         assert.strictEqual(html.includes('&lt;script&gt;evil()&lt;/script&gt;'), true);
         assert.strictEqual(html.includes('&amp;'), true);
+    });
+});
+
+describe('7. Muslim Baby Names Database & Navigation Integrity', () => {
+    it('should load authentic Muslim names database with 100+ names', () => {
+        assert.ok(window.muslimNamesData, 'muslimNamesData is not defined');
+        assert.ok(Array.isArray(window.muslimNamesData.names), 'names is not an array');
+        assert.ok(window.muslimNamesData.names.length >= 100, `Expected 100+ names, got ${window.muslimNamesData.names.length}`);
+    });
+
+    it('each name item has valid schema (id, name, arabic, english, meaning, gender, letter)', () => {
+        window.muslimNamesData.names.forEach(n => {
+            assert.ok(n.id, `Missing id for ${JSON.stringify(n)}`);
+            assert.ok(n.name, `Missing name for ${n.id}`);
+            assert.ok(n.arabic, `Missing arabic for ${n.id}`);
+            assert.ok(n.english, `Missing english for ${n.id}`);
+            assert.ok(n.meaning, `Missing meaning for ${n.id}`);
+            assert.ok(n.gender === 'boy' || n.gender === 'girl', `Invalid gender for ${n.id}`);
+            assert.ok(n.letter, `Missing letter for ${n.id}`);
+        });
+    });
+
+    it('contains naming guidelines and prohibited names datasets', () => {
+        assert.ok(Array.isArray(window.muslimNamesData.guidelines), 'guidelines missing');
+        assert.ok(window.muslimNamesData.guidelines.length >= 5, 'expected at least 5 guidelines');
+        assert.ok(Array.isArray(window.muslimNamesData.prohibitedNames), 'prohibitedNames missing');
+        assert.ok(window.muslimNamesData.prohibitedNames.length >= 5, 'expected at least 5 prohibited names');
+    });
+
+    it('Universal Command Palette indexes muslim-names.html', () => {
+        const item = commandPaletteIndex.find(i => i.url === 'muslim-names.html');
+        assert.ok(item, 'muslim-names.html is not indexed in Command Palette');
+        assert.ok(item.keywords.includes('muslim'));
+        assert.ok(item.keywords.includes('baby'));
     });
 });
 

@@ -26,27 +26,41 @@
       }
     }
   </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
 </head>
-<body class="bg-stone-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen font-bengali antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <!-- Header -->
-  <header class="py-10 md:py-14 text-center container mx-auto px-4 max-w-4xl">
-    <h1 class="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-3">
-      দ্বীনের পথে আপনার অবদান
-    </h1>
-    <p class="text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-      একটি অলাভজনক দ্বীনি উদ্যোগে আপনার সাদাকাহ ও দান পৌঁছে দিন সহীহ দ্বীন প্রচার ও প্রযুক্তিগত সহায়তায়।
-    </p>
-  </header>
-
-  <!-- Main Content -->
-  <main class="container mx-auto px-4 md:px-6 pb-20 flex-grow max-w-5xl">
+  <!-- Content Section -->
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-5xl space-y-8">
+    
+    <!-- Header Hero -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🤝</span>
+        <span>দ্বীনের খেদমতে সাদাকাহ</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        দ্বীনের পথে আপনার অবদান
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        একটি অলাভজনক দ্বীনি উদ্যোগে আপনার সাদাকাহ ও দান পৌঁছে দিন সহীহ দ্বীন প্রচার ও প্রযুক্তিগত সহায়তায়।
+      </p>
+    </div>
 
     <!-- Quranic Verse Plaque -->
-    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 p-6 md:p-8 shadow-sm mb-10 text-center max-w-3xl mx-auto">
+    <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 md:p-8 shadow-sm mb-10 text-center max-w-3xl mx-auto">
       <p class="font-arabic text-xl md:text-2xl text-emerald-700 dark:text-emerald-400 leading-loose mb-3" dir="rtl">
         مَّثَلُ الَّذِينَ يُنفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنبُلَةٍ مِّائَةُ حَبَّةٍ
       </p>
@@ -58,7 +72,7 @@
 
     <!-- Payment Account Card -->
     <div class="max-w-2xl mx-auto mb-14">
-      <div class="bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 p-6 md:p-8 shadow-sm">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 md:p-8 shadow-sm">
         <div class="flex items-center space-x-3 mb-6 pb-4 border-b border-stone-100 dark:border-slate-800/80">
           <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-100 dark:border-emerald-800/40 shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
@@ -106,7 +120,7 @@
     </div>
 
     <!-- Transparency Breakdown -->
-    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800/80 p-6 md:p-10 shadow-sm max-w-4xl mx-auto">
+    <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 md:p-10 shadow-sm max-w-4xl mx-auto">
       <div class="text-center mb-8">
         <h2 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2">আপনার অনুদান কোথায় ব্যয় হয়?</h2>
         <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 max-w-xl mx-auto">আমরা সম্পূর্ণ স্বচ্ছতার সাথে প্রতিটি পয়সা দ্বীনি খেদমতে ও প্ল্যাটফর্ম পরিচালনায় নিয়োজিত রাখি।</p>
