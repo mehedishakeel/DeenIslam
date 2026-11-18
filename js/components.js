@@ -1012,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <!-- All Ibadah, Tools & Portal Resources Dropdown -->
                         <li class="relative group">
                             <button class="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-colors ${isIbadahActive ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
-                                <span>ইবাদত ও সেবাসমূহ</span>
+                                <span>ইবাদত ও টুলস</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 transform group-hover:rotate-180 transition-transform duration-200 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                             </button>
                             <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-[30rem] bg-white dark:bg-[#0f172a] border border-stone-200/90 dark:border-slate-800 rounded-2xl shadow-xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
@@ -1035,7 +1035,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </a>
                                     <a href="${basePath}muslim-names.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'muslim-names.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">👶</span>
-                                        <span>ইসলামিক নাম ও অর্থ</span>
+                                        <span>মুসলিম শিশুদের নাম</span>
                                     </a>
                                     <a href="${basePath}namaz.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">🕌</span>
@@ -1130,7 +1130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="${basePath}qibla.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'qibla.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🧭 কিবলা কম্পাস</a>
                         <a href="${basePath}dua.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'dua.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🤲 দো'আ ও জিকির</a>
                         <a href="${basePath}allah-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🌟 আল্লাহর ৯৯ নাম</a>
-                        <a href="${basePath}muslim-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'muslim-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">👶 ইসলামিক নাম ও অর্থ</a>
+                        <a href="${basePath}muslim-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'muslim-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">👶 মুসলিম শিশুদের নাম</a>
                         <a href="${basePath}namaz.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🕌 নামাজ শিক্ষা</a>
                         <a href="${basePath}zakat.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'zakat.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">💎 যাকাত ক্যালকুলেটর</a>
                         <a href="${basePath}tasbih.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'tasbih.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">📿 ডিজিটাল তাসবীহ</a>
@@ -1273,7 +1273,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li><a href="${basePath}tasbih.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>📿</span><span>ডিজিটাল তাসবীহ</span></a></li>
                             <li><a href="${basePath}dua.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🤲</span><span>হিসনুল মুসলিম দো'আ</span></a></li>
                             <li><a href="${basePath}allah-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌟</span><span>আল্লাহর ৯৯ নাম</span></a></li>
-                            <li><a href="${basePath}muslim-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>👶</span><span>ইসলামিক নাম ও অর্থ</span></a></li>
+                            <li><a href="${basePath}muslim-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>👶</span><span>মুসলিম শিশুদের নাম</span></a></li>
                             <li><a href="${basePath}zakat.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>💎</span><span>যাকাত ক্যালকুলেটর</span></a></li>
                             <li><a href="${basePath}roja.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌙</span><span>রোজা ও সেহরি-ইফতার</span></a></li>
                             <li><a href="${basePath}hajj.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🕋</span><span>হজ ও উমরাহ গাইড</span></a></li>
