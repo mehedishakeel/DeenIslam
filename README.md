@@ -5,12 +5,12 @@
 [![Tech: TailwindCSS](https://img.shields.io/badge/Tech-TailwindCSS-38B2AC.svg)](#)
 [![GitHub Pages](https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-blue.svg)](https://deenislam.org/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Ready-emerald.svg)](#)
-[![Android APK v1.1.0](https://img.shields.io/badge/Android%20APK-v1.1.0%20Download-047857.svg)](https://github.com/mehedishakeel/DeenIslam/releases/download/v1.1.0/DeenIslam-v1.1.0.apk)
+[![Android APK v1.2.0](https://img.shields.io/badge/Android%20APK-v1.2.0%20Download-047857.svg)](https://github.com/mehedishakeel/DeenIslam/releases/download/v1.2.0/DeenIslam-v1.2.0.apk)
 
 **DeenIslam** is an ad-free, privacy-first Islamic web portal and native Android application (`mobile/`) providing authentic Islamic resources in Bengali.
 
 - **Live Website:** [https://deenislam.org/](https://deenislam.org/)
-- **Android App (APK v1.1.0):** [Download DeenIslam-v1.1.0.apk](https://github.com/mehedishakeel/DeenIslam/releases/download/v1.1.0/DeenIslam-v1.1.0.apk)
+- **Android App (APK v1.2.0):** [Download DeenIslam-v1.2.0.apk](https://github.com/mehedishakeel/DeenIslam/releases/download/v1.2.0/DeenIslam-v1.2.0.apk)
 
 ---
 

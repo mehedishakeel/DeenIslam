@@ -4,6 +4,12 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.mehedishakeel.deenislam"
     compileSdk = 34
@@ -26,9 +32,34 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        release {
+            def keyFile = file('deenislam-release.jks')
+            if (keystorePropertiesFile.exists() && keystoreProperties['storeFile']) {
+                def propFile = file(keystoreProperties['storeFile'])
+                if (!propFile.exists()) {
+                    propFile = rootProject.file(keystoreProperties['storeFile'])
+                }
+                if (propFile.exists()) {
+                    keyFile = propFile
+                }
+            }
+            if (keyFile.exists()) {
+                keyAlias (keystoreProperties['keyAlias'] ?: 'deenislam')
+                keyPassword (keystoreProperties['keyPassword'] ?: 'deenislam2026')
+                storeFile keyFile
+                storePassword (keystoreProperties['storePassword'] ?: 'deenislam2026')
+            } else {
+                signingConfig = signingConfigs.debug
+            }
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
-            signingConfig = signingConfigs.debug
+            signingConfig = signingConfigs.release
             minifyEnabled = false
             shrinkResources = false
         }

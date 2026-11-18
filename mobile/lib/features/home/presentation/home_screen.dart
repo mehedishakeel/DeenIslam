@@ -438,20 +438,27 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Icon(prayerStatus.icon, color: AppColors.emerald, size: 17),
-                          const SizedBox(width: 6),
-                          Text(
-                            "পরবর্তী ওয়াক্ত: ${prayerStatus.nextName}",
-                            style: GoogleFonts.hindSiliguri(
-                              fontSize: 12.5,
-                              fontWeight: FontWeight.bold,
-                              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Icon(prayerStatus.icon, color: AppColors.emerald, size: 17),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                "পরবর্তী ওয়াক্ত: ${prayerStatus.nextName}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
@@ -547,20 +554,27 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          const Text("🌙", style: TextStyle(fontSize: 13)),
-                          const SizedBox(width: 6),
-                          Text(
-                            fastingStatus.title,
-                            style: GoogleFonts.hindSiliguri(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            const Text("🌙", style: TextStyle(fontSize: 13)),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                fastingStatus.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       Text(
                         BengaliNumerals.formatCountdown(fastingStatus.remaining),
                         style: GoogleFonts.hindSiliguri(
