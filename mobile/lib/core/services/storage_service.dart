@@ -53,6 +53,19 @@ class StorageService {
   static const String _selectedCityKey = 'deen_selected_city_v1';
   static const String _lastReadSurahKey = 'deen_last_read_surah_v1';
   static const String _darkModeKey = 'deen_dark_mode_v1';
+  static const String _hijriOffsetKey = 'deen_hijri_offset';
+
+  // --- Hijri Moon-Sighting Offset Persistence ---
+  static Future<int> getHijriOffset() async {
+    final prefs = await SharedPreferences.getInstance();
+    final val = prefs.getInt(_hijriOffsetKey) ?? 0;
+    return val.clamp(-3, 3);
+  }
+
+  static Future<void> setHijriOffset(int offset) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_hijriOffsetKey, offset.clamp(-3, 3));
+  }
 
   // --- Theme Persistence ---
   static Future<bool> getDarkMode() async {
