@@ -47,7 +47,7 @@
     </div>
     
     <!-- Last Read Ayah Card (Architectural Sanctuary) -->
-    <div id="last-read-container" class="hidden max-w-4xl mx-auto mb-8">
+    <div id="last-read-container" class="hidden max-w-4xl mx-auto mb-6">
       <div class="bg-gradient-to-r from-emerald-900 to-teal-900 text-white p-5 md:p-6 rounded-2xl border border-emerald-700/40 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center space-x-3.5">
           <div class="w-11 h-11 bg-white/10 rounded-xl flex items-center justify-center text-xl border border-white/15 shrink-0">
@@ -61,6 +61,20 @@
         <a id="last-read-link" href="#" class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs md:text-sm rounded-xl transition-all shrink-0">
           পড়া চালিয়ে যান →
         </a>
+      </div>
+    </div>
+
+    <!-- Quran Reading Progress Tracker -->
+    <div id="khatam-progress-card" class="max-w-4xl mx-auto mb-8 bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-2xl border border-stone-200/90 dark:border-slate-800 shadow-2xs">
+      <div class="flex items-center justify-between text-xs sm:text-sm font-bold mb-2">
+        <span class="text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
+          <span>✅</span>
+          <span>কুরআন খতম অগ্রগতি (পঠিত সূরা)</span>
+        </span>
+        <span id="khatam-progress-label" class="text-emerald-700 dark:text-emerald-400">০ / ১১৪ সূরা (০%)</span>
+      </div>
+      <div class="w-full h-2 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden">
+        <div id="khatam-progress-bar" class="h-full bg-emerald-600 transition-all duration-300 rounded-full" style="width: 0%;"></div>
       </div>
     </div>
 
@@ -329,12 +343,14 @@
         
         const bookmarkKey = `quran_surah_${surah.id}`;
         const isBookmarked = window.isBookmarked(bookmarkKey);
+        const completedSurahs = getCompletedSurahsList();
+        const isCompleted = completedSurahs.includes(surah.id);
 
         card.innerHTML = `
           <div>
             <div class="flex justify-between items-center mb-3.5">
-              <div class="w-9 h-9 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 rounded-lg flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40 group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                ${toBengaliNumerals(surah.id)}
+              <div class="w-9 h-9 ${isCompleted ? 'bg-emerald-600 text-white' : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'} rounded-lg flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40 group-hover:bg-emerald-600 group-hover:text-white transition-all" title="${isCompleted ? 'পঠিত সম্পন্ন' : ''}">
+                ${isCompleted ? '✓' : toBengaliNumerals(surah.id)}
               </div>
               <div class="flex items-center space-x-1">
                   <button onclick="handleBookmark(event, ${JSON.stringify(surah).replace(/"/g, '&quot;')})" class="p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
@@ -736,11 +752,32 @@
       } catch (e) {}
     }
 
-    // Initialize Recent Search & Last Read
+    function getCompletedSurahsList() {
+      try {
+        const raw = localStorage.getItem('deen_completed_surahs');
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function updateKhatamProgress() {
+      const list = getCompletedSurahsList();
+      const count = list.length;
+      const pct = Math.round((count / 114) * 100);
+      const label = document.getElementById('khatam-progress-label');
+      const bar = document.getElementById('khatam-progress-bar');
+      if (label) label.textContent = `${toBengaliNumerals(count)} / ১১৪ সূরা (${toBengaliNumerals(pct)}%)`;
+      if (bar) bar.style.width = `${pct}%`;
+    }
+
+    // Initialize Recent Search & Last Read & Khatam Progress
     if (window.initRecentSearch) {
         initRecentSearch('surah-search', 'recent_quran_searches');
     }
     checkLastRead();
+    updateKhatamProgress();
   </script>
 
 </body>

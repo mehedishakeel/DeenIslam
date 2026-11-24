@@ -24,6 +24,11 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
   bool _isLoading = true;
   bool _isSyncing = false;
   double _arabicFontSize = 24.0;
+  double _bengaliFontSize = 15.0;
+  String _reciterId = 'ar.alafasy';
+  int _repeatCount = 1; // 1, 3, 5, 999
+  int _currentRepeatIteration = 0;
+  bool _isCompleted = false;
   bool _isPlayingSurah = false;
   bool _isBufferingAudio = false;
   int? _playingAyahIndex;
@@ -58,29 +63,46 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
     );
     final loaded = await QuranRepository.loadSurahWithOfflineCache(widget.surah.number);
     final bookmarks = await StorageService.getBookmarks();
+    final reciter = await StorageService.getQuranReciter();
+    final repeat = await StorageService.getQuranRepeatCount();
+    final arSize = await StorageService.getArabicFontSize();
+    final bnSize = await StorageService.getBengaliFontSize();
+    final completedSet = await StorageService.getCompletedSurahs();
     if (!mounted) return;
     setState(() {
       _ayahs = loaded;
       _bookmarkedKeys = bookmarks.map((b) => b.key).toSet();
+      _reciterId = reciter;
+      _repeatCount = repeat;
+      _arabicFontSize = arSize;
+      _bengaliFontSize = bnSize;
+      _isCompleted = completedSet.contains(widget.surah.number);
       _isLoading = false;
     });
   }
 
-  Future<void> _playSingleAyah(int index) async {
-    if (_playingAyahIndex == index && !_isPlayingSurah) {
+  Future<void> _playSingleAyah(int index, {bool resetRepeat = true}) async {
+    if (resetRepeat && _playingAyahIndex == index && !_isPlayingSurah) {
       await AudioService.instance.stop();
       if (!mounted) return;
       setState(() {
         _playingAyahIndex = null;
         _isPlayingSurah = false;
+        _currentRepeatIteration = 0;
       });
       return;
     }
 
+    if (resetRepeat) {
+      _currentRepeatIteration = 0;
+    }
+
     final ayah = _ayahs[index];
-    final url = (ayah.audioUrl != null && ayah.audioUrl!.isNotEmpty)
-        ? ayah.audioUrl!
-        : QuranRepository.getAyahAudioUrl(widget.surah.number, ayah.numberInSurah);
+    final url = QuranRepository.getAudioUrlForAyah(
+      ayah,
+      widget.surah.number,
+      reciterId: _reciterId,
+    );
 
     setState(() {
       _isPlayingSurah = false;
@@ -90,10 +112,16 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
     await AudioService.instance.playUrl(
       url,
       onCompleted: () {
-        if (!mounted) return;
-        setState(() {
-          _playingAyahIndex = null;
-        });
+        if (!mounted || _playingAyahIndex != index) return;
+        _currentRepeatIteration++;
+        if (_repeatCount == 999 || _currentRepeatIteration < _repeatCount) {
+          _playSingleAyah(index, resetRepeat: false);
+        } else {
+          setState(() {
+            _playingAyahIndex = null;
+            _currentRepeatIteration = 0;
+          });
+        }
       },
     );
   }
@@ -105,11 +133,13 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
       setState(() {
         _isPlayingSurah = false;
         _playingAyahIndex = null;
+        _currentRepeatIteration = 0;
       });
       return;
     }
 
     final startIndex = _playingAyahIndex ?? 0;
+    _currentRepeatIteration = 0;
     setState(() {
       _isPlayingSurah = true;
     });
@@ -122,15 +152,18 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
         setState(() {
           _isPlayingSurah = false;
           _playingAyahIndex = null;
+          _currentRepeatIteration = 0;
         });
       }
       return;
     }
 
     final ayah = _ayahs[index];
-    final url = (ayah.audioUrl != null && ayah.audioUrl!.isNotEmpty)
-        ? ayah.audioUrl!
-        : QuranRepository.getAyahAudioUrl(widget.surah.number, ayah.numberInSurah);
+    final url = QuranRepository.getAudioUrlForAyah(
+      ayah,
+      widget.surah.number,
+      reciterId: _reciterId,
+    );
 
     setState(() {
       _playingAyahIndex = index;
@@ -140,7 +173,13 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
       url,
       onCompleted: () {
         if (!mounted || !_isPlayingSurah) return;
-        _playSurahSequenceFrom(index + 1);
+        _currentRepeatIteration++;
+        if (_repeatCount == 999 || _currentRepeatIteration < _repeatCount) {
+          _playSurahSequenceFrom(index);
+        } else {
+          _currentRepeatIteration = 0;
+          _playSurahSequenceFrom(index + 1);
+        }
       },
     );
   }
@@ -327,6 +366,116 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                           ),
                         ),
                       ],
+                      const SizedBox(height: 14),
+                      // Quick Reader Controls: Reciter, Hifz Repeat & Mark Completed
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        alignment: WrapAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: _showReciterSheet,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: isDark ? AppColors.borderDark : AppColors.emerald.withOpacity(0.3),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.record_voice_over_outlined, size: 14, color: AppColors.emerald),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    QuranRepository.reciters
+                                        .firstWhere((r) => r.id == _reciterId,
+                                            orElse: () => QuranRepository.reciters.first)
+                                        .nameBn,
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: _cycleRepeatMode,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: _repeatCount > 1
+                                    ? AppColors.emerald.withOpacity(0.15)
+                                    : (isDark ? Colors.white.withOpacity(0.06) : Colors.white),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: _repeatCount > 1
+                                      ? AppColors.emerald
+                                      : (isDark ? AppColors.borderDark : AppColors.emerald.withOpacity(0.3)),
+                                ),
+                              ),
+                              child: Text(
+                                _repeatCount == 999
+                                    ? '🔁 অবিরাম লুপ'
+                                    : '🔁 ${BengaliNumerals.toBengali(_repeatCount)} বার',
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: _repeatCount > 1
+                                      ? AppColors.emerald
+                                      : (isDark ? Colors.white : AppColors.textPrimaryLight),
+                                ),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: _toggleSurahCompleted,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: _isCompleted
+                                    ? AppColors.emerald
+                                    : (isDark ? Colors.white.withOpacity(0.06) : Colors.white),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: _isCompleted
+                                      ? AppColors.emerald
+                                      : (isDark ? AppColors.borderDark : AppColors.emerald.withOpacity(0.3)),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    _isCompleted ? Icons.check_circle : Icons.check_circle_outline,
+                                    size: 14,
+                                    color: _isCompleted ? Colors.white : AppColors.emerald,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    _isCompleted ? 'পঠিত সম্পন্ন' : 'পঠিত চিহ্নিত করুন',
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: _isCompleted
+                                          ? Colors.white
+                                          : (isDark ? Colors.white : AppColors.textPrimaryLight),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -428,7 +577,7 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                           Text(
                             ayah.textBengali,
                             style: GoogleFonts.hindSiliguri(
-                              fontSize: 13.5,
+                              fontSize: _bengaliFontSize,
                               height: 1.5,
                               color: isDark
                                   ? AppColors.textSecondaryDark
@@ -481,7 +630,10 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                       Text(
                         _isBufferingAudio
                             ? "অডিও লোড হচ্ছে..."
-                            : "ক্বারী মিশারি রাশিদ আল-আফাসী",
+                            : QuranRepository.reciters
+                                .firstWhere((r) => r.id == _reciterId,
+                                    orElse: () => QuranRepository.reciters.first)
+                                .nameBn,
                         style: GoogleFonts.hindSiliguri(
                           fontSize: 10.5,
                           color: isDark
@@ -511,6 +663,107 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
     );
   }
 
+  Future<void> _cycleRepeatMode() async {
+    const modes = [1, 3, 5, 999];
+    final currentIdx = modes.indexOf(_repeatCount);
+    final nextMode = modes[(currentIdx + 1) % modes.length];
+    await StorageService.setQuranRepeatCount(nextMode);
+    if (!mounted) return;
+    setState(() {
+      _repeatCount = nextMode;
+      _currentRepeatIteration = 0;
+    });
+    final label = nextMode == 999
+        ? 'অবিরাম লুপ'
+        : '${BengaliNumerals.toBengali(nextMode)} বার';
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'আয়াত পুনরাবৃত্তি: $label',
+          style: GoogleFonts.hindSiliguri(fontSize: 13),
+        ),
+        duration: const Duration(seconds: 1),
+        backgroundColor: AppColors.emerald,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  Future<void> _toggleSurahCompleted() async {
+    final added = await StorageService.toggleCompletedSurah(widget.surah.number);
+    if (!mounted) return;
+    setState(() => _isCompleted = added);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          added ? 'সূরাটি পঠিত তালিকায় যুক্ত হয়েছে' : 'পঠিত তালিকা থেকে সরানো হয়েছে',
+          style: GoogleFonts.hindSiliguri(fontSize: 13),
+        ),
+        duration: const Duration(seconds: 1),
+        backgroundColor: AppColors.emerald,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _showReciterSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'ক্বারী নির্বাচন করুন',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              ...QuranRepository.reciters.map((r) {
+                final selected = _reciterId == r.id;
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: Icon(
+                    selected ? Icons.radio_button_checked : Icons.radio_button_off,
+                    color: selected ? AppColors.emerald : Colors.grey,
+                  ),
+                  title: Text(
+                    r.nameBn,
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 14,
+                      fontWeight: selected ? FontWeight.bold : FontWeight.w500,
+                      color: selected ? AppColors.emerald : null,
+                    ),
+                  ),
+                  onTap: () async {
+                    Navigator.pop(ctx);
+                    await AudioService.instance.stop();
+                    await StorageService.setQuranReciter(r.id);
+                    if (!mounted) return;
+                    setState(() {
+                      _reciterId = r.id;
+                      _isPlayingSurah = false;
+                      _playingAyahIndex = null;
+                      _currentRepeatIteration = 0;
+                    });
+                  },
+                );
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _showFontSizeDialog() {
     showModalBottomSheet(
       context: context,
@@ -527,13 +780,12 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "আরবি ফন্ট সাইজ নির্ধারণ করুন",
+                    "আরবি ফন্ট সাইজ: ${BengaliNumerals.toBengali(_arabicFontSize.toInt())}px",
                     style: GoogleFonts.hindSiliguri(
-                      fontSize: 15,
+                      fontSize: 14.5,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 14),
                   Row(
                     children: [
                       const Text("A", style: TextStyle(fontSize: 14)),
@@ -545,25 +797,44 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                           divisions: 9,
                           activeColor: AppColors.emerald,
                           onChanged: (val) {
-                            setModalState(() {
-                              _arabicFontSize = val;
-                            });
-                            setState(() {
-                              _arabicFontSize = val;
-                            });
+                            setModalState(() => _arabicFontSize = val);
+                            setState(() => _arabicFontSize = val);
+                            StorageService.setArabicFontSize(val);
                           },
                         ),
                       ),
                       const Text("A", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                     ],
                   ),
-                  Center(
-                    child: Text(
-                      "সাইজ: ${BengaliNumerals.toBengali(_arabicFontSize.toInt())}px",
-                      style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold),
+                  const SizedBox(height: 8),
+                  Text(
+                    "বাংলা অনুবাদ ফন্ট সাইজ: ${BengaliNumerals.toBengali(_bengaliFontSize.toInt())}px",
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 14.5,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      const Text("অ", style: TextStyle(fontSize: 13)),
+                      Expanded(
+                        child: Slider(
+                          value: _bengaliFontSize,
+                          min: 12.0,
+                          max: 24.0,
+                          divisions: 6,
+                          activeColor: AppColors.emerald,
+                          onChanged: (val) {
+                            setModalState(() => _bengaliFontSize = val);
+                            setState(() => _bengaliFontSize = val);
+                            StorageService.setBengaliFontSize(val);
+                          },
+                        ),
+                      ),
+                      const Text("অ", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
                 ],
               ),
             );

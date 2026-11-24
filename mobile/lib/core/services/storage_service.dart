@@ -54,6 +54,11 @@ class StorageService {
   static const String _lastReadSurahKey = 'deen_last_read_surah_v1';
   static const String _darkModeKey = 'deen_dark_mode_v1';
   static const String _hijriOffsetKey = 'deen_hijri_offset';
+  static const String _quranReciterKey = 'deen_quran_reciter_v1';
+  static const String _quranRepeatKey = 'deen_quran_repeat_v1';
+  static const String _arabicFontSizeKey = 'deen_arabic_font_size';
+  static const String _bengaliFontSizeKey = 'deen_bengali_font_size';
+  static const String _completedSurahsKey = 'deen_completed_surahs';
 
   // --- Hijri Moon-Sighting Offset Persistence ---
   static Future<int> getHijriOffset() async {
@@ -364,5 +369,70 @@ class StorageService {
     if (score > current) {
       await prefs.setInt(_quizHighScoreKey, score);
     }
+  }
+
+  // --- Quran Reader Preferences & Progress ---
+  static Future<String> getQuranReciter() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_quranReciterKey) ?? 'ar.alafasy';
+  }
+
+  static Future<void> setQuranReciter(String reciterId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_quranReciterKey, reciterId);
+  }
+
+  static Future<int> getQuranRepeatCount() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_quranRepeatKey) ?? 1;
+  }
+
+  static Future<void> setQuranRepeatCount(int count) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_quranRepeatKey, count);
+  }
+
+  static Future<double> getArabicFontSize() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_arabicFontSizeKey) ?? 24.0;
+  }
+
+  static Future<void> setArabicFontSize(double size) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_arabicFontSizeKey, size);
+  }
+
+  static Future<double> getBengaliFontSize() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_bengaliFontSizeKey) ?? 15.0;
+  }
+
+  static Future<void> setBengaliFontSize(double size) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble(_bengaliFontSizeKey, size);
+  }
+
+  static Future<Set<int>> getCompletedSurahs() async {
+    final prefs = await SharedPreferences.getInstance();
+    final list = prefs.getStringList(_completedSurahsKey) ?? [];
+    return list.map((e) => int.tryParse(e)).whereType<int>().toSet();
+  }
+
+  static Future<bool> toggleCompletedSurah(int surahNumber) async {
+    final prefs = await SharedPreferences.getInstance();
+    final current = await getCompletedSurahs();
+    bool added;
+    if (current.contains(surahNumber)) {
+      current.remove(surahNumber);
+      added = false;
+    } else {
+      current.add(surahNumber);
+      added = true;
+    }
+    await prefs.setStringList(
+      _completedSurahsKey,
+      current.map((e) => e.toString()).toList(),
+    );
+    return added;
   }
 }

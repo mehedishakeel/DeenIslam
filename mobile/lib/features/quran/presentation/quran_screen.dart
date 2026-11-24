@@ -19,6 +19,7 @@ class _QuranScreenState extends State<QuranScreen> {
   String _selectedFilter = 'সকল'; // 'সকল', 'মাক্কী', 'মাদানী', 'অফলাইন'
   final List<Surah> _allSurahs = SurahData.allSurahs;
   Set<int> _offlineSurahs = {1, 103, 108, 112, 113, 114};
+  Set<int> _completedSurahs = {};
   Map<String, dynamic>? _lastRead;
 
   @override
@@ -30,9 +31,11 @@ class _QuranScreenState extends State<QuranScreen> {
   Future<void> _loadMetadata() async {
     final cached = await StorageService.getOfflineCachedSurahNumbers();
     final last = await StorageService.getLastReadSurah();
+    final completed = await StorageService.getCompletedSurahs();
     if (!mounted) return;
     setState(() {
       _offlineSurahs = cached;
+      _completedSurahs = completed;
       _lastRead = last;
     });
   }
@@ -150,6 +153,59 @@ class _QuranScreenState extends State<QuranScreen> {
               ),
             ),
 
+          // Quran Khatam Progress Bar
+          if (_searchQuery.isEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.cardDark : Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '✅ কুরআন খতম অগ্রগতি (পঠিত সূরা)',
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                          ),
+                        ),
+                        Text(
+                          '${BengaliNumerals.toBengali(_completedSurahs.length)} / ১১৪ সূরা',
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.emerald,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: LinearProgressIndicator(
+                        value: _completedSurahs.length / 114.0,
+                        minHeight: 6,
+                        backgroundColor: isDark
+                            ? const Color(0xFF0F172A)
+                            : Colors.grey.shade200,
+                        color: AppColors.emerald,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
           // Search & Filter Section
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -236,6 +292,7 @@ class _QuranScreenState extends State<QuranScreen> {
               itemBuilder: (context, index) {
                 final s = filtered[index];
                 final isOffline = _offlineSurahs.contains(s.number);
+                final isCompleted = _completedSurahs.contains(s.number);
                 return InkWell(
                   onTap: () => _openSurah(s),
                   borderRadius: BorderRadius.circular(14),
@@ -257,22 +314,28 @@ class _QuranScreenState extends State<QuranScreen> {
                           height: 38,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft,
+                            color: isCompleted
+                                ? AppColors.emerald
+                                : (isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft),
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: isDark
-                                  ? AppColors.emeraldDark
-                                  : AppColors.emerald.withOpacity(0.3),
+                              color: isCompleted
+                                  ? AppColors.emerald
+                                  : (isDark
+                                      ? AppColors.emeraldDark
+                                      : AppColors.emerald.withOpacity(0.3)),
                             ),
                           ),
-                          child: Text(
-                            BengaliNumerals.toBengali(s.number),
-                            style: GoogleFonts.hindSiliguri(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.emerald,
-                            ),
-                          ),
+                          child: isCompleted
+                              ? const Icon(Icons.check, color: Colors.white, size: 18)
+                              : Text(
+                                  BengaliNumerals.toBengali(s.number),
+                                  style: GoogleFonts.hindSiliguri(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.emerald,
+                                  ),
+                                ),
                         ),
                         const SizedBox(width: 14),
 

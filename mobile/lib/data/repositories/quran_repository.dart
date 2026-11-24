@@ -3,11 +3,74 @@ import 'dart:io';
 import '../../core/services/storage_service.dart';
 import '../models/ayah_model.dart';
 
+class QuranReciter {
+  final String id;
+  final String nameBn;
+  final String everyAyahFolder;
+
+  const QuranReciter({
+    required this.id,
+    required this.nameBn,
+    required this.everyAyahFolder,
+  });
+}
+
 class QuranRepository {
-  static String getAyahAudioUrl(int surahNumber, int ayahNumber) {
+  static const List<QuranReciter> reciters = [
+    QuranReciter(
+      id: 'ar.alafasy',
+      nameBn: 'মিশারী রাশিদ আল-আফাসি',
+      everyAyahFolder: 'Alafasy_128kbps',
+    ),
+    QuranReciter(
+      id: 'ar.abdurrahmaansudais',
+      nameBn: 'আবদুর রহমান আস-সুদাইস',
+      everyAyahFolder: 'Abdurrahmaan_As-Sudais_192kbps',
+    ),
+    QuranReciter(
+      id: 'ar.mahermuaiqly',
+      nameBn: 'মাহের আল-মুআইকলি',
+      everyAyahFolder: 'MaherAlMuaiqly128kbps',
+    ),
+    QuranReciter(
+      id: 'ar.husary',
+      nameBn: 'মাহমুদ খলিল আল-হুসারি',
+      everyAyahFolder: 'Husary_128kbps',
+    ),
+  ];
+
+  static String getAyahAudioUrl(
+    int surahNumber,
+    int ayahNumber, {
+    String reciterId = 'ar.alafasy',
+  }) {
+    final reciter = reciters.firstWhere(
+      (r) => r.id == reciterId,
+      orElse: () => reciters.first,
+    );
     final s = surahNumber.toString().padLeft(3, '0');
     final a = ayahNumber.toString().padLeft(3, '0');
-    return 'https://everyayah.com/data/Alafasy_128kbps/$s$a.mp3';
+    return 'https://everyayah.com/data/${reciter.everyAyahFolder}/$s$a.mp3';
+  }
+
+  static String getAudioUrlForAyah(
+    Ayah ayah,
+    int surahNumber, {
+    String reciterId = 'ar.alafasy',
+  }) {
+    if (reciterId == 'ar.alafasy' &&
+        ayah.audioUrl != null &&
+        ayah.audioUrl!.isNotEmpty) {
+      return ayah.audioUrl!;
+    }
+    if (ayah.numberInQuran > 0) {
+      return 'https://cdn.islamic.network/quran/audio/128/$reciterId/${ayah.numberInQuran}.mp3';
+    }
+    return getAyahAudioUrl(
+      surahNumber,
+      ayah.numberInSurah,
+      reciterId: reciterId,
+    );
   }
 
   /// Get Ayahs synchronously from preset offline data

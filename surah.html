@@ -82,13 +82,33 @@
             </div>
         </div>
 
-        <div id="audio-controls" class="flex flex-wrap justify-center gap-3">
+        <div id="audio-controls" class="flex flex-wrap justify-center items-center gap-3">
             <button id="play-full-btn" onclick="toggleFullSurahAudio()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-bold text-xs md:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-2">
                 <span>▶ সম্পূর্ণ সূরা শুনুন</span>
             </button>
             <button id="stop-btn" onclick="stopAllAudio()" class="hidden bg-stone-100 hover:bg-red-50 dark:bg-slate-800 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/40 px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2">
                 <span>⏹ থামান</span>
             </button>
+            <button id="mark-complete-btn" onclick="toggleSurahCompleted()" class="bg-stone-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5">
+                <span id="mark-complete-icon">☐</span>
+                <span id="mark-complete-text">পঠিত চিহ্নিত করুন</span>
+            </button>
+        </div>
+
+        <!-- Font Size Controls -->
+        <div class="flex flex-wrap justify-center items-center gap-3 mt-4 pt-4 border-t border-stone-100 dark:border-slate-800 text-xs">
+            <div class="inline-flex items-center gap-2 bg-stone-50 dark:bg-slate-800/70 px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-slate-700">
+                <span class="font-bold text-slate-600 dark:text-slate-300">আরবি ফন্ট:</span>
+                <button onclick="adjustFontSize('arabic', -2)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="ছোট করুন">A-</button>
+                <span id="arabic-size-label" class="font-bold text-emerald-700 dark:text-emerald-400 min-w-[34px] text-center">৩০px</span>
+                <button onclick="adjustFontSize('arabic', 2)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="বড় করুন">A+</button>
+            </div>
+            <div class="inline-flex items-center gap-2 bg-stone-50 dark:bg-slate-800/70 px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-slate-700">
+                <span class="font-bold text-slate-600 dark:text-slate-300">বাংলা ফন্ট:</span>
+                <button onclick="adjustFontSize('bengali', -1)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="ছোট করুন">A-</button>
+                <span id="bengali-size-label" class="font-bold text-emerald-700 dark:text-emerald-400 min-w-[34px] text-center">১৭px</span>
+                <button onclick="adjustFontSize('bengali', 1)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="বড় করুন">A+</button>
+            </div>
         </div>
     </div>
 
@@ -518,7 +538,7 @@
             </div>
           </div>
           <div class="mb-6 text-right">
-            <p class="text-2xl md:text-4xl leading-[2.4] font-arabic text-slate-900 dark:text-white font-normal" dir="rtl">${arabicText}</p>
+            <p class="arabic-verse-text text-2xl md:text-4xl leading-[2.4] font-arabic text-slate-900 dark:text-white font-normal" dir="rtl">${arabicText}</p>
           </div>
           <div class="border-t pt-5 border-stone-100 dark:border-slate-800">
             <p class="text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed font-medium font-bengali-content">${bengaliData.ayahs[index].text}</p>
@@ -526,6 +546,18 @@
         `;
         container.appendChild(verseCard);
       });
+
+      applySavedFontSizes();
+      updateCompletionButtonUI();
+      if (targetAyahIndex >= 0) {
+        setTimeout(() => {
+          const el = document.getElementById(`verse-${targetAyahIndex}`);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            highlightVerse(targetAyahIndex);
+          }
+        }, 250);
+      }
     }
 
     window.navigateSurah = (dir) => {
@@ -714,8 +746,92 @@
     function highlightVerse(index) {
         removeHighlights();
         const activeVerse = document.getElementById(`verse-${index}`);
-        if (activeVerse) activeVerse.classList.add('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary');
+        if (activeVerse) {
+            activeVerse.classList.add('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary');
+            activeVerse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     }
+
+    // --- Font Sizing Controls (Synced with localStorage) ---
+    let arabicFontSize = parseInt(localStorage.getItem('deen_arabic_font_size') || '30', 10) || 30;
+    let bengaliFontSize = parseInt(localStorage.getItem('deen_bengali_font_size') || '17', 10) || 17;
+
+    function applySavedFontSizes() {
+        const arLabel = document.getElementById('arabic-size-label');
+        const bnLabel = document.getElementById('bengali-size-label');
+        if (arLabel) arLabel.textContent = `${toBengaliNumerals(arabicFontSize)}px`;
+        if (bnLabel) bnLabel.textContent = `${toBengaliNumerals(bengaliFontSize)}px`;
+
+        document.querySelectorAll('.arabic-verse-text').forEach(el => {
+            el.style.fontSize = `${arabicFontSize}px`;
+        });
+        document.querySelectorAll('.font-bengali-content').forEach(el => {
+            el.style.fontSize = `${bengaliFontSize}px`;
+        });
+    }
+
+    window.adjustFontSize = (type, delta) => {
+        if (type === 'arabic') {
+            arabicFontSize = Math.max(18, Math.min(48, arabicFontSize + delta));
+            localStorage.setItem('deen_arabic_font_size', String(arabicFontSize));
+        } else {
+            bengaliFontSize = Math.max(13, Math.min(26, bengaliFontSize + delta));
+            localStorage.setItem('deen_bengali_font_size', String(bengaliFontSize));
+        }
+        applySavedFontSizes();
+    };
+
+    // --- Surah Reading Completion Tracker ---
+    const COMPLETED_SURAHS_KEY = 'deen_completed_surahs';
+
+    function getCompletedSurahs() {
+        try {
+            const raw = localStorage.getItem(COMPLETED_SURAHS_KEY);
+            const parsed = raw ? JSON.parse(raw) : [];
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (_) {
+            return [];
+        }
+    }
+
+    function updateCompletionButtonUI() {
+        const btn = document.getElementById('mark-complete-btn');
+        const icon = document.getElementById('mark-complete-icon');
+        const text = document.getElementById('mark-complete-text');
+        if (!btn || !icon || !text) return;
+
+        const completed = getCompletedSurahs().includes(parseInt(surahId, 10));
+        if (completed) {
+            btn.className = "bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-500/40 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
+            icon.textContent = "✅";
+            text.textContent = "পঠিত সম্পন্ন";
+        } else {
+            btn.className = "bg-stone-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
+            icon.textContent = "☐";
+            text.textContent = "পঠিত চিহ্নিত করুন";
+        }
+    }
+
+    window.toggleSurahCompleted = () => {
+        const sNum = parseInt(surahId, 10);
+        const list = getCompletedSurahs();
+        const idx = list.indexOf(sNum);
+        let added = false;
+        if (idx >= 0) {
+            list.splice(idx, 1);
+        } else {
+            list.push(sNum);
+            added = true;
+        }
+        localStorage.setItem(COMPLETED_SURAHS_KEY, JSON.stringify(list));
+        updateCompletionButtonUI();
+        if (window.showToast) {
+            window.showToast(
+                added ? 'সূরাটি পঠিত তালিকায় যুক্ত হয়েছে' : 'পঠিত তালিকা থেকে সরানো হয়েছে',
+                added ? 'success' : 'info'
+            );
+        }
+    };
 
     function removeHighlights() {
         document.querySelectorAll('.verse-card').forEach(el => el.classList.remove('ring-4', 'ring-emerald-100', 'dark:ring-emerald-900/20', 'border-primary'));

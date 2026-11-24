@@ -317,6 +317,24 @@ describe('9. Islamic Quiz & Masael FAQs Dataset & Navigation Integrity', () => {
     });
 });
 
+describe('10. Quran Reader Font Controls, Auto-Scroll & Reading Progress Integrity', () => {
+    it('surah.html includes font size controls, auto-scroll highlight, and completion toggle', () => {
+        const surahHtml = fs.readFileSync(path.join(__dirname, '../surah.html'), 'utf8');
+        assert.ok(surahHtml.includes('adjustFontSize'), 'Missing adjustFontSize handler');
+        assert.ok(surahHtml.includes('arabic-size-label'), 'Missing arabic-size-label');
+        assert.ok(surahHtml.includes('bengali-size-label'), 'Missing bengali-size-label');
+        assert.ok(surahHtml.includes('toggleSurahCompleted'), 'Missing toggleSurahCompleted handler');
+        assert.ok(surahHtml.includes('scrollIntoView'), 'Missing auto-scroll into view on highlight');
+    });
+
+    it('quran.html includes Khatam reading progress bar and completed tracker', () => {
+        const quranHtml = fs.readFileSync(path.join(__dirname, '../quran.html'), 'utf8');
+        assert.ok(quranHtml.includes('khatam-progress-card'), 'Missing khatam-progress-card');
+        assert.ok(quranHtml.includes('khatam-progress-bar'), 'Missing khatam-progress-bar');
+        assert.ok(quranHtml.includes('deen_completed_surahs'), 'Missing deen_completed_surahs tracker');
+    });
+});
+
 console.log(`\n========================================`);
 console.log(`Summary: ${passedTests}/${totalTests} tests passed.`);
 console.log(`Status: ${passedTests === totalTests ? 'SUCCESS - ALL TESTS PASSED' : 'FAILURE'}`);
