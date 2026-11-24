@@ -119,8 +119,8 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 100));
 
-    // Initially 'সবগুলো (১৯)' shows 19 items
-    expect(find.text('১৯টি সেবা'), findsOneWidget);
+    // Initially 'সবগুলো (২০)' shows 20 items
+    expect(find.text('২০টি সেবা'), findsOneWidget);
 
     // Scroll until visible then tap '🛠️ টুলস (৫)'
     await tester.scrollUntilVisible(

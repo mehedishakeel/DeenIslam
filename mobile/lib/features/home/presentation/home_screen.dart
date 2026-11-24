@@ -16,6 +16,7 @@ import '../../hadith/presentation/hadith_screen.dart';
 import '../../hajj/presentation/hajj_screen.dart';
 import '../../kalima/presentation/kalima_screen.dart';
 import '../../names/presentation/allah_names_screen.dart';
+import '../../names/presentation/muslim_names_screen.dart';
 import '../../prayer/presentation/prayer_screen.dart';
 import '../../qibla/presentation/qibla_screen.dart';
 import '../../quiz/presentation/quiz_screen.dart';
@@ -1035,6 +1036,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       {'title': 'সীরাতুন্নবী (ﷺ)', 'category': 'knowledge', 'icon': Icons.map_outlined, 'color': AppColors.emerald, 'screen': const SeerahScreen()},
       {'title': '৬ কালিমা ও ঈমান', 'category': 'knowledge', 'icon': Icons.verified_outlined, 'color': AppColors.amber, 'screen': const KalimaScreen()},
       {'title': 'আল্লাহর ৯৯ নাম', 'category': 'knowledge', 'icon': Icons.auto_awesome, 'color': AppColors.emerald, 'screen': const AllahNamesScreen()},
+      {'title': 'মুসলিম শিশুদের নাম', 'category': 'knowledge', 'icon': Icons.child_care_outlined, 'color': AppColors.amber, 'screen': const MuslimNamesScreen()},
       {'title': 'প্রবন্ধ ও মিডিয়া', 'category': 'knowledge', 'icon': Icons.play_circle_outline, 'color': AppColors.amber, 'screen': const ArticlesMediaScreen()},
       {'title': 'ইসলামিক কুইজ ও প্রশ্ন', 'category': 'knowledge', 'icon': Icons.quiz_outlined, 'color': AppColors.emerald, 'screen': const QuizScreen()},
 
