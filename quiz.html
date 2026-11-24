@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ইসলামিক কুইজ ও মাসায়েল প্রশ্নোত্তর | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="পবিত্র কুরআন, সীরাতুন্নবী (ﷺ), হাদিস ও দৈনন্দিন ফিকহ সংক্রান্ত ইন্টারেক্টিভ ইসলামিক কুইজ, প্রামাণ্য ব্যাখ্যা এবং গুরুত্বপূর্ণ মাসায়েল ও প্রশ্নোত্তর।">
+  <meta name="keywords" content="ইসলামিক কুইজ, Islamic Quiz Bangla, কুরআন কুইজ, সীরাত কুইজ, ইসলামিক প্রশ্নোত্তর, মাসায়েল, DeenIslam Quiz">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deenislam.org/quiz.html">
+  <meta property="og:title" content="ইসলামিক কুইজ ও মাসায়েল প্রশ্নোত্তর | DeenIslam">
+  <meta property="og:description" content="কুরআন, সীরাত ও ফিকহ বিষয়ে আপনার ইসলামিক জ্ঞান যাচাই করুন এবং দৈনন্দিন মাসায়েলের সঠিক উত্তর জানুন।">
+  <meta property="og:image" content="https://deenislam.org/images/share-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ইসলামিক কুইজ ও মাসায়েল প্রশ্নোত্তর | DeenIslam">
+  <meta name="twitter:description" content="কুরআন, সীরাত ও ফিকহ বিষয়ে ইন্টারেক্টিভ ইসলামিক কুইজ ও মাসায়েল।">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#059669',
+            secondary: '#d97706',
+          },
+          fontFamily: {
+            bengali: ['Noto Sans Bengali', 'sans-serif'],
+            arabic: ['Amiri', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-4xl space-y-6">
+
+    <!-- Header Hero -->
+    <div class="text-center mb-6">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>🧠</span>
+        <span>জ্ঞান ও আত্মউন্নয়ন</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        ইসলামিক কুইজ ও মাসায়েল
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        পবিত্র কুরআন, সীরাতুন্নবী (ﷺ), হাদিস ও ফিকহ বিষয়ে আপনার জ্ঞান যাচাই করুন এবং দৈনন্দিন মাসায়েলের প্রামাণ্য উত্তর জানুন।
+      </p>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="inline-flex p-1.5 mt-6 rounded-2xl bg-stone-200/70 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700/70 shadow-2xs">
+        <button id="tab-btn-quiz" onclick="switchMode('quiz')" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-[#0f172a] text-emerald-700 dark:text-emerald-300 shadow-xs">
+          🎯 ইসলামিক কুইজ
+        </button>
+        <button id="tab-btn-faq" onclick="switchMode('faq')" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+          📚 মাসায়েল ও প্রশ্নোত্তর
+        </button>
+      </div>
+    </div>
+
+    <!-- SECTION 1: INTERACTIVE QUIZ -->
+    <section id="quiz-section" class="space-y-5">
+
+      <!-- Category Filter Pills -->
+      <div id="quiz-categories-bar" class="flex flex-wrap justify-center gap-2">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Score & Progress Card -->
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-4 sm:p-5 shadow-2xs">
+        <div class="flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-bold mb-3">
+          <div class="flex items-center gap-2 text-slate-700 dark:text-slate-200">
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40" id="quiz-progress-label">প্রশ্ন ১ / ১৬</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300" id="quiz-score-label">স্কোর: ০</span>
+            <span class="px-2.5 py-1 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/40" id="quiz-highscore-label">সর্বোচ্চ: ০</span>
+          </div>
+        </div>
+        <div class="w-full h-2 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div id="quiz-progress-bar" class="h-full bg-emerald-600 transition-all duration-300 rounded-full" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Active Question Card -->
+      <div id="quiz-question-card" class="bg-white dark:bg-[#0f172a] rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-8 shadow-sm space-y-5">
+        <div class="flex items-center justify-between">
+          <span id="q-category-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/40 text-[11px] font-bold">
+            📖 আল-কুরআন
+          </span>
+        </div>
+
+        <h2 id="q-text" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed">
+          লোড হচ্ছে...
+        </h2>
+
+        <div id="q-options-container" class="space-y-3">
+          <!-- Options injected via JS -->
+        </div>
+
+        <!-- Explanation Box (Hidden until answered) -->
+        <div id="q-explanation-box" class="hidden p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/50 space-y-1.5">
+          <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-300">
+            <span>💡</span>
+            <span>সঠিক ব্যাখ্যা ও দলিল</span>
+          </div>
+          <p id="q-explanation-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div id="q-next-container" class="hidden pt-2">
+          <button onclick="nextQuestion()" id="q-next-btn" class="w-full py-3 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-all shadow-sm active:scale-[0.99]">
+            পরবর্তী প্রশ্ন →
+          </button>
+        </div>
+      </div>
+
+      <!-- Quiz Completed Card (Hidden initially) -->
+      <div id="quiz-completed-card" class="hidden bg-white dark:bg-[#0f172a] rounded-3xl border border-stone-200/80 dark:border-slate-800 p-8 text-center shadow-sm space-y-5">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-3xl">
+          🏆
+        </div>
+        <div class="space-y-1.5">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">কুইজ সম্পন্ন হয়েছে</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">মাশাআল্লাহ!</h2>
+          <p id="completed-score-summary" class="text-sm sm:text-base text-slate-600 dark:text-slate-300 font-semibold"></p>
+        </div>
+
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/70 dark:border-amber-800/50 text-amber-800 dark:text-amber-300 text-xs font-bold" id="completed-highscore-badge">
+          সর্বোচ্চ স্কোর: ০
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm transition-all shadow-sm">
+            🔄 পুনরায় শুরু করুন
+          </button>
+          <button onclick="shareQuizScore()" class="px-6 py-3 rounded-xl bg-stone-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-slate-800 dark:text-slate-200 border border-stone-200 dark:border-slate-700 font-bold text-xs sm:text-sm transition-all">
+            🎴 ফলাফল শেয়ার কার্ড
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECTION 2: MASAEL & FAQS -->
+    <section id="faq-section" class="hidden space-y-4">
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-4 shadow-2xs">
+        <input type="text" id="faq-search-input" oninput="renderFaqs()" placeholder="মাসায়েল বা প্রশ্ন খুঁজুন (যেমন: নামাজ, কুরআন, যাকাত, রোজা)..." class="w-full text-xs sm:text-sm px-4 py-2.5 rounded-xl border border-stone-200/80 dark:border-slate-700 bg-stone-50/60 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/30">
+      </div>
+
+      <div id="faq-list-container" class="space-y-3">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="js/quiz-data.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    const HIGH_SCORE_KEY = 'deen_quiz_high_score_v1';
+    let selectedCategory = 'all';
+    let activeQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let highScore = 0;
+    let selectedOption = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      highScore = parseInt(localStorage.getItem(HIGH_SCORE_KEY) || '0', 10) || 0;
+      renderCategoryPills();
+      startQuizCategory('all');
+      renderFaqs();
+    });
+
+    function toBn(num) {
+      return window.toBengaliNumerals ? window.toBengaliNumerals(num) : String(num);
+    }
+
+    window.switchMode = (mode) => {
+      const quizSec = document.getElementById('quiz-section');
+      const faqSec = document.getElementById('faq-section');
+      const btnQuiz = document.getElementById('tab-btn-quiz');
+      const btnFaq = document.getElementById('tab-btn-faq');
+
+      if (mode === 'quiz') {
+        quizSec.classList.remove('hidden');
+        faqSec.classList.add('hidden');
+        btnQuiz.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-[#0f172a] text-emerald-700 dark:text-emerald-300 shadow-xs";
+        btnFaq.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      } else {
+        quizSec.classList.add('hidden');
+        faqSec.classList.remove('hidden');
+        btnFaq.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white dark:bg-[#0f172a] text-emerald-700 dark:text-emerald-300 shadow-xs";
+        btnQuiz.className = "px-5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      }
+    };
+
+    function renderCategoryPills() {
+      const bar = document.getElementById('quiz-categories-bar');
+      bar.innerHTML = window.QuizData.CATEGORIES.map(cat => {
+        const count = cat.id === 'all'
+          ? window.QuizData.QUESTIONS.length
+          : window.QuizData.QUESTIONS.filter(q => q.category === cat.id).length;
+        const isActive = selectedCategory === cat.id;
+        return `
+          <button onclick="startQuizCategory('${cat.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
+            isActive
+              ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+              : 'bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40'
+          }">
+            ${cat.icon} ${cat.nameBn} (${toBn(count)})
+          </button>
+        `;
+      }).join('');
+    }
+
+    window.startQuizCategory = (catId) => {
+      selectedCategory = catId;
+      activeQuestions = catId === 'all'
+        ? [...window.QuizData.QUESTIONS]
+        : window.QuizData.QUESTIONS.filter(q => q.category === catId);
+      currentIndex = 0;
+      score = 0;
+      selectedOption = null;
+
+      document.getElementById('quiz-question-card').classList.remove('hidden');
+      document.getElementById('quiz-completed-card').classList.add('hidden');
+      renderCategoryPills();
+      renderCurrentQuestion();
+    };
+
+    function renderCurrentQuestion() {
+      if (!activeQuestions.length) return;
+      const q = activeQuestions[currentIndex];
+      const catMeta = window.QuizData.CATEGORIES.find(c => c.id === q.category) || { nameBn: 'সাধারণ', icon: '📚' };
+
+      document.getElementById('quiz-progress-label').textContent = `প্রশ্ন ${toBn(currentIndex + 1)} / ${toBn(activeQuestions.length)}`;
+      document.getElementById('quiz-score-label').textContent = `স্কোর: ${toBn(score)}`;
+      document.getElementById('quiz-highscore-label').textContent = `সর্বোচ্চ: ${toBn(highScore)}`;
+      document.getElementById('quiz-progress-bar').style.width = `${((currentIndex + 1) / activeQuestions.length) * 100}%`;
+
+      document.getElementById('q-category-badge').textContent = `${catMeta.icon} ${catMeta.nameBn}`;
+      document.getElementById('q-text').textContent = q.q;
+
+      const optionsContainer = document.getElementById('q-options-container');
+      const labels = ['ক', 'খ', 'গ', 'ঘ'];
+
+      optionsContainer.innerHTML = q.options.map((opt, idx) => `
+        <button onclick="selectOption(${idx})" id="opt-btn-${idx}" class="w-full text-left p-4 rounded-2xl border border-stone-200/80 dark:border-slate-700/80 bg-stone-50/70 dark:bg-slate-800/40 hover:border-emerald-500/60 hover:bg-emerald-50/40 dark:hover:bg-emerald-950/30 transition-all flex items-center gap-3 group">
+          <span class="w-7 h-7 rounded-lg bg-white dark:bg-slate-800 border border-stone-200 dark:border-slate-700 text-xs font-black text-slate-700 dark:text-slate-300 flex items-center justify-center shrink-0">
+            ${labels[idx] || idx + 1}
+          </span>
+          <span class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100 flex-grow">${opt}</span>
+          <span id="opt-icon-${idx}" class="text-sm shrink-0"></span>
+        </button>
+      `).join('');
+
+      document.getElementById('q-explanation-box').classList.add('hidden');
+      document.getElementById('q-next-container').classList.add('hidden');
+    }
+
+    window.selectOption = (idx) => {
+      if (selectedOption !== null) return;
+      selectedOption = idx;
+
+      const q = activeQuestions[currentIndex];
+      const isCorrect = idx === q.answer;
+      if (isCorrect) {
+        score++;
+        if (score > highScore) {
+          highScore = score;
+          localStorage.setItem(HIGH_SCORE_KEY, String(highScore));
+        }
+      }
+
+      document.getElementById('quiz-score-label').textContent = `স্কোর: ${toBn(score)}`;
+      document.getElementById('quiz-highscore-label').textContent = `সর্বোচ্চ: ${toBn(highScore)}`;
+
+      q.options.forEach((_, i) => {
+        const btn = document.getElementById(`opt-btn-${i}`);
+        const icon = document.getElementById(`opt-icon-${i}`);
+        btn.disabled = true;
+
+        if (i === q.answer) {
+          btn.className = "w-full text-left p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/50 transition-all flex items-center gap-3";
+          icon.textContent = "✅";
+        } else if (i === idx && !isCorrect) {
+          btn.className = "w-full text-left p-4 rounded-2xl border-2 border-rose-500 bg-rose-50 dark:bg-rose-950/40 transition-all flex items-center gap-3";
+          icon.textContent = "❌";
+        } else {
+          btn.classList.add('opacity-60');
+        }
+      });
+
+      document.getElementById('q-explanation-text').textContent = q.explanation;
+      document.getElementById('q-explanation-box').classList.remove('hidden');
+
+      const nextBtn = document.getElementById('q-next-btn');
+      nextBtn.textContent = (currentIndex + 1 < activeQuestions.length) ? 'পরবর্তী প্রশ্ন →' : 'ফলাফল দেখুন 🏆';
+      document.getElementById('q-next-container').classList.remove('hidden');
+    };
+
+    window.nextQuestion = () => {
+      if (currentIndex + 1 < activeQuestions.length) {
+        currentIndex++;
+        selectedOption = null;
+        renderCurrentQuestion();
+      } else {
+        showCompletionCard();
+      }
+    };
+
+    function showCompletionCard() {
+      document.getElementById('quiz-question-card').classList.add('hidden');
+      document.getElementById('quiz-completed-card').classList.remove('hidden');
+
+      const total = activeQuestions.length;
+      const pct = Math.round((score / total) * 100);
+      document.getElementById('completed-score-summary').textContent =
+        `আপনার স্কোর: ${toBn(score)} / ${toBn(total)} (${toBn(pct)}%)`;
+      document.getElementById('completed-highscore-badge').textContent =
+        `সর্বোচ্চ স্কোর: ${toBn(highScore)}`;
+    }
+
+    window.restartQuiz = () => {
+      startQuizCategory(selectedCategory);
+    };
+
+    window.shareQuizScore = () => {
+      const total = activeQuestions.length;
+      const text = `দ্বীন ইসলাম (DeenIslam) ইসলামিক কুইজে আমি ${toBn(total)}-এর মধ্যে ${toBn(score)} পেয়েছি! আপনিও আপনার ইসলামিক জ্ঞান যাচাই করুন।`;
+      if (window.openShareModal) {
+        window.openShareModal({
+          title: "ইসলামিক কুইজ অর্জন",
+          arabic: "رَبِّ زِدْنِي عِلْمًا",
+          translation: text,
+          source: `DeenIslam কুইজ • স্কোর: ${toBn(score)}/${toBn(total)}`
+        });
+      } else if (window.copyToClipboard) {
+        window.copyToClipboard(text);
+      }
+    };
+
+    function renderFaqs() {
+      const query = (document.getElementById('faq-search-input')?.value || '').toLowerCase().trim();
+      const container = document.getElementById('faq-list-container');
+      const filtered = window.QuizData.FAQS.filter(f =>
+        !query || f.q.toLowerCase().includes(query) || f.a.toLowerCase().includes(query)
+      );
+
+      if (!filtered.length) {
+        container.innerHTML = `<div class="p-8 text-center text-xs sm:text-sm text-slate-500 dark:text-slate-400 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800">কোনো মাসায়েল খুঁজে পাওয়া যায়নি।</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(f => `
+        <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-5 shadow-2xs space-y-2.5">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-sm sm:text-base font-bold text-emerald-700 dark:text-emerald-400 leading-snug">${f.q}</h3>
+            <button onclick="window.copyToClipboard('${f.q.replace(/'/g, "\\'")}\\n\\n${f.a.replace(/'/g, "\\'")}')" class="shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+              📋
+            </button>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${f.a}</p>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

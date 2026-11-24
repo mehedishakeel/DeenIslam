@@ -427,6 +427,7 @@ const commandPaletteIndex = [
     { title: "আল্লাহর ৯৯টি গুণবাচক নাম (আসমাউল হুসনা)", category: "টুলস ও ইবাদত", url: "allah-names.html", keywords: "allah 99 names asmaul husna sifat ar-rahman ar-rahim" },
     { title: "মুসলিম শিশুদের সুন্দর নাম ও অর্থ (অর্থসহ ইসলামিক নাম)", category: "টুলস ও ইবাদত", url: "muslim-names.html", keywords: "muslim names baby islamic nam boy girl shishu orthosho অর্থসহ নাম শিশুর নাম" },
     { title: "ইসলামিক ক্যালেন্ডার ও গুরুত্বপূর্ণ দিনসমূহ (হিজরি বর্ষপঞ্জি)", category: "টুলস ও ইবাদত", url: "islamic-calendar.html", keywords: "islamic calendar hijri date ramadan eid countdown hijri converter হিজরি ক্যালেন্ডার দিনপঞ্জি রোজা" },
+    { title: "ইসলামিক কুইজ ও মাসায়েল প্রশ্নোত্তর", category: "টুলস ও ইবাদত", url: "quiz.html", keywords: "islamic quiz quran seerah fiqh faq masael proshno uttor কুইজ প্রশ্নোত্তর মাসায়েল" },
     { title: "নামাজ শিক্ষা ও সহীহ পদ্ধতি", category: "টুলস ও ইবাদত", url: "namaz.html", keywords: "namaz salah prayer shikkha wudu tayammum rakat ruku sajdah" },
     { title: "সালাতের সময়সূচি ও সেহরি-ইফতার", category: "টুলস ও ইবাদত", url: "salat.html", keywords: "salat prayer times fajr dhuhr asr maghrib isha sehri iftar" },
     { title: "যাকাত ক্যালকুলেটর (সহজ হিসাব)", category: "টুলস ও ইবাদত", url: "zakat.html", keywords: "zakat calculator nisab gold silver cash calculation" },
@@ -972,7 +973,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Inject Navbar
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
     if (navbarPlaceholder) {
-        const isIbadahActive = ['salat.html', 'qibla.html', 'dua.html', 'allah-names.html', 'muslim-names.html', 'islamic-calendar.html', 'namaz.html', 'zakat.html', 'tasbih.html', 'roja.html', 'hajj.html', 'kalima.html', 'media.html', 'community.html'].includes(currentPage) || isSubDir;
+        const isIbadahActive = ['salat.html', 'qibla.html', 'dua.html', 'allah-names.html', 'muslim-names.html', 'islamic-calendar.html', 'quiz.html', 'namaz.html', 'zakat.html', 'tasbih.html', 'roja.html', 'hajj.html', 'kalima.html', 'media.html', 'community.html'].includes(currentPage) || isSubDir;
         const isOthersActive = ['community.html', 'about.html', 'credits.html'].includes(currentPage);
 
         navbarPlaceholder.innerHTML = `
@@ -1044,6 +1045,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <a href="${basePath}islamic-calendar.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'islamic-calendar.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">📅</span>
                                         <span>ইসলামিক ক্যালেন্ডার</span>
+                                    </a>
+                                    <a href="${basePath}quiz.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'quiz.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
+                                        <span class="text-base">🧠</span>
+                                        <span>ইসলামিক কুইজ ও মাসায়েল</span>
                                     </a>
                                     <a href="${basePath}namaz.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">🕌</span>
@@ -1140,6 +1145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="${basePath}allah-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🌟 আল্লাহর ৯৯ নাম</a>
                         <a href="${basePath}muslim-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'muslim-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">👶 মুসলিম শিশুদের নাম</a>
                         <a href="${basePath}islamic-calendar.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'islamic-calendar.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">📅 ইসলামিক ক্যালেন্ডার</a>
+                        <a href="${basePath}quiz.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'quiz.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🧠 ইসলামিক কুইজ ও মাসায়েল</a>
                         <a href="${basePath}namaz.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'namaz.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🕌 নামাজ শিক্ষা</a>
                         <a href="${basePath}zakat.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'zakat.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">💎 যাকাত ক্যালকুলেটর</a>
                         <a href="${basePath}tasbih.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'tasbih.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">📿 ডিজিটাল তাসবীহ</a>
@@ -1285,6 +1291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li><a href="${basePath}allah-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌟</span><span>আল্লাহর ৯৯ নাম</span></a></li>
                             <li><a href="${basePath}muslim-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>👶</span><span>মুসলিম শিশুদের নাম</span></a></li>
                             <li><a href="${basePath}islamic-calendar.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>📅</span><span>ইসলামিক ক্যালেন্ডার</span></a></li>
+                            <li><a href="${basePath}quiz.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🧠</span><span>ইসলামিক কুইজ ও মাসায়েল</span></a></li>
                             <li><a href="${basePath}zakat.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>💎</span><span>যাকাত ক্যালকুলেটর</span></a></li>
                             <li><a href="${basePath}roja.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌙</span><span>রোজা ও সেহরি-ইফতার</span></a></li>
                             <li><a href="${basePath}hajj.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🕋</span><span>হজ ও উমরাহ গাইড</span></a></li>

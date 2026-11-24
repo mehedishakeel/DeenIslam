@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
+import '../../../data/repositories/quiz_data.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -13,137 +14,15 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  String _selectedCategory = 'all';
   int _currentIndex = 0;
   int _score = 0;
   int _highScore = 0;
   int? _selectedOption;
   bool _quizCompleted = false;
 
-  static const List<Map<String, dynamic>> _questions = [
-    {
-      'q': 'পবিত্র কুরআনের সর্বপ্রথম নাযিলকৃত সূরা কোনটি এবং এর প্রথম শব্দ কী?',
-      'options': [
-        'সূরা আল-ফাতিহা (আলহামদুলিল্লাহ)',
-        'সূরা আল-আলাক (ইকরা - পড়ো)',
-        'সূরা আল-মুদ্দাসসির (ইয়া আইয়্যুহাল মুদ্দাসসির)',
-        'সূরা আল-বাকারা (আলিফ-লাম-মীম)',
-      ],
-      'answer': 1,
-      'explanation':
-          'হেরা গুহায় জিবরাঈল (আ.)-এর মাধ্যমে সর্বপ্রথম সূরা আল-আলাকের প্রথম ৫টি আয়াত নাযিল হয়, যার প্রথম শব্দ "ইকরা" (পড়ো)।',
-    },
-    {
-      'q': 'পবিত্র কুরআনের কোন সূরাকে "কুরআনের হৃদয়" (কলবুল কুরআন) বলা হয়েছে?',
-      'options': [
-        'সূরা আর-রাহমান',
-        'সূরা আল-মুলক',
-        'সূরা ইয়াসীন',
-        'সূরা আল-কাহফ',
-      ],
-      'answer': 2,
-      'explanation': 'হাদিস শরীফে সূরা ইয়াসীনকে কুরআনের হৃদয় হিসেবে উল্লেখ করা হয়েছে এবং সূরা আল-ফাতিহাকে উম্মুল কুরআন বলা হয়।',
-    },
-    {
-      'q': 'ইসলামের ইতিহাসে সর্বপ্রথম মুয়াজ্জিন কে ছিলেন?',
-      'options': [
-        'হযরত আবু বকর সিদ্দিক (রা.)',
-        'হযরত আম্মার ইবনে ইয়াসির (রা.)',
-        'হযরত বিলাল ইবনে রাবাহ (রা.)',
-        'হযরত আব্দুল্লাহ ইবনে উম্মে মাকতুম (রা.)',
-      ],
-      'answer': 2,
-      'explanation':
-          'রাসূলুল্লাহ (সা.)-এর নির্দেশে হযরত বিলাল ইবনে রাবাহ (রা.) মদিনায় সর্বপ্রথম আজান প্রদান করেন।',
-    },
-    {
-      'q': 'পবিত্র কুরআনের সবচেয়ে মর্যাদাপূর্ণ আয়াত "আয়াতুল কুরসী" কোন সূরায় অবস্থিত?',
-      'options': [
-        'সূরা আলে ইমরান, আয়াত ১৮',
-        'সূরা আল-বাকারা, আয়াত ২৫৫',
-        'সূরা আল-বাকারা, আয়াত ২৮৫',
-        'সূরা আন-নিসা, আয়াত ৩৬',
-      ],
-      'answer': 1,
-      'explanation':
-          'সূরা আল-বাকারার ২৫৫ নম্বর আয়াতটি হলো আয়াতুল কুরসী। সহীহ হাদিসে এটিকে কুরআনের সর্বশ্রেষ্ঠ আয়াত বলা হয়েছে।',
-    },
-    {
-      'q': 'পাঁচ ওয়াক্ত সালাত কোন রাতে উম্মতে মুহাম্মাদীর ওপর ফরজ হয়?',
-      'options': [
-        'লাইলাতুল কদরের রাতে',
-        'হিজরতের রাতে',
-        'মিরাজের রাতে (ইসরা ও মিরাজ)',
-        'বদর যুদ্ধের আগের রাতে',
-      ],
-      'answer': 2,
-      'explanation':
-          'মিরাজের রজনীতে মহান আল্লাহ সরাসরি রাসূলুল্লাহ (সা.)-কে পাঁচ ওয়াক্ত সালাত উপহার দেন, যার সওয়াব পঞ্চাশ ওয়াক্তের সমান।',
-    },
-    {
-      'q': 'স্বর্ণের যাকাতের নিসাব পরিমাণ কত?',
-      'options': [
-        '৫ ভরি স্বর্ণ',
-        '৭.৫ ভরি (সাড়ে সাত তোলা / ৮৭.৪৮ গ্রাম) স্বর্ণ',
-        '১০ ভরি স্বর্ণ',
-        '৫২.৫ ভরি স্বর্ণ',
-      ],
-      'answer': 1,
-      'explanation':
-          'স্বর্ণের নিসাব ৭.৫ ভরি (৮৭.৪৮ গ্রাম) এবং রৌপ্যের নিসাব ৫২.৫ ভরি (৬১২.৩৬ গ্রাম)। এক চান্দ্র বছর পূর্ণ হলে ২.৫% যাকাত ফরজ হয়।',
-    },
-    {
-      'q': 'পবিত্র কুরআনে মোট কতজন নবী ও রাসূলের নাম প্রত্যক্ষভাবে উল্লেখ করা হয়েছে?',
-      'options': [
-        '১৮ জন',
-        '২৫ জন',
-        '৪০ জন',
-        '৭০ জন',
-      ],
-      'answer': 1,
-      'explanation':
-          'পবিত্র কুরআনে ২৫ জন নবী-রাসূলের নাম সরাসরি উল্লেখ রয়েছে, যাঁদের মধ্যে প্রথম আদম (আ.) এবং সর্বশেষ মুহাম্মাদ (সা.)।',
-    },
-    {
-      'q': 'হজ্জের সবচেয়ে প্রধান ফরজ (রুকন) কোনটি?',
-      'options': [
-        'মদিনা শরীফ যিয়ারত করা',
-        '৯ জিলহজ্জ আরাফাতের ময়দানে অবস্থান করা',
-        'পাথর নিক্ষেপ করা',
-        'মিনায় রাত্রিযাপন করা',
-      ],
-      'answer': 1,
-      'explanation':
-          'রাসূলুল্লাহ (সা.) বলেছেন: "আল-হজ্জু আরাফাহ" অর্থাৎ আরাফাতের ময়দানে অবস্থান করাই হলো হজ্জের মূল স্তম্ভ।',
-    },
-  ];
-
-  static const List<Map<String, String>> _faqs = [
-    {
-      'q': '১. নামাজে ভুল হলে সাহু সিজদা দেওয়ার নিয়ম কী?',
-      'a':
-          'নামাজের কোনো ওয়াজিব ভুলবশত ছুটে গেলে বা বিলম্ব হলে শেষ বৈঠকে কেবল তাশাহহুদ (আত্তাহিয়্যাতু) পড়ে ডান দিকে এক সালাম ফিরিয়ে দুটি সিজদা করতে হয়। এরপর পুনরায় তাশাহহুদ, দরুদ শরীফ ও দোয়া মাসুরা পড়ে উভয় দিকে সালাম ফিরিয়ে নামাজ শেষ করতে হয়।',
-    },
-    {
-      'q': '২. ছুটে যাওয়া (কাজা) নামাজ আদায়ের বিধান কী?',
-      'a':
-          'ঘুম বা ভুলে যাওয়ার কারণে কোনো ফরজ বা ওয়াজিব (বিতর) নামাজ ছুটে গেলে স্মরণ হওয়া মাত্রই বা সুবিধাজনক সময়ে (তিনটি নিষিদ্ধ সময় বাদে) তা কাজা পড়ে নেওয়া ফরজ। সুন্নাত নামাজের সাধারণত কাজা হয় না, তবে ফজরের সুন্নাত ফরজের সাথে ছুটে গেলে সূর্য ওঠার পর দুপুরের আগে পড়ে নেওয়া উত্তম।',
-    },
-    {
-      'q': '৩. মোবাইলে অজু ছাড়া কুরআন শরীফ পড়া যাবে কি?',
-      'a':
-          'ছাপানো মুসহাফ (কুরআন শরীফ) স্পর্শ করার জন্য অজু থাকা শর্ত। তবে মোবাইল স্ক্রিনে দেখে বা মুখস্থ কুরআন তিলাওয়াত অজু ছাড়াও করা জায়েয আছে; যদিও অজু অবস্থায় তিলাওয়াত করা অধিক আদব ও সওয়াবের কাজ।',
-    },
-    {
-      'q': '৪. চাকরিজীবীদের বেতনের টাকার ওপর কীভাবে যাকাত হিসাব করতে হবে?',
-      'a':
-          'মাসিক বেতন থেকে সংসারের যাবতীয় খরচ বাদ দিয়ে যা সঞ্চয় থাকে, তা যদি নিসাব পরিমাণ (৫২.৫ ভরি রুপার সমমূল্য) পৌঁছে এবং সেই নিসাবের ওপর পূর্ণ এক চান্দ্র বছর (হিজরি বছর) অতিবাহিত হয়, তবে বছর শেষে মোট জমাকৃত অর্থের ২.৫% যাকাত দিতে হবে।',
-    },
-    {
-      'q': '৫. মৃত পিতা-মাতার জন্য সন্তানের সবচেয়ে উত্তম আমল কী?',
-      'a':
-          'হাদিস অনুযায়ী মৃত পিতা-মাতার জন্য সন্তানের সেরা আমল হলো: ১. তাঁদের জন্য নিয়মিত মাগফিরাতের দোয়া করা ("রাব্বির হামহুমা কামা রাব্বাইয়ানী সাগীরা"), ২. তাঁদের পক্ষ থেকে সদকায়ে জারিয়া (যেমন নলকূপ, মসজিদ বা কুরআন বিতরণ) করা, এবং ৩. তাঁদের আত্মীয়-স্বজন ও বন্ধুদের সাথে সুসম্পর্ক বজায় রাখা।',
-    },
-  ];
+  List<QuizQuestion> get _activeQuestions =>
+      QuizData.filterByCategory(_selectedCategory);
 
   @override
   void initState() {
@@ -157,10 +36,20 @@ class _QuizScreenState extends State<QuizScreen> {
     setState(() => _highScore = hs);
   }
 
+  void _selectCategory(String categoryId) {
+    setState(() {
+      _selectedCategory = categoryId;
+      _currentIndex = 0;
+      _score = 0;
+      _selectedOption = null;
+      _quizCompleted = false;
+    });
+  }
+
   Future<void> _selectOption(int index) async {
     if (_selectedOption != null) return;
     HapticFeedback.selectionClick();
-    final isCorrect = index == (_questions[_currentIndex]['answer'] as int);
+    final isCorrect = index == _activeQuestions[_currentIndex].answer;
     final nextScore = isCorrect ? _score + 1 : _score;
     setState(() {
       _selectedOption = index;
@@ -175,7 +64,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _nextQuestion() {
-    if (_currentIndex + 1 < _questions.length) {
+    if (_currentIndex + 1 < _activeQuestions.length) {
       setState(() {
         _currentIndex++;
         _selectedOption = null;
@@ -234,6 +123,8 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Widget _buildQuizTab(bool isDark) {
+    final questions = _activeQuestions;
+
     if (_quizCompleted) {
       return Center(
         child: Padding(
@@ -262,7 +153,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'আপনার স্কোর: ${BengaliNumerals.convert(_score)} / ${BengaliNumerals.convert(_questions.length)}',
+                  'আপনার স্কোর: ${BengaliNumerals.convert(_score)} / ${BengaliNumerals.convert(questions.length)}',
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -271,7 +162,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'সর্বোচ্চ স্কোর: ${BengaliNumerals.convert(_highScore)} / ${BengaliNumerals.convert(_questions.length)}',
+                  'সর্বোচ্চ স্কোর: ${BengaliNumerals.convert(_highScore)}',
                   style: GoogleFonts.hindSiliguri(
                     fontSize: 13,
                     color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
@@ -301,13 +192,47 @@ class _QuizScreenState extends State<QuizScreen> {
       );
     }
 
-    final current = _questions[_currentIndex];
-    final options = current['options'] as List<String>;
-    final correctAnswer = current['answer'] as int;
+    final current = questions[_currentIndex];
+    final options = current.options;
+    final correctAnswer = current.answer;
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
+        // Category Filter Chips
+        SizedBox(
+          height: 36,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: QuizData.categories.length,
+            separatorBuilder: (_, __) => const SizedBox(width: 8),
+            itemBuilder: (context, idx) {
+              final cat = QuizData.categories[idx];
+              final isSelected = _selectedCategory == cat.id;
+              return ChoiceChip(
+                label: Text(
+                  cat.nameBn,
+                  style: GoogleFonts.hindSiliguri(
+                    fontSize: 12,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                    color: isSelected
+                        ? Colors.white
+                        : (isDark ? Colors.grey.shade300 : Colors.black87),
+                  ),
+                ),
+                selected: isSelected,
+                selectedColor: AppColors.emerald,
+                backgroundColor: isDark ? AppColors.cardDark : Colors.white,
+                side: BorderSide(
+                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                ),
+                onSelected: (_) => _selectCategory(cat.id),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 12),
+
         // Score & Progress Header
         Container(
           padding: const EdgeInsets.all(14),
@@ -322,7 +247,7 @@ class _QuizScreenState extends State<QuizScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'প্রশ্ন ${BengaliNumerals.convert(_currentIndex + 1)}/${BengaliNumerals.convert(_questions.length)}',
+                'প্রশ্ন ${BengaliNumerals.convert(_currentIndex + 1)}/${BengaliNumerals.convert(questions.length)}',
                 style: GoogleFonts.hindSiliguri(
                   fontSize: 13.5,
                   fontWeight: FontWeight.bold,
@@ -356,7 +281,7 @@ class _QuizScreenState extends State<QuizScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                current['q'] as String,
+                current.question,
                 style: GoogleFonts.hindSiliguri(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -429,7 +354,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    'ব্যাখ্যা: ${current['explanation']}',
+                    'ব্যাখ্যা: ${current.explanation}',
                     style: GoogleFonts.hindSiliguri(
                       fontSize: 12.8,
                       fontWeight: FontWeight.w600,
@@ -450,7 +375,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                   ),
                   child: Text(
-                    _currentIndex + 1 < _questions.length
+                    _currentIndex + 1 < questions.length
                         ? 'পরবর্তী প্রশ্ন →'
                         : 'ফলাফল দেখুন',
                     style: GoogleFonts.hindSiliguri(
@@ -470,9 +395,9 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget _buildFaqTab(bool isDark) {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: _faqs.length,
+      itemCount: QuizData.faqs.length,
       itemBuilder: (context, index) {
-        final item = _faqs[index];
+        final item = QuizData.faqs[index];
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(16),
@@ -487,7 +412,7 @@ class _QuizScreenState extends State<QuizScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                item['q']!,
+                item.question,
                 style: GoogleFonts.hindSiliguri(
                   fontSize: 14.5,
                   fontWeight: FontWeight.bold,
@@ -496,7 +421,7 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                item['a']!,
+                item.answer,
                 style: GoogleFonts.hindSiliguri(
                   fontSize: 13,
                   height: 1.5,

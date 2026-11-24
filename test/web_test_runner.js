@@ -33,6 +33,9 @@ eval(muslimNamesCode);
 const islamicCalendarCode = fs.readFileSync(path.join(__dirname, '../js/islamic-calendar-data.js'), 'utf8');
 eval(islamicCalendarCode);
 
+const quizDataCode = fs.readFileSync(path.join(__dirname, '../js/quiz-data.js'), 'utf8');
+eval(quizDataCode);
+
 let totalTests = 0;
 let passedTests = 0;
 
@@ -275,6 +278,42 @@ describe('8. Islamic Calendar Engine, Date Converter & Navigation Integrity', ()
         assert.ok(content.includes('today-hijri-display'), 'Missing today-hijri-display');
         assert.ok(content.includes('events-grid-container'), 'Missing events-grid-container');
         assert.ok(content.includes('calendar-days-grid'), 'Missing calendar-days-grid');
+    });
+});
+
+describe('9. Islamic Quiz & Masael FAQs Dataset & Navigation Integrity', () => {
+    it('should load QuizData with categories, 16+ questions, and 8+ FAQs', () => {
+        assert.ok(window.QuizData, 'QuizData is not loaded');
+        assert.strictEqual(window.QuizData.CATEGORIES.length, 4);
+        assert.ok(window.QuizData.QUESTIONS.length >= 16, 'Expected at least 16 quiz questions');
+        assert.ok(window.QuizData.FAQS.length >= 8, 'Expected at least 8 Masael FAQs');
+    });
+
+    it('every quiz question has valid options, in-bounds answer index, and explanation', () => {
+        const validCats = new Set(['quran', 'seerah', 'fiqh']);
+        window.QuizData.QUESTIONS.forEach(item => {
+            assert.ok(validCats.has(item.category), `Invalid category for question ${item.id}`);
+            assert.ok(item.q && item.q.length > 5, `Empty question text for ${item.id}`);
+            assert.ok(Array.isArray(item.options) && item.options.length === 4, `Question ${item.id} must have 4 options`);
+            assert.ok(item.answer >= 0 && item.answer < item.options.length, `Invalid answer index for ${item.id}`);
+            assert.ok(item.explanation && item.explanation.length > 10, `Missing explanation for ${item.id}`);
+        });
+    });
+
+    it('Universal Command Palette indexes quiz.html', () => {
+        const item = commandPaletteIndex.find(i => i.url === 'quiz.html');
+        assert.ok(item, 'quiz.html is not indexed in Command Palette');
+        assert.ok(item.keywords.includes('quiz'));
+    });
+
+    it('validates quiz.html structure and presence on disk', () => {
+        const filePath = path.join(__dirname, '../quiz.html');
+        assert.ok(fs.existsSync(filePath), 'quiz.html missing on disk');
+        const content = fs.readFileSync(filePath, 'utf8');
+        assert.ok(content.includes('navbar-placeholder'), 'Missing navbar-placeholder');
+        assert.ok(content.includes('footer-placeholder'), 'Missing footer-placeholder');
+        assert.ok(content.includes('quiz-question-card'), 'Missing quiz-question-card');
+        assert.ok(content.includes('faq-list-container'), 'Missing faq-list-container');
     });
 });
 
