@@ -23,5 +23,15 @@ void main() {
       final ids = DuaData.allDuas.map((d) => d.id).toSet();
       expect(ids.length, DuaData.allDuas.length, reason: 'Duplicate Dua ID detected');
     });
+
+    test('Morning/Evening Adhkar include multi-repetition targets (3x, 7x, 100x)', () {
+      final targets = DuaData.allDuas.map((d) => d.targetCount).toSet();
+      expect(targets.contains(3), isTrue);
+      expect(targets.contains(7), isTrue);
+      expect(targets.contains(100), isTrue);
+      for (final dua in DuaData.allDuas) {
+        expect(dua.targetCount, greaterThanOrEqualTo(1));
+      }
+    });
   });
 }

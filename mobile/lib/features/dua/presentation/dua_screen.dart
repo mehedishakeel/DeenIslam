@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/bengali_numerals.dart';
 import '../../../data/models/dua_model.dart';
 import '../../../data/repositories/dua_data.dart';
 
@@ -18,6 +19,7 @@ class _DuaScreenState extends State<DuaScreen> {
   String _selectedCategory = 'সকল';
   late List<Dua> _duas;
   Set<String> _bookmarkedKeys = {};
+  Map<int, int> _tapCounts = {};
 
   final List<String> _categories = [
     'সকল', 'সকাল-সন্ধ্যা', 'নামাজ', 'ঘুম', 'দৈনন্দিন', 'বিপদ-আপদ'
@@ -27,15 +29,74 @@ class _DuaScreenState extends State<DuaScreen> {
   void initState() {
     super.initState();
     _duas = List.from(DuaData.allDuas);
-    _loadSavedBookmarks();
+    _loadSavedData();
   }
 
-  Future<void> _loadSavedBookmarks() async {
+  Future<void> _loadSavedData() async {
     final items = await StorageService.getBookmarks();
+    final counts = await StorageService.getDailyDuaCounts();
     if (!mounted) return;
     setState(() {
       _bookmarkedKeys = items.map((e) => e.key).toSet();
+      _tapCounts = counts;
     });
+  }
+
+  Future<void> _incrementCounter(Dua dua) async {
+    final current = _tapCounts[dua.id] ?? 0;
+    int next = current + 1;
+    if (next > dua.targetCount) {
+      next = 0;
+    } else if (next == dua.targetCount) {
+      HapticFeedback.heavyImpact();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'মাশাআল্লাহ! পাঠ সম্পন্ন হয়েছে',
+              style: GoogleFonts.hindSiliguri(fontSize: 13),
+            ),
+            duration: const Duration(seconds: 1),
+            backgroundColor: AppColors.emerald,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    } else {
+      HapticFeedback.lightImpact();
+    }
+
+    setState(() {
+      _tapCounts[dua.id] = next;
+    });
+    await StorageService.saveDailyDuaCounts(_tapCounts);
+  }
+
+  Future<void> _resetSingleCounter(Dua dua) async {
+    setState(() {
+      _tapCounts[dua.id] = 0;
+    });
+    await StorageService.saveDailyDuaCounts(_tapCounts);
+  }
+
+  Future<void> _resetAllCounters() async {
+    setState(() {
+      _tapCounts.clear();
+    });
+    await StorageService.saveDailyDuaCounts(_tapCounts);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'সকল কাউন্টার রিসেট করা হয়েছে',
+            style: GoogleFonts.hindSiliguri(fontSize: 13),
+          ),
+          duration: const Duration(seconds: 1),
+          backgroundColor: AppColors.emerald,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   void _copyDua(Dua dua) {
@@ -183,6 +244,88 @@ class _DuaScreenState extends State<DuaScreen> {
           ),
           const SizedBox(height: 6),
 
+          // Daily Adhkar Progress Banner
+          Builder(
+            builder: (context) {
+              final completedCount = _duas
+                  .where((d) => (_tapCounts[d.id] ?? 0) >= d.targetCount)
+                  .length;
+              final totalCount = _duas.length;
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(16, 2, 16, 6),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.cardDark : Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            '✨ আজকের দো\'আ ও আযকার অগ্রগতি',
+                            style: GoogleFonts.hindSiliguri(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            '${BengaliNumerals.toBengali(completedCount)}/${BengaliNumerals.toBengali(totalCount)}',
+                            style: GoogleFonts.hindSiliguri(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.emerald,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          InkWell(
+                            onTap: _resetAllCounters,
+                            borderRadius: BorderRadius.circular(6),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? Colors.white.withOpacity(0.06)
+                                    : Colors.grey.shade100,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                'রিসেট ↺',
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: LinearProgressIndicator(
+                          value: totalCount > 0 ? completedCount / totalCount : 0,
+                          minHeight: 5,
+                          backgroundColor: isDark
+                              ? const Color(0xFF0F172A)
+                              : Colors.grey.shade200,
+                          color: AppColors.emerald,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+
           // Dua List
           Expanded(
             child: ListView.separated(
@@ -300,9 +443,32 @@ class _DuaScreenState extends State<DuaScreen> {
                           color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      if (dua.note != null && dua.note!.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? AppColors.amberSoftDark.withOpacity(0.35)
+                                : AppColors.amberSoft,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: AppColors.amber.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Text(
+                            '★ ${dua.note}',
+                            style: GoogleFonts.hindSiliguri(
+                              fontSize: 11.5,
+                              height: 1.4,
+                              color: isDark ? const Color(0xFFFDE68A) : AppColors.amberDark,
+                            ),
+                          ),
+                        ),
+                      ],
+                      const SizedBox(height: 10),
 
-                      // Reference
+                      // Reference & Interactive Tap Counter
                       Row(
                         children: [
                           const Icon(Icons.bookmark_outline, size: 13, color: AppColors.emerald),
@@ -316,6 +482,61 @@ class _DuaScreenState extends State<DuaScreen> {
                                 color: AppColors.emerald,
                               ),
                             ),
+                          ),
+                          const SizedBox(width: 6),
+                          InkWell(
+                            onTap: () => _resetSingleCounter(dua),
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              width: 28,
+                              height: 28,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                                ),
+                              ),
+                              child: const Text(
+                                '↺',
+                                style: TextStyle(fontSize: 13, color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Builder(
+                            builder: (context) {
+                              final currentCount = _tapCounts[dua.id] ?? 0;
+                              final isDone = currentCount >= dua.targetCount;
+                              return InkWell(
+                                onTap: () => _incrementCounter(dua),
+                                borderRadius: BorderRadius.circular(8),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                  decoration: BoxDecoration(
+                                    color: isDone
+                                        ? AppColors.emerald
+                                        : (isDark
+                                            ? AppColors.emeraldSoftDark.withOpacity(0.6)
+                                            : AppColors.emeraldSoft),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: isDone
+                                          ? AppColors.emerald
+                                          : AppColors.emerald.withOpacity(0.35),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    '${BengaliNumerals.toBengali(currentCount)} / ${BengaliNumerals.toBengali(dua.targetCount)}${isDone ? ' ✓' : ''}',
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDone ? Colors.white : AppColors.emerald,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

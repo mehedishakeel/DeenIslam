@@ -84,6 +84,23 @@
       </div>
     </div>
 
+    <!-- Daily Adhkar Progress Banner -->
+    <div id="adhkar-progress-banner" class="mb-6 bg-white dark:bg-[#0f172a] p-4 sm:p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold mb-2">
+        <span class="text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
+          <span>✨</span>
+          <span>আজকের দো'আ ও আযকার অগ্রগতি</span>
+        </span>
+        <div class="flex items-center gap-3">
+          <span id="adhkar-progress-label" class="text-emerald-700 dark:text-emerald-400">০ / ২০ সম্পন্ন</span>
+          <button onclick="resetAllDuaCounters()" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-500 hover:text-red-500 transition-colors" title="সকল কাউন্টার রিসেট করুন">সব রিসেট ↺</button>
+        </div>
+      </div>
+      <div class="w-full h-2 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden">
+        <div id="adhkar-progress-bar" class="h-full bg-emerald-600 transition-all duration-300 rounded-full" style="width: 0%;"></div>
+      </div>
+    </div>
+
     <!-- Duas Grid Container -->
     <div id="duas-list" class="space-y-6">
       <!-- Injected via JavaScript -->
@@ -319,14 +336,65 @@
         reference: "সহীহ বুখারী: ৬৪০৫",
         count: 100,
         note: "রাসূলুল্লাহ (সা.) বলেছেন: যে ব্যক্তি দিনে ১০০ বার এটি বলবে, তার সব গুনাহ ক্ষমা করা হবে, যদিও তা সমুদ্রের ফেনা সমান হয়।"
+      },
+      // 19. Hasbiyallahu (7x Morning/Evening)
+      {
+        id: "hasbiyallahu-7",
+        category: "morning_evening",
+        title: "দুনিয়া ও আখেরাতের সকল চিন্তায় আল্লাহর যথেষ্ট হওয়ার দো'আ (৭ বার)",
+        arabic: "حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ ۖ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",
+        transliteration: "হাসবিয়াল্লা-হু লা- ইলা-হা ইল্লা- হুওয়া ‘আলাইহি তাওয়াক্কালতু ওয়া হুওয়া রব্বুল ‘আরশিল ‘আযীম।",
+        translation: "আমার জন্য আল্লাহই যথেষ্ট, তিনি ব্যতীত কোনো সত্য উপাস্য নেই। আমি তাঁরই ওপর ভরসা করি এবং তিনিই মহান আরশের অধিপতি।",
+        reference: "সুনানে আবু দাউদ: ৫০৮১, সূরা আত-তাওবা: ১২৯",
+        count: 7,
+        note: "সকাল ও সন্ধ্যায় ৭ বার পাঠ করলে আল্লাহ তা'আলা দুনিয়া ও আখেরাতের সকল বিষয়ে যথেষ্ট হয়ে যান।"
+      },
+      // 20. Raditu Billahi (3x Morning/Evening)
+      {
+        id: "raditu-billahi-3",
+        category: "morning_evening",
+        title: "আল্লাহ, ইসলাম ও নবীজীর প্রতি সন্তুষ্টির দো'আ (৩ বার)",
+        arabic: "رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",
+        transliteration: "রদ্বীতু বিল্লা-হি রব্বাও ওয়াবিল ইসলা-মি দ্বীনাও ওয়াবি মুহাম্মাদিন ছল্লাল্লা-হু ‘আলাইহি ওয়াসাল্লামা নাবিয়্যা-।",
+        translation: "আমি রব হিসেবে আল্লাহর প্রতি, দ্বীন হিসেবে ইসলামের প্রতি এবং নবী হিসেবে মুহাম্মদ (ﷺ)-এর প্রতি সন্তুষ্ট।",
+        reference: "সুনানে আবু দাউদ: ৫০৭২, জামে তিরমিযী: ৩৩৮৯",
+        count: 3,
+        note: "সকাল-সন্ধ্যায় ৩ বার পাঠ করলে কিয়ামতের দিন আল্লাহ তা'আলা পাঠকারীকে সন্তুষ্ট করা নিজের দায়িত্বে নিয়ে নেন।"
       }
     ];
 
     let currentCategory = 'all';
     let searchQuery = '';
 
-    // Repetition counter states
-    const tapCounts = {};
+    // Daily persisted repetition counter states (auto-resets on new day)
+    const DUA_COUNTS_KEY = 'deen_dua_counts_v1';
+    function getTodayDateKey() {
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
+
+    function loadTapCounts() {
+      try {
+        const raw = localStorage.getItem(DUA_COUNTS_KEY);
+        if (!raw) return {};
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed.date === getTodayDateKey() && parsed.counts) {
+          return parsed.counts;
+        }
+      } catch (e) {}
+      return {};
+    }
+
+    function saveTapCounts() {
+      try {
+        localStorage.setItem(DUA_COUNTS_KEY, JSON.stringify({
+          date: getTodayDateKey(),
+          counts: tapCounts
+        }));
+      } catch (e) {}
+    }
+
+    const tapCounts = loadTapCounts();
 
     function renderDuas() {
       const container = document.getElementById('duas-list');
@@ -345,10 +413,12 @@
       if (filtered.length === 0) {
         container.innerHTML = '';
         emptyState.classList.remove('hidden');
+        updateAdhkarProgressBanner();
         return;
       }
 
       emptyState.classList.add('hidden');
+      updateAdhkarProgressBanner();
       container.innerHTML = filtered.map(d => {
         const countKey = d.id;
         if (tapCounts[countKey] === undefined) tapCounts[countKey] = 0;
@@ -452,8 +522,27 @@
 
     window.resetDuaCounter = (id) => {
       tapCounts[id] = 0;
+      saveTapCounts();
       renderDuas();
     };
+
+    window.resetAllDuaCounters = () => {
+      Object.keys(tapCounts).forEach(k => { tapCounts[k] = 0; });
+      saveTapCounts();
+      renderDuas();
+      if (window.showToast) window.showToast('সকল কাউন্টার রিসেট করা হয়েছে', 'info');
+    };
+
+    function updateAdhkarProgressBanner() {
+      const completed = duasData.filter(d => (tapCounts[d.id] || 0) >= d.count).length;
+      const total = duasData.length;
+      const pct = Math.round((completed / total) * 100);
+      const label = document.getElementById('adhkar-progress-label');
+      const bar = document.getElementById('adhkar-progress-bar');
+      const toBn = window.toBengaliNumerals || (n => String(n));
+      if (label) label.textContent = `${toBn(completed)} / ${toBn(total)} সম্পন্ন (${toBn(pct)}%)`;
+      if (bar) bar.style.width = `${pct}%`;
+    }
 
     window.speakDua = (id) => {
       const d = duasData.find(item => item.id === id);
@@ -505,6 +594,7 @@
       } else {
         if (navigator.vibrate) navigator.vibrate(30);
       }
+      saveTapCounts();
       renderDuas();
     }
 

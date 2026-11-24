@@ -335,6 +335,18 @@ describe('10. Quran Reader Font Controls, Auto-Scroll & Reading Progress Integri
     });
 });
 
+describe('11. Dua & Daily Adhkar Loop Counters & Persistence Integrity', () => {
+    it('dua.html includes daily persisted Adhkar progress banner and reset controls', () => {
+        const duaHtml = fs.readFileSync(path.join(__dirname, '../dua.html'), 'utf8');
+        assert.ok(duaHtml.includes('adhkar-progress-banner'), 'Missing adhkar-progress-banner');
+        assert.ok(duaHtml.includes('adhkar-progress-bar'), 'Missing adhkar-progress-bar');
+        assert.ok(duaHtml.includes('deen_dua_counts_v1'), 'Missing daily persistence key');
+        assert.ok(duaHtml.includes('hasbiyallahu-7'), 'Missing 7x Hasbiyallahu adhkar');
+        assert.ok(duaHtml.includes('raditu-billahi-3'), 'Missing 3x Raditu Billahi adhkar');
+        assert.ok(duaHtml.includes('resetAllDuaCounters'), 'Missing resetAllDuaCounters');
+    });
+});
+
 console.log(`\n========================================`);
 console.log(`Summary: ${passedTests}/${totalTests} tests passed.`);
 console.log(`Status: ${passedTests === totalTests ? 'SUCCESS - ALL TESTS PASSED' : 'FAILURE'}`);

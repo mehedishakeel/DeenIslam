@@ -6,6 +6,8 @@ class Dua {
   final String pronunciation;
   final String translation;
   final String reference;
+  final int targetCount;
+  final String? note;
   final bool isFavorite;
 
   const Dua({
@@ -16,6 +18,8 @@ class Dua {
     required this.pronunciation,
     required this.translation,
     required this.reference,
+    this.targetCount = 1,
+    this.note,
     this.isFavorite = false,
   });
 
@@ -28,6 +32,8 @@ class Dua {
       pronunciation: pronunciation,
       translation: translation,
       reference: reference,
+      targetCount: targetCount,
+      note: note,
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }

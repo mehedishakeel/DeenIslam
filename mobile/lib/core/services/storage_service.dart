@@ -59,6 +59,7 @@ class StorageService {
   static const String _arabicFontSizeKey = 'deen_arabic_font_size';
   static const String _bengaliFontSizeKey = 'deen_bengali_font_size';
   static const String _completedSurahsKey = 'deen_completed_surahs';
+  static const String _dailyDuaCountsKey = 'deen_dua_counts_v1';
 
   // --- Hijri Moon-Sighting Offset Persistence ---
   static Future<int> getHijriOffset() async {
@@ -434,5 +435,45 @@ class StorageService {
       current.map((e) => e.toString()).toList(),
     );
     return added;
+  }
+
+  // --- Daily Adhkar Loop Counter Persistence (auto-resets daily) ---
+  static String _todayDateString() {
+    final now = DateTime.now();
+    return '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+  }
+
+  static Future<Map<int, int>> getDailyDuaCounts() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_dailyDuaCountsKey);
+    if (raw == null) return {};
+    try {
+      final decoded = jsonDecode(raw) as Map<String, dynamic>;
+      if (decoded['date'] == _todayDateString() &&
+          decoded['counts'] is Map<String, dynamic>) {
+        final rawCounts = decoded['counts'] as Map<String, dynamic>;
+        final result = <int, int>{};
+        rawCounts.forEach((k, v) {
+          final id = int.tryParse(k);
+          if (id != null && v is int) {
+            result[id] = v;
+          }
+        });
+        return result;
+      }
+    } catch (_) {}
+    return {};
+  }
+
+  static Future<void> saveDailyDuaCounts(Map<int, int> counts) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encodedMap = <String, int>{};
+    counts.forEach((k, v) {
+      encodedMap[k.toString()] = v;
+    });
+    await prefs.setString(
+      _dailyDuaCountsKey,
+      jsonEncode({'date': _todayDateString(), 'counts': encodedMap}),
+    );
   }
 }
