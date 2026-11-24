@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ইসলামিক ক্যালেন্ডার ও গুরুত্বপূর্ণ দিনসমূহ | DeenIslam</title>
+  <link rel="icon" type="image/x-icon" href="favicon/deenislam.ico">
+  <meta name="description" content="আজকের হিজরি তারিখ, গুরুত্বপূর্ণ ইসলামিক দিবসসমূহের লাইভ কাউন্টডাউন, হিজরি-ইংরেজি ক্যালেন্ডার রূপান্তর, আইয়ামে বিজ ও সম্মানিত মাসের পূর্ণাঙ্গ দিনপঞ্জি।">
+  <meta name="keywords" content="ইসলামিক ক্যালেন্ডার, হিজরি তারিখ, আজকের হিজরি তারিখ, হিজরি ক্যালেন্ডার ২০২৬, Islamic Calendar Bangla, Hijri Calendar, Ramadan Countdown, Eid Date">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://deenislam.org/islamic-calendar.html">
+  <meta property="og:title" content="ইসলামিক ক্যালেন্ডার ও গুরুত্বপূর্ণ দিনসমূহ | DeenIslam">
+  <meta property="og:description" content="আজকের হিজরি তারিখ, চাঁদ দেখার সমন্বয়, গুরুত্বপূর্ণ ইসলামিক দিবসের লাইভ কাউন্টডাউন ও দ্বি-মুখী হিজরি কনভার্টার।">
+  <meta property="og:image" content="https://deenislam.org/images/share-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ইসলামিক ক্যালেন্ডার ও গুরুত্বপূর্ণ দিনসমূহ | DeenIslam">
+  <meta name="twitter:description" content="আজকের হিজরি তারিখ, চাঁদ দেখার সমন্বয়, গুরুত্বপূর্ণ ইসলামিক দিবসের লাইভ কাউন্টডাউন।">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#059669">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#059669',
+            secondary: '#d97706',
+          },
+          fontFamily: {
+            bengali: ['Noto Sans Bengali', 'sans-serif'],
+            arabic: ['Amiri', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dark .bg-islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .calendar-cell {
+      min-height: 86px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-6xl space-y-8">
+
+    <!-- Header Hero -->
+    <div class="text-center mb-6">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold mb-3 shadow-2xs">
+        <span>📅</span>
+        <span>হিজরি বর্ষপঞ্জি ও বিশেষ দিনসমূহ</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
+        ইসলামিক ক্যালেন্ডার ও গুরুত্বপূর্ণ দিবস
+      </h1>
+      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        আজকের হিজরি তারিখ, চাঁদ দেখার স্থানীয় সমন্বয়, গুরুত্বপূর্ণ ইসলামিক দিনসমূহের লাইভ কাউন্টডাউন ও হিজরি-ইংরেজি ক্যালেন্ডার রূপান্তর।
+      </p>
+
+      <!-- Quick Nav Jump Pills -->
+      <div class="flex flex-wrap justify-center gap-2 mt-5">
+        <a href="#today-card" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-emerald-800 dark:text-emerald-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all">আজকের তারিখ</a>
+        <a href="#countdowns-section" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all">আসন্ন দিবসসমূহ</a>
+        <a href="#monthly-calendar" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all">মাসিক দিনপঞ্জি</a>
+        <a href="#converter-section" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-xs shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all">তারিখ কনভার্টার</a>
+        <a href="#rules-section" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-xs transition-all shadow-2xs">রোজার সুন্নাত ও নিষিদ্ধ দিনসমূহ →</a>
+      </div>
+    </div>
+
+    <!-- 1. TODAY'S ISLAMIC DATE HERO BANNER -->
+    <section id="today-card" class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-800 via-emerald-900 to-slate-900 text-white p-6 sm:p-8 md:p-10 shadow-xl border border-emerald-700/50">
+      <div class="absolute -right-8 -top-8 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -left-12 -bottom-12 w-56 h-56 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- Main Hijri Display -->
+        <div class="lg:col-span-8 space-y-3 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-700/40 border border-emerald-500/30 text-emerald-200 text-xs font-bold">
+            <span class="animate-pulse">🟢</span>
+            <span>আজকের হিজরি তারিখ</span>
+          </div>
+
+          <div class="space-y-1">
+            <h2 id="today-hijri-display" class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white drop-shadow-sm">
+              লোড হচ্ছে...
+            </h2>
+            <p id="today-gregorian-display" class="text-emerald-200 text-sm sm:text-base font-medium">
+              লোড হচ্ছে...
+            </p>
+          </div>
+
+          <!-- Dynamic Status Badges -->
+          <div id="today-badges-container" class="flex flex-wrap gap-2 pt-2 justify-center lg:justify-start">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Moon Sighting Offset Controls & Quick Share -->
+        <div class="lg:col-span-4 bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/10 space-y-3.5">
+          <div class="flex items-center justify-between text-xs font-bold text-emerald-200">
+            <span class="flex items-center gap-1.5">
+              <span>🌙</span>
+              <span>চাঁদ দেখা সমন্বয় (হিজরি অফসেট)</span>
+            </span>
+            <span id="current-offset-badge" class="px-2 py-0.5 rounded-md bg-emerald-600/60 text-white text-[11px]">স্বাভাবিক (০)</span>
+          </div>
+
+          <p class="text-[11px] text-emerald-100/80 leading-relaxed">
+            বাংলাদেশের চাঁদ দেখার ওপর ভিত্তি করে হিজরি তারিখ ১ বা ২ দিন কম-বেশি হতে পারে। আপনার স্থানীয় হিসাব অনুযায়ী সমন্বয় করুন:
+          </p>
+
+          <div class="grid grid-cols-5 gap-1.5 text-center text-xs">
+            <button onclick="setCalendarOffset(-2)" class="offset-btn py-1.5 rounded-lg border border-white/20 hover:bg-white/20 transition-all font-bold text-[11px]" data-offset="-2">-২ দিন</button>
+            <button onclick="setCalendarOffset(-1)" class="offset-btn py-1.5 rounded-lg border border-white/20 hover:bg-white/20 transition-all font-bold text-[11px]" data-offset="-1">-১ দিন</button>
+            <button onclick="setCalendarOffset(0)" class="offset-btn py-1.5 rounded-lg border border-white/20 hover:bg-white/20 transition-all font-bold text-[11px] bg-emerald-500 text-white" data-offset="0">০ দিন</button>
+            <button onclick="setCalendarOffset(1)" class="offset-btn py-1.5 rounded-lg border border-white/20 hover:bg-white/20 transition-all font-bold text-[11px]" data-offset="1">+১ দিন</button>
+            <button onclick="setCalendarOffset(2)" class="offset-btn py-1.5 rounded-lg border border-white/20 hover:bg-white/20 transition-all font-bold text-[11px]" data-offset="2">+২ দিন</button>
+          </div>
+
+          <div class="flex items-center gap-2 pt-1">
+            <button onclick="copyTodayHijri()" class="flex-1 py-2 px-3 bg-white/15 hover:bg-white/25 rounded-xl text-xs font-semibold text-white transition-all flex items-center justify-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+              <span>তারিখ কপি</span>
+            </button>
+            <button onclick="shareTodayHijri()" class="flex-1 py-2 px-3 bg-emerald-500 hover:bg-emerald-600 rounded-xl text-xs font-semibold text-white transition-all flex items-center justify-center gap-1.5 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
+              <span>শেয়ার করুন</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. UPCOMING MAJOR ISLAMIC EVENTS & COUNTDOWN -->
+    <section id="countdowns-section" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/80 dark:border-slate-800 pb-3">
+        <div>
+          <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
+            আসন্ন গুরুত্বপূর্ণ ইসলামিক দিবস ও কাউন্টডাউন
+          </h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            পবিত্র রমজান, ঈদ, শবে কদর, হজ ও আশুরাসহ প্রধান দিনসমূহের দিনগণনা
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-500 dark:text-slate-400 font-semibold">ফিল্টার:</span>
+          <select id="event-filter-select" onchange="renderUpcomingEvents()" class="text-xs font-semibold px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+            <option value="all">সকল গুরুত্বপূর্ণ দিন</option>
+            <option value="eid">পবিত্র দুই ঈদ</option>
+            <option value="ramadan">রমজান ও শবে কদর</option>
+            <option value="fasting">ফজিলতপূর্ণ নফল রোজা</option>
+            <option value="hajj">হজ ও আরাফাহ</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Event Countdown Grid -->
+      <div id="events-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- 3. INTERACTIVE MONTHLY ISLAMIC CALENDAR GRID -->
+    <section id="monthly-calendar" class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 dark:border-slate-800 pb-3">
+        <div>
+          <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <span class="w-1.5 h-4 bg-amber-500 rounded-full"></span>
+            মাসিক ইসলামিক দিনপঞ্জি (হিজরি মাস ভিউ)
+          </h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            আইয়ামে বিজ (সাদা দিন), জুমু'আ ও বিশেষ দিবসসমূহ চিহ্নিত মাসভিত্তিক ক্যালেন্ডার
+          </p>
+        </div>
+
+        <!-- Month Navigation Controls -->
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <button onclick="navigateMonth(-1)" class="p-2 rounded-xl bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-500/40 transition-all shadow-2xs" title="পূর্ববর্তী মাস">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+
+          <select id="calendar-month-select" onchange="onMonthSelectChange()" class="text-xs font-bold px-3 py-2 rounded-xl border border-stone-200/80 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500 shadow-2xs">
+            <!-- 12 Hijri Months injected via JS -->
+          </select>
+
+          <select id="calendar-year-select" onchange="onMonthSelectChange()" class="text-xs font-bold px-2.5 py-2 rounded-xl border border-stone-200/80 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-emerald-500 shadow-2xs">
+            <!-- Hijri Years injected via JS -->
+          </select>
+
+          <button onclick="navigateMonth(1)" class="p-2 rounded-xl bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-500/40 transition-all shadow-2xs" title="পরবর্তী মাস">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Month Summary Banner -->
+      <div id="month-info-banner" class="p-4 rounded-2xl bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-2xs">
+        <!-- Injected via JS -->
+      </div>
+
+      <!-- Calendar Legend -->
+      <div class="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-slate-600 dark:text-slate-400 px-1">
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-emerald-500"></span> আজকের দিন</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-amber-400"></span> আইয়ামে বিজ (১৩, ১৪, ১৫)</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-rose-500"></span> রোজা রাখা হারাম</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-teal-500"></span> জুমু'আব্বার (শুক্রবার)</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-md bg-purple-500"></span> বিশেষ ইসলামিক দিবস</span>
+      </div>
+
+      <!-- Calendar Container -->
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-4 shadow-sm overflow-hidden">
+        <!-- Weekday Headers -->
+        <div class="grid grid-cols-7 gap-1.5 text-center font-bold text-xs text-slate-500 dark:text-slate-400 pb-2 mb-2 border-b border-stone-200/60 dark:border-slate-800">
+          <div>রবি</div>
+          <div>সোম</div>
+          <div>মঙ্গল</div>
+          <div>বুধ</div>
+          <div>বৃহঃ</div>
+          <div class="text-teal-600 dark:text-teal-400 font-black">শুক্র (জুমু'আ)</div>
+          <div>শনি</div>
+        </div>
+
+        <!-- Calendar Days Grid -->
+        <div id="calendar-days-grid" class="grid grid-cols-7 gap-1.5">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TWO-WAY HIJRI-GREGORIAN DATE CONVERTER -->
+    <section id="converter-section" class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 md:p-8 shadow-sm space-y-6">
+      <div class="border-b border-stone-200/80 dark:border-slate-800 pb-4">
+        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <span class="w-1.5 h-4 bg-teal-600 rounded-full"></span>
+          হিজরি ও ইংরেজি (গ্রেগরিয়ান) দ্বি-মুখী তারিখ কনভার্টার
+        </h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          যেকোনো ইংরেজি তারিখের হিজরি রূপান্তর অথবা হিজরি তারিখের ইংরেজি রূপান্তর বের করুন
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Left: Gregorian -> Hijri -->
+        <div class="p-5 rounded-2xl bg-stone-50/70 dark:bg-slate-800/40 border border-stone-200/80 dark:border-slate-800 space-y-4">
+          <h3 class="text-sm font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+            <span>🗓️</span>
+            <span>ইংরেজি (গ্রেগরিয়ান) থেকে হিজরি তারিখ</span>
+          </h3>
+
+          <div class="space-y-2">
+            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400">ইংরেজি তারিখ নির্বাচন করুন:</label>
+            <input type="date" id="gregorian-input" onchange="convertGregorianToHijriUI()" class="w-full text-xs font-semibold p-2.5 rounded-xl border border-stone-200/80 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+          </div>
+
+          <div id="gregorian-result-box" class="p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-700 text-center space-y-1">
+            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 block">অনুরূপ হিজরি তারিখ</span>
+            <span id="g2h-result-hijri" class="text-lg font-black text-emerald-600 dark:text-emerald-400 block">-</span>
+            <span id="g2h-result-details" class="text-xs text-slate-500 dark:text-slate-400 block">-</span>
+          </div>
+        </div>
+
+        <!-- Right: Hijri -> Gregorian -->
+        <div class="p-5 rounded-2xl bg-stone-50/70 dark:bg-slate-800/40 border border-stone-200/80 dark:border-slate-800 space-y-4">
+          <h3 class="text-sm font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+            <span>🌙</span>
+            <span>হিজরি থেকে ইংরেজি (গ্রেগরিয়ান) তারিখ</span>
+          </h3>
+
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">দিন:</label>
+              <select id="h2g-day-input" onchange="convertHijriToGregorianUI()" class="w-full text-xs font-semibold p-2 rounded-xl border border-stone-200/80 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+                <!-- 1 to 30 injected via JS -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">মাস:</label>
+              <select id="h2g-month-input" onchange="convertHijriToGregorianUI()" class="w-full text-xs font-semibold p-2 rounded-xl border border-stone-200/80 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+                <!-- 12 Months injected via JS -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">সন (হিজরি):</label>
+              <input type="number" id="h2g-year-input" value="1448" min="1300" max="1600" onchange="convertHijriToGregorianUI()" oninput="convertHijriToGregorianUI()" class="w-full text-xs font-semibold p-2 rounded-xl border border-stone-200/80 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
+            </div>
+          </div>
+
+          <div id="hijri-result-box" class="p-4 rounded-xl bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-700 text-center space-y-1">
+            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 block">অনুরূপ ইংরেজি তারিখ</span>
+            <span id="h2g-result-gregorian" class="text-lg font-black text-teal-600 dark:text-teal-400 block">-</span>
+            <span id="h2g-result-details" class="text-xs text-slate-500 dark:text-slate-400 block">-</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FASTING RULES, AYYAM AL-BEED & SACRED MONTHS -->
+    <section id="rules-section" class="space-y-6">
+      <div class="border-b border-stone-200/80 dark:border-slate-800 pb-3">
+        <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <span class="w-1.5 h-4 bg-emerald-600 rounded-full"></span>
+          সুন্নাত রোজা, নিষিদ্ধ দিন ও সম্মানিত মাসের বিধান
+        </h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          সহীহ হাদিসের আলোকে আইয়ামে বিজ, চার পবিত্র মাস ও হারাম রোজার দিনসমূহ
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Ayyam al-Beed Card -->
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-500/20 text-[11px] font-bold mb-2.5">
+              <span>🌟</span>
+              <span>আইয়ামে বিজ (সাদা দিন)</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">প্রতি হিজরি মাসের ১৩, ১৪ ও ১৫ তারিখ</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              প্রতি চান্দ্রমাসের পূর্ণিমার দিনগুলোতে রোজা রাখা সুন্নাতে মুয়াক্কাদা। হাদিস শরিফে বলা হয়েছে: "প্রতি মাসে ৩টি রোজা সারা বছর রোজা রাখার সমতুল্য।" (সহীহ বুখারী)
+            </p>
+          </div>
+          <div class="p-3 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-800/40 text-[11px] text-amber-900 dark:text-amber-200">
+            <strong>আমল:</strong> প্রতি মাসে ক্যালেন্ডারে চিহ্নিত হলুদ রঙের দিনগুলোতে নফল রোজার নিয়ত করুন।
+          </div>
+        </div>
+
+        <!-- Prohibited Days Card -->
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-300 border border-rose-500/20 text-[11px] font-bold mb-2.5">
+              <span>🚫</span>
+              <span>রোজা রাখা সম্পূর্ণ হারাম</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">বছরের ৫টি নিষিদ্ধ দিন</h3>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 mb-3 list-disc list-inside">
+              <li><strong>১লা শাওয়াল:</strong> পবিত্র ঈদুল ফিতর</li>
+              <li><strong>১০ই জিলহজ:</strong> পবিত্র ঈদুল আজহা</li>
+              <li><strong>১১, ১২ ও ১৩ই জিলহজ:</strong> আইয়ামে তাশরিকের ৩ দিন</li>
+            </ul>
+          </div>
+          <div class="p-3 rounded-xl bg-rose-50/60 dark:bg-rose-950/30 border border-rose-200/60 dark:border-rose-800/40 text-[11px] text-rose-900 dark:text-rose-200">
+            <strong>হাদিস:</strong> রাসূলুল্লাহ (ﷺ) এই দিনগুলোতে রোজা রাখতে কঠোরভাবে নিষেধ করেছেন। (সহীহ মুসলিম: ১১৪০)
+          </div>
+        </div>
+
+        <!-- Sacred Months Card -->
+        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-500/20 text-[11px] font-bold mb-2.5">
+              <span>👑</span>
+              <span>আশহুরুল হুরুম (সম্মানিত ৪ মাস)</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">মুহাররম, রজব, জিলকদ ও জিলহজ</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
+              কুরআনে আল্লাহ তা'আলা এরশাদ করেন: "নিশ্চয়ই আল্লাহর বিধান অনুযায়ী আকাশমন্ডলী ও পৃথিবী সৃষ্টির দিন থেকেই গণনায় মাসের সংখ্যা বারোটি, এর মধ্যে চারটি সম্মানিত।" (সূরা তাওবা: ৩৬)
+            </p>
+          </div>
+          <div class="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 text-[11px] text-emerald-900 dark:text-emerald-200">
+            <strong>তাৎপর্য:</strong> এ মাসগুলোতে যুদ্ধবিগ্রহ ও পাপ কাজ কঠোরভাবে নিষিদ্ধ এবং নেক আমলের সওয়াব বহুগুণ বৃদ্ধি পায়।
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 Islamic Months Breakdown Accordion / Grid -->
+      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 shadow-sm">
+        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <span>📜</span>
+          <span>১২টি হিজরি মাসের পূর্ণাঙ্গ পরিচিতি ও তাৎপর্য</span>
+        </h3>
+        <div id="months-list-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="js/islamic-calendar-data.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // Calendar Controller State
+    let currentActiveHijri = null;
+    let selectedCalendarMonth = null;
+    let selectedCalendarYear = null;
+    let countdownInterval = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initCalendarApp();
+    });
+
+    function initCalendarApp() {
+      const today = new Date();
+      currentActiveHijri = window.IslamicCalendarData.gregorianToHijri(today);
+      selectedCalendarMonth = currentActiveHijri.month;
+      selectedCalendarYear = currentActiveHijri.year;
+
+      renderTodayHero();
+      populateCalendarDropdowns();
+      renderMonthlyCalendar();
+      renderUpcomingEvents();
+      initConverterInputs();
+      renderMonthsList();
+
+      // Start countdown tick
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(updateLiveCountdowns, 1000);
+    }
+
+    // 1. TODAY HERO RENDERER
+    function renderTodayHero() {
+      const today = new Date();
+      const offset = window.IslamicCalendarData.getStoredOffset();
+      currentActiveHijri = window.IslamicCalendarData.gregorianToHijri(today, offset);
+
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      // Hijri Title
+      document.getElementById('today-hijri-display').innerHTML = `
+        ${toBn(currentActiveHijri.day)} ${currentActiveHijri.monthNameBn}, ${toBn(currentActiveHijri.year)} হিজরি
+        <span class="block text-xl sm:text-2xl font-arabic font-normal text-emerald-200/90 mt-1" dir="rtl">
+          ${currentActiveHijri.day} ${currentActiveHijri.monthNameAr} ${currentActiveHijri.year} هـ
+        </span>
+      `;
+
+      // Gregorian Date in Bengali
+      const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+      const bnDays = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার (পবিত্র জুমু'আ)", "শনিবার"];
+      const gDay = toBn(today.getDate());
+      const gMonth = bnMonths[today.getMonth()];
+      const gYear = toBn(today.getFullYear());
+      const gWeekday = bnDays[today.getDay()];
+
+      document.getElementById('today-gregorian-display').textContent = `${gWeekday} • ${gDay} ${gMonth} ${gYear} খ্রিষ্টাব্দ`;
+
+      // Update Offset Badge & Active Buttons
+      const offsetBadge = document.getElementById('current-offset-badge');
+      if (offset === 0) {
+        offsetBadge.textContent = "স্বাভাবিক (০ দিন)";
+      } else if (offset > 0) {
+        offsetBadge.textContent = `+${toBn(offset)} দিন এগিয়ে`;
+      } else {
+        offsetBadge.textContent = `${toBn(offset)} দিন পিছিয়ে`;
+      }
+
+      document.querySelectorAll('.offset-btn').forEach(btn => {
+        const val = parseInt(btn.getAttribute('data-offset'), 10);
+        if (val === offset) {
+          btn.classList.add('bg-emerald-500', 'text-white');
+          btn.classList.remove('bg-white/10');
+        } else {
+          btn.classList.remove('bg-emerald-500', 'text-white');
+        }
+      });
+
+      // Badges
+      const badgesContainer = document.getElementById('today-badges-container');
+      let badgesHtml = '';
+
+      if (currentActiveHijri.isSacredMonth) {
+        badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-200 border border-amber-400/30 text-xs font-bold flex items-center gap-1">👑 আশহুরুল হুরুম (পবিত্র ৪ মাস)</span>`;
+      }
+      if (currentActiveHijri.month === 9) {
+        badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-emerald-500/30 text-emerald-100 border border-emerald-400/40 text-xs font-bold flex items-center gap-1">🌙 পবিত্র মাহে রমজান</span>`;
+      }
+      if (currentActiveHijri.isWhiteDay) {
+        badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-amber-400/30 text-amber-100 border border-amber-300/40 text-xs font-bold flex items-center gap-1">🌟 আইয়ামে বিজ (সুন্নাত রোজা)</span>`;
+      }
+      if (currentActiveHijri.isMonday || currentActiveHijri.isThursday) {
+        badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-teal-500/20 text-teal-200 border border-teal-400/30 text-xs font-bold flex items-center gap-1">✨ সাপ্তাহিক সুন্নাত রোজা</span>`;
+      }
+      if (currentActiveHijri.isProhibitedFasting) {
+        badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-rose-500/30 text-rose-100 border border-rose-400/40 text-xs font-bold flex items-center gap-1">🚫 আজ রোজা রাখা হারাম</span>`;
+      }
+      if (currentActiveHijri.isFriday) {
+        badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-emerald-500/30 text-emerald-100 border border-emerald-400/40 text-xs font-bold flex items-center gap-1">🕌 পবিত্র জুমু'আ বার</span>`;
+      }
+      if (currentActiveHijri.events && currentActiveHijri.events.length > 0) {
+        currentActiveHijri.events.forEach(ev => {
+          badgesHtml += `<span class="px-2.5 py-1 rounded-lg bg-purple-500/30 text-purple-100 border border-purple-400/40 text-xs font-bold flex items-center gap-1">${ev.icon} ${ev.titleBn}</span>`;
+        });
+      }
+
+      badgesContainer.innerHTML = badgesHtml;
+    }
+
+    // Offset Change Handler
+    window.setCalendarOffset = (offset) => {
+      window.IslamicCalendarData.setStoredOffset(offset);
+      renderTodayHero();
+      renderMonthlyCalendar();
+      renderUpcomingEvents();
+      convertGregorianToHijriUI();
+      convertHijriToGregorianUI();
+
+      // Show toast if available
+      if (window.showToast) {
+        const toBn = window.toBengaliNumerals || ((n) => String(n));
+        window.showToast(`হিজরি তারিখ সমন্বয় করা হয়েছে (${offset >= 0 ? '+' : ''}${toBn(offset)} দিন)`, "info");
+      }
+    };
+
+    // Copy Today's Date
+    window.copyTodayHijri = () => {
+      if (!currentActiveHijri) return;
+      const text = `আজকের ইসলামিক তারিখ: ${currentActiveHijri.formattedBn} (${document.getElementById('today-gregorian-display').textContent.trim()})`;
+      if (window.copyToClipboard) {
+        window.copyToClipboard(text);
+      } else {
+        navigator.clipboard.writeText(text);
+      }
+    };
+
+    // Share Today's Date
+    window.shareTodayHijri = () => {
+      if (!currentActiveHijri) return;
+      if (navigator.share) {
+        navigator.share({
+          title: 'আজকের হিজরি তারিখ | DeenIslam',
+          text: `আজকের ইসলামিক তারিখ: ${currentActiveHijri.formattedBn}\nবিস্তারিত দেখুন:`,
+          url: window.location.href
+        }).catch(() => {});
+      } else if (window.openShareModal) {
+        window.openShareModal({
+          title: "আজকের হিজরি তারিখ",
+          arabic: `${currentActiveHijri.day} ${currentActiveHijri.monthNameAr} ${currentActiveHijri.year} هـ`,
+          translation: `আজকের ইসলামিক তারিখ: ${currentActiveHijri.formattedBn}`,
+          source: "DeenIslam • ইসলামিক ক্যালেন্ডার"
+        });
+      } else {
+        window.copyTodayHijri();
+      }
+    };
+
+    // 2. UPCOMING EVENTS & LIVE COUNTDOWN
+    function renderUpcomingEvents() {
+      const container = document.getElementById('events-grid-container');
+      const filter = document.getElementById('event-filter-select').value;
+      const events = window.IslamicCalendarData.getUpcomingEvents();
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      let filtered = events;
+      if (filter === 'eid') {
+        filtered = events.filter(e => e.id.includes('eid'));
+      } else if (filter === 'ramadan') {
+        filtered = events.filter(e => e.id.includes('ramadan') || e.id.includes('qadr') || e.id.includes('badr'));
+      } else if (filter === 'fasting') {
+        filtered = events.filter(e => e.id.includes('fast') || e.id.includes('ashura') || e.id.includes('arafah'));
+      } else if (filter === 'hajj') {
+        filtered = events.filter(e => e.id.includes('hajj') || e.id.includes('arafah') || e.id.includes('dhul_hijjah'));
+      }
+
+      container.innerHTML = filtered.map(ev => {
+        const isUrgent = ev.daysRemaining <= 7 && ev.daysRemaining >= 0;
+        const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+        const gDate = ev.targetGregorianDate;
+        const gStr = `${toBn(gDate.getDate())} ${bnMonths[gDate.getMonth()]}, ${toBn(gDate.getFullYear())}`;
+
+        return `
+          <div class="bg-white dark:bg-[#0f172a] rounded-2xl border ${isUrgent ? 'border-emerald-500/60 dark:border-emerald-500/40 ring-1 ring-emerald-500/20' : 'border-stone-200/80 dark:border-slate-800'} p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between" data-event-id="${ev.id}">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-[11px] font-bold ${isUrgent ? 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-500/30' : 'bg-stone-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'}">
+                  <span>${ev.icon}</span>
+                  <span>${ev.badge}</span>
+                </span>
+                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">${toBn(ev.day)} ${window.IslamicCalendarData.MONTHS.find(m => m.number === ev.month)?.nameBn}</span>
+              </div>
+
+              <h3 class="text-base font-bold text-slate-900 dark:text-white mb-1.5">${ev.titleBn}</h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-3 line-clamp-2">${ev.description}</p>
+            </div>
+
+            <div class="pt-3 border-t border-stone-200/60 dark:border-slate-800 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-500 dark:text-slate-400">সম্ভাব্য তারিখ:</span>
+                <span class="font-bold text-slate-700 dark:text-slate-300">${gStr}</span>
+              </div>
+
+              <div class="countdown-timer flex items-center justify-between p-2.5 rounded-xl bg-stone-50 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60 text-center" data-target-ms="${ev.targetGregorianDate.getTime()}">
+                <div class="flex-1">
+                  <span class="c-days text-sm sm:text-base font-black text-emerald-600 dark:text-emerald-400 block">${toBn(Math.max(0, ev.daysRemaining))}</span>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold block">দিন</span>
+                </div>
+                <span class="text-slate-300 dark:text-slate-600 font-bold">:</span>
+                <div class="flex-1">
+                  <span class="c-hours text-sm sm:text-base font-black text-slate-700 dark:text-slate-200 block">০০</span>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold block">ঘণ্টা</span>
+                </div>
+                <span class="text-slate-300 dark:text-slate-600 font-bold">:</span>
+                <div class="flex-1">
+                  <span class="c-mins text-sm sm:text-base font-black text-slate-700 dark:text-slate-200 block">০০</span>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold block">মিনিট</span>
+                </div>
+                <span class="text-slate-300 dark:text-slate-600 font-bold">:</span>
+                <div class="flex-1">
+                  <span class="c-secs text-sm sm:text-base font-black text-amber-600 dark:text-amber-400 block">০০</span>
+                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-bold block">সেকেন্ড</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      updateLiveCountdowns();
+    }
+
+    // Live Countdown Timer Engine
+    function updateLiveCountdowns() {
+      const timers = document.querySelectorAll('.countdown-timer');
+      const now = Date.now();
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      timers.forEach(timer => {
+        const targetMs = parseInt(timer.getAttribute('data-target-ms'), 10);
+        const diff = targetMs - now;
+
+        if (diff <= 0) {
+          const daysEl = timer.querySelector('.c-days');
+          if (daysEl) daysEl.textContent = 'আজ';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const dEl = timer.querySelector('.c-days');
+        const hEl = timer.querySelector('.c-hours');
+        const mEl = timer.querySelector('.c-mins');
+        const sEl = timer.querySelector('.c-secs');
+
+        if (dEl) dEl.textContent = toBn(days);
+        if (hEl) hEl.textContent = toBn(hours < 10 ? '0' + hours : hours);
+        if (mEl) mEl.textContent = toBn(minutes < 10 ? '0' + minutes : minutes);
+        if (sEl) sEl.textContent = toBn(seconds < 10 ? '0' + seconds : seconds);
+      });
+    }
+
+    // 3. MONTHLY CALENDAR GRID
+    function populateCalendarDropdowns() {
+      const monthSelect = document.getElementById('calendar-month-select');
+      const yearSelect = document.getElementById('calendar-year-select');
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      monthSelect.innerHTML = window.IslamicCalendarData.MONTHS.map(m => `
+        <option value="${m.number}" ${m.number === selectedCalendarMonth ? 'selected' : ''}>
+          ${toBn(m.number)}. ${m.nameBn} (${m.nameAr})
+        </option>
+      `).join('');
+
+      const baseYear = selectedCalendarYear || 1448;
+      const years = [];
+      for (let y = baseYear - 2; y <= baseYear + 4; y++) {
+        years.push(y);
+      }
+
+      yearSelect.innerHTML = years.map(y => `
+        <option value="${y}" ${y === selectedCalendarYear ? 'selected' : ''}>
+          ${toBn(y)} হিজরি
+        </option>
+      `).join('');
+    }
+
+    function onMonthSelectChange() {
+      selectedCalendarMonth = parseInt(document.getElementById('calendar-month-select').value, 10);
+      selectedCalendarYear = parseInt(document.getElementById('calendar-year-select').value, 10);
+      renderMonthlyCalendar();
+    }
+
+    window.navigateMonth = (delta) => {
+      selectedCalendarMonth += delta;
+      if (selectedCalendarMonth < 1) {
+        selectedCalendarMonth = 12;
+        selectedCalendarYear--;
+      } else if (selectedCalendarMonth > 12) {
+        selectedCalendarMonth = 1;
+        selectedCalendarYear++;
+      }
+      populateCalendarDropdowns();
+      renderMonthlyCalendar();
+    };
+
+    function renderMonthlyCalendar() {
+      const grid = document.getElementById('calendar-days-grid');
+      const banner = document.getElementById('month-info-banner');
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      const calData = window.IslamicCalendarData.getMonthCalendar(selectedCalendarYear, selectedCalendarMonth);
+      const mInfo = calData.monthInfo;
+
+      // Month Info Banner
+      banner.innerHTML = `
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <h3 class="text-lg font-black text-slate-900 dark:text-white">
+              ${mInfo.nameBn} (${mInfo.nameAr}) - ${toBn(selectedCalendarYear)} হিজরি
+            </h3>
+            ${mInfo.isSacred ? '<span class="px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[11px] font-bold">সম্মানিত মাস</span>' : ''}
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-400">${mInfo.significance}</p>
+        </div>
+        <div class="text-left md:text-right text-xs text-slate-500 dark:text-slate-400">
+          <span class="block font-bold text-emerald-600 dark:text-emerald-400">মোট দিন: ${toBn(calData.totalDays)} দিন</span>
+          <span>অর্থ: ${mInfo.meaning}</span>
+        </div>
+      `;
+
+      // Calculate Day of Week for the 1st day (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      const firstDayDate = calData.days[0].gregorianDate;
+      const startDayOfWeek = firstDayDate.getDay();
+
+      let daysHtml = '';
+
+      // Leading empty cells
+      for (let i = 0; i < startDayOfWeek; i++) {
+        daysHtml += `<div class="calendar-cell p-2 rounded-xl bg-stone-100/40 dark:bg-slate-900/40 border border-transparent opacity-40"></div>`;
+      }
+
+      const today = new Date();
+      const currentH = window.IslamicCalendarData.gregorianToHijri(today);
+
+      const bnMonthsShort = ["জানু", "ফেব্রু", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টে", "অক্টো", "নভে", "ডিসে"];
+
+      calData.days.forEach(day => {
+        const isToday = (day.hijriDay === currentH.day && day.hijriMonth === currentH.month && day.hijriYear === currentH.year);
+        const hasEvents = day.events && day.events.length > 0;
+
+        let bgClass = "bg-stone-50/70 dark:bg-slate-800/40 border-stone-200/60 dark:border-slate-800 hover:border-emerald-500/50";
+        if (isToday) {
+          bgClass = "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-500 ring-2 ring-emerald-500/30";
+        } else if (day.isProhibitedFasting) {
+          bgClass = "bg-rose-50/60 dark:bg-rose-950/30 border-rose-300/60 dark:border-rose-900/60";
+        } else if (day.isWhiteDay) {
+          bgClass = "bg-amber-50/60 dark:bg-amber-950/30 border-amber-300/60 dark:border-amber-900/60";
+        } else if (day.isFriday) {
+          bgClass = "bg-teal-50/40 dark:bg-teal-950/20 border-teal-200/60 dark:border-teal-900/40";
+        }
+
+        daysHtml += `
+          <div class="calendar-cell p-2 rounded-xl border ${bgClass} flex flex-col justify-between cursor-pointer" onclick="showDayModal(${day.hijriDay}, ${day.hijriMonth}, ${day.hijriYear})">
+            <div class="flex items-center justify-between">
+              <span class="text-sm sm:text-base font-black ${isToday ? 'text-emerald-700 dark:text-emerald-300' : 'text-slate-800 dark:text-slate-100'}">
+                ${day.hijriDayBn}
+              </span>
+              ${day.isWhiteDay ? '<span class="text-[10px]" title="আইয়ামে বিজ (সাদা দিন)">🌟</span>' : ''}
+              ${day.isProhibitedFasting ? '<span class="text-[10px]" title="রোজা রাখা হারাম">🚫</span>' : ''}
+              ${hasEvents ? '<span class="w-1.5 h-1.5 rounded-full bg-purple-500" title="বিশেষ দিবস"></span>' : ''}
+            </div>
+
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-semibold truncate pt-1">
+              ${toBn(day.gregorianDay)} ${bnMonthsShort[day.gregorianMonth - 1]}
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = daysHtml;
+    }
+
+    // Day Details Popover / Modal
+    window.showDayModal = (hDay, hMonth, hYear) => {
+      const calData = window.IslamicCalendarData.getMonthCalendar(hYear, hMonth);
+      const dayItem = calData.days.find(d => d.hijriDay === hDay);
+      if (!dayItem) return;
+
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+      const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+      const gDate = dayItem.gregorianDate;
+      const gFormatted = `${toBn(gDate.getDate())} ${bnMonths[gDate.getMonth()]}, ${toBn(gDate.getFullYear())}`;
+
+      let msg = `📅 ${toBn(hDay)} ${calData.monthInfo.nameBn}, ${toBn(hYear)} হিজরি\nঅনুরূপ ইংরেজি: ${gFormatted}`;
+      if (dayItem.isWhiteDay) msg += `\n🌟 এটি আইয়ামে বিজের অন্যতম দিন (রোজা রাখা সুন্নাত)।`;
+      if (dayItem.isProhibitedFasting) msg += `\n🚫 এই দিনে রোজা রাখা শরীয়ত মোতাবেক সম্পূর্ণ নিষিদ্ধ।`;
+      if (dayItem.events && dayItem.events.length > 0) {
+        dayItem.events.forEach(e => {
+          msg += `\n✨ বিশেষ দিবস: ${e.titleBn}`;
+        });
+      }
+
+      if (window.showToast) {
+        window.showToast(msg, "info");
+      } else {
+        alert(msg);
+      }
+    };
+
+    // 4. TWO-WAY CONVERTER
+    function initConverterInputs() {
+      const today = new Date();
+      const datePicker = document.getElementById('gregorian-input');
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      datePicker.value = `${yyyy}-${mm}-${dd}`;
+
+      // Populate Hijri converter select
+      const hDaySelect = document.getElementById('h2g-day-input');
+      const hMonthSelect = document.getElementById('h2g-month-input');
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      let dayOpts = '';
+      for (let i = 1; i <= 30; i++) {
+        dayOpts += `<option value="${i}">${toBn(i)}</option>`;
+      }
+      hDaySelect.innerHTML = dayOpts;
+
+      hMonthSelect.innerHTML = window.IslamicCalendarData.MONTHS.map(m => `
+        <option value="${m.number}">${toBn(m.number)}. ${m.nameBn}</option>
+      `).join('');
+
+      if (currentActiveHijri) {
+        hDaySelect.value = currentActiveHijri.day;
+        hMonthSelect.value = currentActiveHijri.month;
+        document.getElementById('h2g-year-input').value = currentActiveHijri.year;
+      }
+
+      convertGregorianToHijriUI();
+      convertHijriToGregorianUI();
+    }
+
+    window.convertGregorianToHijriUI = () => {
+      const val = document.getElementById('gregorian-input').value;
+      if (!val) return;
+      const date = new Date(val);
+      const res = window.IslamicCalendarData.gregorianToHijri(date);
+
+      document.getElementById('g2h-result-hijri').textContent = res.formattedBn;
+      document.getElementById('g2h-result-details').textContent = `${res.day} ${res.monthNameAr} ${res.year} هـ • ${res.isSacredMonth ? 'পবিত্র সম্মানিত মাস' : 'সাধারণ মাস'}`;
+    };
+
+    window.convertHijriToGregorianUI = () => {
+      const d = parseInt(document.getElementById('h2g-day-input').value, 10);
+      const m = parseInt(document.getElementById('h2g-month-input').value, 10);
+      const y = parseInt(document.getElementById('h2g-year-input').value, 10);
+
+      if (!d || !m || !y) return;
+
+      const gDate = window.IslamicCalendarData.hijriToGregorian(y, m, d);
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+      const bnMonths = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+      const bnDays = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"];
+
+      const gFormatted = `${toBn(gDate.getDate())} ${bnMonths[gDate.getMonth()]}, ${toBn(gDate.getFullYear())}`;
+      document.getElementById('h2g-result-gregorian').textContent = gFormatted;
+      document.getElementById('h2g-result-details').textContent = `${bnDays[gDate.getDay()]} বার`;
+    };
+
+    // 5. MONTHS LIST
+    function renderMonthsList() {
+      const container = document.getElementById('months-list-container');
+      const toBn = window.toBengaliNumerals || ((n) => String(n));
+
+      container.innerHTML = window.IslamicCalendarData.MONTHS.map(m => `
+        <div class="p-3.5 rounded-xl bg-stone-50/70 dark:bg-slate-800/40 border border-stone-200/80 dark:border-slate-800 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-[10px] font-black">${toBn(m.number)}</span>
+              <span>${m.nameBn}</span>
+            </span>
+            <span class="text-xs font-arabic text-slate-500 dark:text-slate-400" dir="rtl">${m.nameAr}</span>
+          </div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">${m.meaning} • ${m.significance}</p>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

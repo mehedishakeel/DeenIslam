@@ -23,12 +23,15 @@ global.localStorage = {
     removeItem: function(k) { delete this._data[k]; }
 };
 
-// Load components.js and muslim-names-data.js into context
+// Load components.js, muslim-names-data.js, and islamic-calendar-data.js into context
 const componentsCode = fs.readFileSync(path.join(__dirname, '../js/components.js'), 'utf8');
 eval(componentsCode);
 
 const muslimNamesCode = fs.readFileSync(path.join(__dirname, '../js/muslim-names-data.js'), 'utf8');
 eval(muslimNamesCode);
+
+const islamicCalendarCode = fs.readFileSync(path.join(__dirname, '../js/islamic-calendar-data.js'), 'utf8');
+eval(islamicCalendarCode);
 
 let totalTests = 0;
 let passedTests = 0;
@@ -200,6 +203,78 @@ describe('7. Muslim Baby Names Database & Navigation Integrity', () => {
         assert.ok(item, 'muslim-names.html is not indexed in Command Palette');
         assert.ok(item.keywords.includes('muslim'));
         assert.ok(item.keywords.includes('baby'));
+    });
+});
+
+describe('8. Islamic Calendar Engine, Date Converter & Navigation Integrity', () => {
+    it('should define all 12 Islamic months with 4 sacred months (Ashhurul Hurum)', () => {
+        assert.ok(window.IslamicCalendarData, 'IslamicCalendarData is not loaded');
+        assert.strictEqual(window.IslamicCalendarData.MONTHS.length, 12);
+        const sacred = window.IslamicCalendarData.MONTHS.filter(m => m.isSacred);
+        assert.strictEqual(sacred.length, 4, 'Must have exactly 4 sacred months');
+        const sacredNumbers = sacred.map(m => m.number);
+        assert.deepStrictEqual(sacredNumbers, [1, 7, 11, 12], 'Sacred months must be Muharram, Rajab, Dhu al-Qidah, Dhu al-Hijjah');
+    });
+
+    it('contains major annual Islamic events with countdown dates', () => {
+        assert.ok(window.IslamicCalendarData.EVENTS.length >= 10);
+        const eventIds = window.IslamicCalendarData.EVENTS.map(e => e.id);
+        assert.ok(eventIds.includes('ramadan_start'), 'Must include Ramadan start');
+        assert.ok(eventIds.includes('eid_ul_fitr'), 'Must include Eid ul Fitr');
+        assert.ok(eventIds.includes('eid_ul_adha'), 'Must include Eid ul Adha');
+        assert.ok(eventIds.includes('ashura'), 'Must include Ashura');
+        assert.ok(eventIds.includes('arafah_day'), 'Must include Day of Arafah');
+    });
+
+    it('accurately identifies white days (Ayyam al-Beed: 13, 14, 15) and prohibited fasting days', () => {
+        // 13, 14, 15 are white days
+        const d13 = window.IslamicCalendarData.gregorianToHijri('2026-03-03');
+        // Test direct helper
+        const cal = window.IslamicCalendarData.getMonthCalendar(1448, 9); // Ramadan
+        assert.strictEqual(cal.days.find(d => d.hijriDay === 13).isWhiteDay, true);
+        assert.strictEqual(cal.days.find(d => d.hijriDay === 14).isWhiteDay, true);
+        assert.strictEqual(cal.days.find(d => d.hijriDay === 15).isWhiteDay, true);
+        assert.strictEqual(cal.days.find(d => d.hijriDay === 12).isWhiteDay, false);
+
+        // Prohibited fasting days: 1 Shawwal, 10, 11, 12, 13 Dhu al-Hijjah
+        const shawwalCal = window.IslamicCalendarData.getMonthCalendar(1448, 10);
+        assert.strictEqual(shawwalCal.days.find(d => d.hijriDay === 1).isProhibitedFasting, true);
+        assert.strictEqual(shawwalCal.days.find(d => d.hijriDay === 2).isProhibitedFasting, false);
+
+        const dhulHijjahCal = window.IslamicCalendarData.getMonthCalendar(1448, 12);
+        assert.strictEqual(dhulHijjahCal.days.find(d => d.hijriDay === 10).isProhibitedFasting, true);
+        assert.strictEqual(dhulHijjahCal.days.find(d => d.hijriDay === 11).isProhibitedFasting, true);
+        assert.strictEqual(dhulHijjahCal.days.find(d => d.hijriDay === 12).isProhibitedFasting, true);
+        assert.strictEqual(dhulHijjahCal.days.find(d => d.hijriDay === 13).isProhibitedFasting, true);
+        assert.strictEqual(dhulHijjahCal.days.find(d => d.hijriDay === 9).isProhibitedFasting, false); // Arafah is recommended
+    });
+
+    it('converts Gregorian to Hijri and respects manual offset adjustments', () => {
+        const base = window.IslamicCalendarData.gregorianToHijri('2026-05-15', 0);
+        const plusOne = window.IslamicCalendarData.gregorianToHijri('2026-05-15', 1);
+        const minusOne = window.IslamicCalendarData.gregorianToHijri('2026-05-15', -1);
+
+        assert.ok(base.formattedBn.includes('হিজরি'));
+        assert.strictEqual(plusOne.gregorianDate.getDate(), 16);
+        assert.strictEqual(minusOne.gregorianDate.getDate(), 14);
+    });
+
+    it('Universal Command Palette indexes islamic-calendar.html', () => {
+        const item = commandPaletteIndex.find(i => i.url === 'islamic-calendar.html');
+        assert.ok(item, 'islamic-calendar.html is not indexed in Command Palette');
+        assert.ok(item.keywords.includes('calendar'));
+        assert.ok(item.keywords.includes('hijri'));
+    });
+
+    it('validates islamic-calendar.html structure and presence on disk', () => {
+        const filePath = path.join(__dirname, '../islamic-calendar.html');
+        assert.ok(fs.existsSync(filePath), 'islamic-calendar.html missing on disk');
+        const content = fs.readFileSync(filePath, 'utf8');
+        assert.ok(content.includes('navbar-placeholder'), 'Missing navbar-placeholder');
+        assert.ok(content.includes('footer-placeholder'), 'Missing footer-placeholder');
+        assert.ok(content.includes('today-hijri-display'), 'Missing today-hijri-display');
+        assert.ok(content.includes('events-grid-container'), 'Missing events-grid-container');
+        assert.ok(content.includes('calendar-days-grid'), 'Missing calendar-days-grid');
     });
 });
 
