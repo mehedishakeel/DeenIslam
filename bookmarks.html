@@ -341,20 +341,45 @@
     }
 
     function exportBookmarksJSON() {
-      const bookmarks = localStorage.getItem('deen_bookmarks') || '[]';
-      const parsed = JSON.parse(bookmarks);
-      if (parsed.length === 0) {
-        showToast('সংরক্ষণ করার মতো কোনো বুকমার্ক নেই');
+      const bookmarks = JSON.parse(localStorage.getItem('deen_bookmarks') || '[]');
+      const settingsKeys = [
+        'deen_completed_surahs',
+        'deen_last_read',
+        'deen_hijri_offset',
+        'deen_dua_counts_v1',
+        'deen_quiz_high_score_v1',
+        'deen_arabic_font_size',
+        'deen_bengali_font_size',
+        'quran_reciter',
+        'deen_selected_district'
+      ];
+      const settings = {};
+      settingsKeys.forEach(k => {
+        const val = localStorage.getItem(k);
+        if (val !== null) settings[k] = val;
+      });
+
+      if (bookmarks.length === 0 && Object.keys(settings).length === 0) {
+        showToast('সংরক্ষণ করার মতো কোনো ডাটা নেই');
         return;
       }
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(parsed, null, 2));
+
+      const payload = {
+        app: 'DeenIslam',
+        version: 2,
+        exportedAt: new Date().toISOString(),
+        bookmarks: bookmarks,
+        settings: settings
+      };
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `deenislam_bookmarks_${new Date().toISOString().slice(0, 10)}.json`);
+      downloadAnchor.setAttribute("download", `deenislam_backup_${new Date().toISOString().slice(0, 10)}.json`);
       document.body.appendChild(downloadAnchor);
       downloadAnchor.click();
       downloadAnchor.remove();
-      showToast('বুকমার্ক ডাউনলোড সম্পন্ন হয়েছে');
+      showToast('সম্পূর্ণ ডাটা ব্যাকআপ ডাউনলোড সম্পন্ন হয়েছে');
     }
 
     function importBookmarksJSON(event) {
@@ -364,16 +389,21 @@
       const reader = new FileReader();
       reader.onload = function(e) {
         try {
-          const imported = JSON.parse(e.target.result);
-          if (!Array.isArray(imported)) {
-            alert('ভুল ফাইল ফরম্যাট! একটি সঠিক JSON ফাইল নির্বাচন করুন।');
+          const parsed = JSON.parse(e.target.result);
+          const importedBookmarks = Array.isArray(parsed)
+            ? parsed
+            : (parsed && Array.isArray(parsed.bookmarks) ? parsed.bookmarks : null);
+
+          if (!importedBookmarks) {
+            alert('ভুল ফাইল ফরম্যাট! একটি সঠিক DeenIslam JSON ফাইল নির্বাচন করুন।');
             return;
           }
+
           let existing = JSON.parse(localStorage.getItem('deen_bookmarks') || '[]');
           const existingKeys = new Set(existing.map(b => b.key));
           let newCount = 0;
 
-          imported.forEach(item => {
+          importedBookmarks.forEach(item => {
             if (item && item.key && !existingKeys.has(item.key)) {
               existing.push(item);
               existingKeys.add(item.key);
@@ -382,7 +412,29 @@
           });
 
           localStorage.setItem('deen_bookmarks', JSON.stringify(existing));
-          showToast(`${window.toBengaliNumerals(newCount)}টি নতুন বুকমার্ক রিস্টোর হয়েছে!`);
+
+          let settingsRestored = 0;
+          if (!Array.isArray(parsed) && parsed.settings && typeof parsed.settings === 'object') {
+            const allowedKeys = new Set([
+              'deen_completed_surahs',
+              'deen_last_read',
+              'deen_hijri_offset',
+              'deen_dua_counts_v1',
+              'deen_quiz_high_score_v1',
+              'deen_arabic_font_size',
+              'deen_bengali_font_size',
+              'quran_reciter',
+              'deen_selected_district'
+            ]);
+            Object.entries(parsed.settings).forEach(([k, v]) => {
+              if (allowedKeys.has(k) && typeof v === 'string') {
+                localStorage.setItem(k, v);
+                settingsRestored++;
+              }
+            });
+          }
+
+          showToast(`${window.toBengaliNumerals(newCount)}টি বুকমার্ক ও ${window.toBengaliNumerals(settingsRestored)}টি সেটিংস রিস্টোর হয়েছে!`);
           loadBookmarks(activeFilter);
         } catch (err) {
           alert('ফাইলটি পড়তে সমস্যা হয়েছে: ' + err.message);

@@ -50,6 +50,105 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
     );
   }
 
+  Future<void> _exportBackup() async {
+    final jsonStr = await StorageService.exportFullBackupJson();
+    await Clipboard.setData(ClipboardData(text: jsonStr));
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'সম্পূর্ণ ব্যাকআপ (JSON) ক্লিপবোর্ডে কপি করা হয়েছে!',
+          style: GoogleFonts.hindSiliguri(fontSize: 13),
+        ),
+        duration: const Duration(seconds: 2),
+        backgroundColor: AppColors.emerald,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _showRestoreDialog() {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          'ব্যাকআপ রিস্টোর করুন',
+          style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'আপনার সংরক্ষিত DeenIslam JSON ব্যাকআপ টেক্সটটি নিচে পেস্ট করুন:',
+              style: GoogleFonts.hindSiliguri(fontSize: 12.5),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: controller,
+              maxLines: 5,
+              decoration: InputDecoration(
+                hintText: '{"app": "DeenIslam", "bookmarks": [...]}',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text('বাতিল', style: GoogleFonts.hindSiliguri()),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.emerald,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () async {
+              final raw = controller.text.trim();
+              if (raw.isEmpty) return;
+              final navigator = Navigator.of(ctx);
+              final messenger = ScaffoldMessenger.of(context);
+              try {
+                final count = await StorageService.importFullBackupJson(raw);
+                navigator.pop();
+                await _loadBookmarks();
+                if (!mounted) return;
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'রিস্টোর সম্পন্ন! (${BengaliNumerals.toBengali(count)}টি নতুন বুকমার্ক যুক্ত হয়েছে)',
+                      style: GoogleFonts.hindSiliguri(fontSize: 13),
+                    ),
+                    backgroundColor: AppColors.emerald,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              } catch (_) {
+                if (!mounted) return;
+                messenger.showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'ভুল JSON ফরম্যাট! অনুগ্রহ করে সঠিক ব্যাকআপ টেক্সট দিন।',
+                      style: GoogleFonts.hindSiliguri(fontSize: 13),
+                    ),
+                    backgroundColor: Colors.redAccent,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              }
+            },
+            child: Text('রিস্টোর', style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -70,6 +169,18 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
           'সংরক্ষিত বুকমার্ক',
           style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.backup_outlined),
+            tooltip: 'ব্যাকআপ (JSON কপি)',
+            onPressed: _exportBackup,
+          ),
+          IconButton(
+            icon: const Icon(Icons.restore_outlined),
+            tooltip: 'রিস্টোর (JSON পেস্ট)',
+            onPressed: _showRestoreDialog,
+          ),
+        ],
       ),
       body: Column(
         children: [

@@ -1,10 +1,87 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/app_colors.dart';
 
-class AboutScreen extends StatelessWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
+
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  static const String _currentVersion = '1.5.0';
+  bool _isCheckingUpdate = false;
+  String? _updateStatusMsg;
+  String? _latestReleaseUrl;
+
+  Future<void> _checkForUpdate() async {
+    if (_isCheckingUpdate) return;
+    setState(() {
+      _isCheckingUpdate = true;
+      _updateStatusMsg = null;
+    });
+
+    final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 10);
+    try {
+      final uri = Uri.parse(
+        'https://api.github.com/repos/mehedishakeel/DeenIslam/releases/latest',
+      );
+      final req = await client.getUrl(uri);
+      req.headers.set('User-Agent', 'DeenIslam-Android/$_currentVersion');
+      final res = await req.close();
+      if (res.statusCode == 200) {
+        final body = await res.transform(utf8.decoder).join();
+        final data = jsonDecode(body) as Map<String, dynamic>;
+        final tagName = (data['tag_name'] as String? ?? '').replaceFirst('v', '');
+        final htmlUrl = data['html_url'] as String? ??
+            'https://github.com/mehedishakeel/DeenIslam/releases/latest';
+        if (!mounted) return;
+        if (tagName.isNotEmpty && _isNewerVersion(tagName, _currentVersion)) {
+          setState(() {
+            _updateStatusMsg = 'নতুন সংস্করণ v$tagName পাওয়া গেছে!';
+            _latestReleaseUrl = htmlUrl;
+          });
+        } else {
+          setState(() {
+            _updateStatusMsg = 'আপনি সর্বশেষ সংস্করণ (v$_currentVersion) ব্যবহার করছেন।';
+            _latestReleaseUrl = null;
+          });
+        }
+      } else {
+        if (!mounted) return;
+        setState(() {
+          _updateStatusMsg = 'আপডেট সার্ভারের সাথে সংযোগ করা যায়নি।';
+        });
+      }
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _updateStatusMsg = 'ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।';
+      });
+    } finally {
+      client.close();
+      if (mounted) {
+        setState(() => _isCheckingUpdate = false);
+      }
+    }
+  }
+
+  bool _isNewerVersion(String latest, String current) {
+    final lParts = latest.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+    final cParts = current.split('.').map((e) => int.tryParse(e) ?? 0).toList();
+    for (int i = 0; i < 3; i++) {
+      final l = i < lParts.length ? lParts[i] : 0;
+      final c = i < cParts.length ? cParts[i] : 0;
+      if (l > c) return true;
+      if (l < c) return false;
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +158,7 @@ class AboutScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'সংস্করণ v1.4 • ১০০% বিজ্ঞাপনমুক্ত ও উন্মুক্ত',
+                            'সংস্করণ v1.5 • ১০০% বিজ্ঞাপনমুক্ত ও উন্মুক্ত',
                             style: GoogleFonts.hindSiliguri(
                               fontSize: 12,
                               color: Colors.white70,
@@ -101,6 +178,89 @@ class AboutScreen extends StatelessWidget {
                     color: Colors.white.withOpacity(0.94),
                   ),
                 ),
+                const SizedBox(height: 14),
+                OutlinedButton.icon(
+                  onPressed: _isCheckingUpdate ? null : _checkForUpdate,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    side: BorderSide(color: Colors.white.withOpacity(0.4)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  icon: _isCheckingUpdate
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Icon(Icons.system_update_outlined, size: 17),
+                  label: Text(
+                    _isCheckingUpdate
+                        ? 'আপডেট যাচাই করা হচ্ছে...'
+                        : 'নতুন আপডেট চেক করুন',
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 12.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                if (_updateStatusMsg != null) ...[
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.22),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _updateStatusMsg!,
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFFA7F3D0),
+                          ),
+                        ),
+                        if (_latestReleaseUrl != null) ...[
+                          const SizedBox(height: 6),
+                          TextButton.icon(
+                            onPressed: () {
+                              Clipboard.setData(ClipboardData(text: _latestReleaseUrl!));
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'রিলিজ ডাউনলোড লিংক কপি হয়েছে!',
+                                    style: GoogleFonts.hindSiliguri(fontSize: 12.5),
+                                  ),
+                                  backgroundColor: AppColors.emerald,
+                                ),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.amberAccent,
+                              padding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                            ),
+                            icon: const Icon(Icons.copy, size: 14),
+                            label: Text(
+                              'ডাউনলোড লিংক কপি করুন',
+                              style: GoogleFonts.hindSiliguri(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

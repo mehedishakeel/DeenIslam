@@ -387,8 +387,46 @@ describe('13. Service Worker & APK Download Safety', () => {
 
     it('index.html APK download link opens safely without same-tab SW interception', () => {
         const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
-        assert.ok(indexHtml.includes('DeenIslam-v1.4.0.apk'), 'Missing v1.4.0 APK link');
-        assert.ok(indexHtml.includes('download="DeenIslam-v1.4.0.apk"'), 'Missing download attribute on APK link');
+        assert.ok(indexHtml.includes('DeenIslam-v1.5.0.apk'), 'Missing v1.5.0 APK link');
+        assert.ok(indexHtml.includes('download="DeenIslam-v1.5.0.apk"'), 'Missing download attribute on APK link');
+    });
+
+    it('sw.js handles notificationclick for web prayer reminders', () => {
+        const swCode = fs.readFileSync(path.join(__dirname, '../sw.js'), 'utf8');
+        assert.ok(swCode.includes('notificationclick'), 'Missing notificationclick listener in sw.js');
+    });
+});
+
+describe('14. v1.5.0 Features: Backup v2, Tafsir, Ampara Offline Batch, Special Prayers & Reminders', () => {
+    it('bookmarks.html supports full-state v2 JSON backup and restore', () => {
+        const html = fs.readFileSync(path.join(__dirname, '../bookmarks.html'), 'utf8');
+        assert.ok(html.includes('exportBookmarksJSON'), 'Missing exportBookmarksJSON');
+        assert.ok(html.includes('importBookmarksJSON'), 'Missing importBookmarksJSON');
+        assert.ok(html.includes('version: 2'), 'Missing v2 backup schema');
+    });
+
+    it('surah.html includes Bengali Mokhtasar Tafsir toggle and CacheStorage lookup', () => {
+        const html = fs.readFileSync(path.join(__dirname, '../surah.html'), 'utf8');
+        assert.ok(html.includes('tafsir-toggle-btn'), 'Missing tafsir-toggle-btn');
+        assert.ok(html.includes('toggleTafsirMode'), 'Missing toggleTafsirMode');
+        assert.ok(html.includes('bengali-mokhtasar'), 'Missing bengali-mokhtasar endpoint');
+    });
+
+    it('quran.html includes batch offline Ampara downloader', () => {
+        const html = fs.readFileSync(path.join(__dirname, '../quran.html'), 'utf8');
+        assert.ok(html.includes('batch-offline-btn'), 'Missing batch-offline-btn');
+        assert.ok(html.includes('downloadAmparaOffline'), 'Missing downloadAmparaOffline');
+    });
+
+    it('namaz.html includes Janazah, Istikharah, and Tahajjud practical guides', () => {
+        const html = fs.readFileSync(path.join(__dirname, '../namaz.html'), 'utf8');
+        assert.ok(html.includes('id="special-prayers"'), 'Missing #special-prayers section');
+    });
+
+    it('salat.html includes opt-in web prayer reminder toggle and minute check', () => {
+        const html = fs.readFileSync(path.join(__dirname, '../salat.html'), 'utf8');
+        assert.ok(html.includes('enableWebPrayerReminders'), 'Missing enableWebPrayerReminders');
+        assert.ok(html.includes('checkWebPrayerReminderTick'), 'Missing checkWebPrayerReminderTick');
     });
 });
 

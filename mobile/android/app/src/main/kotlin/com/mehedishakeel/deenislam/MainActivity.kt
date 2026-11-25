@@ -1,14 +1,22 @@
 package com.mehedishakeel.deenislam
 
+import android.Manifest
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -17,10 +25,12 @@ import kotlin.math.abs
 class MainActivity : FlutterActivity(), SensorEventListener {
     private val AUDIO_CHANNEL = "com.mehedishakeel.deenislam/audio"
     private val COMPASS_CHANNEL = "com.mehedishakeel.deenislam/compass"
+    private val NOTIFICATION_CHANNEL = "com.mehedishakeel.deenislam/notifications"
 
     private var mediaPlayer: MediaPlayer? = null
     private var audioChannel: MethodChannel? = null
     private var compassChannel: MethodChannel? = null
+    private var notificationChannel: MethodChannel? = null
     private val mainHandler = Handler(Looper.getMainLooper())
 
     private var sensorManager: SensorManager? = null
@@ -85,6 +95,91 @@ class MainActivity : FlutterActivity(), SensorEventListener {
                 }
                 "stopCompass" -> {
                     stopCompassListening()
+                    result.success(true)
+                }
+                else -> result.notImplemented()
+            }
+        }
+
+        notificationChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, NOTIFICATION_CHANNEL)
+        notificationChannel?.setMethodCallHandler { call, result ->
+            when (call.method) {
+                "showTestNotification" -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                        ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
+                        result.success(false)
+                    } else {
+                        PrayerAlarmReceiver().showPrayerNotification(
+                            this,
+                            9999,
+                            "সালাত রিমাইন্ডার সক্রিয়",
+                            "আলহামদুলিল্লাহ! দৈনিক ৫ ওয়াক্ত নামাজ ও সেহরি-ইফতারের নোটিফিকেশন সঠিকভাবে কাজ করছে।"
+                        )
+                        result.success(true)
+                    }
+                }
+                "schedulePrayerAlarm" -> {
+                    val id = call.argument<Int>("id") ?: 1001
+                    val triggerAtMillis = call.argument<Number>("triggerAtMillis")?.toLong() ?: 0L
+                    val title = call.argument<String>("title") ?: "সালাতের সময় হয়েছে"
+                    val body = call.argument<String>("body") ?: "হাইয়্যা আলাস সালাহ — নামাজের প্রস্তুতি নিন।"
+                    if (triggerAtMillis <= System.currentTimeMillis()) {
+                        result.success(false)
+                        return@setMethodCallHandler
+                    }
+                    val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+                    val intent = Intent(this, PrayerAlarmReceiver::class.java).apply {
+                        putExtra(PrayerAlarmReceiver.EXTRA_ID, id)
+                        putExtra(PrayerAlarmReceiver.EXTRA_TITLE, title)
+                        putExtra(PrayerAlarmReceiver.EXTRA_BODY, body)
+                    }
+                    val pendingIntent = PendingIntent.getBroadcast(
+                        this,
+                        id,
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+                    if (alarmManager != null) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+                            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+                        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+                        } else {
+                            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+                        }
+                    }
+                    result.success(true)
+                }
+                "cancelPrayerAlarms" -> {
+                    val ids = call.argument<List<Int>>("ids") ?: emptyList()
+                    val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+                    for (id in ids) {
+                        val intent = Intent(this, PrayerAlarmReceiver::class.java)
+                        val pendingIntent = PendingIntent.getBroadcast(
+                            this,
+                            id,
+                            intent,
+                            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                        )
+                        alarmManager?.cancel(pendingIntent)
+                    }
+                    result.success(true)
+                }
+                "updateHomeWidget" -> {
+                    val city = call.argument<String>("city") ?: "ঢাকা"
+                    val nextWaqt = call.argument<String>("nextWaqt") ?: "পরবর্তী সালাত"
+                    val nextTime = call.argument<String>("nextTime") ?: "--:--"
+                    val hijri = call.argument<String>("hijri") ?: ""
+                    val prefs = getSharedPreferences(PrayerWidgetProvider.PREFS_NAME, Context.MODE_PRIVATE)
+                    prefs.edit()
+                        .putString(PrayerWidgetProvider.KEY_CITY, city)
+                        .putString(PrayerWidgetProvider.KEY_NEXT_WAQT, nextWaqt)
+                        .putString(PrayerWidgetProvider.KEY_NEXT_TIME, nextTime)
+                        .putString(PrayerWidgetProvider.KEY_HIJRI, hijri)
+                        .apply()
+                    PrayerWidgetProvider.updateAllWidgets(this)
                     result.success(true)
                 }
                 else -> result.notImplemented()

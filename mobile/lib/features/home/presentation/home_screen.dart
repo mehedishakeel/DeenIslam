@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/services/audio_service.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
@@ -74,10 +75,21 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Future<void> _loadSelectedCity() async {
     final city = await StorageService.getSelectedCity();
+    final alarms = await StorageService.getAzanAlarms();
+    final preMin = await StorageService.getAzanPreReminderMinutes();
+    final hijriOffset = await StorageService.getHijriOffset();
+    final times = PrayerTimesModel.forCity(_now, city);
+    NotificationService.instance.syncPrayerScheduleAndWidget(
+      prayerTimes: times,
+      city: city,
+      alarms: alarms,
+      preMinutes: preMin,
+      hijriOffset: hijriOffset,
+    );
     if (!mounted) return;
     setState(() {
       _selectedCity = city;
-      _prayerTimes = PrayerTimesModel.forCity(_now, city);
+      _prayerTimes = times;
     });
   }
 

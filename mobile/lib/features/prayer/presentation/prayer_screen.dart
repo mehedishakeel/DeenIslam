@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/services/audio_service.dart';
+import '../../../core/services/notification_service.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
@@ -21,6 +22,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
   Map<String, bool> _azanAlarms = {};
   String _selectedMuazzin = "মক্কা শরীফ (হারামাইন)";
   int _preReminderMinutes = 15;
+  int _hijriOffset = 0;
 
   final List<String> _cities = PrayerTimesModel.allDistricts;
 
@@ -38,11 +40,22 @@ class _PrayerScreenState extends State<PrayerScreen> {
     _loadPreferences();
   }
 
+  void _syncNotifications() {
+    NotificationService.instance.syncPrayerScheduleAndWidget(
+      prayerTimes: _prayerTimes,
+      city: _selectedCity,
+      alarms: _azanAlarms,
+      preMinutes: _preReminderMinutes,
+      hijriOffset: _hijriOffset,
+    );
+  }
+
   Future<void> _loadPreferences() async {
     final city = await StorageService.getSelectedCity();
     final alarms = await StorageService.getAzanAlarms();
     final muazzin = await StorageService.getAzanMuazzin();
     final preMin = await StorageService.getAzanPreReminderMinutes();
+    final hijriOffset = await StorageService.getHijriOffset();
     if (!mounted) return;
     setState(() {
       _selectedCity = city;
@@ -50,7 +63,9 @@ class _PrayerScreenState extends State<PrayerScreen> {
       _azanAlarms = alarms;
       _selectedMuazzin = muazzin;
       _preReminderMinutes = preMin;
+      _hijriOffset = hijriOffset;
     });
+    _syncNotifications();
   }
 
   Future<void> _onCityChanged(String city) async {
@@ -60,6 +75,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
       _selectedCity = city;
       _prayerTimes = PrayerTimesModel.forCity(_now, city);
     });
+    _syncNotifications();
   }
 
   Future<void> _toggleAlarm(String waqtName) async {
@@ -71,6 +87,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
     setState(() {
       _azanAlarms[waqtName] = nextVal;
     });
+    _syncNotifications();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -194,6 +211,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
                               await StorageService.setAzanPreReminderMinutes(mins);
                               setModalState(() => _preReminderMinutes = mins);
                               setState(() => _preReminderMinutes = mins);
+                              _syncNotifications();
                             },
                           ),
                         ),
@@ -238,6 +256,43 @@ class _PrayerScreenState extends State<PrayerScreen> {
                       'আজান অ্যালার্ম টেস্ট করুন',
                       style: GoogleFonts.hindSiliguri(
                         fontSize: 13.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      HapticFeedback.lightImpact();
+                      final messenger = ScaffoldMessenger.of(context);
+                      final ok = await NotificationService.instance.showTestNotification();
+                      if (!mounted) return;
+                      messenger.showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            ok
+                                ? 'টেস্ট সালাত নোটিফিকেশন পাঠানো হয়েছে!'
+                                : 'নোটিফিকেশন অনুমতির জন্য অনুগ্রহ করে Allow চাপুন।',
+                            style: GoogleFonts.hindSiliguri(fontSize: 13),
+                          ),
+                          backgroundColor: AppColors.emerald,
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.emerald,
+                      side: const BorderSide(color: AppColors.emerald),
+                      padding: const EdgeInsets.symmetric(vertical: 11),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    icon: const Icon(Icons.notifications_none_rounded, size: 18),
+                    label: Text(
+                      'টেস্ট নোটিফিকেশন পাঠান',
+                      style: GoogleFonts.hindSiliguri(
+                        fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

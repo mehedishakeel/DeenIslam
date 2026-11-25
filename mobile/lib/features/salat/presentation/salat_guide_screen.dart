@@ -12,7 +12,7 @@ class SalatGuideScreen extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -20,6 +20,8 @@ class SalatGuideScreen extends StatelessWidget {
             style: GoogleFonts.hindSiliguri(fontWeight: FontWeight.bold),
           ),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.start,
             labelColor: AppColors.emerald,
             unselectedLabelColor:
                 isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
@@ -32,6 +34,7 @@ class SalatGuideScreen extends StatelessWidget {
               Tab(text: 'অজু ও পবিত্রতা'),
               Tab(text: 'রাকাত ও নিয়ম'),
               Tab(text: 'নামাজের দোয়া'),
+              Tab(text: 'জানাজা ও ইস্তিখারা'),
             ],
           ),
         ),
@@ -40,6 +43,7 @@ class SalatGuideScreen extends StatelessWidget {
             _buildWuduTab(context, isDark),
             _buildRakatTab(context, isDark),
             _buildSalatDuasTab(context, isDark),
+            _buildSpecialPrayersTab(context, isDark),
           ],
         ),
       ),
@@ -646,6 +650,140 @@ class SalatGuideScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildSpecialPrayersTab(BuildContext context, bool isDark) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.cardDark : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '১. সালাতুল জানাজা (জানাজার নামাজের নিয়ম)',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.emerald,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'জানাজার নামাজে কোনো রুকু ও সিজদা নেই—দাঁড়িয়ে ৪ তাকবীরের মাধ্যমে আদায় করতে হয়:\n'
+                '• ১ম তাকবীরের পর: ছানা ও সূরা ফাতিহা পাঠ করা।\n'
+                '• ২য় তাকবীরের পর: দরুদে ইব্রাহীম পাঠ করা।\n'
+                '• ৩য় তাকবীরের পর: মাইয়িতের মাগফিরাতের দোয়া পাঠ করা।\n'
+                '• ৪র্থ তাকবীরের পর: ডান ও বাম দিকে সালাম ফিরিয়ে শেষ করা।',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 13,
+                  height: 1.5,
+                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        _buildDuaCard(
+          context,
+          isDark: isDark,
+          title: 'জানাজার দোয়া (আবু দাউদ: ৩২০১)',
+          arabic:
+              'اللَّهُمَّ اغْفِرْ لِحَيِّنَا وَمَيِّتِنَا، وَشَاهِدِنَا وَغَائِبِنَا، وَصَغِيرِنَا وَكَبِيرِنَا، وَذَكَرِنَا وَأُنْثَانَا',
+          pronunciation:
+              'আল্লাহুম্মাগফির লিহাইয়িনা ওয়া মাইয়িতিনা, ওয়া শাহিদিনা ওয়া গাইবিনা, ওয়া ছাগীরিনা ওয়া কাবীরিনা, ওয়া যাকারিনা ওয়া উনছানা।',
+          meaning:
+              'হে আল্লাহ! আমাদের জীবিত ও মৃত, উপস্থিত ও অনুপস্থিত, ছোট ও বড় এবং পুরুষ ও নারী সকলকে ক্ষমা করুন।',
+        ),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.cardDark : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '২. সালাতুল ইস্তিখারা (কল্যাণ কামনার নামাজ)',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.emerald,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'যেকোনো গুরুত্বপূর্ণ হালাল সিদ্ধান্তের আগে ২ রাকাত নফল সালাত আদায় করে নিচের দোয়া পাঠ করে আল্লাহর কাছে কল্যাণ চাইতে হয়। স্বপ্ন দেখা জরুরি নয়; বরং মনের প্রশান্তি ও পথ সহজ হয়ে যাওয়াই এর মূল নিদর্শন।',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 13,
+                  height: 1.5,
+                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        _buildDuaCard(
+          context,
+          isDark: isDark,
+          title: 'সালাতুল ইস্তিখারার দোয়া (সহীহ বুখারী: ১১৬২)',
+          arabic:
+              'اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ',
+          pronunciation:
+              'আল্লাহুম্মা ইন্নী আসতাখীরুকা বি‘ইলমিকা ওয়া আসতাকদিরুকা বিকুদরাতিকা ওয়া আসআলুকা মিন ফাদ্বলিকাল আযীম...',
+          meaning:
+              'হে আল্লাহ! আপনার জ্ঞানের মাধ্যমে আপনার কাছে কল্যাণ প্রার্থনা করছি, আপনার কুদরতের মাধ্যমে শক্তি কামনা করছি এবং আপনার মহা অনুগ্রহ প্রার্থনা করছি।',
+        ),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: isDark ? AppColors.cardDark : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '৩. সালাতুত তাহাজ্জুদ (রাতের শ্রেষ্ঠ নফল সালাত)',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.amberDark,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'রাতের শেষ তৃতীয়াংশে (ফজরের আগে) ২ রাকাত করে ২ থেকে ৮ রাকাত তাহাজ্জুদ পড়া অত্যন্ত মর্যাদাপূর্ণ সুন্নাত। রাসূলুল্লাহ (ﷺ) বলেন: "ফরজ সালাতের পর সর্বোত্তম সালাত হলো রাতের তাহাজ্জুদ সালাত।" (সহীহ মুসলিম: ১১৬৩)',
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 13,
+                  height: 1.5,
+                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

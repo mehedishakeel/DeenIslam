@@ -186,6 +186,56 @@ class QuranRepository {
     }
   }
 
+  /// Fetch Bengali Mokhtasar Tafsir map (ayahNumber -> explanation)
+  static Future<Map<int, String>> fetchBengaliTafsir(int surahNumber) async {
+    final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 12);
+    try {
+      final uri = Uri.parse(
+        'https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/bengali-mokhtasar/$surahNumber.json',
+      );
+      final req = await client.getUrl(uri);
+      final res = await req.close();
+      if (res.statusCode != 200) return {};
+
+      final body = await res.transform(utf8.decoder).join();
+      final decoded = jsonDecode(body);
+      if (decoded is! List) return {};
+
+      final map = <int, String>{};
+      for (final item in decoded) {
+        if (item is Map<String, dynamic>) {
+          final ayah = item['ayah'] as int?;
+          final text = (item['text'] as String? ?? '').trim();
+          if (ayah != null && text.isNotEmpty) {
+            map[ayah] = text;
+          }
+        }
+      }
+      return map;
+    } catch (_) {
+      return {};
+    } finally {
+      client.close();
+    }
+  }
+
+  /// Batch download Al-Fatiha + Ampara (Surahs 78-114) for full offline reading
+  static Future<int> batchDownloadAmpara({
+    void Function(int current, int total)? onProgress,
+  }) async {
+    final targets = <int>[1, for (int i = 78; i <= 114; i++) i];
+    int savedCount = 0;
+    for (int i = 0; i < targets.length; i++) {
+      final res = await fetchSurahFromApi(targets[i]);
+      if (res != null && res.isNotEmpty) {
+        savedCount++;
+      }
+      onProgress?.call(i + 1, targets.length);
+    }
+    return savedCount;
+  }
+
   static const Map<int, List<Ayah>> _presetSurahs = {
     // 1. Surah Al-Fatiha
     1: [

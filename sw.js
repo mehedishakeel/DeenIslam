@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deenislam-v16';
+const CACHE_NAME = 'deenislam-v17';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -103,6 +103,18 @@ self.addEventListener('fetch', (event) => {
         .catch(() => cachedResponse);
 
       return cachedResponse || fetchPromise;
+    })
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if ('focus' in client) return client.focus();
+      }
+      if (clients.openWindow) return clients.openWindow('./salat.html');
     })
   );
 });

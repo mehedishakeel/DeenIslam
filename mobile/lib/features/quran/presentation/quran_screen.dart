@@ -4,6 +4,7 @@ import '../../../core/services/storage_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
 import '../../../data/models/surah_model.dart';
+import '../../../data/repositories/quran_repository.dart';
 import '../../../data/repositories/surah_data.dart';
 import 'surah_reader_screen.dart';
 
@@ -21,11 +22,45 @@ class _QuranScreenState extends State<QuranScreen> {
   Set<int> _offlineSurahs = {1, 103, 108, 112, 113, 114};
   Set<int> _completedSurahs = {};
   Map<String, dynamic>? _lastRead;
+  bool _isBatchDownloading = false;
+  int _batchDone = 0;
+  int _batchTotal = 0;
 
   @override
   void initState() {
     super.initState();
     _loadMetadata();
+  }
+
+  Future<void> _downloadAmparaBatch() async {
+    if (_isBatchDownloading) return;
+    setState(() {
+      _isBatchDownloading = true;
+      _batchDone = 0;
+      _batchTotal = 38;
+    });
+    final saved = await QuranRepository.batchDownloadAmpara(
+      onProgress: (curr, total) {
+        if (!mounted) return;
+        setState(() {
+          _batchDone = curr;
+          _batchTotal = total;
+        });
+      },
+    );
+    await _loadMetadata();
+    if (!mounted) return;
+    setState(() => _isBatchDownloading = false);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'আমপারা অফলাইন ডাউনলোড সম্পন্ন হয়েছে (${BengaliNumerals.toBengali(saved)} সূরা)!',
+          style: GoogleFonts.hindSiliguri(fontSize: 13),
+        ),
+        backgroundColor: AppColors.emerald,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 
   Future<void> _loadMetadata() async {
@@ -200,6 +235,40 @@ class _QuranScreenState extends State<QuranScreen> {
                             : Colors.grey.shade200,
                         color: AppColors.emerald,
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'অফলাইন আমপারা (সূরা ১ ও ৭৮–১১৪)',
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 11,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: _isBatchDownloading ? null : _downloadAmparaBatch,
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.emerald.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              _isBatchDownloading
+                                  ? '⏳ ${BengaliNumerals.toBengali(_batchDone)}/${BengaliNumerals.toBengali(_batchTotal)}'
+                                  : '📥 অফলাইন সেভ',
+                              style: GoogleFonts.hindSiliguri(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.emerald,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

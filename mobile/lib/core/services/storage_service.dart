@@ -476,4 +476,90 @@ class StorageService {
       jsonEncode({'date': _todayDateString(), 'counts': encodedMap}),
     );
   }
+
+  // --- Full-State Backup Export & Import (JSON) ---
+  static Future<String> exportFullBackupJson() async {
+    final prefs = await SharedPreferences.getInstance();
+    final bookmarks = await getBookmarks();
+    final completedSurahs = await getCompletedSurahs();
+    final payload = {
+      'app': 'DeenIslam',
+      'version': 2,
+      'exportedAt': DateTime.now().toIso8601String(),
+      'bookmarks': bookmarks.map((b) => b.toJson()).toList(),
+      'completedSurahs': completedSurahs.toList(),
+      'selectedCity': await getSelectedCity(),
+      'hijriOffset': await getHijriOffset(),
+      'quizHighScore': await getQuizHighScore(),
+      'quranReciter': await getQuranReciter(),
+      'quranRepeatCount': await getQuranRepeatCount(),
+      'arabicFontSize': await getArabicFontSize(),
+      'bengaliFontSize': await getBengaliFontSize(),
+      'lastReadSurah': prefs.getString(_lastReadSurahKey),
+    };
+    return const JsonEncoder.withIndent('  ').convert(payload);
+  }
+
+  static Future<int> importFullBackupJson(String rawJson) async {
+    final decoded = jsonDecode(rawJson);
+    if (decoded is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON backup format');
+    }
+    final prefs = await SharedPreferences.getInstance();
+    int restoredCount = 0;
+
+    final rawBookmarks = decoded['bookmarks'];
+    if (rawBookmarks is List) {
+      final current = await getBookmarks();
+      final existingKeys = current.map((b) => b.key).toSet();
+      for (final item in rawBookmarks) {
+        if (item is Map<String, dynamic>) {
+          final parsed = BookmarkItem.fromJson(item);
+          if (parsed.key.isNotEmpty && !existingKeys.contains(parsed.key)) {
+            current.add(parsed);
+            existingKeys.add(parsed.key);
+            restoredCount++;
+          }
+        }
+      }
+      await prefs.setStringList(
+        _bookmarksKey,
+        current.map((b) => jsonEncode(b.toJson())).toList(),
+      );
+    }
+
+    if (decoded['completedSurahs'] is List) {
+      final merged = await getCompletedSurahs();
+      for (final s in (decoded['completedSurahs'] as List)) {
+        if (s is int) merged.add(s);
+      }
+      await prefs.setStringList(
+        _completedSurahsKey,
+        merged.map((e) => e.toString()).toList(),
+      );
+    }
+
+    if (decoded['selectedCity'] is String) {
+      await setSelectedCity(decoded['selectedCity'] as String);
+    }
+    if (decoded['hijriOffset'] is int) {
+      await setHijriOffset(decoded['hijriOffset'] as int);
+    }
+    if (decoded['quizHighScore'] is int) {
+      await setQuizHighScore(decoded['quizHighScore'] as int);
+    }
+    if (decoded['quranReciter'] is String) {
+      await setQuranReciter(decoded['quranReciter'] as String);
+    }
+    if (decoded['quranRepeatCount'] is int) {
+      await setQuranRepeatCount(decoded['quranRepeatCount'] as int);
+    }
+    if (decoded['arabicFontSize'] is num) {
+      await setArabicFontSize((decoded['arabicFontSize'] as num).toDouble());
+    }
+    if (decoded['bengaliFontSize'] is num) {
+      await setBengaliFontSize((decoded['bengaliFontSize'] as num).toDouble());
+    }
+    return restoredCount;
+  }
 }

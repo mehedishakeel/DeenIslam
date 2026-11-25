@@ -124,6 +124,10 @@
                 <span id="mark-complete-icon">☐</span>
                 <span id="mark-complete-text">পঠিত চিহ্নিত করুন</span>
             </button>
+            <button id="tafsir-toggle-btn" onclick="toggleTafsirMode()" class="bg-stone-100 hover:bg-amber-50 dark:bg-slate-800 dark:hover:bg-amber-950/30 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5">
+                <span>📘</span>
+                <span id="tafsir-toggle-text">তাফসীর দেখুন</span>
+            </button>
         </div>
 
         <!-- Font Size Controls -->
@@ -456,6 +460,22 @@
             }
         }
 
+        // 1b. Fallback check in CacheStorage (Ampara offline cache)
+        if (!renderedFromCache && 'caches' in window) {
+            try {
+                const apiUrl = `https://api.alquran.cloud/v1/surah/${surahId}/editions/quran-uthmani,bn.bengali,${selectedReciter}`;
+                const matched = await caches.match(apiUrl);
+                if (matched) {
+                    const mJson = await matched.json();
+                    if (mJson && mJson.code === 200 && mJson.data) {
+                        setCachedSurah(cacheKey, mJson.data);
+                        renderSurah(mJson.data);
+                        renderedFromCache = true;
+                    }
+                }
+            } catch (_) {}
+        }
+
         // 2. Network fetch & cache update
         fetch(`https://api.alquran.cloud/v1/surah/${surahId}/editions/quran-uthmani,bn.bengali,${selectedReciter}`)
             .then(response => response.json())
@@ -573,6 +593,7 @@
           </div>
           <div class="border-t pt-5 border-stone-100 dark:border-slate-800">
             <p class="text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed font-medium font-bengali-content">${bengaliData.ayahs[index].text}</p>
+            <div id="tafsir-box-${ayah.numberInSurah}" class="tafsir-box hidden mt-4 p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/70 dark:border-amber-800/40 text-xs sm:text-sm text-amber-950 dark:text-amber-200 leading-relaxed"></div>
           </div>
         `;
         container.appendChild(verseCard);
@@ -861,6 +882,56 @@
                 added ? 'সূরাটি পঠিত তালিকায় যুক্ত হয়েছে' : 'পঠিত তালিকা থেকে সরানো হয়েছে',
                 added ? 'success' : 'info'
             );
+        }
+    };
+
+    // --- Bengali Mokhtasar Tafsir Mode ---
+    let tafsirEnabled = false;
+    let tafsirCache = null;
+
+    window.toggleTafsirMode = async () => {
+        tafsirEnabled = !tafsirEnabled;
+        const btn = document.getElementById('tafsir-toggle-btn');
+        const txt = document.getElementById('tafsir-toggle-text');
+        if (!tafsirEnabled) {
+            document.querySelectorAll('.tafsir-box').forEach(el => el.classList.add('hidden'));
+            if (btn) btn.className = "bg-stone-100 hover:bg-amber-50 dark:bg-slate-800 dark:hover:bg-amber-950/30 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
+            if (txt) txt.textContent = "তাফসীর দেখুন";
+            return;
+        }
+
+        if (txt) txt.textContent = "লোড হচ্ছে...";
+        if (!tafsirCache) {
+            try {
+                const localKey = `deen_tafsir_bn_${surahId}`;
+                const saved = localStorage.getItem(localKey);
+                if (saved) {
+                    tafsirCache = JSON.parse(saved);
+                } else {
+                    const res = await fetch(`https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/bengali-mokhtasar/${surahId}.json`);
+                    if (res.ok) {
+                        tafsirCache = await res.json();
+                        try { localStorage.setItem(localKey, JSON.stringify(tafsirCache)); } catch (_) {}
+                    }
+                }
+            } catch (_) {}
+        }
+
+        if (Array.isArray(tafsirCache)) {
+            tafsirCache.forEach(item => {
+                const box = document.getElementById(`tafsir-box-${item.ayah}`);
+                if (box) {
+                    const safeText = (window.escapeHTML ? window.escapeHTML(item.text || '') : (item.text || ''));
+                    box.innerHTML = `<strong class="block text-amber-800 dark:text-amber-300 mb-1">📘 তাফসীর আল-মুখতাসার:</strong><span>${safeText}</span>`;
+                    box.classList.remove('hidden');
+                }
+            });
+            if (btn) btn.className = "bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-400/50 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
+            if (txt) txt.textContent = "তাফসীর চালু ✓";
+        } else {
+            tafsirEnabled = false;
+            if (txt) txt.textContent = "তাফসীর দেখুন";
+            if (window.showToast) window.showToast('তাফসীর লোড করা যায়নি, ইন্টারনেট পরীক্ষা করুন', 'error');
         }
     };
 

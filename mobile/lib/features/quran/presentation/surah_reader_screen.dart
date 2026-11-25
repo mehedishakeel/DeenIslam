@@ -29,6 +29,9 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
   int _repeatCount = 1; // 1, 3, 5, 999
   int _currentRepeatIteration = 0;
   bool _isCompleted = false;
+  bool _showTafsir = false;
+  bool _isLoadingTafsir = false;
+  Map<int, String> _tafsirMap = {};
   bool _isPlayingSurah = false;
   bool _isBufferingAudio = false;
   int? _playingAyahIndex;
@@ -474,6 +477,36 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                               ),
                             ),
                           ),
+                          InkWell(
+                            onTap: _toggleTafsirMode,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: _showTafsir
+                                    ? AppColors.amber.withOpacity(0.18)
+                                    : (isDark ? Colors.white.withOpacity(0.06) : Colors.white),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: _showTafsir
+                                      ? AppColors.amber
+                                      : (isDark ? AppColors.borderDark : AppColors.emerald.withOpacity(0.3)),
+                                ),
+                              ),
+                              child: Text(
+                                _isLoadingTafsir
+                                    ? '⏳ তাফসীর...'
+                                    : (_showTafsir ? '📘 তাফসীর চালু ✓' : '📘 তাফসীর দেখুন'),
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: _showTafsir
+                                      ? AppColors.amberDark
+                                      : (isDark ? Colors.white : AppColors.textPrimaryLight),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -584,6 +617,45 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
                                   : AppColors.textSecondaryLight,
                             ),
                           ),
+                          if (_showTafsir && _tafsirMap.containsKey(ayah.numberInSurah)) ...[
+                            const SizedBox(height: 10),
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: isDark
+                                    ? AppColors.amberSoftDark.withOpacity(0.3)
+                                    : AppColors.amberSoft,
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: AppColors.amber.withOpacity(0.35),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '📘 তাফসীর আল-মুখতাসার:',
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 11.5,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.amberDark,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    _tafsirMap[ayah.numberInSurah]!,
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 12.5,
+                                      height: 1.48,
+                                      color: isDark
+                                          ? const Color(0xFFFDE68A)
+                                          : const Color(0xFF451A03),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ],
                       ),
                     );
@@ -704,6 +776,39 @@ class _SurahReaderScreenState extends State<SurahReaderScreen> {
         behavior: SnackBarBehavior.floating,
       ),
     );
+  }
+
+  Future<void> _toggleTafsirMode() async {
+    if (_showTafsir) {
+      setState(() => _showTafsir = false);
+      return;
+    }
+    if (_tafsirMap.isNotEmpty) {
+      setState(() => _showTafsir = true);
+      return;
+    }
+    setState(() => _isLoadingTafsir = true);
+    final loaded = await QuranRepository.fetchBengaliTafsir(widget.surah.number);
+    if (!mounted) return;
+    if (loaded.isNotEmpty) {
+      setState(() {
+        _tafsirMap = loaded;
+        _showTafsir = true;
+        _isLoadingTafsir = false;
+      });
+    } else {
+      setState(() => _isLoadingTafsir = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'তাফসীর লোড করা যায়নি, ইন্টারনেট সংযোগ পরীক্ষা করুন।',
+            style: GoogleFonts.hindSiliguri(fontSize: 13),
+          ),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   void _showReciterSheet() {

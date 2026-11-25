@@ -100,6 +100,9 @@
         <a href="namaz.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
           <span>📖 পূর্ণাঙ্গ নামাজ শিক্ষা</span>
         </a>
+        <button id="web-reminder-pill" type="button" onclick="enableWebPrayerReminders()" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
+          <span>🔔 রিমাইন্ডার চালু করুন</span>
+        </button>
       </div>
     </div>
 
@@ -445,36 +448,106 @@
     }
 
     // Notifications
+    let lastNotifiedWaqtKey = '';
+
+    function showDeenNotification(title, body) {
+      if (!("Notification" in window) || Notification.permission !== "granted") return;
+      if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+        navigator.serviceWorker.ready.then((reg) => {
+          if (reg && reg.showNotification) {
+            reg.showNotification(title, { body, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png' });
+          } else {
+            new Notification(title, { body });
+          }
+        }).catch(() => new Notification(title, { body }));
+      } else {
+        new Notification(title, { body });
+      }
+    }
+
+    function checkWebPrayerReminderTick() {
+      if (!currentTimings || localStorage.getItem('prayer_notifications') !== 'true') return;
+      if (!("Notification" in window) || Notification.permission !== "granted") return;
+      const now = new Date();
+      const hhmm = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      const todayKey = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+      const waqts = [
+        { key: 'Fajr', label: 'ফজর ও সেহরি শেষ' },
+        { key: 'Dhuhr', label: 'যোহর' },
+        { key: 'Asr', label: 'আসর' },
+        { key: 'Maghrib', label: 'মাগরিব ও ইফতার' },
+        { key: 'Isha', label: 'ইশা' }
+      ];
+      for (const w of waqts) {
+        const t = (currentTimings[w.key] || '').slice(0, 5);
+        if (t === hhmm) {
+          const dedup = `${todayKey}_${w.key}`;
+          if (lastNotifiedWaqtKey !== dedup) {
+            lastNotifiedWaqtKey = dedup;
+            showDeenNotification(`সালাতের সময় হয়েছে: ${w.label}`, 'হাইয়্যা আলাস সালাহ — এখন নামাজের ওয়াক্ত শুরু হয়েছে।');
+          }
+        }
+      }
+    }
+
+    async function enableWebPrayerReminders() {
+      if (!("Notification" in window)) {
+        alert("দুঃখিত, আপনার ব্রাউজার নোটিফিকেশন সাপোর্ট করে না।");
+        return;
+      }
+      if (Notification.permission === "granted") {
+        localStorage.setItem('prayer_notifications', 'true');
+        updateNotifyUI();
+        showDeenNotification('সালাত রিমাইন্ডার সক্রিয়', 'ট্যাব খোলা থাকা অবস্থায় প্রতিটি ওয়াক্ত শুরু হওয়ার সাথে সাথে নোটিফিকেশন পাবেন।');
+        return;
+      }
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        localStorage.setItem('prayer_notifications', 'true');
+        updateNotifyUI();
+        showDeenNotification('সালাত রিমাইন্ডার সক্রিয়', 'আলহামদুলিল্লাহ! দৈনিক ওয়াক্ত রিমাইন্ডার চালু হয়েছে।');
+      } else {
+        alert("ব্রাউজার নোটিফিকেশন অনুমতি দেওয়া হয়নি।");
+      }
+    }
+
     async function toggleNotifications() {
       if (!("Notification" in window)) {
         alert("দুঃখিত, আপনার ব্রাউজার নোটিফিকেশন সাপোর্ট করে না।");
         return;
       }
       if (Notification.permission === "granted") {
-        const current = localStorage.getItem('prayer_notifications') === 'true';
-        localStorage.setItem('prayer_notifications', !current);
+        const nextVal = localStorage.getItem('prayer_notifications') !== 'true';
+        localStorage.setItem('prayer_notifications', String(nextVal));
         updateNotifyUI();
-      } else {
-        const permission = await Notification.requestPermission();
-        if (permission === "granted") {
-          localStorage.setItem('prayer_notifications', 'true');
-          updateNotifyUI();
+        if (nextVal) {
+          showDeenNotification('সালাত রিমাইন্ডার সক্রিয়', 'প্রতিটি ওয়াক্তের শুরুতে রিমাইন্ডার পাবেন।');
         }
+      } else {
+        await enableWebPrayerReminders();
       }
     }
 
     function updateNotifyUI() {
       const btn = document.getElementById('notify-btn');
       const text = document.getElementById('notify-text');
+      const pill = document.getElementById('web-reminder-pill');
       const isEnabled = localStorage.getItem('prayer_notifications') === 'true' && Notification.permission === "granted";
-      if (isEnabled) {
-        btn.classList.add('text-primary', 'border-emerald-200', 'bg-emerald-50', 'dark:bg-emerald-900/30');
-        text.innerText = "নোটিফিকেশন সক্রিয়";
-      } else {
-        btn.classList.remove('text-primary', 'border-emerald-200', 'bg-emerald-50', 'dark:bg-emerald-900/30');
-        text.innerText = "নোটিফিকেশন";
+      if (btn && text) {
+        if (isEnabled) {
+          btn.classList.add('text-primary', 'border-emerald-200', 'bg-emerald-50', 'dark:bg-emerald-900/30');
+          text.innerText = "নোটিফিকেশন সক্রিয়";
+        } else {
+          btn.classList.remove('text-primary', 'border-emerald-200', 'bg-emerald-50', 'dark:bg-emerald-900/30');
+          text.innerText = "নোটিফিকেশন";
+        }
+      }
+      if (pill) {
+        pill.innerHTML = isEnabled ? '<span>🔔 রিমাইন্ডার সক্রিয়</span>' : '<span>🔔 রিমাইন্ডার চালু করুন</span>';
       }
     }
+
+    setInterval(checkWebPrayerReminderTick, 30000);
 
     document.addEventListener('DOMContentLoaded', () => {
       const instantDate = (window.getInstantHijriDate && window.getInstantHijriDate()) || localStorage.getItem('deen_hijri_date') || "২৪ রবিউস সানি, ১৪৪৮ হিজরি";
