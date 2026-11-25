@@ -1292,9 +1292,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <li><a href="${basePath}muslim-names.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>👶</span><span>মুসলিম শিশুদের নাম</span></a></li>
                             <li><a href="${basePath}islamic-calendar.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>📅</span><span>ইসলামিক ক্যালেন্ডার</span></a></li>
                             <li><a href="${basePath}quiz.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🧠</span><span>ইসলামিক কুইজ ও মাসায়েল</span></a></li>
-                            <li><a href="${basePath}zakat.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>💎</span><span>যাকাত ক্যালকুলেটর</span></a></li>
-                            <li><a href="${basePath}roja.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🌙</span><span>রোজা ও সেহরি-ইফতার</span></a></li>
-                            <li><a href="${basePath}hajj.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🕋</span><span>হজ ও উমরাহ গাইড</span></a></li>
                         </ul>
                     </div>
 
