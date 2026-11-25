@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../core/utils/bengali_numerals.dart';
 
@@ -113,18 +114,116 @@ class PrayerTimesModel {
 
   static List<String> get allDistricts => allDistrictOffsets.keys.toList();
 
-  /// Calculate prayer times for all 64 Bangladesh districts relative to Dhaka
+  static double _dtr(double deg) => deg * math.pi / 180.0;
+  static double _rtd(double rad) => rad * 180.0 / math.pi;
+
+  static double _fixAngle(double a) {
+    final res = a - 360.0 * (a / 360.0).floor();
+    return res < 0 ? res + 360.0 : res;
+  }
+
+  static double _fixHour(double a) {
+    final res = a - 24.0 * (a / 24.0).floor();
+    return res < 0 ? res + 24.0 : res;
+  }
+
+  static double _julianDate(int year, int month, int day) {
+    int y = year;
+    int m = month;
+    if (m <= 2) {
+      y -= 1;
+      m += 12;
+    }
+    final a = (y / 100).floor();
+    final b = 2 - a + (a / 4).floor();
+    return (365.25 * (y + 4716)).floor() + (30.6001 * (m + 1)).floor() + day + b - 1524.5;
+  }
+
+  static ({double decl, double eqt}) _sunPosition(double jd) {
+    final d = jd - 2451545.0;
+    final g = _fixAngle(357.529 + 0.98560028 * d);
+    final q = _fixAngle(280.459 + 0.98564736 * d);
+    final l = _fixAngle(q + 1.915 * math.sin(_dtr(g)) + 0.020 * math.sin(_dtr(2 * g)));
+    final e = 23.439 - 0.00000036 * d;
+    final ra = _rtd(math.atan2(math.cos(_dtr(e)) * math.sin(_dtr(l)), math.cos(_dtr(l)))) / 15.0;
+    final eqt = q / 15.0 - _fixHour(ra);
+    final decl = _rtd(math.asin(math.sin(_dtr(e)) * math.sin(_dtr(l))));
+    return (decl: decl, eqt: eqt);
+  }
+
+  static double _midDay(double jdBase, double timeHours) {
+    final pos = _sunPosition(jdBase + timeHours / 24.0);
+    return _fixHour(12.0 - pos.eqt);
+  }
+
+  static double _sunAngleTime(double jdBase, double lat, double angle, double timeHours, {required bool ccw}) {
+    final pos = _sunPosition(jdBase + timeHours / 24.0);
+    final noon = _midDay(jdBase, timeHours);
+    final numerator = -math.sin(_dtr(angle)) - math.sin(_dtr(pos.decl)) * math.sin(_dtr(lat));
+    final denominator = math.cos(_dtr(pos.decl)) * math.cos(_dtr(lat));
+    final cosHa = (numerator / denominator).clamp(-1.0, 1.0);
+    final ha = _rtd(math.acos(cosHa)) / 15.0;
+    return noon + (ccw ? -ha : ha);
+  }
+
+  static double _asrTime(double jdBase, double lat, double factor, double timeHours) {
+    final pos = _sunPosition(jdBase + timeHours / 24.0);
+    final altRad = math.atan(1.0 / (factor + math.tan(_dtr((lat - pos.decl).abs()))));
+    final noon = _midDay(jdBase, timeHours);
+    final numerator = math.sin(altRad) - math.sin(_dtr(pos.decl)) * math.sin(_dtr(lat));
+    final denominator = math.cos(_dtr(pos.decl)) * math.cos(_dtr(lat));
+    final cosHa = (numerator / denominator).clamp(-1.0, 1.0);
+    final ha = _rtd(math.acos(cosHa)) / 15.0;
+    return noon + ha;
+  }
+
+  static TimeOfDay _hoursToTimeOfDay(double rawHours, double tz, double lng, int offsetMinutes) {
+    final localHours = _fixHour(rawHours + tz - lng / 15.0);
+    final totalMins = (localHours * 60.0 + offsetMinutes).round() % (24 * 60);
+    final normalized = totalMins < 0 ? totalMins + 24 * 60 : totalMins;
+    return TimeOfDay(
+      hour: normalized ~/ 60,
+      minute: normalized % 60,
+    );
+  }
+
+  /// Calculate seasonal astronomical prayer times (Karachi 18°/18°, Hanafi Asr)
+  /// for Dhaka coordinates (23.8103° N, 90.4125° E) adjusted across all 64 districts.
   factory PrayerTimesModel.forCity(DateTime date, String city) {
+    const double dhakaLat = 23.8103;
+    const double dhakaLng = 90.4125;
+    const double bdTz = 6.0;
     final offset = allDistrictOffsets[city] ?? 0;
+
+    final jdBase = _julianDate(date.year, date.month, date.day) - dhakaLng / 360.0;
+
+    // Two-pass iterative solar refinement
+    double fajrH = _sunAngleTime(jdBase, dhakaLat, 18.0, 5.0, ccw: true);
+    double sunriseH = _sunAngleTime(jdBase, dhakaLat, 0.833, 6.0, ccw: true);
+    double dhuhrH = _midDay(jdBase, 12.0);
+    double asrH = _asrTime(jdBase, dhakaLat, 2.0, 15.0);
+    double maghribH = _sunAngleTime(jdBase, dhakaLat, 0.833, 18.0, ccw: false);
+    double ishaH = _sunAngleTime(jdBase, dhakaLat, 18.0, 19.0, ccw: false);
+
+    fajrH = _sunAngleTime(jdBase, dhakaLat, 18.0, fajrH, ccw: true);
+    sunriseH = _sunAngleTime(jdBase, dhakaLat, 0.833, sunriseH, ccw: true);
+    dhuhrH = _midDay(jdBase, dhuhrH);
+    asrH = _asrTime(jdBase, dhakaLat, 2.0, asrH);
+    maghribH = _sunAngleTime(jdBase, dhakaLat, 0.833, maghribH, ccw: false);
+    ishaH = _sunAngleTime(jdBase, dhakaLat, 18.0, ishaH, ccw: false);
+
+    final fajrTime = _hoursToTimeOfDay(fajrH, bdTz, dhakaLng, offset);
+    final imsakTime = _shiftTime(fajrTime, -10);
+
     return PrayerTimesModel(
       date: date,
-      fajr: _shiftTime(const TimeOfDay(hour: 5, minute: 4), offset),
-      sunrise: _shiftTime(const TimeOfDay(hour: 6, minute: 18), offset),
-      dhuhr: _shiftTime(const TimeOfDay(hour: 11, minute: 56), offset),
-      asr: _shiftTime(const TimeOfDay(hour: 15, minute: 52), offset),
-      maghrib: _shiftTime(const TimeOfDay(hour: 17, minute: 32), offset),
-      isha: _shiftTime(const TimeOfDay(hour: 18, minute: 48), offset),
-      imsak: _shiftTime(const TimeOfDay(hour: 4, minute: 54), offset),
+      fajr: fajrTime,
+      sunrise: _hoursToTimeOfDay(sunriseH, bdTz, dhakaLng, offset),
+      dhuhr: _hoursToTimeOfDay(dhuhrH, bdTz, dhakaLng, offset + 1),
+      asr: _hoursToTimeOfDay(asrH, bdTz, dhakaLng, offset),
+      maghrib: _hoursToTimeOfDay(maghribH, bdTz, dhakaLng, offset),
+      isha: _hoursToTimeOfDay(ishaH, bdTz, dhakaLng, offset),
+      imsak: imsakTime,
     );
   }
 

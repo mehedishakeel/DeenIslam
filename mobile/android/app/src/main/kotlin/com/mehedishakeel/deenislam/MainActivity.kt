@@ -12,9 +12,12 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.os.PowerManager
+import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterActivity
@@ -31,6 +34,7 @@ class MainActivity : FlutterActivity(), SensorEventListener {
     private var audioChannel: MethodChannel? = null
     private var compassChannel: MethodChannel? = null
     private var notificationChannel: MethodChannel? = null
+    private var pendingPermissionResult: MethodChannel.Result? = null
     private val mainHandler = Handler(Looper.getMainLooper())
 
     private var sensorManager: SensorManager? = null
@@ -104,10 +108,70 @@ class MainActivity : FlutterActivity(), SensorEventListener {
         notificationChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, NOTIFICATION_CHANNEL)
         notificationChannel?.setMethodCallHandler { call, result ->
             when (call.method) {
+                "checkAlarmPermissions" -> {
+                    val notifGranted = hasNotificationPermission()
+                    val exactGranted = canScheduleExactAlarms()
+                    val pm = getSystemService(Context.POWER_SERVICE) as? PowerManager
+                    val batteryIgnored = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        pm?.isIgnoringBatteryOptimizations(packageName) ?: true
+                    } else {
+                        true
+                    }
+                    result.success(
+                        mapOf(
+                            "notificationsGranted" to notifGranted,
+                            "exactAlarmGranted" to exactGranted,
+                            "batteryIgnored" to batteryIgnored
+                        )
+                    )
+                }
+                "requestNotificationPermission" -> {
+                    if (hasNotificationPermission()) {
+                        result.success(true)
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        pendingPermissionResult?.success(false)
+                        pendingPermissionResult = result
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                            101
+                        )
+                    } else {
+                        result.success(true)
+                    }
+                }
+                "openExactAlarmSettings" -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        try {
+                            val intent = Intent(
+                                Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM,
+                                Uri.parse("package:$packageName")
+                            )
+                            startActivity(intent)
+                            result.success(true)
+                        } catch (_: Exception) {
+                            result.success(false)
+                        }
+                    } else {
+                        result.success(true)
+                    }
+                }
+                "openBatterySettings" -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        try {
+                            startActivity(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
+                            result.success(true)
+                        } catch (_: Exception) {
+                            result.success(false)
+                        }
+                    } else {
+                        result.success(true)
+                    }
+                }
                 "showTestNotification" -> {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-                        ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
-                    ) {
+                    if (!hasNotificationPermission() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        pendingPermissionResult?.success(false)
+                        pendingPermissionResult = null
                         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
                         result.success(false)
                     } else {
@@ -120,37 +184,34 @@ class MainActivity : FlutterActivity(), SensorEventListener {
                         result.success(true)
                     }
                 }
+                "scheduleTestAlarm" -> {
+                    val delaySeconds = call.argument<Int>("delaySeconds") ?: 10
+                    val triggerAt = System.currentTimeMillis() + delaySeconds * 1000L
+                    val scheduled = PrayerAlarmReceiver.scheduleAlarmExact(
+                        this,
+                        9998,
+                        triggerAt,
+                        "সালাত অ্যালার্ম টেস্ট সফল!",
+                        "মাশাআল্লাহ! ডিভাইস লক বা অ্যাপ বন্ধ থাকলেও সালাত অ্যালার্ম সঠিকভাবে কাজ করছে।",
+                        false
+                    )
+                    result.success(scheduled)
+                }
                 "schedulePrayerAlarm" -> {
                     val id = call.argument<Int>("id") ?: 1001
                     val triggerAtMillis = call.argument<Number>("triggerAtMillis")?.toLong() ?: 0L
                     val title = call.argument<String>("title") ?: "সালাতের সময় হয়েছে"
                     val body = call.argument<String>("body") ?: "হাইয়্যা আলাস সালাহ — নামাজের প্রস্তুতি নিন।"
-                    if (triggerAtMillis <= System.currentTimeMillis()) {
-                        result.success(false)
-                        return@setMethodCallHandler
-                    }
-                    val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-                    val intent = Intent(this, PrayerAlarmReceiver::class.java).apply {
-                        putExtra(PrayerAlarmReceiver.EXTRA_ID, id)
-                        putExtra(PrayerAlarmReceiver.EXTRA_TITLE, title)
-                        putExtra(PrayerAlarmReceiver.EXTRA_BODY, body)
-                    }
-                    val pendingIntent = PendingIntent.getBroadcast(
+                    val repeatDaily = call.argument<Boolean>("repeatDaily") ?: true
+                    val scheduled = PrayerAlarmReceiver.scheduleAlarmExact(
                         this,
                         id,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                        triggerAtMillis,
+                        title,
+                        body,
+                        repeatDaily
                     )
-                    if (alarmManager != null) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
-                            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
-                        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
-                        } else {
-                            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
-                        }
-                    }
-                    result.success(true)
+                    result.success(scheduled)
                 }
                 "cancelPrayerAlarms" -> {
                     val ids = call.argument<List<Int>>("ids") ?: emptyList()
@@ -165,6 +226,7 @@ class MainActivity : FlutterActivity(), SensorEventListener {
                         )
                         alarmManager?.cancel(pendingIntent)
                     }
+                    PrayerAlarmReceiver.removeAlarmEntries(this, ids)
                     result.success(true)
                 }
                 "updateHomeWidget" -> {
@@ -305,6 +367,36 @@ class MainActivity : FlutterActivity(), SensorEventListener {
             mediaPlayer?.release()
         } catch (_: Exception) {}
         mediaPlayer = null
+    }
+
+    private fun hasNotificationPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
+    }
+
+    private fun canScheduleExactAlarms(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+            alarmManager?.canScheduleExactAlarms() ?: false
+        } else {
+            true
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 101) {
+            val granted = grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+            pendingPermissionResult?.success(granted)
+            pendingPermissionResult = null
+        }
     }
 
     override fun onPause() {

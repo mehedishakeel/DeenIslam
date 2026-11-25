@@ -23,6 +23,11 @@ class _PrayerScreenState extends State<PrayerScreen> {
   String _selectedMuazzin = "মক্কা শরীফ (হারামাইন)";
   int _preReminderMinutes = 15;
   int _hijriOffset = 0;
+  AlarmPermissionsStatus _permissions = const AlarmPermissionsStatus(
+    notificationsGranted: true,
+    exactAlarmGranted: true,
+    batteryIgnored: true,
+  );
 
   final List<String> _cities = PrayerTimesModel.allDistricts;
 
@@ -50,20 +55,42 @@ class _PrayerScreenState extends State<PrayerScreen> {
     );
   }
 
+  Future<void> _refreshPermissions() async {
+    final perms = await NotificationService.instance.checkPermissions();
+    if (!mounted) return;
+    setState(() {
+      _permissions = perms;
+    });
+  }
+
+  Future<void> _grantMissingPermissions() async {
+    if (!_permissions.notificationsGranted) {
+      await NotificationService.instance.requestNotificationPermission();
+    }
+    final updated = await NotificationService.instance.checkPermissions();
+    if (!updated.exactAlarmGranted) {
+      await NotificationService.instance.openExactAlarmSettings();
+    }
+    await _refreshPermissions();
+    _syncNotifications();
+  }
+
   Future<void> _loadPreferences() async {
     final city = await StorageService.getSelectedCity();
     final alarms = await StorageService.getAzanAlarms();
     final muazzin = await StorageService.getAzanMuazzin();
     final preMin = await StorageService.getAzanPreReminderMinutes();
     final hijriOffset = await StorageService.getHijriOffset();
+    final perms = await NotificationService.instance.checkPermissions();
     if (!mounted) return;
     setState(() {
       _selectedCity = city;
-      _prayerTimes = PrayerTimesModel.forCity(_now, city);
+      _prayerTimes = PrayerTimesModel.forCity(DateTime.now(), city);
       _azanAlarms = alarms;
       _selectedMuazzin = muazzin;
       _preReminderMinutes = preMin;
       _hijriOffset = hijriOffset;
+      _permissions = perms;
     });
     _syncNotifications();
   }
@@ -73,7 +100,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
     if (!mounted) return;
     setState(() {
       _selectedCity = city;
-      _prayerTimes = PrayerTimesModel.forCity(_now, city);
+      _prayerTimes = PrayerTimesModel.forCity(DateTime.now(), city);
     });
     _syncNotifications();
   }
@@ -81,6 +108,10 @@ class _PrayerScreenState extends State<PrayerScreen> {
   Future<void> _toggleAlarm(String waqtName) async {
     final current = _azanAlarms[waqtName] ?? true;
     final nextVal = !current;
+    if (nextVal && !_permissions.notificationsGranted) {
+      await NotificationService.instance.requestNotificationPermission();
+      await _refreshPermissions();
+    }
     await StorageService.setAzanAlarm(waqtName, nextVal);
     HapticFeedback.lightImpact();
     if (!mounted) return;
@@ -113,7 +144,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
       builder: (ctx) {
         return StatefulBuilder(
           builder: (context, setModalState) {
-            return Padding(
+            return SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -265,16 +296,21 @@ class _PrayerScreenState extends State<PrayerScreen> {
                     onPressed: () async {
                       HapticFeedback.lightImpact();
                       final messenger = ScaffoldMessenger.of(context);
-                      final ok = await NotificationService.instance.showTestNotification();
+                      if (!_permissions.notificationsGranted) {
+                        await NotificationService.instance.requestNotificationPermission();
+                        await _refreshPermissions();
+                      }
+                      final ok = await NotificationService.instance.scheduleDelayedTestAlarm(delaySeconds: 10);
                       if (!mounted) return;
                       messenger.showSnackBar(
                         SnackBar(
                           content: Text(
                             ok
-                                ? 'টেস্ট সালাত নোটিফিকেশন পাঠানো হয়েছে!'
-                                : 'নোটিফিকেশন অনুমতির জন্য অনুগ্রহ করে Allow চাপুন।',
+                                ? '১০ সেকেন্ড পর রিয়েল অ্যালার্ম সেট হয়েছে! অ্যাপ মিনিমাইজ বা স্ক্রিন লক করে দেখুন।'
+                                : 'অ্যালার্ম সেট করা যায়নি — অনুগ্রহ করে নোটিফিকেশন ও অ্যালার্ম অনুমতি দিন।',
                             style: GoogleFonts.hindSiliguri(fontSize: 13),
                           ),
+                          duration: const Duration(seconds: 4),
                           backgroundColor: AppColors.emerald,
                           behavior: SnackBarBehavior.floating,
                         ),
@@ -288,14 +324,56 @@ class _PrayerScreenState extends State<PrayerScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    icon: const Icon(Icons.notifications_none_rounded, size: 18),
+                    icon: const Icon(Icons.alarm_on_rounded, size: 18),
                     label: Text(
-                      'টেস্ট নোটিফিকেশন পাঠান',
+                      '১০ সেকেন্ড পর টেস্ট অ্যালার্ম পাঠান',
                       style: GoogleFonts.hindSiliguri(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton.icon(
+                          onPressed: () async {
+                            final messenger = ScaffoldMessenger.of(context);
+                            final ok = await NotificationService.instance.showTestNotification();
+                            await _refreshPermissions();
+                            if (!mounted) return;
+                            messenger.showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  ok
+                                      ? 'তাৎক্ষণিক নোটিফিকেশন পাঠানো হয়েছে!'
+                                      : 'নোটিফিকেশন অনুমতির জন্য Allow চাপুন।',
+                                  style: GoogleFonts.hindSiliguri(fontSize: 12.5),
+                                ),
+                                backgroundColor: AppColors.emerald,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.notifications_none_rounded, size: 17),
+                          label: Text(
+                            'তাৎক্ষণিক নোটিফিকেশন',
+                            style: GoogleFonts.hindSiliguri(fontSize: 12, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: TextButton.icon(
+                          onPressed: () => NotificationService.instance.openBatterySettings(),
+                          icon: const Icon(Icons.battery_saver_rounded, size: 17),
+                          label: Text(
+                            'ব্যাটারি সেটিংস',
+                            style: GoogleFonts.hindSiliguri(fontSize: 12, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -509,6 +587,63 @@ class _PrayerScreenState extends State<PrayerScreen> {
               ),
             ),
             const SizedBox(height: 14),
+
+            if (!_permissions.allCriticalGranted) ...[
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF3B1D0A) : const Color(0xFFFFFBEB),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AppColors.amber.withOpacity(0.5)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.warning_amber_rounded, color: AppColors.amber, size: 20),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'অ্যালার্ম কাজ করার জন্য অনুমতি প্রয়োজন',
+                            style: GoogleFonts.hindSiliguri(
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.bold,
+                              color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      !_permissions.notificationsGranted
+                          ? 'অ্যান্ড্রয়েড নোটিফিকেশন অনুমতি বন্ধ আছে। অ্যালার্ম সাউন্ড ও রিমাইন্ডার পেতে অনুমতি দিন।'
+                          : 'নির্দিষ্ট সময়ে অ্যালার্ম বাজতে "Alarms & Reminders" অনুমতি চালু করুন।',
+                      style: GoogleFonts.hindSiliguri(
+                        fontSize: 12,
+                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton.icon(
+                      onPressed: _grantMissingPermissions,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.emerald,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                      icon: const Icon(Icons.check_circle_outline, size: 17),
+                      label: Text(
+                        'নোটিফিকেশন ও অ্যালার্ম অনুমতি দিন',
+                        style: GoogleFonts.hindSiliguri(fontSize: 12.5, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 14),
+            ],
 
             // Prayer Time List
             ListView.separated(

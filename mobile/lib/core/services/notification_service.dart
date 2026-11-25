@@ -2,6 +2,20 @@ import 'package:flutter/services.dart';
 import '../../data/models/prayer_times_model.dart';
 import '../../data/repositories/islamic_calendar_data.dart';
 
+class AlarmPermissionsStatus {
+  final bool notificationsGranted;
+  final bool exactAlarmGranted;
+  final bool batteryIgnored;
+
+  const AlarmPermissionsStatus({
+    required this.notificationsGranted,
+    required this.exactAlarmGranted,
+    required this.batteryIgnored,
+  });
+
+  bool get allCriticalGranted => notificationsGranted && exactAlarmGranted;
+}
+
 /// Native Android bridge for scheduled prayer notifications (AlarmManager)
 /// and updating the DeenIslam Home Screen prayer widget.
 class NotificationService {
@@ -11,9 +25,75 @@ class NotificationService {
   static const MethodChannel _channel =
       MethodChannel('com.mehedishakeel.deenislam/notifications');
 
+  Future<AlarmPermissionsStatus> checkPermissions() async {
+    try {
+      final res = await _channel.invokeMapMethod<String, dynamic>('checkAlarmPermissions');
+      if (res == null) {
+        return const AlarmPermissionsStatus(
+          notificationsGranted: true,
+          exactAlarmGranted: true,
+          batteryIgnored: true,
+        );
+      }
+      return AlarmPermissionsStatus(
+        notificationsGranted: res['notificationsGranted'] == true,
+        exactAlarmGranted: res['exactAlarmGranted'] == true,
+        batteryIgnored: res['batteryIgnored'] == true,
+      );
+    } on MissingPluginException {
+      return const AlarmPermissionsStatus(
+        notificationsGranted: true,
+        exactAlarmGranted: true,
+        batteryIgnored: true,
+      );
+    } catch (_) {
+      return const AlarmPermissionsStatus(
+        notificationsGranted: true,
+        exactAlarmGranted: true,
+        batteryIgnored: true,
+      );
+    }
+  }
+
+  Future<bool> requestNotificationPermission() async {
+    try {
+      final granted = await _channel.invokeMethod<bool>('requestNotificationPermission');
+      return granted ?? false;
+    } on MissingPluginException {
+      return false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<void> openExactAlarmSettings() async {
+    try {
+      await _channel.invokeMethod('openExactAlarmSettings');
+    } catch (_) {}
+  }
+
+  Future<void> openBatterySettings() async {
+    try {
+      await _channel.invokeMethod('openBatterySettings');
+    } catch (_) {}
+  }
+
   Future<bool> showTestNotification() async {
     try {
       final ok = await _channel.invokeMethod<bool>('showTestNotification');
+      return ok ?? false;
+    } on MissingPluginException {
+      return false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<bool> scheduleDelayedTestAlarm({int delaySeconds = 10}) async {
+    try {
+      final ok = await _channel.invokeMethod<bool>('scheduleTestAlarm', {
+        'delaySeconds': delaySeconds,
+      });
       return ok ?? false;
     } on MissingPluginException {
       return false;
@@ -122,6 +202,7 @@ class NotificationService {
           'triggerAtMillis': triggerDt.millisecondsSinceEpoch,
           'title': item['title'],
           'body': item['body'],
+          'repeatDaily': true,
         });
 
         if (preMinutes > 0) {
@@ -132,6 +213,7 @@ class NotificationService {
               'triggerAtMillis': preDt.millisecondsSinceEpoch,
               'title': '$key-এর $preMinutes মিনিট বাকি ($city)',
               'body': 'অল্প কিছুক্ষণের মধ্যেই $key ওয়াক্ত শুরু হবে। অযু করে প্রস্তুত হোন।',
+              'repeatDaily': true,
             });
           }
         }

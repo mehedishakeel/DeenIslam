@@ -13,7 +13,7 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  static const String _currentVersion = '1.5.0';
+  static const String _currentVersion = '1.5.1';
   bool _isCheckingUpdate = false;
   String? _updateStatusMsg;
   String? _latestReleaseUrl;
@@ -158,7 +158,7 @@ class _AboutScreenState extends State<AboutScreen> {
                             ),
                           ),
                           Text(
-                            'সংস্করণ v1.5 • ১০০% বিজ্ঞাপনমুক্ত ও উন্মুক্ত',
+                            'সংস্করণ v1.5.1 • ১০০% বিজ্ঞাপনমুক্ত ও উন্মুক্ত',
                             style: GoogleFonts.hindSiliguri(
                               fontSize: 12,
                               color: Colors.white70,

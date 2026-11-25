@@ -39,5 +39,21 @@ void main() {
         expect(formattedFajr.contains('AM') || formattedFajr.contains('PM'), isTrue);
       }
     });
+
+    test('Solar calculation adapts accurately across winter and summer seasons in Dhaka', () {
+      final nov = PrayerTimesModel.forCity(DateTime(2026, 11, 25), 'ঢাকা');
+      final jun = PrayerTimesModel.forCity(DateTime(2026, 6, 21), 'ঢাকা');
+
+      // November Maghrib (~17:10) should be significantly earlier than June Maghrib (~18:49)
+      final novMaghribMins = nov.maghrib.hour * 60 + nov.maghrib.minute;
+      final junMaghribMins = jun.maghrib.hour * 60 + jun.maghrib.minute;
+      expect(novMaghribMins < 17 * 60 + 25, isTrue);
+      expect(junMaghribMins > 18 * 60 + 30, isTrue);
+
+      // November Fajr should be later than June Fajr
+      final novFajrMins = nov.fajr.hour * 60 + nov.fajr.minute;
+      final junFajrMins = jun.fajr.hour * 60 + jun.fajr.minute;
+      expect(novFajrMins > junFajrMins + 45, isTrue);
+    });
   });
 }

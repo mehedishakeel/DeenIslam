@@ -387,8 +387,8 @@ describe('13. Service Worker & APK Download Safety', () => {
 
     it('index.html APK download link opens safely without same-tab SW interception', () => {
         const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
-        assert.ok(indexHtml.includes('DeenIslam-v1.5.0.apk'), 'Missing v1.5.0 APK link');
-        assert.ok(indexHtml.includes('download="DeenIslam-v1.5.0.apk"'), 'Missing download attribute on APK link');
+        assert.ok(indexHtml.includes('DeenIslam-v1.5.1.apk'), 'Missing v1.5.1 APK link');
+        assert.ok(indexHtml.includes('download="DeenIslam-v1.5.1.apk"'), 'Missing download attribute on APK link');
     });
 
     it('sw.js handles notificationclick for web prayer reminders', () => {

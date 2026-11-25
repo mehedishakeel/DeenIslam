@@ -55,6 +55,12 @@ void main() {
     final testOk = await NotificationService.instance.showTestNotification();
     expect(testOk, false);
 
+    final perms = await NotificationService.instance.checkPermissions();
+    expect(perms.allCriticalGranted, true);
+
+    final delayedOk = await NotificationService.instance.scheduleDelayedTestAlarm();
+    expect(delayedOk, false);
+
     final times = PrayerTimesModel.forCity(DateTime(2026, 11, 25), 'ঢাকা');
     await NotificationService.instance.syncPrayerScheduleAndWidget(
       prayerTimes: times,
