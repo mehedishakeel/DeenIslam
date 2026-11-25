@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deenislam-v15';
+const CACHE_NAME = 'deenislam-v16';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -13,6 +13,9 @@ const CORE_ASSETS = [
   './qibla.html',
   './dua.html',
   './allah-names.html',
+  './muslim-names.html',
+  './islamic-calendar.html',
+  './quiz.html',
   './zakat.html',
   './bookmarks.html',
   './media.html',
@@ -26,6 +29,9 @@ const CORE_ASSETS = [
   './js/theme.js',
   './js/components.js',
   './js/seerah-data.js',
+  './js/muslim-names-data.js',
+  './js/islamic-calendar-data.js',
+  './js/quiz-data.js',
   './favicon/deenislam.ico',
   './manifest.json'
 ];
@@ -54,12 +60,15 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch Event - Network-First for HTML/JS/CSS, Stale-While-Revalidate for media/fonts
+// Fetch Event - Never intercept cross-origin or binary downloads (.apk/.zip/.mp3)
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
+  if (/\.(apk|zip|pdf|mp3|ogg|wav)$/i.test(url.pathname)) return;
+
   const isCodeOrDoc =
     request.mode === 'navigate' ||
     url.pathname.endsWith('.html') ||

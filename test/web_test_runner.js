@@ -378,6 +378,20 @@ describe('12. SEO, Open Graph, Twitter Card & Schema.org Coverage', () => {
     });
 });
 
+describe('13. Service Worker & APK Download Safety', () => {
+    it('sw.js bypasses cross-origin requests and binary (.apk) downloads', () => {
+        const swCode = fs.readFileSync(path.join(__dirname, '../sw.js'), 'utf8');
+        assert.ok(swCode.includes('url.origin !== self.location.origin'), 'Missing cross-origin bypass in sw.js');
+        assert.ok(swCode.includes('.apk') || swCode.includes('apk|zip'), 'Missing .apk bypass in sw.js');
+    });
+
+    it('index.html APK download link opens safely without same-tab SW interception', () => {
+        const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+        assert.ok(indexHtml.includes('DeenIslam-v1.4.0.apk'), 'Missing v1.4.0 APK link');
+        assert.ok(indexHtml.includes('download="DeenIslam-v1.4.0.apk"'), 'Missing download attribute on APK link');
+    });
+});
+
 console.log(`\n========================================`);
 console.log(`Summary: ${passedTests}/${totalTests} tests passed.`);
 console.log(`Status: ${passedTests === totalTests ? 'SUCCESS - ALL TESTS PASSED' : 'FAILURE'}`);
