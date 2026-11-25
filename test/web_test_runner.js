@@ -347,6 +347,37 @@ describe('11. Dua & Daily Adhkar Loop Counters & Persistence Integrity', () => {
     });
 });
 
+describe('12. SEO, Open Graph, Twitter Card & Schema.org Coverage', () => {
+    it('all public HTML pages contain canonical URL, OG tags, Twitter Card, and valid JSON-LD schema', () => {
+        const rootDir = path.join(__dirname, '..');
+        const rootFiles = fs.readdirSync(rootDir)
+            .filter(f => f.endsWith('.html') && f !== '404.html')
+            .map(f => path.join(rootDir, f));
+        const articlesDir = path.join(rootDir, 'articles');
+        const articleFiles = fs.existsSync(articlesDir)
+            ? fs.readdirSync(articlesDir).filter(f => f.endsWith('.html')).map(f => path.join(articlesDir, f))
+            : [];
+        const allFiles = [...rootFiles, ...articleFiles];
+        assert.ok(allFiles.length >= 30, `Expected at least 30 HTML files, found ${allFiles.length}`);
+
+        allFiles.forEach(file => {
+            const name = path.relative(rootDir, file);
+            const content = fs.readFileSync(file, 'utf8');
+            assert.ok(content.includes('rel="canonical"'), `${name} missing canonical tag`);
+            assert.ok(content.includes('property="og:title"'), `${name} missing og:title`);
+            assert.ok(content.includes('property="og:description"'), `${name} missing og:description`);
+            assert.ok(content.includes('property="og:image"'), `${name} missing og:image`);
+            assert.ok(content.includes('twitter:card'), `${name} missing twitter:card`);
+            assert.ok(!content.includes('share-preview.png'), `${name} references missing share-preview.png`);
+
+            const ldMatch = content.match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
+            assert.ok(ldMatch && ldMatch[1], `${name} missing JSON-LD script`);
+            const parsed = JSON.parse(ldMatch[1]);
+            assert.ok(parsed['@context'] === 'https://schema.org', `${name} invalid Schema.org @context`);
+        });
+    });
+});
+
 console.log(`\n========================================`);
 console.log(`Summary: ${passedTests}/${totalTests} tests passed.`);
 console.log(`Status: ${passedTests === totalTests ? 'SUCCESS - ALL TESTS PASSED' : 'FAILURE'}`);
