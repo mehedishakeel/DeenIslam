@@ -10,3 +10,5 @@
 -keep class io.flutter.embedding.** { *; }
 -dontwarn io.flutter.embedding.**
 -dontwarn javax.annotation.**
+-dontwarn com.google.android.play.core.**
+-keep class io.flutter.app.FlutterPlayStoreSplitApplication { *; }
