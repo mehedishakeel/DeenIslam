@@ -8,6 +8,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/bengali_numerals.dart';
 import '../../../data/models/prayer_times_model.dart';
 import '../../../data/repositories/allah_names_data.dart';
+import '../../../data/repositories/islamic_calendar_data.dart';
+import 'widgets/islamic_sanctuary_painters.dart';
 import '../../about/presentation/about_screen.dart';
 import '../../articles/presentation/articles_media_screen.dart';
 import '../../bookmarks/presentation/bookmarks_screen.dart';
@@ -48,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   DateTime _now = DateTime.now();
   late PrayerTimesModel _prayerTimes;
   String _selectedCity = 'ঢাকা';
+  int _hijriOffset = 0;
 
   // Asmaul Husna cycling state
   int _bentoNameBatchIndex = 0;
@@ -89,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     if (!mounted) return;
     setState(() {
       _selectedCity = city;
+      _hijriOffset = hijriOffset;
       _prayerTimes = times;
     });
   }
@@ -286,10 +290,24 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
+  String _timeGreetingBn(DateTime now) {
+    final h = now.hour;
+    if (h >= 4 && h < 12) return "শুভ সকাল";
+    if (h >= 12 && h < 16) return "শুভ মধ্যাহ্ন";
+    if (h >= 16 && h < 19) return "শুভ সন্ধ্যা";
+    return "শুভ রাত্রি";
+  }
+
+  double _computeWaqtProgress(PrayerStatus status) {
+    final minsRemaining = status.remaining.inMinutes;
+    return (1.0 - (minsRemaining / 360.0)).clamp(0.08, 0.96);
+  }
+
   @override
   Widget build(BuildContext context) {
     final prayerStatus = _prayerTimes.getUpcomingStatus(_now);
     final fastingStatus = _prayerTimes.getFastingStatus(_now);
+    final hijri = IslamicCalendarData.gregorianToHijri(_now, _hijriOffset);
     final isDark = widget.isDark;
 
     return Scaffold(
@@ -298,53 +316,43 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         title: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(7),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: isDark ? AppColors.emeraldDark : AppColors.emerald.withOpacity(0.2),
+                  color: isDark ? AppColors.borderDark : AppColors.emerald.withOpacity(0.22),
                 ),
               ),
-              child: const Icon(Icons.mosque, color: AppColors.emerald, size: 20),
+              child: const Icon(Icons.mosque_rounded, color: AppColors.emerald, size: 19),
             ),
             const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "দ্বীন ইসলাম",
-                  style: GoogleFonts.hindSiliguri(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    color: isDark ? Colors.white : AppColors.textPrimaryLight,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => _showCitySelector(context, isDark),
-                  borderRadius: BorderRadius.circular(6),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 1),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.location_on, size: 11, color: AppColors.emerald),
-                        const SizedBox(width: 2),
-                        Text(
-                          _selectedCity,
-                          style: GoogleFonts.hindSiliguri(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.emerald,
-                          ),
-                        ),
-                        const SizedBox(width: 2),
-                        const Icon(Icons.arrow_drop_down, size: 14, color: AppColors.emerald),
-                      ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "আসসালামু আলাইকুম • ${_timeGreetingBn(_now)}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 10.5,
+                      fontWeight: FontWeight.w600,
+                      color: isDark ? AppColors.amberGold : AppColors.emeraldDark,
                     ),
                   ),
-                ),
-              ],
+                  Text(
+                    "দ্বীন ইসলাম",
+                    style: GoogleFonts.hindSiliguri(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      height: 1.15,
+                      color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -382,31 +390,39 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // 1. Unified Spiritual Status Card (Prayer + Fasting Hub)
-            _buildSpiritualHubCard(prayerStatus, fastingStatus, isDark),
-            const SizedBox(height: 14),
+            // 0. Sacred Bismillah & Hijri / Location Strip
+            _buildBismillahAndContextBar(hijri.formattedBn, isDark),
+            const SizedBox(height: 12),
 
-            // 2. Quick Daily Essentials Row (4 Primary Daily Actions)
+            // 1. Midnight Mosque Sanctuary Hero Card (Prayer + Fasting Hub)
+            _buildSpiritualHubCard(prayerStatus, fastingStatus, isDark),
+            const SizedBox(height: 16),
+
+            // 2. Today's 5-Waqt Schedule Strip
+            _buildTodayScheduleStrip(prayerStatus, isDark),
+            const SizedBox(height: 16),
+
+            // 3. Architectural Quick Essentials Grid (4x2)
             _buildQuickEssentialsRow(context, isDark),
             const SizedBox(height: 14),
 
-            // 3. Quran Audio Recitation Deck
+            // 4. Quran Audio Recitation Deck
             _buildQuranAudioCard(isDark),
             const SizedBox(height: 14),
 
-            // 4. Featured Asmaul Husna (Name of the Moment)
+            // 5. Featured Asmaul Husna (Name of the Moment)
             _buildBentoNamesCard(isDark),
             const SizedBox(height: 14),
 
-            // 5. Featured Seerah Encyclopedia Banner Card
+            // 6. Featured Seerah Encyclopedia Banner Card
             _buildSeerahBannerCard(context, isDark),
             const SizedBox(height: 18),
 
-            // 6. Categorized Services & Tools Grid
+            // 7. Categorized Services & Tools Grid
             _buildCategorizedServicesGrid(context, isDark),
             const SizedBox(height: 24),
           ],
@@ -415,277 +431,564 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
-  // --- CARD 1: Unified Spiritual Status Hub (Prayer + Fasting) ---
-  Widget _buildSpiritualHubCard(PrayerStatus prayerStatus, FastingStatus fastingStatus, bool isDark) {
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.cardDark : Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark ? AppColors.borderDark : AppColors.borderLight,
-          width: 0.8,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.25 : 0.03),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // Prayer Section (Top)
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const PrayerScreen()),
-              ).then((_) => _loadSelectedCity());
-            },
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Icon(prayerStatus.icon, color: AppColors.emerald, size: 17),
-                            const SizedBox(width: 6),
-                            Flexible(
-                              child: Text(
-                                "পরবর্তী ওয়াক্ত: ${prayerStatus.nextName}",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.hindSiliguri(
-                                  fontSize: 12.5,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: isDark ? AppColors.borderDark : AppColors.borderLight,
-                            width: 0.6,
-                          ),
-                        ),
-                        child: Text(
-                          "বর্তমান: ${prayerStatus.currentName}",
-                          style: GoogleFonts.hindSiliguri(
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.w600,
-                            color: isDark ? Colors.white70 : AppColors.textPrimaryLight,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            BengaliNumerals.formatCountdown(prayerStatus.remaining),
-                            style: GoogleFonts.hindSiliguri(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w800,
-                              color: AppColors.emerald,
-                              letterSpacing: -0.5,
-                            ),
-                          ),
-                          Text(
-                            "বাকি আছে (${prayerStatus.nextTimeFormatted}-এ শুরু)",
-                            style: GoogleFonts.hindSiliguri(
-                              fontSize: 11,
-                              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "সকল ওয়াক্ত",
-                            style: GoogleFonts.hindSiliguri(
-                              fontSize: 11.5,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.emerald,
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right, size: 16, color: AppColors.emerald),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+  Widget _buildBismillahAndContextBar(String hijriFormatted, bool isDark) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Text(
+            "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.rtl,
+            style: GoogleFonts.amiri(
+              fontSize: 21,
+              fontWeight: FontWeight.bold,
+              color: isDark ? AppColors.amberGold : AppColors.amberDark,
             ),
           ),
-
-          // Divider
-          Divider(
-            height: 1,
-            thickness: 0.8,
-            color: isDark ? AppColors.borderDark.withOpacity(0.6) : AppColors.borderLight.withOpacity(0.8),
-          ),
-
-          // Fasting Tracker Row (Bottom)
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const RamadanScreen()),
-              );
-            },
-            borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: isDark ? const Color(0xFF0F172A).withOpacity(0.5) : const Color(0xFFFAFAF9),
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            const Text("🌙", style: TextStyle(fontSize: 13)),
-                            const SizedBox(width: 6),
-                            Flexible(
-                              child: Text(
-                                fastingStatus.title,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.hindSiliguri(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDark ? Colors.white : AppColors.textPrimaryLight,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        BengaliNumerals.formatCountdown(fastingStatus.remaining),
-                        style: GoogleFonts.hindSiliguri(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.amber,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: LinearProgressIndicator(
-                      value: fastingStatus.progress,
-                      minHeight: 5,
-                      backgroundColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
-                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.amber),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const HijriCalendarScreen()),
+                  );
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.cardDark : Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                      width: 0.8,
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Row(
                     children: [
-                      Text(
-                        fastingStatus.info,
-                        style: GoogleFonts.hindSiliguri(
-                          fontSize: 10.5,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
-                        ),
-                      ),
-                      Text(
-                        "${BengaliNumerals.toBengali((fastingStatus.progress * 100).toInt())}% সম্পন্ন",
-                        style: GoogleFonts.hindSiliguri(
-                          fontSize: 10.5,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.amber,
+                      const Icon(Icons.calendar_today_rounded, size: 13, color: AppColors.emerald),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          hijriFormatted,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(width: 8),
+            InkWell(
+              onTap: () => _showCitySelector(context, isDark),
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isDark ? AppColors.borderDark : AppColors.emerald.withOpacity(0.25),
+                    width: 0.8,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.location_on_rounded, size: 13, color: AppColors.emerald),
+                    const SizedBox(width: 4),
+                    Text(
+                      _selectedCity,
+                      style: GoogleFonts.hindSiliguri(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : AppColors.emeraldDark,
+                      ),
+                    ),
+                    const SizedBox(width: 2),
+                    Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      size: 15,
+                      color: isDark ? AppColors.emeraldLight : AppColors.emeraldDark,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  // --- CARD 1: Midnight Mosque Sanctuary Card (Prayer + Fasting Hub) ---
+  Widget _buildSpiritualHubCard(PrayerStatus prayerStatus, FastingStatus fastingStatus, bool isDark) {
+    final progress = _computeWaqtProgress(prayerStatus);
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [AppColors.emeraldDeep, AppColors.emeraldMidnight],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: AppColors.amberGold.withOpacity(0.28),
+          width: 1.0,
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(22),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: IgnorePointer(
+                child: CustomPaint(
+                  painter: MosqueSkylinePainter(
+                    lineColor: AppColors.amberGold.withOpacity(0.14),
+                    fillColor: AppColors.emerald.withOpacity(0.12),
+                  ),
+                ),
+              ),
+            ),
+            Column(
+              children: [
+                // Prayer Section (Top)
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const PrayerScreen()),
+                    ).then((_) => _loadSelectedCity());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Icon(prayerStatus.icon, color: AppColors.amberGold, size: 17),
+                                  const SizedBox(width: 6),
+                                  Flexible(
+                                    child: Text(
+                                      "পরবর্তী ওয়াক্ত: ${prayerStatus.nextName}",
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.hindSiliguri(
+                                        fontSize: 12.5,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFFB7D6C8),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.08),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: Colors.white.withOpacity(0.14),
+                                  width: 0.7,
+                                ),
+                              ),
+                              child: Text(
+                                "বর্তমান: ${prayerStatus.currentName}",
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 14),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    BengaliNumerals.formatCountdown(prayerStatus.remaining),
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.amberGold,
+                                      letterSpacing: -0.4,
+                                      height: 1.05,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    "বাকি আছে (${prayerStatus.nextTimeFormatted}-এ শুরু)",
+                                    style: GoogleFonts.hindSiliguri(
+                                      fontSize: 11.5,
+                                      color: const Color(0xFFC5DFD2),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  width: 58,
+                                  height: 58,
+                                  child: CustomPaint(
+                                    painter: CountdownRingPainter(
+                                      progress: progress,
+                                      trackColor: Colors.white.withOpacity(0.14),
+                                      activeColor: AppColors.amberGold,
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        prayerStatus.icon,
+                                        color: AppColors.amberGold,
+                                        size: 22,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      "সকল ওয়াক্ত",
+                                      style: GoogleFonts.hindSiliguri(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const Icon(Icons.chevron_right_rounded, size: 15, color: Colors.white),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Divider
+                Divider(
+                  height: 1,
+                  thickness: 0.8,
+                  color: Colors.white.withOpacity(0.12),
+                ),
+
+                // Fasting & Sehri/Iftar Strip (Bottom)
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const RamadanScreen()),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+                    color: Colors.black.withOpacity(0.18),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  const Text("🌙", style: TextStyle(fontSize: 13)),
+                                  const SizedBox(width: 6),
+                                  Flexible(
+                                    child: Text(
+                                      fastingStatus.title,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.hindSiliguri(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Text(
+                              BengaliNumerals.formatCountdown(fastingStatus.remaining),
+                              style: GoogleFonts.hindSiliguri(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.amberGold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 7),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: LinearProgressIndicator(
+                            value: fastingStatus.progress,
+                            minHeight: 4.5,
+                            backgroundColor: Colors.white.withOpacity(0.12),
+                            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.amberGold),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "সেহরি: ${_prayerTimes.formatTime(_prayerTimes.imsak)} • ইফতার: ${_prayerTimes.formatTime(_prayerTimes.maghrib)}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.hindSiliguri(
+                                  fontSize: 10.5,
+                                  color: const Color(0xFFB7D6C8),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              "${BengaliNumerals.toBengali((fastingStatus.progress * 100).toInt())}% সম্পন্ন",
+                              style: GoogleFonts.hindSiliguri(
+                                fontSize: 10.5,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.amberGold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // --- SECTION 2: Daily Quick Essentials (4 Key Shortcuts) ---
+  // --- SECTION 2: Today's 5-Waqt Horizontal Schedule Strip ---
+  Widget _buildTodayScheduleStrip(PrayerStatus prayerStatus, bool isDark) {
+    final items = [
+      {'name': 'ফজর', 'time': _prayerTimes.formatTime(_prayerTimes.fajr), 'icon': Icons.wb_twilight_rounded},
+      {'name': 'যোহর', 'time': _prayerTimes.formatTime(_prayerTimes.dhuhr), 'icon': Icons.wb_sunny_rounded},
+      {'name': 'আসর', 'time': _prayerTimes.formatTime(_prayerTimes.asr), 'icon': Icons.sunny_snowing},
+      {'name': 'মাগরিব', 'time': _prayerTimes.formatTime(_prayerTimes.maghrib), 'icon': Icons.nights_stay_outlined},
+      {'name': 'ইশা', 'time': _prayerTimes.formatTime(_prayerTimes.isha), 'icon': Icons.bedtime_rounded},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "আজকের নামাজের সময়সূচি",
+                style: GoogleFonts.hindSiliguri(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const PrayerScreen()),
+                  ).then((_) => _loadSelectedCity());
+                },
+                child: Text(
+                  "অ্যালার্ম সেট →",
+                  style: GoogleFonts.hindSiliguri(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.emerald,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: items.map((w) {
+            final name = w['name'] as String;
+            final isHighlighted = prayerStatus.nextName.contains(name);
+            return Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(right: name == 'ইশা' ? 0 : 6),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const PrayerScreen()),
+                    ).then((_) => _loadSelectedCity());
+                  },
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+                    decoration: BoxDecoration(
+                      color: isHighlighted
+                          ? (isDark ? AppColors.emeraldSoftDark : AppColors.emeraldSoft)
+                          : (isDark ? AppColors.cardDark : Colors.white),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: isHighlighted
+                            ? AppColors.amberLight
+                            : (isDark ? AppColors.borderDark : AppColors.borderLight),
+                        width: isHighlighted ? 1.4 : 0.8,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          w['icon'] as IconData,
+                          size: 16,
+                          color: isHighlighted
+                              ? AppColors.amber
+                              : (isDark ? AppColors.emeraldLight : AppColors.emerald),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                            color: isHighlighted
+                                ? (isDark ? AppColors.amberGold : AppColors.emeraldDark)
+                                : (isDark ? Colors.white : AppColors.textPrimaryLight),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          (w['time'] as String).replaceAll(' AM', '').replaceAll(' PM', ''),
+                          maxLines: 1,
+                          style: GoogleFonts.hindSiliguri(
+                            fontSize: 10.5,
+                            fontWeight: isHighlighted ? FontWeight.bold : FontWeight.w600,
+                            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  // --- SECTION 3: Architectural Quick Essentials Grid (4x2) ---
   Widget _buildQuickEssentialsRow(BuildContext context, bool isDark) {
     final essentials = [
       {'title': 'কিবলা কম্পাস', 'icon': Icons.explore_outlined, 'color': AppColors.emerald, 'screen': const QiblaScreen()},
       {'title': 'ডিজিটাল তাসবীহ', 'icon': Icons.fingerprint, 'color': AppColors.amber, 'screen': const TasbihScreen()},
       {'title': 'নিত্যদিনের দোয়া', 'icon': Icons.favorite_border, 'color': AppColors.emerald, 'screen': const DuaScreen()},
       {'title': 'সালাত শিক্ষা', 'icon': Icons.mosque_outlined, 'color': AppColors.amber, 'screen': const SalatGuideScreen()},
+      {'title': 'আল-কুরআন', 'icon': Icons.menu_book_rounded, 'color': AppColors.emerald, 'screen': const QuranScreen()},
+      {'title': 'হাদিস শরীফ', 'icon': Icons.library_books_outlined, 'color': AppColors.amber, 'screen': const HadithScreen()},
+      {'title': 'রমজান ও রোজা', 'icon': Icons.nights_stay_outlined, 'color': AppColors.emerald, 'screen': const RamadanScreen()},
+      {'title': 'হিজরি ক্যালেন্ডার', 'icon': Icons.calendar_month_outlined, 'color': AppColors.amber, 'screen': const HijriCalendarScreen()},
     ];
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.cardDark : Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: isDark ? AppColors.borderDark : AppColors.borderLight,
-          width: 0.8,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(
+            "প্রয়োজনীয় সেবাসমূহ",
+            style: GoogleFonts.hindSiliguri(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : AppColors.textPrimaryLight,
+            ),
+          ),
         ),
-      ),
-      child: Row(
-        children: essentials.map((item) {
-          final color = item['color'] as Color;
-          return Expanded(
-            child: InkWell(
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: essentials.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            childAspectRatio: 0.96,
+          ),
+          itemBuilder: (context, index) {
+            final item = essentials[index];
+            final color = item['color'] as Color;
+            return InkWell(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => item['screen'] as Widget),
-                );
+                ).then((_) => _loadSelectedCity());
               },
-              borderRadius: BorderRadius.circular(12),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+              borderRadius: BorderRadius.circular(14),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.cardDark : Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                    width: 0.8,
+                  ),
+                ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 44,
-                      height: 44,
+                      width: 38,
+                      height: 38,
                       decoration: BoxDecoration(
-                        color: color.withOpacity(isDark ? 0.2 : 0.1),
-                        shape: BoxShape.circle,
+                        color: color.withOpacity(isDark ? 0.18 : 0.1),
+                        borderRadius: BorderRadius.circular(11),
                         border: Border.all(
-                          color: color.withOpacity(0.3),
-                          width: 1,
+                          color: color.withOpacity(0.26),
+                          width: 0.8,
                         ),
                       ),
-                      child: Icon(item['icon'] as IconData, color: color, size: 22),
+                      child: Icon(item['icon'] as IconData, color: color, size: 20),
                     ),
                     const SizedBox(height: 6),
                     Text(
@@ -694,7 +997,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.hindSiliguri(
-                        fontSize: 11,
+                        fontSize: 10.5,
                         fontWeight: FontWeight.w600,
                         color: isDark ? Colors.white : AppColors.textPrimaryLight,
                       ),
@@ -702,10 +1005,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   ],
                 ),
               ),
-            ),
-          );
-        }).toList(),
-      ),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -872,7 +1175,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF0F172A) : const Color(0xFFFBFBFB),
+              color: isDark ? AppColors.surfaceElevatedDark : const Color(0xFFFBFBFB),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
                 color: isDark ? AppColors.borderDark : AppColors.borderLight,
@@ -974,7 +1277,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isDark
-                ? [const Color(0xFF064E3B), const Color(0xFF0F172A)]
+                ? [AppColors.emeraldDeep, AppColors.cardDark]
                 : [const Color(0xFF065F46), const Color(0xFF047857)],
           ),
           borderRadius: BorderRadius.circular(18),
@@ -1185,7 +1488,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.emerald
-              : (isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9)),
+              : (isDark ? AppColors.surfaceElevatedDark : const Color(0xFFF1F5F9)),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected

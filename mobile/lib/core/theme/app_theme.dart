@@ -34,19 +34,27 @@ class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.white,
-        elevation: 1,
+        elevation: 0,
+        height: 68,
         indicatorColor: AppColors.emeraldSoft,
+        indicatorShape: const StadiumBorder(),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.emeraldDark, size: 22);
+          }
+          return const IconThemeData(color: AppColors.textSecondaryLight, size: 22);
+        }),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return GoogleFonts.hindSiliguri(
-              color: AppColors.emerald,
-              fontSize: 12,
+              color: AppColors.emeraldDark,
+              fontSize: 11.5,
               fontWeight: FontWeight.bold,
             );
           }
           return GoogleFonts.hindSiliguri(
             color: AppColors.textSecondaryLight,
-            fontSize: 12,
+            fontSize: 11.5,
           );
         }),
       ),
@@ -88,19 +96,27 @@ class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.cardDark,
-        elevation: 1,
+        elevation: 0,
+        height: 68,
         indicatorColor: AppColors.emeraldSoftDark,
+        indicatorShape: const StadiumBorder(),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.emeraldLight, size: 22);
+          }
+          return const IconThemeData(color: AppColors.textSecondaryDark, size: 22);
+        }),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return GoogleFonts.hindSiliguri(
               color: AppColors.emeraldLight,
-              fontSize: 12,
+              fontSize: 11.5,
               fontWeight: FontWeight.bold,
             );
           }
           return GoogleFonts.hindSiliguri(
             color: AppColors.textSecondaryDark,
-            fontSize: 12,
+            fontSize: 11.5,
           );
         }),
       ),

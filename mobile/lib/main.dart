@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/services/storage_service.dart';
+import 'core/theme/app_colors.dart';
 import 'core/theme/app_theme.dart';
 import 'features/dua/presentation/dua_screen.dart';
 import 'features/hadith/presentation/hadith_screen.dart';
@@ -53,6 +54,13 @@ class _DeenIslamAppState extends State<DeenIslamApp> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = _themeMode == ThemeMode.dark;
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+      ),
+    );
     return MaterialApp(
       title: 'দ্বীন ইসলাম - DeenIslam',
       debugShowCheckedModeBanner: false,
@@ -61,7 +69,7 @@ class _DeenIslamAppState extends State<DeenIslamApp> {
       themeMode: _themeMode,
       home: MainNavigationScaffold(
         onToggleTheme: _toggleTheme,
-        isDark: _themeMode == ThemeMode.dark,
+        isDark: isDark,
       ),
     );
   }
@@ -102,40 +110,50 @@ class _MainNavigationScaffoldState extends State<MainNavigationScaffold> {
         index: _currentIndex,
         children: screens,
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex,
-        onDestinationSelected: (idx) {
-          setState(() {
-            _currentIndex = idx;
-          });
-        },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: "হোম",
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: widget.isDark ? AppColors.borderDark : AppColors.borderLight,
+              width: 0.8,
+            ),
           ),
-          NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book),
-            label: "কুরআন",
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.library_books_outlined),
-            selectedIcon: Icon(Icons.library_books),
-            label: "হাদিস",
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.access_time_outlined),
-            selectedIcon: Icon(Icons.access_time_filled),
-            label: "নামাজ",
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_outline),
-            selectedIcon: Icon(Icons.favorite),
-            label: "দোয়া",
-          ),
-        ],
+        ),
+        child: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: (idx) {
+            setState(() {
+              _currentIndex = idx;
+            });
+          },
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: "হোম",
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.menu_book_outlined),
+              selectedIcon: Icon(Icons.menu_book),
+              label: "কুরআন",
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.library_books_outlined),
+              selectedIcon: Icon(Icons.library_books),
+              label: "হাদিস",
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.access_time_outlined),
+              selectedIcon: Icon(Icons.access_time_filled),
+              label: "নামাজ",
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.favorite_outline),
+              selectedIcon: Icon(Icons.favorite),
+              label: "দোয়া",
+            ),
+          ],
+        ),
       ),
     );
   }

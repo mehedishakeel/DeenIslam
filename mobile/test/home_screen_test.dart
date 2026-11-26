@@ -39,7 +39,9 @@ void main() {
     expect(find.textContaining('বর্তমান:'), findsOneWidget);
     expect(find.text('সকল ওয়াক্ত'), findsOneWidget);
 
-    // 3. Verify Daily Quick Essentials
+    // 3. Verify Bismillah, Today's Schedule Strip & Daily Quick Essentials
+    expect(find.text('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'), findsOneWidget);
+    expect(find.text('আজকের নামাজের সময়সূচি'), findsOneWidget);
     expect(find.text('কিবলা কম্পাস'), findsWidgets);
     expect(find.text('ডিজিটাল তাসবীহ'), findsWidgets);
     expect(find.text('নিত্যদিনের দোয়া'), findsWidgets);
@@ -133,5 +135,31 @@ void main() {
 
     // Now shows 5 items
     expect(find.text('৫টি সেবা'), findsOneWidget);
+  });
+
+  testWidgets('HomeScreen Midnight Sanctuary dark mode renders without layout errors', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    tester.view.devicePixelRatio = 2.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    await tester.pumpWidget(
+      MaterialApp(
+        themeMode: ThemeMode.dark,
+        darkTheme: ThemeData.dark(),
+        home: HomeScreen(
+          onToggleTheme: () {},
+          isDark: true,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    expect(find.text('দ্বীন ইসলাম'), findsOneWidget);
+    expect(find.text('আজকের নামাজের সময়সূচি'), findsOneWidget);
+    expect(find.text('প্রয়োজনীয় সেবাসমূহ'), findsOneWidget);
   });
 }
