@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Rub el Hizb Star Fills (clean dark emerald octagon interior) -->
+    <path
+        android:pathData="M34.5,34.5 L73.5,34.5 L73.5,73.5 L34.5,73.5 Z"
+        android:fillColor="#FF053326" />
+    <path
+        android:pathData="M54,26.4 L81.6,54 L54,81.6 L26.4,54 Z"
+        android:fillColor="#FF053326" />
+
+    <!-- Rub el Hizb Gold Strokes (interlocking 8-pointed geometry) -->
+    <path
+        android:pathData="M34.5,34.5 L73.5,34.5 L73.5,73.5 L34.5,73.5 Z"
+        android:strokeWidth="2.0"
+        android:strokeLineJoin="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="28"
+                android:startY="28"
+                android:endX="80"
+                android:endY="80">
+                <item android:offset="0.0" android:color="#FFF7DA7B" />
+                <item android:offset="0.5" android:color="#FFE5B84B" />
+                <item android:offset="1.0" android:color="#FFD97706" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <path
+        android:pathData="M54,26.4 L81.6,54 L54,81.6 L26.4,54 Z"
+        android:strokeWidth="2.0"
+        android:strokeLineJoin="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="26"
+                android:startY="26"
+                android:endX="82"
+                android:endY="82">
+                <item android:offset="0.0" android:color="#FFF7DA7B" />
+                <item android:offset="0.5" android:color="#FFE5B84B" />
+                <item android:offset="1.0" android:color="#FFD97706" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner Midnight Sanctuary Medallion -->
+    <path
+        android:pathData="M54,54m-17.8,0a17.8,17.8 0,1 1,35.6 0a17.8,17.8 0,1 1,-35.6 0"
+        android:fillColor="#FF042219"
+        android:strokeWidth="0.9"
+        android:strokeColor="#80E5B84B" />
+
+    <!-- Crescent Hilal floating clearly above dome -->
+    <path
+        android:pathData="M51.4,37.8 A4.8,4.8 0 1,0 59.0,42.0 A3.9,3.9 0 1,1 51.4,37.8 Z"
+        android:fillColor="#FFF7DA7B" />
+
+    <!-- Architectural Mosque Dome -->
+    <path
+        android:pathData="M54,45.2 C56.8,48.8 63.2,51.0 63.2,57.2 L44.8,57.2 C44.8,51.0 51.2,48.8 54,45.2 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="44"
+                android:startY="45"
+                android:endX="64"
+                android:endY="58">
+                <item android:offset="0.0" android:color="#FFFDFBF5" />
+                <item android:offset="1.0" android:color="#FFE8E2D0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Mosque Base + Mihrab Cutout Portal -->
+    <path
+        android:pathData="M43.2,58.0 L64.8,58.0 L64.8,66.2 L57.2,66.2 L57.2,62.0 C57.2,60.1 55.8,59.0 54,59.0 C52.2,59.0 50.8,60.1 50.8,62.0 L50.8,66.2 L43.2,66.2 Z"
+        android:fillColor="#FFE5B84B" />
+</vector>

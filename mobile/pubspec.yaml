@@ -1,7 +1,7 @@
 name: deen_islam
 description: "DeenIslam - Modern Islamic Client-Side Portal & Native Mobile Application"
 publish_to: "none"
-version: 1.6.0+11
+version: 1.6.1+12
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
