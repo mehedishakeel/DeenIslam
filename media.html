@@ -73,7 +73,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
@@ -89,7 +89,7 @@
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
         অডিও ও ভিডিও গ্যালারি
       </h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
         ইসলামিক জ্ঞান, নবীদের জীবনী এবং সুন্দর কুরআন তেলাওয়াতের এক সমৃদ্ধ সংগ্রহশালা।
       </p>
     </div>
@@ -97,16 +97,16 @@
     <!-- Controls Section -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
         <!-- Tabs -->
-        <div class="flex bg-stone-100/80 dark:bg-[#0f172a] p-1 rounded-xl border border-stone-200/80 dark:border-slate-800 w-full md:w-auto overflow-x-auto no-scrollbar space-x-1">
+        <div class="flex bg-stone-100/80 dark:bg-[#0b2018] p-1 rounded-xl border border-stone-200/80 dark:border-[#1a3b2e] w-full md:w-auto overflow-x-auto no-scrollbar space-x-1">
             <button onclick="filterMedia('all')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all active-tab bg-emerald-600 text-white shadow-xs" data-category="all">সবগুলো</button>
-            <button onclick="filterMedia('prophets')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800" data-category="prophets">নবীদের জীবনী</button>
-            <button onclick="filterMedia('quran')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800" data-category="quran">কুরআন তেলাওয়াত</button>
-            <button onclick="filterMedia('lecture')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800" data-category="lecture">আলোচনা ও বয়ান</button>
+            <button onclick="filterMedia('prophets')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-[#9ab3a8] hover:bg-white dark:hover:bg-[#102b20]" data-category="prophets">নবীদের জীবনী</button>
+            <button onclick="filterMedia('quran')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-[#9ab3a8] hover:bg-white dark:hover:bg-[#102b20]" data-category="quran">কুরআন তেলাওয়াত</button>
+            <button onclick="filterMedia('lecture')" class="tab-btn px-4 py-2 rounded-lg font-semibold text-xs transition-all text-slate-600 dark:text-[#9ab3a8] hover:bg-white dark:hover:bg-[#102b20]" data-category="lecture">আলোচনা ও বয়ান</button>
         </div>
 
         <!-- Search -->
         <div class="relative w-full md:w-72">
-            <input type="text" id="media-search" placeholder="ভিডিও খুঁজুন..." class="w-full py-2 pl-9 pr-4 bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all font-normal text-slate-900 dark:text-slate-100 text-xs md:text-sm">
+            <input type="text" id="media-search" placeholder="ভিডিও খুঁজুন..." class="w-full py-2 pl-9 pr-4 bg-white dark:bg-[#0b2018] border border-stone-200/80 dark:border-[#1a3b2e] rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all font-normal text-slate-900 dark:text-[#f4f7f5] text-xs md:text-sm">
             <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
         </div>
     </div>
@@ -123,10 +123,10 @@
 
     <!-- Empty State -->
     <div id="empty-state" class="hidden text-center py-20">
-        <div class="w-20 h-20 bg-stone-100 dark:bg-[#0f172a] text-slate-400 dark:text-slate-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-stone-200/80 dark:border-slate-800">
+        <div class="w-20 h-20 bg-stone-100 dark:bg-[#0b2018] text-slate-400 dark:text-slate-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-stone-200/80 dark:border-[#1a3b2e]">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
         </div>
-        <h3 class="text-xl font-bold text-slate-600 dark:text-slate-400">দুঃখিত, কোনো ভিডিও পাওয়া যায়নি</h3>
+        <h3 class="text-xl font-bold text-slate-600 dark:text-[#9ab3a8]">দুঃখিত, কোনো ভিডিও পাওয়া যায়নি</h3>
         <button onclick="resetFilters()" class="mt-4 text-primary font-bold hover:underline">সব ভিডিও দেখুন</button>
     </div>
 
@@ -135,14 +135,14 @@
   <!-- Video Player Modal -->
   <div id="video-modal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 md:p-10 opacity-0 pointer-events-none transition-all duration-300">
     <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-sm" onclick="closeModal()"></div>
-    <div class="relative w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 dark:border-slate-800 transform scale-95 transition-transform duration-300" id="modal-content">
+    <div class="relative w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 dark:border-[#1a3b2e] transform scale-95 transition-transform duration-300" id="modal-content">
         <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
         <div class="aspect-video">
             <iframe id="modal-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="p-6 bg-white dark:bg-[#0f172a] border-t border-stone-100 dark:border-slate-800">
+        <div class="p-6 bg-white dark:bg-[#0b2018] border-t border-stone-100 dark:border-[#1a3b2e]">
             <h3 id="modal-title" class="text-xl font-bold text-slate-800 dark:text-white line-clamp-1">ভিডিও টাইটেল</h3>
             <p id="modal-category" class="text-primary text-sm font-bold mt-1 uppercase tracking-widest">CATEGORY</p>
         </div>
@@ -435,7 +435,7 @@
         };
         
         const card = document.createElement('div');
-        card.className = "bg-white dark:bg-[#0f172a] rounded-2xl overflow-hidden shadow-xs border border-stone-200/80 dark:border-slate-800 group cursor-pointer hover:border-emerald-500/40 hover:shadow-md transition-all";
+        card.className = "bg-white dark:bg-[#0b2018] rounded-2xl overflow-hidden shadow-xs border border-stone-200/80 dark:border-[#1a3b2e] group cursor-pointer hover:border-emerald-500/40 hover:shadow-md transition-all";
         card.onclick = () => openModal(item);
         
         card.innerHTML = `
@@ -447,19 +447,19 @@
                 </div>
             </div>
             <div class="absolute top-3 left-3 flex flex-col space-y-2">
-                <span class="px-2 py-0.5 bg-white/95 dark:bg-[#0f172a]/95 text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 rounded-md border border-stone-200/80 dark:border-slate-800">
+                <span class="px-2 py-0.5 bg-white/95 dark:bg-[#0b2018]/95 text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 rounded-md border border-stone-200/80 dark:border-[#1a3b2e]">
                     ${categoryLabels[item.category]}
                 </span>
             </div>
             <div class="absolute top-3 right-3">
-                <button onclick="handleMediaBookmark(event, ${JSON.stringify(item).replace(/"/g, '&quot;')})" class="w-7 h-7 bg-white/95 dark:bg-[#0f172a]/95 text-emerald-700 dark:text-emerald-400 rounded-md flex items-center justify-center shadow-2xs border border-stone-200/80 dark:border-slate-800 hover:bg-emerald-600 hover:text-white transition-all bookmark-btn" data-key="media_${item.id}">
+                <button onclick="handleMediaBookmark(event, ${JSON.stringify(item).replace(/"/g, '&quot;')})" class="w-7 h-7 bg-white/95 dark:bg-[#0b2018]/95 text-emerald-700 dark:text-emerald-400 rounded-md flex items-center justify-center shadow-2xs border border-stone-200/80 dark:border-[#1a3b2e] hover:bg-emerald-600 hover:text-white transition-all bookmark-btn" data-key="media_${item.id}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="${window.isBookmarked(`media_${item.id}`) ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
                 </button>
             </div>
           </div>
           <div class="p-4">
             <h3 class="font-bold text-slate-900 dark:text-white text-xs md:text-sm line-clamp-2 leading-relaxed group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">${item.title}</h3>
-            <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-stone-100 dark:border-slate-800/80">
+            <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-stone-100 dark:border-[#1a3b2e]/80">
                 <span class="text-slate-400 text-[11px] font-medium flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     প্লে করুন
@@ -485,7 +485,7 @@
             btn.className = `w-8 h-8 rounded-lg font-semibold text-xs transition-all ${
                 currentPage === i 
                 ? 'bg-emerald-600 text-white shadow-xs' 
-                : 'bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:bg-stone-50 dark:hover:bg-slate-800 border border-stone-200/80 dark:border-slate-800'
+                : 'bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:bg-stone-50 dark:hover:bg-[#102b20] border border-stone-200/80 dark:border-[#1a3b2e]'
             }`;
             btn.onclick = () => {
                 currentPage = i;

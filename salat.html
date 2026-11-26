@@ -74,7 +74,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
   <div id="navbar-placeholder"></div>
 
   <main class="container mx-auto px-4 md:px-6 pt-6 pb-16 flex-grow max-w-6xl">
@@ -85,7 +85,7 @@
         <span>সালাত ও ওয়াক্ত</span>
       </div>
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white mb-2.5 tracking-tight">সালাত ও নামাজের সময়সূচী</h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
         আপনার ভৌগোলিক অবস্থান অনুযায়ী নির্ভুল ওয়াক্ত, সেহরি-ইফতার এবং নামাজের নিষিদ্ধ সময়।
       </p>
 
@@ -94,13 +94,13 @@
         <span id="hijri-date-badge" class="px-3.5 py-1.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 font-semibold text-xs rounded-lg border border-emerald-200/60 dark:border-emerald-800/40 flex items-center">
           🌙 হিজরি তারিখ লোড হচ্ছে...
         </span>
-        <a href="qibla.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
+        <a href="qibla.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-[#1a3b2e] flex items-center space-x-1.5 transition-all">
           <span>🕋 কিবলা কম্পাস</span>
         </a>
-        <a href="namaz.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
+        <a href="namaz.html" class="px-3.5 py-1.5 bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-[#1a3b2e] flex items-center space-x-1.5 transition-all">
           <span>📖 পূর্ণাঙ্গ নামাজ শিক্ষা</span>
         </a>
-        <button id="web-reminder-pill" type="button" onclick="enableWebPrayerReminders()" class="px-3.5 py-1.5 bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-slate-800 flex items-center space-x-1.5 transition-all">
+        <button id="web-reminder-pill" type="button" onclick="enableWebPrayerReminders()" class="px-3.5 py-1.5 bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-200 hover:text-primary font-semibold text-xs rounded-lg border border-stone-200/80 dark:border-[#1a3b2e] flex items-center space-x-1.5 transition-all">
           <span>🔔 রিমাইন্ডার চালু করুন</span>
         </button>
       </div>
@@ -130,8 +130,8 @@
 
     <!-- Prayer Times Grid Section -->
     <section class="max-w-6xl mx-auto mb-10">
-      <div class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl shadow-xs border border-stone-200/80 dark:border-slate-800">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7 pb-4 border-b border-stone-100 dark:border-slate-800">
+      <div class="bg-white dark:bg-[#0b2018] p-6 md:p-8 rounded-2xl shadow-xs border border-stone-200/80 dark:border-[#1a3b2e]">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-7 pb-4 border-b border-stone-100 dark:border-[#1a3b2e]">
           
           <!-- Location Info -->
           <div class="flex items-center space-x-3">
@@ -149,7 +149,7 @@
           <!-- Controls: Asr School Selector, Notifications, Update -->
           <div class="flex flex-wrap items-center gap-2.5">
             <!-- Asr Calculation Method (Hanafi vs Shafi'i) -->
-            <div class="flex items-center space-x-1.5 text-xs font-semibold bg-stone-100 dark:bg-slate-800/80 px-3 py-1.5 rounded-lg border border-stone-200 dark:border-slate-700">
+            <div class="flex items-center space-x-1.5 text-xs font-semibold bg-stone-100 dark:bg-[#102b20]/80 px-3 py-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e]">
               <span class="text-slate-400">মাযহাব:</span>
               <select id="asr-school" onchange="changeAsrSchool(this.value)" class="bg-transparent text-primary font-bold outline-none cursor-pointer">
                 <option value="1">হানাফী (Hanafi)</option>
@@ -158,7 +158,7 @@
             </div>
 
             <!-- Notification Toggle Button -->
-            <button id="notify-btn" onclick="toggleNotifications()" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-primary flex items-center space-x-1.5 border border-stone-200 dark:border-slate-700 px-3 py-1.5 rounded-lg transition-all bg-white dark:bg-slate-800">
+            <button id="notify-btn" onclick="toggleNotifications()" class="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-primary flex items-center space-x-1.5 border border-stone-200 dark:border-[#1a3b2e] px-3 py-1.5 rounded-lg transition-all bg-white dark:bg-[#102b20]">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
@@ -166,7 +166,7 @@
             </button>
 
             <!-- Refresh Location -->
-            <button onclick="getPrayerTimes(true)" class="p-1.5 rounded-lg bg-stone-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 text-primary transition-all border border-stone-200 dark:border-slate-700" title="লোকেশন রিফ্রেশ">
+            <button onclick="getPrayerTimes(true)" class="p-1.5 rounded-lg bg-stone-100 dark:bg-[#102b20] hover:bg-emerald-50 dark:hover:bg-emerald-900/30 text-primary transition-all border border-stone-200 dark:border-[#1a3b2e]" title="লোকেশন রিফ্রেশ">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
@@ -199,22 +199,22 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div class="bg-white dark:bg-[#0f172a] p-6 rounded-2xl border border-amber-200/50 dark:border-slate-800 shadow-xs text-center">
+          <div class="bg-white dark:bg-[#0b2018] p-6 rounded-2xl border border-amber-200/50 dark:border-[#1a3b2e] shadow-xs text-center">
             <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950/60 rounded-xl flex items-center justify-center mx-auto mb-4 text-amber-700 dark:text-amber-400 font-bold text-lg">১</div>
             <h3 class="text-base font-bold text-slate-800 dark:text-white mb-2">সূর্যোদয়ের সময়</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">সূর্য উদিত হওয়ার সময় থেকে পরবর্তী প্রায় ১৫-২০ মিনিট পর্যন্ত কোনো নামাজ পড়া জায়েয নেই।</p>
+            <p class="text-xs text-slate-600 dark:text-[#9ab3a8] leading-relaxed">সূর্য উদিত হওয়ার সময় থেকে পরবর্তী প্রায় ১৫-২০ মিনিট পর্যন্ত কোনো নামাজ পড়া জায়েয নেই।</p>
           </div>
 
-          <div class="bg-white dark:bg-[#0f172a] p-6 rounded-2xl border border-amber-200/50 dark:border-slate-800 shadow-xs text-center">
+          <div class="bg-white dark:bg-[#0b2018] p-6 rounded-2xl border border-amber-200/50 dark:border-[#1a3b2e] shadow-xs text-center">
             <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950/60 rounded-xl flex items-center justify-center mx-auto mb-4 text-amber-700 dark:text-amber-400 font-bold text-lg">২</div>
             <h3 class="text-base font-bold text-slate-800 dark:text-white mb-2">দ্বিপ্রহর (জাওয়াল)</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">সূর্য যখন ঠিক মাথার উপরে অবস্থান করে (যোহরের ওয়াক্ত হওয়ার ঠিক পূর্বের ৫-১০ মিনিট)।</p>
+            <p class="text-xs text-slate-600 dark:text-[#9ab3a8] leading-relaxed">সূর্য যখন ঠিক মাথার উপরে অবস্থান করে (যোহরের ওয়াক্ত হওয়ার ঠিক পূর্বের ৫-১০ মিনিট)।</p>
           </div>
 
-          <div class="bg-white dark:bg-[#0f172a] p-6 rounded-2xl border border-amber-200/50 dark:border-slate-800 shadow-xs text-center">
+          <div class="bg-white dark:bg-[#0b2018] p-6 rounded-2xl border border-amber-200/50 dark:border-[#1a3b2e] shadow-xs text-center">
             <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950/60 rounded-xl flex items-center justify-center mx-auto mb-4 text-amber-700 dark:text-amber-400 font-bold text-lg">৩</div>
             <h3 class="text-base font-bold text-slate-800 dark:text-white mb-2">সূর্যাস্তের সময়</h3>
-            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">সূর্য ডোবার পূর্ব মুহূর্ত পর্যন্ত। তবে ওই দিনের আসরের ফরজ পড়া বাকি থাকলে তা পড়ে নেওয়া যাবে।</p>
+            <p class="text-xs text-slate-600 dark:text-[#9ab3a8] leading-relaxed">সূর্য ডোবার পূর্ব মুহূর্ত পর্যন্ত। তবে ওই দিনের আসরের ফরজ পড়া বাকি থাকলে তা পড়ে নেওয়া যাবে।</p>
           </div>
         </div>
       </div>
@@ -363,7 +363,7 @@
         div.className = `p-5 md:p-6 rounded-2xl text-center border transition-all duration-300 ${
           isActive 
             ? 'prayer-card-active border-transparent text-white scale-102 shadow-lg' 
-            : 'bg-stone-50/80 dark:bg-slate-800/50 border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40'
+            : 'bg-stone-50/80 dark:bg-[#102b20]/50 border-stone-200/80 dark:border-[#1a3b2e] hover:border-emerald-500/40'
         }`;
         div.innerHTML = `
           <span class="text-xs font-bold uppercase tracking-widest block mb-2 ${isActive ? 'text-emerald-100' : 'text-slate-400'}">
@@ -371,7 +371,7 @@
           </span>
           <h3 class="font-bold text-xl mb-2 ${isActive ? 'text-white' : 'text-slate-800 dark:text-white'}">${p.name}</h3>
           <span class="font-mono text-2xl md:text-3xl font-black block mb-4">${formatTime(timings[p.id])}</span>
-          <div class="pt-4 border-t ${isActive ? 'border-white/20' : 'border-stone-200/60 dark:border-slate-700'}">
+          <div class="pt-4 border-t ${isActive ? 'border-white/20' : 'border-stone-200/60 dark:border-[#1a3b2e]'}">
             <p class="text-xs leading-relaxed ${isActive ? 'text-emerald-50' : 'text-slate-600 dark:text-slate-300'} font-bold">${p.details}</p>
           </div>
         `;

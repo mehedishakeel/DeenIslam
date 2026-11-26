@@ -22,12 +22,12 @@ The original brand colors are strictly preserved and deepened with harmonious to
 |------|------|-------------|---------|
 | **Primary** | Botanical Emerald | `#059669` / `bg-emerald-600` | Primary brand color, spiritual identity, active waqt |
 | **Primary Dark** | Deep Forest Emerald | `#047857` / `bg-emerald-700` | Hover states, hero gradients, emphasized headers |
-| **Primary Deep** | Midnight Mosque | `#022c22` / `#064e3b` | Focal card background in hero, deep dark tone |
-| **Accent** | Sacred Amber | `#d97706` / `#f59e0b` | One deliberate accent: next prayer countdown, audio play button, golden highlights |
+| **Primary Deep** | Midnight Mosque | `#042219` / `#073628` | Focal card background in hero, deep dark tone |
+| **Accent** | Sacred Amber | `#d97706` / `#f59e0b` / `#e5b84b` | One deliberate accent: next prayer countdown, audio play button, golden highlights |
 | **Light Canvas** | Brand Ivory | `#fbfaf8` | Soothing, book-like paper background in light mode |
-| **Dark Canvas** | Deep Obsidian Slate | `#020617` / `#0b1120` | OLED-friendly, eye-relieving night reading background |
-| **Card Surface** | Pure Light / Deep Navy | `#ffffff` / `#0f172a` | Solid, grounded surfaces with crisp hairline borders |
-| **Borders** | Hairline Stone / Slate | `rgba(226, 232, 240, 0.8)` / `rgba(30, 41, 59, 0.8)` | Structured separation without muddy drop shadows |
+| **Dark Canvas** | Deep Emerald-Obsidian | `#06130e` | OLED-friendly botanical obsidian night background |
+| **Card Surface** | Pure Light / Deep Forest | `#ffffff` / `#0b2018` (`#102b20` elevated) | Solid, grounded surfaces with crisp hairline borders |
+| **Borders** | Hairline Stone / Forest | `rgba(226, 232, 240, 0.8)` / `#1a3b2e` | Structured separation without muddy drop shadows |
 
 ---
 

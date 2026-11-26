@@ -69,7 +69,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
@@ -86,7 +86,7 @@
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
         আল্লাহ তায়ালার ৯৯টি গুণবাচক নাম
       </h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
         রাসূলুল্লাহ (সা.) বলেছেন: "নিশ্চয়ই আল্লাহর নিরানব্বইটি নাম রয়েছে, যে ব্যক্তি এগুলো মুখস্থ করবে ও অনুধাবন করবে, সে জান্নাতে প্রবেশ করবে।" (সহীহ বুখারী)
       </p>
     </div>
@@ -95,10 +95,10 @@
     <div class="flex flex-col sm:flex-row items-center justify-between gap-3.5 mb-8 max-w-3xl mx-auto">
       <div class="relative w-full">
         <input type="text" id="names-search" placeholder="নাম, উচ্চারণ বা অর্থ দিয়ে খুঁজুন..." 
-          class="w-full py-3.5 pl-11 pr-4 bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+          class="w-full py-3.5 pl-11 pr-4 bg-white dark:bg-[#0b2018] border border-stone-200/80 dark:border-[#1a3b2e] rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
         <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
       </div>
-      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-3.5 py-2.5 bg-white dark:bg-[#0f172a] rounded-xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+      <div class="text-xs font-bold text-slate-500 dark:text-[#9ab3a8] shrink-0 px-3.5 py-2.5 bg-white dark:bg-[#0b2018] rounded-xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-2xs">
         মোট নাম: <span id="names-count" class="text-emerald-600 dark:text-emerald-400 font-black text-sm">৯৯</span> টি
       </div>
     </div>
@@ -109,7 +109,7 @@
     </div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800">
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e]">
       <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো নাম পাওয়া যায়নি</h3>
       <p class="text-slate-400 text-xs mt-1">অন্য কোনো শব্দ লিখে পুনরায় অনুসন্ধান করুন</p>
     </div>
@@ -270,7 +270,7 @@
         const isBookmarked = window.isBookmarked ? window.isBookmarked(bookmarkKey) : false;
 
         return `
-          <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
+          <div class="bg-white dark:bg-[#0b2018] p-5 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
             
             <!-- Top Card Bar -->
             <div>
@@ -279,17 +279,17 @@
                   ${window.toBengaliNumerals(n.id)}
                 </span>
                 <div class="flex items-center space-x-1">
-                  <button onclick="speakName('${n.arabic}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="উচ্চারণ শুনুন">
+                  <button onclick="speakName('${n.arabic}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="উচ্চারণ শুনুন">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     </svg>
                   </button>
-                  <button onclick="handleNameBookmark(event, ${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
+                  <button onclick="handleNameBookmark(event, ${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                     </svg>
                   </button>
-                  <button onclick="copyName(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+                  <button onclick="copyName(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5H6a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                     </svg>
@@ -298,7 +298,7 @@
               </div>
 
               <!-- Arabic Calligraphy Box -->
-              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-slate-800/80 rounded-xl border border-stone-200/60 dark:border-slate-700/60">
+              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-[#102b20]/80 rounded-xl border border-stone-200/60 dark:border-[#1a3b2e]/60">
                 <p class="font-arabic text-3xl md:text-4xl text-slate-900 dark:text-emerald-200 font-normal leading-relaxed">${n.arabic}</p>
               </div>
 
@@ -306,7 +306,7 @@
               <div class="text-center mt-2.5">
                 <h3 class="text-base font-bold text-emerald-800 dark:text-emerald-400 mb-0.5">${n.transliteration}</h3>
                 <p class="text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1.5">${n.meaning}</p>
-                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed pt-2 border-t border-stone-100 dark:border-slate-800/60">${n.desc}</p>
+                <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] leading-relaxed pt-2 border-t border-stone-100 dark:border-[#1a3b2e]/60">${n.desc}</p>
               </div>
             </div>
 

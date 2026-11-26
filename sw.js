@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deenislam-v17';
+const CACHE_NAME = 'deenislam-v18';
 const CORE_ASSETS = [
   './',
   './index.html',

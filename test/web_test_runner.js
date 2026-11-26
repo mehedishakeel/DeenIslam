@@ -430,6 +430,24 @@ describe('14. v1.5.0 Features: Backup v2, Tafsir, Ampara Offline Batch, Special 
     });
 });
 
+describe('15. Unified Cross-Platform Midnight Emerald-Obsidian Palette Parity', () => {
+    it('js/theme.js uses Android-synced dark canvas #06130e, card #0b2018, and border #1a3b2e', () => {
+        const themeJs = fs.readFileSync(path.join(__dirname, '../js/theme.js'), 'utf8');
+        assert.ok(themeJs.includes('#06130e'), 'Missing Android bgDark #06130e');
+        assert.ok(themeJs.includes('#0b2018'), 'Missing Android cardDark #0b2018');
+        assert.ok(themeJs.includes('#102b20'), 'Missing Android surfaceElevatedDark #102b20');
+        assert.ok(themeJs.includes('#1a3b2e'), 'Missing Android borderDark #1a3b2e');
+        assert.ok(!themeJs.includes('#020617'), 'Old slate bg #020617 still present in theme.js');
+    });
+
+    it('index.html uses Midnight Mosque Sanctuary hero (#042219/#073628) and obsidian body', () => {
+        const indexHtml = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+        assert.ok(indexHtml.includes('dark:bg-[#06130e]'), 'Missing obsidian body dark class');
+        assert.ok(indexHtml.includes('from-[#042219]'), 'Missing emeraldDeep gradient');
+        assert.ok(indexHtml.includes('#e5b84b'), 'Missing amberGold highlight');
+    });
+});
+
 console.log(`\n========================================`);
 console.log(`Summary: ${passedTests}/${totalTests} tests passed.`);
 console.log(`Status: ${passedTests === totalTests ? 'SUCCESS - ALL TESTS PASSED' : 'FAILURE'}`);

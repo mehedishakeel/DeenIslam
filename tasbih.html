@@ -72,7 +72,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
   <div id="navbar-placeholder"></div>
 
   <main class="flex-grow flex flex-col items-center justify-center px-4 pt-6 pb-16 relative max-w-xl mx-auto w-full">
@@ -86,16 +86,16 @@
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
         ডিজিটাল তাসবীহ ও যিকির
       </h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-md mx-auto leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base max-w-md mx-auto leading-relaxed">
         আল্লাহর স্মরণ ও প্রাত্যহিক যিকির গণনায় সুমধুর অডিও এবং স্পর্শীয় হ্যাপটিক ফিডব্যাক।
       </p>
     </div>
 
     <!-- Dhikr Selector Dropdown / Pill -->
     <div class="w-full mb-6">
-      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-xs border border-stone-200/80 dark:border-slate-800 text-center">
+      <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-5 shadow-xs border border-stone-200/80 dark:border-[#1a3b2e] text-center">
         <label for="dhikr-select" class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">নির্বাচিত জিকির</label>
-        <select id="dhikr-select" class="w-full bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 rounded-xl py-2.5 px-4 text-center font-bold text-slate-800 dark:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm md:text-base cursor-pointer">
+        <select id="dhikr-select" class="w-full bg-stone-50 dark:bg-[#102b20]/80 border border-stone-200 dark:border-[#1a3b2e] rounded-xl py-2.5 px-4 text-center font-bold text-slate-800 dark:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm md:text-base cursor-pointer">
           <option value="সুবহানাল্লাহ" data-arabic="سُبْحَانَ اللَّهِ">সুবহানাল্লাহ (SubhanAllah)</option>
           <option value="আলহামদুলিল্লাহ" data-arabic="الْحَمْدُ لِلَّهِ">আলহামদুলিল্লাহ (Alhamdulillah)</option>
           <option value="লা ইলাহা ইল্লাল্লাহ" data-arabic="لَا إِلَهَ إِلَّا اللَّهُ">লা ইলাহা ইল্লাল্লাহ (La ilaha illallah)</option>
@@ -112,11 +112,11 @@
 
     <!-- Target & Stats Pills -->
     <div class="flex items-center justify-between w-full px-2 mb-6">
-      <div class="flex items-center space-x-2 bg-white dark:bg-[#0f172a] px-3.5 py-1.5 rounded-lg border border-stone-200/80 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400">
+      <div class="flex items-center space-x-2 bg-white dark:bg-[#0b2018] px-3.5 py-1.5 rounded-lg border border-stone-200/80 dark:border-[#1a3b2e] text-xs font-semibold text-slate-500 dark:text-[#9ab3a8]">
         <span>লক্ষ্য:</span>
         <span id="target-display" class="text-emerald-700 dark:text-emerald-400 font-bold font-mono">৩৩</span>
       </div>
-      <div class="flex items-center space-x-2 bg-white dark:bg-[#0f172a] px-3.5 py-1.5 rounded-lg border border-stone-200/80 dark:border-slate-800 text-xs font-semibold text-slate-500 dark:text-slate-400">
+      <div class="flex items-center space-x-2 bg-white dark:bg-[#0b2018] px-3.5 py-1.5 rounded-lg border border-stone-200/80 dark:border-[#1a3b2e] text-xs font-semibold text-slate-500 dark:text-[#9ab3a8]">
         <span>মোট জিকির:</span>
         <span id="total-session-display" class="text-amber-700 dark:text-amber-400 font-bold font-mono">০</span>
       </div>
@@ -145,33 +145,33 @@
     <!-- Target quick presets -->
     <div class="flex items-center space-x-2 mt-6">
       <span class="text-xs font-bold text-slate-400">টার্গেট:</span>
-      <button onclick="setTarget(33)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="33">৩৩</button>
-      <button onclick="setTarget(99)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="99">৯৯</button>
-      <button onclick="setTarget(100)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="100">১০০</button>
-      <button onclick="setTarget(1000)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-slate-700 bg-white dark:bg-[#0f172a] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="1000">১০০০</button>
+      <button onclick="setTarget(33)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-[#1a3b2e] bg-white dark:bg-[#0b2018] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="33">৩৩</button>
+      <button onclick="setTarget(99)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-[#1a3b2e] bg-white dark:bg-[#0b2018] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="99">৯৯</button>
+      <button onclick="setTarget(100)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-[#1a3b2e] bg-white dark:bg-[#0b2018] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="100">১০০</button>
+      <button onclick="setTarget(1000)" class="target-chip px-3 py-1 text-xs font-bold rounded-lg border border-stone-200 dark:border-[#1a3b2e] bg-white dark:bg-[#0b2018] hover:border-primary text-slate-700 dark:text-slate-300 transition-all" data-target="1000">১০০০</button>
     </div>
 
     <!-- Bottom Controls -->
     <div class="mt-7 w-full max-w-sm grid grid-cols-3 gap-3">
       <button id="reset-btn" class="flex flex-col items-center space-y-1.5 group p-2">
-        <div class="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-xs border border-stone-200/80 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:text-red-500 group-hover:border-red-200 transition-all">
+        <div class="w-12 h-12 bg-white dark:bg-[#0b2018] rounded-xl shadow-xs border border-stone-200/80 dark:border-[#1a3b2e] flex items-center justify-center text-slate-400 group-hover:text-red-500 group-hover:border-red-200 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
         </div>
-        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">রিসেট</span>
+        <span class="text-xs font-semibold text-slate-500 dark:text-[#9ab3a8]">রিসেট</span>
       </button>
 
       <button id="target-btn" class="flex flex-col items-center space-y-1.5 group p-2">
-        <div class="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-xs border border-stone-200/80 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all">
+        <div class="w-12 h-12 bg-white dark:bg-[#0b2018] rounded-xl shadow-xs border border-stone-200/80 dark:border-[#1a3b2e] flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
         </div>
-        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">টার্গেট বদল</span>
+        <span class="text-xs font-semibold text-slate-500 dark:text-[#9ab3a8]">টার্গেট বদল</span>
       </button>
 
       <button id="sound-btn" class="flex flex-col items-center space-y-1.5 group p-2">
-        <div id="sound-icon-container" class="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-xs border border-stone-200/80 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all">
+        <div id="sound-icon-container" class="w-12 h-12 bg-white dark:bg-[#0b2018] rounded-xl shadow-xs border border-stone-200/80 dark:border-[#1a3b2e] flex items-center justify-center text-slate-400 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all">
           <svg id="sound-on" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
         </div>
-        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">শব্দ</span>
+        <span class="text-xs font-semibold text-slate-500 dark:text-[#9ab3a8]">শব্দ</span>
       </button>
     </div>
   </main>
@@ -181,12 +181,12 @@
   <!-- Reset Confirmation Modal -->
   <div id="reset-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-6">
     <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"></div>
-    <div class="relative bg-white dark:bg-slate-900 w-full max-w-sm rounded-2xl p-8 shadow-xl border border-stone-200/90 dark:border-slate-800/80 text-center">
+    <div class="relative bg-white dark:bg-[#0b2018] w-full max-w-sm rounded-2xl p-8 shadow-xl border border-stone-200/90 dark:border-[#1a3b2e]/80 text-center">
       <div class="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/40 text-red-500 flex items-center justify-center mx-auto mb-4 font-bold text-xl">⚠️</div>
       <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-2">রিসেট করতে চান?</h3>
       <p class="text-slate-500 text-sm mb-6">আপনার বর্তমান চক্রের গণনা শূন্য হয়ে যাবে।</p>
       <div class="flex space-x-3">
-        <button id="cancel-reset" class="flex-grow py-3 bg-stone-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-bold text-sm">না</button>
+        <button id="cancel-reset" class="flex-grow py-3 bg-stone-100 dark:bg-[#102b20] text-slate-700 dark:text-slate-300 rounded-xl font-bold text-sm">না</button>
         <button id="confirm-reset" class="flex-grow py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl font-bold text-sm shadow-md transition-all">হ্যাঁ, রিসেট</button>
       </div>
     </div>
@@ -317,7 +317,7 @@
           if (tVal === target) {
             chip.className = 'target-chip px-3 py-1 text-xs font-bold rounded-full border border-emerald-600 bg-emerald-600 text-white shadow-sm transition-all';
           } else {
-            chip.className = 'target-chip px-3 py-1 text-xs font-bold rounded-full border border-stone-200 dark:border-slate-700 bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-emerald-300 transition-all';
+            chip.className = 'target-chip px-3 py-1 text-xs font-bold rounded-full border border-stone-200 dark:border-[#1a3b2e] bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 hover:border-emerald-300 transition-all';
           }
         });
 

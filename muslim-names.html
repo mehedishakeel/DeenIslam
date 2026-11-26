@@ -69,7 +69,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
@@ -86,27 +86,27 @@
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
         মুসলিম শিশুদের সুন্দর ও অর্থবহ নাম
       </h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
         রাসূলুল্লাহ (ﷺ) বলেছেন: "কিয়ামতের দিন তোমাদেরকে তোমাদের নাম ও পিতার নাম ধরে ডাকা হবে। সুতরাং তোমরা সুন্দর নাম রাখো।" (আবু দাউদ)
       </p>
     </div>
 
     <!-- Quick Stats Cards -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-8">
-      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
-        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">মোট নাম</span>
+      <div class="bg-white dark:bg-[#0b2018] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-[#9ab3a8] block mb-1">মোট নাম</span>
         <span id="stat-total" class="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">১১৫</span>
       </div>
-      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
-        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">ছেলেদের নাম</span>
+      <div class="bg-white dark:bg-[#0b2018] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-[#9ab3a8] block mb-1">ছেলেদের নাম</span>
         <span id="stat-boys" class="text-xl sm:text-2xl font-black text-teal-600 dark:text-teal-400">৬৫</span>
       </div>
-      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
-        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">মেয়েদের নাম</span>
+      <div class="bg-white dark:bg-[#0b2018] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-[#9ab3a8] block mb-1">মেয়েদের নাম</span>
         <span id="stat-girls" class="text-xl sm:text-2xl font-black text-rose-600 dark:text-rose-400">৫০</span>
       </div>
-      <div class="bg-white dark:bg-[#0f172a] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center shadow-2xs">
-        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-1">পছন্দের তালিকা</span>
+      <div class="bg-white dark:bg-[#0b2018] p-3.5 sm:p-4 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] text-center shadow-2xs">
+        <span class="text-xs font-bold text-slate-500 dark:text-[#9ab3a8] block mb-1">পছন্দের তালিকা</span>
         <span id="stat-favorites" class="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400">০</span>
       </div>
     </div>
@@ -116,32 +116,32 @@
       <button onclick="setTab('all')" id="tab-all" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-emerald-600 text-white shadow-2xs">
         সবগুলো
       </button>
-      <button onclick="setTab('boy')" id="tab-boy" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('boy')" id="tab-boy" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         👦 ছেলে
       </button>
-      <button onclick="setTab('girl')" id="tab-girl" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('girl')" id="tab-girl" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         👧 মেয়ে
       </button>
-      <button onclick="setTab('prophet')" id="tab-prophet" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('prophet')" id="tab-prophet" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         🌟 নবী ও রাসূল
       </button>
-      <button onclick="setTab('sahabi')" id="tab-sahabi" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('sahabi')" id="tab-sahabi" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         🛡️ সাহাবী ও সাহাবীয়া
       </button>
-      <button onclick="setTab('favorites')" id="tab-favorites" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('favorites')" id="tab-favorites" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         ❤️ পছন্দ
       </button>
-      <button onclick="setTab('guidelines')" id="tab-guidelines" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('guidelines')" id="tab-guidelines" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         📜 সুন্নাত নীতিমালা
       </button>
-      <button onclick="setTab('prohibited')" id="tab-prohibited" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-rose-600 border border-stone-200/80 dark:border-slate-800">
+      <button onclick="setTab('prohibited')" id="tab-prohibited" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-rose-600 border border-stone-200/80 dark:border-[#1a3b2e]">
         ⚠️ বর্জনীয় নাম
       </button>
     </div>
 
     <!-- Letter Filter Strip (Visible on names views) -->
     <div id="letter-filter-section" class="mb-6">
-      <div class="flex items-center gap-1.5 flex-wrap justify-center bg-white dark:bg-[#0f172a] p-3 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+      <div class="flex items-center gap-1.5 flex-wrap justify-center bg-white dark:bg-[#0b2018] p-3 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-2xs">
         <span class="text-xs font-bold text-slate-400 dark:text-slate-500 mr-1 hidden sm:inline">হরফ অনুযায়ী:</span>
         <button onclick="setLetter('all')" id="letter-all" class="letter-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all bg-emerald-600 text-white">সকল</button>
         <button onclick="setLetter('অ')" class="letter-btn px-2 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40">অ</button>
@@ -173,11 +173,11 @@
     <div id="search-section" class="flex flex-col sm:flex-row items-center justify-between gap-3.5 mb-8 max-w-3xl mx-auto">
       <div class="relative w-full">
         <input type="text" id="names-search" placeholder="বাংলা নাম, ইংরেজি বানান বা অর্থ দিয়ে সহজে খুঁজুন..." 
-          class="w-full py-3.5 pl-11 pr-10 bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+          class="w-full py-3.5 pl-11 pr-10 bg-white dark:bg-[#0b2018] border border-stone-200/80 dark:border-[#1a3b2e] rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
         <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
         <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold p-1">✕</button>
       </div>
-      <div class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-3.5 py-2.5 bg-white dark:bg-[#0f172a] rounded-xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+      <div class="text-xs font-bold text-slate-500 dark:text-[#9ab3a8] shrink-0 px-3.5 py-2.5 bg-white dark:bg-[#0b2018] rounded-xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-2xs">
         মোট নাম: <span id="filtered-count" class="text-emerald-600 dark:text-emerald-400 font-black text-sm">১১৫</span> টি
       </div>
     </div>
@@ -189,14 +189,14 @@
 
     <!-- Guidelines Container (Visible when guidelines tab active) -->
     <div id="guidelines-container" class="hidden max-w-4xl mx-auto space-y-4">
-      <div class="bg-white dark:bg-[#0f172a] p-6 sm:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs mb-6">
+      <div class="bg-white dark:bg-[#0b2018] p-6 sm:p-8 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-2xs mb-6">
         <div class="flex items-center space-x-3 mb-4">
           <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xl">
             📜
           </div>
           <div>
             <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">ইসলামিক নাম রাখার সুন্নাত নীতিমালা</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400">কুরআন ও সহীহ সুন্নাহ মোতাবেক নবজাতকের নাম নির্বাচনের সঠিক দিকনির্দেশনা</p>
+            <p class="text-xs text-slate-500 dark:text-[#9ab3a8]">কুরআন ও সহীহ সুন্নাহ মোতাবেক নবজাতকের নাম নির্বাচনের সঠিক দিকনির্দেশনা</p>
           </div>
         </div>
         <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -232,7 +232,7 @@
     </div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 max-w-xl mx-auto">
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] max-w-xl mx-auto">
       <div class="text-4xl mb-3">🔍</div>
       <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো নাম পাওয়া যায়নি</h3>
       <p class="text-slate-400 text-xs mt-1 mb-4">অন্য কোনো হরফ বা শব্দ দিয়ে অনুসন্ধান করে দেখুন</p>
@@ -276,7 +276,7 @@
       
       // Update tab button styles
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0f172a] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-slate-800';
+        btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shrink-0 bg-white dark:bg-[#0b2018] text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-stone-200/80 dark:border-[#1a3b2e]';
       });
       const activeBtn = document.getElementById(`tab-${tab}`);
       if (activeBtn) {
@@ -392,7 +392,7 @@
           : '<span class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-950/50 text-rose-800 dark:text-rose-300 text-[10px] font-bold border border-rose-200/60 dark:border-rose-800/40">👧 মেয়ে</span>';
 
         return `
-          <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
+          <div class="bg-white dark:bg-[#0b2018] p-5 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] hover:border-emerald-500/40 hover:shadow-xs transition-all duration-200 relative group flex flex-col justify-between">
             <div>
               <!-- Top Row Badges & Actions -->
               <div class="flex justify-between items-center mb-3">
@@ -402,25 +402,25 @@
                 </div>
                 <div class="flex items-center space-x-1">
                   <!-- Audio Speech -->
-                  <button onclick="speakName('${n.arabic}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="আরবি উচ্চারণ শুনুন">
+                  <button onclick="speakName('${n.arabic}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="আরবি উচ্চারণ শুনুন">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     </svg>
                   </button>
                   <!-- Copy Button -->
-                  <button onclick="copyName(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+                  <button onclick="copyName(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5H6a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                     </svg>
                   </button>
                   <!-- Bookmark Button -->
-                  <button onclick="handleNameBookmark(event, ${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="পছন্দের তালিকায় রাখুন">
+                  <button onclick="handleNameBookmark(event, ${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="পছন্দের তালিকায় রাখুন">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                     </svg>
                   </button>
                   <!-- Share Image Button -->
-                  <button onclick="shareNameCard(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কার্ড শেয়ার করুন">
+                  <button onclick="shareNameCard(${n.id})" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কার্ড শেয়ার করুন">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                     </svg>
@@ -429,7 +429,7 @@
               </div>
 
               <!-- Arabic Calligraphy Box -->
-              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-slate-800/80 rounded-xl border border-stone-200/60 dark:border-slate-700/60">
+              <div class="text-center my-2.5 py-3.5 px-3 bg-stone-50/80 dark:bg-[#102b20]/80 rounded-xl border border-stone-200/60 dark:border-[#1a3b2e]/60">
                 <p class="font-arabic text-3xl md:text-4xl text-slate-900 dark:text-emerald-200 font-normal leading-relaxed" dir="rtl">${n.arabic}</p>
               </div>
 
@@ -437,14 +437,14 @@
               <div class="text-center mt-2.5">
                 <h3 class="text-lg font-black text-slate-800 dark:text-white mb-0.5">${n.name}</h3>
                 <p class="text-xs font-mono font-semibold text-emerald-700 dark:text-emerald-400 mb-2">${n.english}</p>
-                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal pt-2 border-t border-stone-100 dark:border-slate-800/60">
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-normal pt-2 border-t border-stone-100 dark:border-[#1a3b2e]/60">
                   <span class="font-semibold text-slate-700 dark:text-slate-200">অর্থ:</span> ${n.meaning}
                 </p>
               </div>
             </div>
 
             <!-- Footer Reference Tag -->
-            <div class="mt-4 pt-2.5 border-t border-stone-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
+            <div class="mt-4 pt-2.5 border-t border-stone-100 dark:border-[#1a3b2e]/80 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
               <span class="inline-flex items-center space-x-1">
                 <span>📖</span>
                 <span>${n.ref || 'ইসলামিক ঐতিহ্য'}</span>
@@ -461,7 +461,7 @@
     function renderGuidelines() {
       const container = document.getElementById('guidelines-cards');
       container.innerHTML = guidelinesList.map((g, idx) => `
-        <div class="bg-white dark:bg-[#0f172a] p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+        <div class="bg-white dark:bg-[#0b2018] p-5 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-2xs">
           <div class="flex items-center space-x-2.5 mb-2.5">
             <span class="w-6 h-6 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs">
               ${window.toBengaliNumerals(idx + 1)}
@@ -476,14 +476,14 @@
     function renderProhibited() {
       const container = document.getElementById('prohibited-cards');
       container.innerHTML = prohibitedList.map(p => `
-        <div class="bg-white dark:bg-[#0f172a] p-4 sm:p-5 rounded-2xl border border-rose-200/80 dark:border-rose-900/40 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="bg-white dark:bg-[#0b2018] p-4 sm:p-5 rounded-2xl border border-rose-200/80 dark:border-rose-900/40 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="space-y-1">
             <div class="flex items-center space-x-2">
               <span class="text-rose-500 text-xs">🚫</span>
               <h4 class="text-sm font-bold text-slate-900 dark:text-white">${p.name}</h4>
               <span class="font-arabic text-sm text-slate-600 dark:text-slate-300" dir="rtl">${p.arabic}</span>
             </div>
-            <p class="text-xs text-slate-600 dark:text-slate-400"><span class="font-semibold text-rose-700 dark:text-rose-400">কারণ:</span> ${p.reason}</p>
+            <p class="text-xs text-slate-600 dark:text-[#9ab3a8]"><span class="font-semibold text-rose-700 dark:text-rose-400">কারণ:</span> ${p.reason}</p>
           </div>
           <span class="self-start sm:self-center px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-[11px] font-bold shrink-0 border border-rose-200/60 dark:border-rose-800/40">
             বর্জনীয়

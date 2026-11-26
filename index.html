@@ -89,7 +89,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 selection:bg-emerald-500 selection:text-white bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 selection:bg-emerald-500 selection:text-white bg-islamic-pattern">
 
   <!-- Navbar Placeholder (Injected via js/components.js) -->
   <div id="navbar-placeholder"></div>
@@ -103,18 +103,26 @@
       <!-- 2-Column Balanced Architectural Layout -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-        <!-- Column 1: Deep Botanical Emerald Prayer Focal Sanctuary (7 cols) -->
-        <div class="lg:col-span-7 relative bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#043328] rounded-2xl p-6 sm:p-8 text-white shadow-md overflow-hidden border border-emerald-500/25 flex flex-col justify-between">
+        <!-- Column 1: Midnight Mosque Sanctuary Card (7 cols) -->
+        <div class="lg:col-span-7 relative bg-gradient-to-br from-[#042219] via-[#062d21] to-[#073628] rounded-2xl p-6 sm:p-8 text-white shadow-md overflow-hidden border border-[#e5b84b]/30 flex flex-col justify-between">
           
-          <!-- Subtle Arabesque Star Geometry Overlay -->
-          <div class="absolute inset-0 opacity-10 pointer-events-none">
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="islamic-geom-grid" width="48" height="48" patternUnits="userSpaceOnUse">
-                  <path d="M24 0 L48 24 L24 48 L0 24 Z M24 12 L36 24 L24 36 L12 24 Z" fill="none" stroke="white" stroke-width="0.75"/>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#islamic-geom-grid)" />
+          <!-- Subtle Architectural Mosque Skyline Overlay -->
+          <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" preserveAspectRatio="xMidYMax slice">
+              <g fill="rgba(16,185,129,0.22)" stroke="rgba(229,184,75,0.45)" stroke-width="1.2">
+                <rect x="190" y="255" width="220" height="65" />
+                <path d="M264 255 C264 205, 290 192, 300 176 C310 192, 336 205, 336 255 Z" />
+                <line x1="300" y1="176" x2="300" y2="162" />
+                <circle cx="300" cy="159" r="3" />
+                <rect x="215" y="270" width="44" height="50" />
+                <path d="M217 270 Q237 236 257 270 Z" />
+                <rect x="341" y="270" width="44" height="50" />
+                <path d="M343 270 Q363 236 383 270 Z" />
+                <rect x="180" y="200" width="14" height="120" />
+                <path d="M178 200 Q187 178 196 200 Z" />
+                <rect x="406" y="200" width="14" height="120" />
+                <path d="M404 200 Q413 178 422 200 Z" />
+              </g>
             </svg>
           </div>
 
@@ -150,7 +158,7 @@
                   cx="80" 
                   cy="80" 
                   r="64" 
-                  class="text-amber-400" 
+                  class="text-[#e5b84b]" 
                   stroke-width="7" 
                   stroke-dasharray="402.12" 
                   stroke-dashoffset="120" 
@@ -165,7 +173,7 @@
               <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center select-none">
                 <span class="text-[11px] uppercase font-bold tracking-widest text-emerald-200/90 mb-1">পরবর্তী ওয়াক্ত</span>
                 <h2 id="next-prayer-name" class="text-3xl sm:text-4xl font-black text-white tracking-tight my-1">ফজর</h2>
-                <div class="flex items-center space-x-1 text-base text-amber-300 font-bold font-mono mt-0.5">
+                <div class="flex items-center space-x-1 text-base text-[#e5b84b] font-bold font-mono mt-0.5">
                   <span id="next-prayer-time">--:--</span>
                 </div>
               </div>
@@ -205,7 +213,7 @@
         <div class="lg:col-span-5 flex flex-col gap-6 justify-between">
           
           <!-- Card A: Daily Quranic Ayah Card -->
-          <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 sm:p-7 shadow-sm border border-stone-200/80 dark:border-slate-800 flex flex-col justify-between relative">
+          <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-6 sm:p-7 shadow-sm border border-stone-200/80 dark:border-[#1a3b2e] flex flex-col justify-between relative">
             <div>
               <!-- Header Pill -->
               <div class="flex items-center justify-between mb-4">
@@ -214,7 +222,7 @@
                   <span>আজকের আয়াত • Daily Ayah</span>
                 </span>
                 <div class="flex items-center space-x-2">
-                  <button onclick="shareDailyAyahCard()" class="px-2.5 py-1 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all text-xs font-bold flex items-center space-x-1" title="ছবি হিসেবে শেয়ার করুন">
+                  <button onclick="shareDailyAyahCard()" class="px-2.5 py-1 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all text-xs font-bold flex items-center space-x-1" title="ছবি হিসেবে শেয়ার করুন">
                     <span>📤</span>
                     <span class="hidden sm:inline">শেয়ার</span>
                   </button>
@@ -239,9 +247,9 @@
             </div>
 
             <!-- Footer Reference & Link -->
-            <div class="pt-4 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between">
+            <div class="pt-4 border-t border-stone-100 dark:border-[#1a3b2e] flex items-center justify-between">
               <p id="daily-verse-ref" class="text-xs font-bold text-emerald-700 dark:text-emerald-400">সূরা আল-বাকারা: ১৫৩</p>
-              <a href="quran.html" class="inline-flex items-center space-x-1 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+              <a href="quran.html" class="inline-flex items-center space-x-1 text-xs font-bold text-slate-500 dark:text-[#9ab3a8] hover:text-primary transition-colors">
                 <span>তিলাওয়াত শুনুন ও পড়ুন</span>
                 <span>→</span>
               </a>
@@ -252,7 +260,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             <!-- Widget 1: Fasting & Ramadan Tracker -->
-            <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-sm border border-stone-200/80 dark:border-slate-800 flex flex-col justify-between">
+            <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-5 shadow-sm border border-stone-200/80 dark:border-[#1a3b2e] flex flex-col justify-between">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2.5 py-0.5 rounded-md border border-amber-200/50 dark:border-amber-800/40">
                   🌙 সাওম ট্র্যাকার
@@ -269,14 +277,14 @@
                 <div id="bento-fasting-clock" class="font-mono text-2xl font-black text-amber-600 dark:text-amber-400 tracking-tight my-1">
                   --:--:--
                 </div>
-                <p id="bento-fasting-info" class="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                <p id="bento-fasting-info" class="text-[11px] text-slate-500 dark:text-[#9ab3a8] truncate">
                   মাগরিব (ইফতার): --:--
                 </p>
               </div>
 
               <!-- Two-Tone Fasting Progress Bar -->
-              <div class="space-y-1.5 pt-2 border-t border-stone-100 dark:border-slate-800">
-                <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
+              <div class="space-y-1.5 pt-2 border-t border-stone-100 dark:border-[#1a3b2e]">
+                <div class="w-full h-1.5 bg-slate-100 dark:bg-[#102b20] rounded-full overflow-hidden flex">
                   <div id="bento-fasting-bar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-500 transition-all duration-500" style="width: 50%"></div>
                 </div>
                 <div class="flex justify-between items-center text-[10px] font-semibold text-slate-400">
@@ -288,7 +296,7 @@
             </div>
 
             <!-- Widget 2: Continue Reading Surah -->
-            <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 shadow-sm border border-stone-200/80 dark:border-slate-800 flex flex-col justify-between">
+            <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-5 shadow-sm border border-stone-200/80 dark:border-[#1a3b2e] flex flex-col justify-between">
               <div class="flex items-center justify-between mb-2">
                 <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-0.5 rounded-md border border-emerald-200/50 dark:border-emerald-800/40">
                   সর্বশেষ পঠিত
@@ -302,13 +310,13 @@
                 <h4 id="home-last-read-title" class="text-sm font-black text-slate-800 dark:text-white truncate">
                   Surah Al-Kahf
                 </h4>
-                <p id="home-last-read-sub" class="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                <p id="home-last-read-sub" class="text-[11px] text-slate-500 dark:text-[#9ab3a8] truncate">
                   সূরা আল-কাহাফ • আয়াত ১-১৫
                 </p>
               </div>
 
               <div class="space-y-1.5 my-2">
-                <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden flex">
+                <div class="w-full h-1.5 bg-slate-100 dark:bg-[#102b20] rounded-full overflow-hidden flex">
                   <div id="home-progress-bar-1" class="h-full bg-emerald-500 transition-all duration-500" style="width: 35%"></div>
                   <div id="home-progress-bar-2" class="h-full bg-amber-400 transition-all duration-500" style="width: 25%"></div>
                 </div>
@@ -318,7 +326,7 @@
                 </div>
               </div>
 
-              <a id="home-last-read-link" href="surah.html?id=18" class="w-full py-1.5 bg-stone-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-primary font-bold text-xs rounded-lg text-center transition-all flex items-center justify-center space-x-1 group">
+              <a id="home-last-read-link" href="surah.html?id=18" class="w-full py-1.5 bg-stone-100 dark:bg-[#102b20] hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-primary font-bold text-xs rounded-lg text-center transition-all flex items-center justify-center space-x-1 group">
                 <span>পড়া চালিয়ে যান</span>
                 <span class="group-hover:translate-x-1 transition-transform">→</span>
               </a>
@@ -337,75 +345,75 @@
       <div class="flex items-center justify-between mb-5">
         <div>
           <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white tracking-tight">প্রধান ইসলামিক সংকলন ও সেবা</h2>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">সহীহ দলিল ও নির্ভরযোগ্য রেফারেন্সসহ প্রাত্যহিক ইবাদত সহায়ক</p>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-[#9ab3a8] mt-0.5">সহীহ দলিল ও নির্ভরযোগ্য রেফারেন্সসহ প্রাত্যহিক ইবাদত সহায়ক</p>
         </div>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
         
         <!-- Tool 1: Quran -->
-        <a href="quran.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+        <a href="quran.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
           <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
             📖
           </div>
           <div>
             <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">আল-কুরআন</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">১১৪ সূরা ও ৩০ পারা</p>
+            <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">১১৪ সূরা ও ৩০ পারা</p>
           </div>
         </a>
 
         <!-- Tool 2: Hadith -->
-        <a href="hadith.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+        <a href="hadith.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
           <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
             📜
           </div>
           <div>
             <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">সহীহ হাদিস</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">৭টি প্রধান গ্রন্থ</p>
+            <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">৭টি প্রধান গ্রন্থ</p>
           </div>
         </a>
 
         <!-- Tool 3: Dua -->
-        <a href="dua.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+        <a href="dua.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
           <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
             🤲
           </div>
           <div>
             <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">দৈনন্দিন দো'আ</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">হিসনুল মুসলিম</p>
+            <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">হিসনুল মুসলিম</p>
           </div>
         </a>
 
         <!-- Tool 4: Tasbih -->
-        <a href="tasbih.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+        <a href="tasbih.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
           <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
             📿
           </div>
           <div>
             <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">ডিজিটাল তাসবীহ</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">জিকির ও কাউন্টার</p>
+            <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">জিকির ও কাউন্টার</p>
           </div>
         </a>
 
         <!-- Tool 5: Qibla -->
-        <a href="qibla.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+        <a href="qibla.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
           <div class="w-10 h-10 bg-emerald-50 dark:bg-emerald-950/50 text-primary rounded-xl flex items-center justify-center text-lg mb-3 group-hover:scale-110 transition-transform">
             🧭
           </div>
           <div>
             <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">কিবলা কম্পাস</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">সঠিক দিকনির্ণয়</p>
+            <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">সঠিক দিকনির্ণয়</p>
           </div>
         </a>
 
         <!-- Tool 6: Namaz Guide -->
-        <a href="namaz.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
+        <a href="namaz.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-4 sm:p-5 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all group flex flex-col justify-between">
           <div class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg mb-3 shadow-sm group-hover:scale-110 transition-transform">
             🕌
           </div>
           <div>
             <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">নামাজ শিক্ষা</h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">সহীহ সালাত গাইড</p>
+            <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">সহীহ সালাত গাইড</p>
           </div>
         </a>
 
@@ -431,14 +439,14 @@
           </div>
         </div>
 
-        <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs flex flex-col justify-between gap-3 group hover:border-emerald-500/40 transition-all">
+        <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs flex flex-col justify-between gap-3 group hover:border-emerald-500/40 transition-all">
           <div class="space-y-1.5">
             <div class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300 text-[11px] font-bold border border-teal-200/60 dark:border-teal-800/40">
               <span>👶</span>
               <span>নবজাতকের সুন্দর নাম</span>
             </div>
             <h3 class="text-base font-black text-slate-800 dark:text-white group-hover:text-primary transition-colors">মুসলিম শিশুদের সুন্দর নাম ও অর্থ</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            <p class="text-xs text-slate-500 dark:text-[#9ab3a8] leading-relaxed">
               কুরআন ও হাদিসের আলোকে নবজাতক ছেলে ও মেয়েদের জন্য অর্থপূর্ণ বরকতময় নাম, নবীদের নাম ও সুন্নাত আদব।
             </p>
           </div>
@@ -456,12 +464,12 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- Card 1: Hisnul Muslim Daily Dua Card -->
-        <a href="dua.html" class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group block">
+        <a href="dua.html" class="bg-white dark:bg-[#0b2018] rounded-2xl p-6 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group block">
           <div>
             <div class="flex items-center justify-between mb-3">
               <h3 class="font-bold text-sm text-slate-800 dark:text-white group-hover:text-primary transition-colors">প্রাত্যহিক দো'আ</h3>
               <div class="flex items-center space-x-1.5">
-                <button onclick="event.preventDefault(); event.stopPropagation(); shareDailyDuaCard();" class="p-1 px-2 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-500 hover:text-emerald-600 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all text-xs font-bold flex items-center space-x-1" title="ছবি হিসেবে শেয়ার করুন">
+                <button onclick="event.preventDefault(); event.stopPropagation(); shareDailyDuaCard();" class="p-1 px-2 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-500 hover:text-emerald-600 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all text-xs font-bold flex items-center space-x-1" title="ছবি হিসেবে শেয়ার করুন">
                   <span>📤</span>
                   <span class="text-[10px]">শেয়ার</span>
                 </button>
@@ -474,14 +482,14 @@
               <p id="bento-dua-arabic" class="font-arabic text-xl leading-relaxed text-slate-800 dark:text-white font-bold select-all" dir="rtl">
                 اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا
               </p>
-              <p class="font-arabic text-sm text-slate-500 dark:text-slate-400 mt-1" dir="rtl">
+              <p class="font-arabic text-sm text-slate-500 dark:text-[#9ab3a8] mt-1" dir="rtl">
                 وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ
               </p>
             </div>
           </div>
 
           <!-- Bengali Translation -->
-          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-slate-800">
+          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-[#1a3b2e]">
             <p id="bento-dua-bn" class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
               "হে আল্লাহ! নিশ্চয়ই আমি আমার নিজের ওপর বহু জুলুম করেছি, আর আপনি ছাড়া কোনো ক্ষমাকারী নেই..."
             </p>
@@ -493,7 +501,7 @@
         </a>
 
         <!-- Card 3: 99 Names of Allah Dynamic Grid Tile -->
-        <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+        <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-5 sm:p-6 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
           <div>
             <div class="flex items-center justify-between mb-2.5">
               <div class="flex items-center space-x-1.5">
@@ -514,8 +522,8 @@
           </div>
 
           <!-- Interactive Action Deck & Footer -->
-          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between">
-            <button onclick="cycleBentoNamesBatch()" class="px-2.5 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary bg-stone-100 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-slate-700 rounded-lg border border-stone-200/80 dark:border-slate-700 transition-colors flex items-center space-x-1" title="পরবর্তী নামগুলো দেখুন">
+          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-[#1a3b2e] flex items-center justify-between">
+            <button onclick="cycleBentoNamesBatch()" class="px-2.5 py-1 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary bg-stone-100 dark:bg-[#102b20]/80 hover:bg-emerald-50 dark:hover:bg-slate-700 rounded-lg border border-stone-200/80 dark:border-[#1a3b2e] transition-colors flex items-center space-x-1" title="পরবর্তী নামগুলো দেখুন">
               <span id="bento-cycle-btn-text">পরবর্তী ৯টি ↻</span>
             </button>
             <a href="allah-names.html" class="text-[11px] font-bold text-primary hover:underline">
@@ -525,7 +533,7 @@
         </div>
 
         <!-- Card 4: Quran Surah Recitation & Audio Player -->
-        <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
+        <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-6 border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between group">
           <div>
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center space-x-1.5">
@@ -538,7 +546,7 @@
             </div>
 
             <!-- Surah Calligraphy & Info Box -->
-            <div class="my-2 p-3.5 rounded-xl bg-gradient-to-b from-stone-50 to-amber-50/20 dark:from-slate-900/80 dark:to-amber-950/10 border border-stone-200/70 dark:border-slate-800 text-center">
+            <div class="my-2 p-3.5 rounded-xl bg-gradient-to-b from-stone-50 to-amber-50/20 dark:from-slate-900/80 dark:to-amber-950/10 border border-stone-200/70 dark:border-[#1a3b2e] text-center">
               <h4 id="bento-surah-ar" class="font-arabic text-2xl font-extrabold text-amber-800 dark:text-amber-300 leading-tight" dir="rtl">
                 سُورَةُ الفَاتِحَةِ
               </h4>
@@ -586,7 +594,7 @@
               </div>
 
               <!-- Time Counter -->
-              <span id="bento-audio-timer" class="font-mono text-[11px] text-slate-500 dark:text-slate-400 font-bold shrink-0">
+              <span id="bento-audio-timer" class="font-mono text-[11px] text-slate-500 dark:text-[#9ab3a8] font-bold shrink-0">
                 ০:০০
               </span>
 
@@ -594,7 +602,7 @@
           </div>
 
           <!-- Footer Link -->
-          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-[11px]">
+          <div class="mt-2 pt-3 border-t border-stone-100 dark:border-[#1a3b2e] flex justify-between items-center text-[11px]">
             <span class="text-slate-400">মিশারি আল-আফাসি</span>
             <a href="quran.html" class="text-primary font-bold hover:underline">পূর্ণ কুরআন শুনুন →</a>
           </div>
@@ -610,31 +618,31 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="text-center mb-8">
         <h2 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-white mb-2 tracking-tight">ইসলামের পাঁচটি স্তম্ভ</h2>
-        <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400">প্রতিটি স্তম্ভ সম্পর্কে সহীহ দলিল ও পূর্ণাঙ্গ গাইডলাইন</p>
+        <p class="text-xs md:text-sm text-slate-500 dark:text-[#9ab3a8]">প্রতিটি স্তম্ভ সম্পর্কে সহীহ দলিল ও পূর্ণাঙ্গ গাইডলাইন</p>
         <div class="w-12 h-0.5 bg-amber-500 mx-auto rounded-full mt-3"></div>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-5">
-        <a href="kalima.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+        <a href="kalima.html" class="bg-white dark:bg-[#0b2018] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
           <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">১</div>
           <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">কালেমা</h3>
           <p class="text-[11px] text-slate-400 mt-0.5">ঈমানের ঘোষণা</p>
         </a>
-        <a href="namaz.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+        <a href="namaz.html" class="bg-white dark:bg-[#0b2018] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
           <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">২</div>
           <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">নামাজ</h3>
           <p class="text-[11px] text-slate-400 mt-0.5">দৈনিক ৫ ওয়াক্ত সালাত</p>
         </a>
-        <a href="roja.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+        <a href="roja.html" class="bg-white dark:bg-[#0b2018] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
           <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">৩</div>
           <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">রোজা</h3>
           <p class="text-[11px] text-slate-400 mt-0.5">মাহে রামাদানের সাওম</p>
         </a>
-        <a href="zakat.html" class="bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+        <a href="zakat.html" class="bg-white dark:bg-[#0b2018] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
           <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">৪</div>
           <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">যাকাত</h3>
           <p class="text-[11px] text-slate-400 mt-0.5">সম্পদের পবিত্রতা</p>
         </a>
-        <a href="hajj.html" class="col-span-2 sm:col-span-1 bg-white dark:bg-[#0f172a] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
+        <a href="hajj.html" class="col-span-2 sm:col-span-1 bg-white dark:bg-[#0b2018] p-5 sm:p-7 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/40 hover:shadow-md transition-all text-center block group">
           <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 rounded-xl flex items-center justify-center mx-auto mb-3 font-bold text-xl group-hover:scale-105 transition-transform">৫</div>
           <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-white group-hover:text-primary transition-colors">হজ</h3>
           <p class="text-[11px] text-slate-400 mt-0.5">বাইতুল্লাহর সফর</p>
@@ -644,8 +652,8 @@
 
     <!-- ZAKAT CALCULATOR SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="bg-white dark:bg-[#0f172a] rounded-2xl p-6 sm:p-8 md:p-10 shadow-sm border border-stone-200/80 dark:border-slate-800">
-        <div class="flex items-center justify-between mb-8 pb-4 border-b border-stone-100 dark:border-slate-800">
+      <div class="bg-white dark:bg-[#0b2018] rounded-2xl p-6 sm:p-8 md:p-10 shadow-sm border border-stone-200/80 dark:border-[#1a3b2e]">
+        <div class="flex items-center justify-between mb-8 pb-4 border-b border-stone-100 dark:border-[#1a3b2e]">
           <div class="flex items-center space-x-3.5">
             <div class="w-11 h-11 bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 rounded-xl flex items-center justify-center font-bold text-lg">৳</div>
             <div>
@@ -659,20 +667,20 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div class="space-y-4">
             <div>
-              <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">১. নগদ অর্থ (হাতে ও ব্যাংকে)</label>
-              <input type="number" id="zakat-cash" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+              <label class="block text-[11px] font-bold text-slate-500 dark:text-[#9ab3a8] mb-1.5 uppercase tracking-wider">১. নগদ অর্থ (হাতে ও ব্যাংকে)</label>
+              <input type="number" id="zakat-cash" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-[#102b20]/80 border border-stone-200 dark:border-[#1a3b2e] focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
             </div>
             <div>
-              <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">২. স্বর্ণ ও রূপা (বর্তমান বাজারমূল্য)</label>
-              <input type="number" id="zakat-gold" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+              <label class="block text-[11px] font-bold text-slate-500 dark:text-[#9ab3a8] mb-1.5 uppercase tracking-wider">২. স্বর্ণ ও রূপা (বর্তমান বাজারমূল্য)</label>
+              <input type="number" id="zakat-gold" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-[#102b20]/80 border border-stone-200 dark:border-[#1a3b2e] focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
             </div>
             <div>
-              <label class="block text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 uppercase tracking-wider">৩. ব্যবসায়িক পণ্য ও মজুদ সম্পদ</label>
-              <input type="number" id="zakat-other" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+              <label class="block text-[11px] font-bold text-slate-500 dark:text-[#9ab3a8] mb-1.5 uppercase tracking-wider">৩. ব্যবসায়িক পণ্য ও মজুদ সম্পদ</label>
+              <input type="number" id="zakat-other" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-[#102b20]/80 border border-stone-200 dark:border-[#1a3b2e] focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
             </div>
             <div>
               <label class="block text-[11px] font-bold text-red-500 mb-1.5 uppercase tracking-wider">৪. চলতি ঋণ ও দেনা (বাদ দিতে হবে)</label>
-              <input type="number" id="zakat-debt" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
+              <input type="number" id="zakat-debt" class="w-full p-3 rounded-xl bg-stone-50 dark:bg-[#102b20]/80 border border-stone-200 dark:border-[#1a3b2e] focus:outline-none focus:ring-2 focus:ring-red-500 transition-all text-sm text-slate-800 dark:text-white font-mono" placeholder="০.০০">
             </div>
           </div>
           <div class="bg-emerald-50/70 dark:bg-emerald-950/20 rounded-2xl p-8 text-center flex flex-col justify-center border border-emerald-200/60 dark:border-emerald-800/40">
@@ -689,32 +697,32 @@
       <div class="flex justify-between items-end mb-7">
         <div>
           <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white mb-1 tracking-tight">সাম্প্রতিক ইসলামিক প্রবন্ধ</h2>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">শুদ্ধ আকিদা ও আমল বিষয়ক গবেষণাভিত্তিক লেখা</p>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-[#9ab3a8]">শুদ্ধ আকিদা ও আমল বিষয়ক গবেষণাভিত্তিক লেখা</p>
         </div>
         <a href="articles/index.html" class="text-primary dark:text-emerald-400 font-bold hover:underline flex items-center text-xs sm:text-sm">সবগুলো দেখুন <span class="ml-1">→</span></a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+        <article class="bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
           <div class="p-6 sm:p-7">
             <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-2.5">তাকওয়া ও আত্মশুদ্ধি</div>
             <h3 class="text-base sm:text-lg font-bold mb-2.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">রামাদানের তাৎপর্য ও গুরুত্ব</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">মাহে রামাদান মুসলিমদের জন্য এক পরম নিয়ামত। এই মাসে তাকওয়া অর্জনের বিস্তারিত বর্ণনা...</p>
+            <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm leading-relaxed mb-5">মাহে রামাদান মুসলিমদের জন্য এক পরম নিয়ামত। এই মাসে তাকওয়া অর্জনের বিস্তারিত বর্ণনা...</p>
             <a href="articles/ramadan-benefits.html" class="inline-flex items-center text-primary dark:text-emerald-400 font-bold text-xs">আরও পড়ুন <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></a>
           </div>
         </article>
-        <article class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+        <article class="bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
           <div class="p-6 sm:p-7">
             <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-2.5">আখলাক ও চরিত্র</div>
             <h3 class="text-base sm:text-lg font-bold mb-2.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">সুন্দর আচরণের ইসলামি শিক্ষা</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">ইসলাম পারস্পরিক সম্পর্কের ক্ষেত্রে সুন্দর আচরণের ওপর অপরিসীম গুরুত্ব দিয়েছে।</p>
+            <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm leading-relaxed mb-5">ইসলাম পারস্পরিক সম্পর্কের ক্ষেত্রে সুন্দর আচরণের ওপর অপরিসীম গুরুত্ব দিয়েছে।</p>
             <a href="articles/good-manners.html" class="inline-flex items-center text-primary dark:text-emerald-400 font-bold text-xs">আরও পড়ুন <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></a>
           </div>
         </article>
-        <article class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
+        <article class="bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-xs hover:border-emerald-500/30 hover:shadow-md transition-all duration-200 overflow-hidden group">
           <div class="p-6 sm:p-7">
             <div class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-2.5">পবিত্রতা ও তাহরাত</div>
             <h3 class="text-base sm:text-lg font-bold mb-2.5 text-slate-800 dark:text-white group-hover:text-primary transition-colors leading-snug">পবিত্রতার গুরুত্ব ও উপকারিতা</h3>
-            <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">ইসলামী শরিয়তে পবিত্রতা ঈমানের অর্ধেক। এর গুরুত্ব এবং দৈনন্দিন জীবনে এর প্রভাব।</p>
+            <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm leading-relaxed mb-5">ইসলামী শরিয়তে পবিত্রতা ঈমানের অর্ধেক। এর গুরুত্ব এবং দৈনন্দিন জীবনে এর প্রভাব।</p>
             <a href="articles/purity-in-islam.html" class="inline-flex items-center text-primary dark:text-emerald-400 font-bold text-xs">আরও পড়ুন <span class="ml-1 group-hover:translate-x-1 transition-transform">→</span></a>
           </div>
         </article>
@@ -723,17 +731,17 @@
 
     <!-- ANDROID APP DOWNLOAD BANNER -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-      <div class="bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div class="bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
           <span class="inline-block text-[11px] font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider mb-1.5">Android App • v1.6.0</span>
           <h2 class="text-lg sm:text-xl font-black text-slate-800 dark:text-white mb-1.5">DeenIslam অ্যান্ড্রয়েড অ্যাপ ডাউনলোড করুন</h2>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">অফলাইন আল-কুরআন ও সহীহ হাদিস, সুমধুর কুরআন তিলাওয়াত অডিও, ৬৪ জেলার নামাজের সময়সূচি, লাইভ কিবলা কম্পাস এবং ডিজিটাল তাসবীহ—সবকিছু একটি বিজ্ঞাপনমুক্ত অ্যাপে।</p>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-[#9ab3a8] max-w-2xl">অফলাইন আল-কুরআন ও সহীহ হাদিস, সুমধুর কুরআন তিলাওয়াত অডিও, ৬৪ জেলার নামাজের সময়সূচি, লাইভ কিবলা কম্পাস এবং ডিজিটাল তাসবীহ—সবকিছু একটি বিজ্ঞাপনমুক্ত অ্যাপে।</p>
         </div>
         <div class="flex flex-wrap items-center gap-3 shrink-0">
           <a href="https://github.com/mehedishakeel/DeenIslam/releases/download/v1.6.0/DeenIslam-v1.6.0.apk" target="_blank" rel="noopener noreferrer" download="DeenIslam-v1.6.0.apk" class="inline-flex items-center px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm transition-colors">
             <span>APK ডাউনলোড করুন (v1.6.0)</span>
           </a>
-          <a href="https://github.com/mehedishakeel/DeenIslam/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-3 rounded-xl border border-stone-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-emerald-500/40 font-bold text-xs sm:text-sm transition-colors">
+          <a href="https://github.com/mehedishakeel/DeenIslam/releases/latest" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-3 rounded-xl border border-stone-300 dark:border-[#1a3b2e] text-slate-700 dark:text-slate-200 hover:border-emerald-500/40 font-bold text-xs sm:text-sm transition-colors">
             <span>রিলিজ নোট দেখুন</span>
           </a>
         </div>
@@ -1279,7 +1287,7 @@
                 <h4 class="text-xs font-bold text-slate-800 dark:text-white truncate">
                   ${hero.transliteration}
                 </h4>
-                <p class="text-[10px] text-slate-500 dark:text-slate-400 truncate font-medium">
+                <p class="text-[10px] text-slate-500 dark:text-[#9ab3a8] truncate font-medium">
                   ${hero.meaning}
                 </p>
               </div>
@@ -1292,7 +1300,7 @@
             </div>
           </div>
           ${others.map(item => `
-            <div onclick="playBentoNameAudio('${item.arabic}')" class="p-2 rounded-xl bg-stone-50/80 hover:bg-emerald-50/70 dark:bg-slate-900/60 dark:hover:bg-emerald-950/30 border border-stone-200/60 dark:border-slate-800 hover:border-emerald-500/40 transition-all text-center cursor-pointer group/tile flex flex-col justify-center items-center">
+            <div onclick="playBentoNameAudio('${item.arabic}')" class="p-2 rounded-xl bg-stone-50/80 hover:bg-emerald-50/70 dark:bg-[#0b2018]/60 dark:hover:bg-emerald-950/30 border border-stone-200/60 dark:border-[#1a3b2e] hover:border-emerald-500/40 transition-all text-center cursor-pointer group/tile flex flex-col justify-center items-center">
               <div class="w-full flex items-center justify-between mb-0.5">
                 <span class="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500">
                   #${window.toBengaliNumerals(item.id)}
@@ -1305,7 +1313,7 @@
               <h5 class="text-[11px] font-bold text-slate-700 dark:text-slate-200 truncate w-full mt-0.5">
                 ${item.transliteration}
               </h5>
-              <p class="text-[9.5px] text-slate-400 dark:text-slate-400 truncate w-full font-medium">
+              <p class="text-[9.5px] text-slate-400 dark:text-[#9ab3a8] truncate w-full font-medium">
                 ${item.meaning}
               </p>
             </div>
@@ -1314,7 +1322,7 @@
       } else {
         // Desktop Layout: Exactly 9 items in a 3x3 symmetric grid
         gridEl.innerHTML = currentBatch.map(item => `
-          <div onclick="playBentoNameAudio('${item.arabic}')" class="p-2 rounded-xl bg-stone-50/80 hover:bg-emerald-50/70 dark:bg-slate-900/60 dark:hover:bg-emerald-950/30 border border-stone-200/60 dark:border-slate-800 hover:border-emerald-500/40 transition-all text-center cursor-pointer group/tile flex flex-col justify-center items-center">
+          <div onclick="playBentoNameAudio('${item.arabic}')" class="p-2 rounded-xl bg-stone-50/80 hover:bg-emerald-50/70 dark:bg-[#0b2018]/60 dark:hover:bg-emerald-950/30 border border-stone-200/60 dark:border-[#1a3b2e] hover:border-emerald-500/40 transition-all text-center cursor-pointer group/tile flex flex-col justify-center items-center">
             <div class="w-full flex items-center justify-between mb-0.5">
               <span class="text-[9px] font-mono font-bold text-slate-400 dark:text-slate-500">
                 #${window.toBengaliNumerals(item.id)}
@@ -1327,7 +1335,7 @@
             <h5 class="text-[11px] font-bold text-slate-700 dark:text-slate-200 truncate w-full mt-0.5">
               ${item.transliteration}
             </h5>
-            <p class="text-[9.5px] text-slate-400 dark:text-slate-400 truncate w-full font-medium">
+            <p class="text-[9.5px] text-slate-400 dark:text-[#9ab3a8] truncate w-full font-medium">
               ${item.meaning}
             </p>
           </div>

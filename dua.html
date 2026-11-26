@@ -71,7 +71,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
@@ -88,7 +88,7 @@
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white tracking-tight mb-2.5">
         দৈনন্দিন দো'আ ও আযকার
       </h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
         মুমিনের আত্মিক ঢাল এবং প্রাত্যহিক জীবনের প্রয়োজনীয় সহীহ দো'আ ও জিকিরসমূহ বিশুদ্ধ উচ্চারণ ও অর্থসহ।
       </p>
     </div>
@@ -98,7 +98,7 @@
       <!-- Search Input -->
       <div class="relative max-w-xl mx-auto">
         <input type="text" id="dua-search" placeholder="দো'আর নাম, বিষয় বা শব্দ দিয়ে খুঁজুন..." 
-          class="w-full py-3.5 pl-11 pr-11 bg-white dark:bg-[#0f172a] border border-stone-200/80 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
+          class="w-full py-3.5 pl-11 pr-11 bg-white dark:bg-[#0b2018] border border-stone-200/80 dark:border-[#1a3b2e] rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 transition-all font-medium text-slate-800 dark:text-slate-200 text-sm">
         <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm">🔍</span>
         <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500 font-bold text-xs">✕</button>
       </div>
@@ -106,17 +106,17 @@
       <!-- Categories Filter Tabs -->
       <div class="flex items-center justify-start md:justify-center overflow-x-auto no-scrollbar gap-2 py-2">
         <button onclick="filterCategory('all')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-emerald-600 text-white border border-emerald-600 shadow-xs" data-cat="all">সবগুলো (<span id="count-all">0</span>)</button>
-        <button onclick="filterCategory('morning_evening')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-slate-800" data-cat="morning_evening">সকাল ও সন্ধ্যা</button>
-        <button onclick="filterCategory('daily_life')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-slate-800" data-cat="daily_life">দৈনন্দিন জীবন</button>
-        <button onclick="filterCategory('prayer')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-slate-800" data-cat="prayer">নামাজ ও সালাত</button>
-        <button onclick="filterCategory('forgiveness')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-slate-800" data-cat="forgiveness">ক্ষমা ও তাওবা</button>
-        <button onclick="filterCategory('quranic')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-slate-800" data-cat="quranic">রব্বানা দো'আ</button>
-        <button onclick="filterCategory('hardship')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0f172a] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-slate-800" data-cat="hardship">বিপদ ও আরোগ্য</button>
+        <button onclick="filterCategory('morning_evening')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-[#1a3b2e]" data-cat="morning_evening">সকাল ও সন্ধ্যা</button>
+        <button onclick="filterCategory('daily_life')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-[#1a3b2e]" data-cat="daily_life">দৈনন্দিন জীবন</button>
+        <button onclick="filterCategory('prayer')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-[#1a3b2e]" data-cat="prayer">নামাজ ও সালাত</button>
+        <button onclick="filterCategory('forgiveness')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-[#1a3b2e]" data-cat="forgiveness">ক্ষমা ও তাওবা</button>
+        <button onclick="filterCategory('quranic')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-[#1a3b2e]" data-cat="quranic">রব্বানা দো'আ</button>
+        <button onclick="filterCategory('hardship')" class="cat-tab px-4 py-2 rounded-xl font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/80 dark:border-[#1a3b2e]" data-cat="hardship">বিপদ ও আরোগ্য</button>
       </div>
     </div>
 
     <!-- Daily Adhkar Progress Banner -->
-    <div id="adhkar-progress-banner" class="mb-6 bg-white dark:bg-[#0f172a] p-4 sm:p-5 rounded-2xl border border-stone-200/80 dark:border-slate-800 shadow-2xs">
+    <div id="adhkar-progress-banner" class="mb-6 bg-white dark:bg-[#0b2018] p-4 sm:p-5 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] shadow-2xs">
       <div class="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold mb-2">
         <span class="text-slate-700 dark:text-slate-200 flex items-center gap-1.5">
           <span>✨</span>
@@ -124,10 +124,10 @@
         </span>
         <div class="flex items-center gap-3">
           <span id="adhkar-progress-label" class="text-emerald-700 dark:text-emerald-400">০ / ২০ সম্পন্ন</span>
-          <button onclick="resetAllDuaCounters()" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-500 hover:text-red-500 transition-colors" title="সকল কাউন্টার রিসেট করুন">সব রিসেট ↺</button>
+          <button onclick="resetAllDuaCounters()" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-500 hover:text-red-500 transition-colors" title="সকল কাউন্টার রিসেট করুন">সব রিসেট ↺</button>
         </div>
       </div>
-      <div class="w-full h-2 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden">
+      <div class="w-full h-2 bg-stone-100 dark:bg-[#102b20] rounded-full overflow-hidden">
         <div id="adhkar-progress-bar" class="h-full bg-emerald-600 transition-all duration-300 rounded-full" style="width: 0%;"></div>
       </div>
     </div>
@@ -138,8 +138,8 @@
     </div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0f172a] rounded-2xl border border-stone-200/80 dark:border-slate-800">
-      <div class="w-12 h-12 bg-stone-100 dark:bg-slate-800 text-slate-400 rounded-xl flex items-center justify-center mx-auto mb-3 text-xl">🔍</div>
+    <div id="empty-state" class="hidden text-center py-16 bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e]">
+      <div class="w-12 h-12 bg-stone-100 dark:bg-[#102b20] text-slate-400 rounded-xl flex items-center justify-center mx-auto mb-3 text-xl">🔍</div>
       <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">কোনো দো'আ পাওয়া যায়নি</h3>
       <p class="text-slate-400 text-xs mt-1">ভিন্ন শব্দ লিখে পুনরায় চেষ্টা করুন</p>
     </div>
@@ -459,7 +459,7 @@
         const isBookmarked = window.isBookmarked ? window.isBookmarked(bookmarkKey) : false;
 
         return `
-          <div class="bg-white dark:bg-[#0f172a] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 transition-all duration-200 relative group" id="card-${d.id}">
+          <div class="bg-white dark:bg-[#0b2018] p-6 md:p-8 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] hover:border-emerald-500/40 transition-all duration-200 relative group" id="card-${d.id}">
             
             <!-- Card Header -->
             <div class="flex justify-between items-start gap-3 mb-5">
@@ -472,17 +472,17 @@
               
               <!-- Action Buttons -->
               <div class="flex items-center space-x-1.5 shrink-0">
-                <button onclick="handleDuaBookmark(event, '${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
+                <button onclick="handleDuaBookmark(event, '${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors bookmark-btn" data-key="${bookmarkKey}" title="বুকমার্ক">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="${isBookmarked ? 'currentColor' : 'none'}" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                   </svg>
                 </button>
-                <button onclick="copyDua('${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
+                <button onclick="copyDua('${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="কপি করুন">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5H6a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                   </svg>
                 </button>
-                <button onclick="shareDuaAsImage('${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="ছবি হিসেবে শেয়ার করুন">
+                <button onclick="shareDuaAsImage('${d.id}')" class="p-2 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors" title="ছবি হিসেবে শেয়ার করুন">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -502,7 +502,7 @@
             </div>
 
             <!-- Translation -->
-            <div class="mb-5 pt-4 border-t border-stone-100 dark:border-slate-800">
+            <div class="mb-5 pt-4 border-t border-stone-100 dark:border-[#1a3b2e]">
               <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-1">অর্থ</p>
               <p class="text-slate-800 dark:text-slate-200 text-sm md:text-base leading-relaxed font-medium">${d.translation}</p>
             </div>
@@ -516,8 +516,8 @@
             ` : ''}
 
             <!-- Footer: Reference & Interactive Counter -->
-            <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-100 dark:border-slate-800">
-              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center">
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-stone-100 dark:border-[#1a3b2e]">
+              <span class="text-xs font-semibold text-slate-500 dark:text-[#9ab3a8] flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
@@ -526,7 +526,7 @@
 
               <!-- Counter Controls -->
               <div class="flex items-center space-x-1.5">
-                <button onclick="resetDuaCounter('${d.id}')" class="w-8 h-8 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-red-500 hover:border-red-300 flex items-center justify-center text-xs transition-colors" title="কাউন্টার রিসেট">
+                <button onclick="resetDuaCounter('${d.id}')" class="w-8 h-8 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-red-500 hover:border-red-300 flex items-center justify-center text-xs transition-colors" title="কাউন্টার রিসেট">
                   ↺
                 </button>
                 <button onclick="incrementDuaCounter('${d.id}', ${d.count})" 
@@ -535,7 +535,7 @@
                       ? 'bg-emerald-600 text-white shadow-xs' 
                       : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60 hover:bg-emerald-100'
                   }">
-                  <span class="w-5 h-5 rounded-md bg-white dark:bg-slate-800 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs shadow-xs">
+                  <span class="w-5 h-5 rounded-md bg-white dark:bg-[#102b20] text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-xs shadow-xs">
                     ${window.toBengaliNumerals(currentCount)}
                   </span>
                   <span>/ ${window.toBengaliNumerals(d.count)} ${isDone ? '✓' : ''}</span>
@@ -608,7 +608,7 @@
         if (b.getAttribute('data-cat') === cat) {
           b.className = "cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-emerald-600 text-white border border-emerald-600 shadow-xs";
         } else {
-          b.className = "cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-slate-800";
+          b.className = "cat-tab px-4 py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap transition-all bg-white dark:bg-[#0b2018] text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 border border-stone-200/90 dark:border-[#1a3b2e]";
         }
       });
       renderDuas();

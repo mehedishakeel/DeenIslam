@@ -82,7 +82,7 @@
 }
   </script>
 </head>
-<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#020617] dark:text-slate-100 flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
+<body class="bg-[#fbfaf8] text-slate-800 dark:bg-[#06130e] dark:text-[#f4f7f5] flex flex-col min-h-screen font-bengali transition-colors duration-200 bg-islamic-pattern">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
@@ -97,13 +97,13 @@
         <span>কিবলা দিকনির্ণয়</span>
       </div>
       <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-800 dark:text-white mb-2.5 tracking-tight">ডিজিটাল কিবলা কম্পাস</h1>
-      <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed">
+      <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm md:text-base leading-relaxed">
         আপনার জিপিএস অবস্থান অনুযায়ী পবিত্র কাবা শরীফের সঠিক দিক ও দূরত্ব জানুন।
       </p>
     </div>
 
     <!-- Location & Status Card -->
-    <div class="w-full max-w-md bg-white dark:bg-[#0f172a] p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 mb-6 flex items-center justify-between shadow-xs">
+    <div class="w-full max-w-md bg-white dark:bg-[#0b2018] p-4 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] mb-6 flex items-center justify-between shadow-xs">
       <div class="flex items-center space-x-3">
         <div class="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,7 +116,7 @@
           <h3 id="user-location-text" class="text-xs md:text-sm font-bold text-slate-900 dark:text-white">লোকেশন খোঁজা হচ্ছে...</h3>
         </div>
       </div>
-      <button onclick="initLocation(true)" class="p-2 rounded-lg border border-stone-200 dark:border-slate-700 bg-stone-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-500/40 transition-colors text-xs font-bold" title="লোকেশন রিলোড">
+      <button onclick="initLocation(true)" class="p-2 rounded-lg border border-stone-200 dark:border-[#1a3b2e] bg-stone-50 dark:bg-[#102b20]/80 text-slate-600 dark:text-slate-300 hover:text-emerald-600 hover:border-emerald-500/40 transition-colors text-xs font-bold" title="লোকেশন রিলোড">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
@@ -161,7 +161,7 @@
             <polygon points="50,284 66,150 50,160" fill="#475569" opacity="0.8" />
             <polygon points="50,284 34,150 50,160" fill="#334155" opacity="0.8" />
             <!-- Center Pivot -->
-            <circle cx="50" cy="150" r="14" fill="#0f172a" stroke="#f59e0b" stroke-width="2.5" />
+            <circle cx="50" cy="150" r="14" fill="#0b2018" stroke="#f59e0b" stroke-width="2.5" />
             <circle cx="50" cy="150" r="6" fill="#10b981" />
           </svg>
         </div>
@@ -176,21 +176,21 @@
     </div>
 
     <!-- Direction Guidance Card -->
-    <div id="guidance-box" class="w-full max-w-md bg-white dark:bg-[#0f172a] p-5 md:p-6 rounded-2xl border border-stone-200/80 dark:border-slate-800 text-center mt-5 shadow-xs">
+    <div id="guidance-box" class="w-full max-w-md bg-white dark:bg-[#0b2018] p-5 md:p-6 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] text-center mt-5 shadow-xs">
       <div id="alignment-status" class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1.5 flex items-center justify-center space-x-2">
         <span>মোবাইল সমান্তরাল রেখে ধীরে ধীরে ঘোরান</span>
       </div>
-      <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4" id="sensor-tip">
+      <p class="text-xs text-slate-500 dark:text-[#9ab3a8] leading-relaxed mb-4" id="sensor-tip">
         মোবাইলটি মাটির সমান্তরালে রাখুন। তিরচিহ্নটি কাবার সাথে মিললে আপনার মুখ কাবার অভিমুখে থাকবে।
       </p>
 
       <!-- Key Metrics: Distance & Angle -->
-      <div class="grid grid-cols-2 gap-3 pt-3.5 border-t border-stone-100 dark:border-slate-800">
-        <div class="bg-stone-50 dark:bg-slate-800/80 p-3 rounded-xl border border-stone-100 dark:border-slate-700/60">
+      <div class="grid grid-cols-2 gap-3 pt-3.5 border-t border-stone-100 dark:border-[#1a3b2e]">
+        <div class="bg-stone-50 dark:bg-[#102b20]/80 p-3 rounded-xl border border-stone-100 dark:border-[#1a3b2e]/60">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">কাবার দূরত্ব</span>
           <span id="distance-display" class="text-base md:text-lg font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">-- কিমি</span>
         </div>
-        <div class="bg-stone-50 dark:bg-slate-800/80 p-3 rounded-xl border border-stone-100 dark:border-slate-700/60">
+        <div class="bg-stone-50 dark:bg-[#102b20]/80 p-3 rounded-xl border border-stone-100 dark:border-[#1a3b2e]/60">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">দিক নির্দেশনা</span>
           <span id="cardinal-display" class="text-base md:text-lg font-bold text-amber-600 dark:text-amber-400">পশ্চিম-দক্ষিণ</span>
         </div>
@@ -202,9 +202,9 @@
       </button>
 
       <!-- Manual City Selector Fallback -->
-      <div class="mt-3.5 pt-3.5 border-t border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs">
+      <div class="mt-3.5 pt-3.5 border-t border-stone-100 dark:border-[#1a3b2e] flex items-center justify-between text-xs">
         <span class="text-slate-400 font-medium">শহর নির্বাচন করুন:</span>
-        <select id="city-selector" onchange="handleCitySelect(this.value)" class="bg-stone-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 font-bold px-3 py-1.5 rounded-lg border border-stone-200 dark:border-slate-700 outline-none cursor-pointer">
+        <select id="city-selector" onchange="handleCitySelect(this.value)" class="bg-stone-100 dark:bg-[#102b20]/80 text-slate-700 dark:text-slate-200 font-bold px-3 py-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] outline-none cursor-pointer">
           <option value="auto">স্বয়ংক্রিয় (GPS)</option>
           <option value="dhaka">ঢাকা (২৫৮°)</option>
           <option value="chittagong">চট্টগ্রাম (২৬১°)</option>
@@ -221,13 +221,13 @@
     </div>
 
     <!-- Phone Orientation & Calibration Guide Card -->
-    <div class="w-full max-w-md bg-white dark:bg-[#0f172a] p-4 rounded-2xl border border-stone-200/80 dark:border-slate-800 mt-4 flex items-center justify-between shadow-xs">
+    <div class="w-full max-w-md bg-white dark:bg-[#0b2018] p-4 rounded-2xl border border-stone-200/80 dark:border-[#1a3b2e] mt-4 flex items-center justify-between shadow-xs">
       <div class="text-left">
         <h4 class="font-bold text-xs text-slate-800 dark:text-white flex items-center space-x-1.5">
           <span>📱</span>
           <span>ফোন ওরিয়েন্টেশন ও ক্যালিব্রেশন গাইড</span>
         </h4>
-        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+        <p class="text-[11px] text-slate-500 dark:text-[#9ab3a8] mt-0.5">
           ফোনটি মাটির সমান্তরাল রেখে বাতাসে ৮-আকৃতিতে (Figure-8) কয়েকবার ঘুরিয়ে কম্পাস সেন্সর নিখুঁত করুন।
         </p>
       </div>

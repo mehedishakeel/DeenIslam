@@ -61,7 +61,7 @@
 }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 flex flex-col min-h-screen font-bengali">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#06130e] flex flex-col min-h-screen font-bengali">
 
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
@@ -70,21 +70,21 @@
   <main class="container mx-auto px-4 py-8 md:py-12 flex-grow max-w-5xl">
     
     <!-- Surah Header (Architectural Sanctuary) -->
-    <div id="surah-header" class="mb-8 p-6 md:p-8 bg-white dark:bg-slate-900 rounded-2xl border border-stone-200/90 dark:border-slate-800 shadow-xs relative overflow-hidden">
+    <div id="surah-header" class="mb-8 p-6 md:p-8 bg-white dark:bg-[#0b2018] rounded-2xl border border-stone-200/90 dark:border-[#1a3b2e] shadow-xs relative overflow-hidden">
         <div class="flex items-center justify-between mb-5">
-            <button onclick="navigateSurah(-1)" class="w-9 h-9 rounded-xl border border-stone-200 dark:border-slate-700 bg-stone-50 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center justify-center font-bold text-base transition-colors" title="পূর্ববর্তী সূরা">‹</button>
+            <button onclick="navigateSurah(-1)" class="w-9 h-9 rounded-xl border border-stone-200 dark:border-[#1a3b2e] bg-stone-50 dark:bg-[#102b20] hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center justify-center font-bold text-base transition-colors" title="পূর্ববর্তী সূরা">‹</button>
             <div class="text-center">
                 <span class="inline-block text-[10px] uppercase font-bold tracking-widest text-emerald-600 dark:text-emerald-400 mb-1">পবিত্র কুরআনুল কারীম</span>
                 <h1 id="surah-name" class="text-2xl md:text-4xl font-black text-slate-900 dark:text-white">লোড হচ্ছে...</h1>
-                <p id="surah-info" class="text-xs md:text-sm text-slate-500 dark:text-slate-400 font-medium mt-1">অনুগ্রহ করে অপেক্ষা করুন</p>
+                <p id="surah-info" class="text-xs md:text-sm text-slate-500 dark:text-[#9ab3a8] font-medium mt-1">অনুগ্রহ করে অপেক্ষা করুন</p>
             </div>
-            <button onclick="navigateSurah(1)" class="w-9 h-9 rounded-xl border border-stone-200 dark:border-slate-700 bg-stone-50 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center justify-center font-bold text-base transition-colors" title="পরবর্তী সূরা">›</button>
+            <button onclick="navigateSurah(1)" class="w-9 h-9 rounded-xl border border-stone-200 dark:border-[#1a3b2e] bg-stone-50 dark:bg-[#102b20] hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center justify-center font-bold text-base transition-colors" title="পরবর্তী সূরা">›</button>
         </div>
         
         <div class="flex flex-wrap items-center justify-center gap-2.5 max-w-xl mx-auto mb-6">
             <!-- Reciter Select -->
             <div class="relative group flex-grow min-w-[180px]">
-                <select id="reciter-select" class="w-full py-2.5 pl-3.5 pr-8 border border-stone-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 bg-stone-50/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer appearance-none">
+                <select id="reciter-select" class="w-full py-2.5 pl-3.5 pr-8 border border-stone-200 dark:border-[#1a3b2e] rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 bg-stone-50/80 dark:bg-[#102b20]/80 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer appearance-none">
                     <option value="ar.alafasy">মিশারী রাশিদ আল-আফাসি</option>
                 </select>
                 <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none text-slate-400 text-xs">▼</div>
@@ -92,7 +92,7 @@
 
             <!-- Repeat Loop -->
             <div class="relative group">
-                <select id="repeat-select" onchange="changeRepeatMode(this.value)" class="py-2.5 pl-3 pr-7 border border-stone-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 bg-stone-50/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer appearance-none" title="আয়াত পুনরাবৃত্তি (হিফজ)">
+                <select id="repeat-select" onchange="changeRepeatMode(this.value)" class="py-2.5 pl-3 pr-7 border border-stone-200 dark:border-[#1a3b2e] rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 bg-stone-50/80 dark:bg-[#102b20]/80 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer appearance-none" title="আয়াত পুনরাবৃত্তি (হিফজ)">
                     <option value="1">🔁 ১ বার</option>
                     <option value="3">🔁 ৩ বার (হিফজ)</option>
                     <option value="5">🔁 ৫ বার</option>
@@ -103,7 +103,7 @@
 
             <!-- Playback Speed -->
             <div class="relative group">
-                <select id="speed-select" onchange="changePlaybackSpeed(this.value)" class="py-2.5 pl-3 pr-7 border border-stone-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 bg-stone-50/80 dark:bg-slate-800/80 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer appearance-none" title="অডিওর গতি">
+                <select id="speed-select" onchange="changePlaybackSpeed(this.value)" class="py-2.5 pl-3 pr-7 border border-stone-200 dark:border-[#1a3b2e] rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-600 bg-stone-50/80 dark:bg-[#102b20]/80 text-xs font-bold text-slate-700 dark:text-slate-300 cursor-pointer appearance-none" title="অডিওর গতি">
                     <option value="0.75">⚡ ০.৭৫x</option>
                     <option value="1.0" selected>⚡ ১.০x (স্বাভাবিক)</option>
                     <option value="1.25">⚡ ১.২৫x</option>
@@ -117,32 +117,32 @@
             <button id="play-full-btn" onclick="toggleFullSurahAudio()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-xl font-bold text-xs md:text-sm shadow-xs transition-all active:scale-95 flex items-center gap-2">
                 <span>▶ সম্পূর্ণ সূরা শুনুন</span>
             </button>
-            <button id="stop-btn" onclick="stopAllAudio()" class="hidden bg-stone-100 hover:bg-red-50 dark:bg-slate-800 dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/40 px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2">
+            <button id="stop-btn" onclick="stopAllAudio()" class="hidden bg-stone-100 hover:bg-red-50 dark:bg-[#102b20] dark:hover:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900/40 px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-2">
                 <span>⏹ থামান</span>
             </button>
-            <button id="mark-complete-btn" onclick="toggleSurahCompleted()" class="bg-stone-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5">
+            <button id="mark-complete-btn" onclick="toggleSurahCompleted()" class="bg-stone-100 hover:bg-emerald-50 dark:bg-[#102b20] dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-[#1a3b2e] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5">
                 <span id="mark-complete-icon">☐</span>
                 <span id="mark-complete-text">পঠিত চিহ্নিত করুন</span>
             </button>
-            <button id="tafsir-toggle-btn" onclick="toggleTafsirMode()" class="bg-stone-100 hover:bg-amber-50 dark:bg-slate-800 dark:hover:bg-amber-950/30 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5">
+            <button id="tafsir-toggle-btn" onclick="toggleTafsirMode()" class="bg-stone-100 hover:bg-amber-50 dark:bg-[#102b20] dark:hover:bg-amber-950/30 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-[#1a3b2e] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5">
                 <span>📘</span>
                 <span id="tafsir-toggle-text">তাফসীর দেখুন</span>
             </button>
         </div>
 
         <!-- Font Size Controls -->
-        <div class="flex flex-wrap justify-center items-center gap-3 mt-4 pt-4 border-t border-stone-100 dark:border-slate-800 text-xs">
-            <div class="inline-flex items-center gap-2 bg-stone-50 dark:bg-slate-800/70 px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-slate-700">
+        <div class="flex flex-wrap justify-center items-center gap-3 mt-4 pt-4 border-t border-stone-100 dark:border-[#1a3b2e] text-xs">
+            <div class="inline-flex items-center gap-2 bg-stone-50 dark:bg-[#102b20]/70 px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-[#1a3b2e]">
                 <span class="font-bold text-slate-600 dark:text-slate-300">আরবি ফন্ট:</span>
-                <button onclick="adjustFontSize('arabic', -2)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="ছোট করুন">A-</button>
+                <button onclick="adjustFontSize('arabic', -2)" class="w-6 h-6 rounded-lg bg-white dark:bg-[#0b2018] border border-stone-200 dark:border-[#1a3b2e] font-bold hover:text-emerald-600" title="ছোট করুন">A-</button>
                 <span id="arabic-size-label" class="font-bold text-emerald-700 dark:text-emerald-400 min-w-[34px] text-center">৩০px</span>
-                <button onclick="adjustFontSize('arabic', 2)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="বড় করুন">A+</button>
+                <button onclick="adjustFontSize('arabic', 2)" class="w-6 h-6 rounded-lg bg-white dark:bg-[#0b2018] border border-stone-200 dark:border-[#1a3b2e] font-bold hover:text-emerald-600" title="বড় করুন">A+</button>
             </div>
-            <div class="inline-flex items-center gap-2 bg-stone-50 dark:bg-slate-800/70 px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-slate-700">
+            <div class="inline-flex items-center gap-2 bg-stone-50 dark:bg-[#102b20]/70 px-3 py-1.5 rounded-xl border border-stone-200/80 dark:border-[#1a3b2e]">
                 <span class="font-bold text-slate-600 dark:text-slate-300">বাংলা ফন্ট:</span>
-                <button onclick="adjustFontSize('bengali', -1)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="ছোট করুন">A-</button>
+                <button onclick="adjustFontSize('bengali', -1)" class="w-6 h-6 rounded-lg bg-white dark:bg-[#0b2018] border border-stone-200 dark:border-[#1a3b2e] font-bold hover:text-emerald-600" title="ছোট করুন">A-</button>
                 <span id="bengali-size-label" class="font-bold text-emerald-700 dark:text-emerald-400 min-w-[34px] text-center">১৭px</span>
-                <button onclick="adjustFontSize('bengali', 1)" class="w-6 h-6 rounded-lg bg-white dark:bg-slate-700 border border-stone-200 dark:border-slate-600 font-bold hover:text-emerald-600" title="বড় করুন">A+</button>
+                <button onclick="adjustFontSize('bengali', 1)" class="w-6 h-6 rounded-lg bg-white dark:bg-[#0b2018] border border-stone-200 dark:border-[#1a3b2e] font-bold hover:text-emerald-600" title="বড় করুন">A+</button>
             </div>
         </div>
     </div>
@@ -150,8 +150,8 @@
     <!-- Verses Container -->
     <div id="verses-container" class="space-y-6 max-w-5xl mx-auto pb-28">
       <div class="animate-pulse flex flex-col space-y-4 items-center">
-        <div class="h-10 bg-slate-200 dark:bg-slate-800 rounded-xl w-1/2"></div>
-        <div class="h-6 bg-slate-200 dark:bg-slate-800 rounded-xl w-1/3"></div>
+        <div class="h-10 bg-slate-200 dark:bg-[#102b20] rounded-xl w-1/2"></div>
+        <div class="h-6 bg-slate-200 dark:bg-[#102b20] rounded-xl w-1/3"></div>
       </div>
     </div>
 
@@ -159,7 +159,7 @@
 
   <!-- Architectural Floating Media Player Bar -->
   <div class="fixed bottom-4 left-0 right-0 z-[100] flex justify-center px-4 pointer-events-none">
-    <div id="surah-player-bar" class="pointer-events-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl px-4 sm:px-5 py-3 shadow-lg border border-stone-200 dark:border-slate-800 max-w-xl w-full transform translate-y-full transition-transform duration-300 flex items-center justify-between gap-3">
+    <div id="surah-player-bar" class="pointer-events-auto bg-white/95 dark:bg-[#0b2018]/95 backdrop-blur-md rounded-2xl px-4 sm:px-5 py-3 shadow-lg border border-stone-200 dark:border-[#1a3b2e] max-w-xl w-full transform translate-y-full transition-transform duration-300 flex items-center justify-between gap-3">
       
       <!-- Left: Surah Badge & Info -->
       <div class="flex items-center space-x-3 shrink-0">
@@ -170,7 +170,7 @@
         </div>
         <div class="max-w-[120px] sm:max-w-[150px]">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm leading-tight truncate" id="bar-surah-name">সূরা</h4>
-          <p class="text-[10px] text-slate-500 dark:text-slate-400 truncate tabular-nums" id="bar-verse-info">আয়াত: ০/০</p>
+          <p class="text-[10px] text-slate-500 dark:text-[#9ab3a8] truncate tabular-nums" id="bar-verse-info">আয়াত: ০/০</p>
         </div>
       </div>
 
@@ -187,7 +187,7 @@
       
       <!-- Progress Bar (Desktop) -->
       <div class="hidden sm:block flex-grow max-w-[100px]">
-        <div class="bg-stone-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+        <div class="bg-stone-100 dark:bg-[#102b20] h-1.5 rounded-full overflow-hidden">
           <div id="bar-progress" class="bg-emerald-600 h-full w-0 transition-all duration-300"></div>
         </div>
       </div>
@@ -197,7 +197,7 @@
         <button id="bar-play-btn" onclick="toggleFullSurahAudio()" class="w-9 h-9 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl flex items-center justify-center shadow-xs transition-all active:scale-95 shrink-0" title="প্লে / বিরতি">
           <svg id="bar-play-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-0.5 fill-current" viewBox="0 0 20 20"><path d="M4.5 3.5v13l11-6.5-11-6.5z"/></svg>
         </button>
-        <button onclick="stopAllAudio()" class="w-8 h-8 rounded-xl border border-stone-200 dark:border-slate-700 text-slate-400 hover:text-red-500 hover:border-red-300 flex items-center justify-center transition-colors shrink-0" title="থামান">
+        <button onclick="stopAllAudio()" class="w-8 h-8 rounded-xl border border-stone-200 dark:border-[#1a3b2e] text-slate-400 hover:text-red-500 hover:border-red-300 flex items-center justify-center transition-colors shrink-0" title="থামান">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </div>
@@ -535,7 +535,7 @@
           bismDiv.className = "text-center mb-8 p-8 md:p-10 bg-emerald-50/40 dark:bg-emerald-950/20 rounded-2xl border border-emerald-500/20 dark:border-emerald-900/30 shadow-xs";
           bismDiv.innerHTML = `
             <p class="text-3xl md:text-5xl leading-loose font-arabic text-slate-900 dark:text-emerald-100 mb-3 drop-shadow-xs">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-            <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base font-medium">পরম করুণাময় অসীম দয়ালু আল্লাহর নামে শুরু করছি</p>
+            <p class="text-slate-600 dark:text-[#9ab3a8] text-sm md:text-base font-medium">পরম করুণাময় অসীম দয়ালু আল্লাহর নামে শুরু করছি</p>
           `;
           container.appendChild(bismDiv);
       }
@@ -561,15 +561,15 @@
         const bookmarkKey = `quran_verse_${surahId}_${ayah.numberInSurah}`;
         const isBookmarked = window.isBookmarked(bookmarkKey);
 
-        verseCard.className = "verse-card bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-slate-800 hover:border-emerald-500/40 transition-all duration-200 relative group";
+        verseCard.className = "verse-card bg-white dark:bg-[#0b2018] p-6 md:p-8 rounded-2xl border border-stone-200/90 dark:border-[#1a3b2e] hover:border-emerald-500/40 transition-all duration-200 relative group";
         
         verseCard.innerHTML = `
-          <div class="flex flex-wrap justify-between items-center gap-3 mb-6 pb-4 border-b border-stone-100 dark:border-slate-800">
+          <div class="flex flex-wrap justify-between items-center gap-3 mb-6 pb-4 border-b border-stone-100 dark:border-[#1a3b2e]">
             <div class="flex items-center space-x-2">
               <div class="w-8 h-8 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 rounded-lg flex items-center justify-center font-bold text-xs ring-1 ring-emerald-200/60 dark:ring-emerald-800/40">
                 ${toBengaliNumerals(ayah.numberInSurah)}
               </div>
-              <button onclick="handleVerseBookmark(event, ${index}, ${JSON.stringify(ayah).replace(/"/g, '&quot;')}, ${JSON.stringify(bengaliData.ayahs[index]).replace(/"/g, '&quot;')})" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg text-xs font-semibold ${isBookmarked ? 'bg-emerald-600 text-white' : 'bg-stone-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-600'} border border-stone-200 dark:border-slate-700 transition-all bookmark-btn" data-key="${bookmarkKey}">
+              <button onclick="handleVerseBookmark(event, ${index}, ${JSON.stringify(ayah).replace(/"/g, '&quot;')}, ${JSON.stringify(bengaliData.ayahs[index]).replace(/"/g, '&quot;')})" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-lg text-xs font-semibold ${isBookmarked ? 'bg-emerald-600 text-white' : 'bg-stone-50 dark:bg-[#102b20] text-slate-700 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-600'} border border-stone-200 dark:border-[#1a3b2e] transition-all bookmark-btn" data-key="${bookmarkKey}">
                 <span>${isBookmarked ? '★' : '☆'}</span>
                 <span>বুকমার্ক</span>
               </button>
@@ -580,10 +580,10 @@
                 <span id="play-icon-${index}">▶</span>
                 <span>তেলাওয়াত</span>
               </button>
-              <button onclick="window.copyToClipboard('${ayah.text.replace(/'/g, "\\'")}\\n\\n${bengaliData.ayahs[index].text.replace(/'/g, "\\'")}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-all text-xs" title="কপি করুন">
+              <button onclick="window.copyToClipboard('${ayah.text.replace(/'/g, "\\'")}\\n\\n${bengaliData.ayahs[index].text.replace(/'/g, "\\'")}')" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-600 dark:text-[#9ab3a8] hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-all text-xs" title="কপি করুন">
                 📋
               </button>
-              <button onclick="shareVerseAsImage(${index})" class="p-1.5 rounded-lg border border-stone-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-all text-xs" title="ছবি হিসেবে শেয়ার করুন">
+              <button onclick="shareVerseAsImage(${index})" class="p-1.5 rounded-lg border border-stone-200 dark:border-[#1a3b2e] text-slate-600 dark:text-[#9ab3a8] hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-all text-xs" title="ছবি হিসেবে শেয়ার করুন">
                 📤
               </button>
             </div>
@@ -591,7 +591,7 @@
           <div class="mb-6 text-right">
             <p class="arabic-verse-text text-2xl md:text-4xl leading-[2.4] font-arabic text-slate-900 dark:text-white font-normal" dir="rtl">${arabicText}</p>
           </div>
-          <div class="border-t pt-5 border-stone-100 dark:border-slate-800">
+          <div class="border-t pt-5 border-stone-100 dark:border-[#1a3b2e]">
             <p class="text-slate-700 dark:text-slate-300 text-base md:text-lg leading-relaxed font-medium font-bengali-content">${bengaliData.ayahs[index].text}</p>
             <div id="tafsir-box-${ayah.numberInSurah}" class="tafsir-box hidden mt-4 p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/70 dark:border-amber-800/40 text-xs sm:text-sm text-amber-950 dark:text-amber-200 leading-relaxed"></div>
           </div>
@@ -858,7 +858,7 @@
             icon.textContent = "✅";
             text.textContent = "পঠিত সম্পন্ন";
         } else {
-            btn.className = "bg-stone-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
+            btn.className = "bg-stone-100 hover:bg-emerald-50 dark:bg-[#102b20] dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-[#1a3b2e] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
             icon.textContent = "☐";
             text.textContent = "পঠিত চিহ্নিত করুন";
         }
@@ -895,7 +895,7 @@
         const txt = document.getElementById('tafsir-toggle-text');
         if (!tafsirEnabled) {
             document.querySelectorAll('.tafsir-box').forEach(el => el.classList.add('hidden'));
-            if (btn) btn.className = "bg-stone-100 hover:bg-amber-50 dark:bg-slate-800 dark:hover:bg-amber-950/30 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
+            if (btn) btn.className = "bg-stone-100 hover:bg-amber-50 dark:bg-[#102b20] dark:hover:bg-amber-950/30 text-slate-700 dark:text-slate-300 border border-stone-200 dark:border-[#1a3b2e] px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all flex items-center gap-1.5";
             if (txt) txt.textContent = "তাফসীর দেখুন";
             return;
         }

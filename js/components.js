@@ -131,7 +131,7 @@ window.initRecentSearch = (inputId, storageKey) => {
     const wrapper = input.parentElement;
     const recentContainer = document.createElement('div');
     recentContainer.id = `${inputId}-recent`;
-    recentContainer.className = "hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-emerald-50 dark:border-slate-800 rounded-2xl shadow-xl z-50 p-4";
+    recentContainer.className = "hidden absolute top-full left-0 right-0 mt-2 bg-white dark:bg-[#0b2018] border border-emerald-50 dark:border-[#1a3b2e] rounded-2xl shadow-xl z-50 p-4";
     wrapper.appendChild(recentContainer);
 
     const updateRecentUI = () => {
@@ -148,7 +148,7 @@ window.initRecentSearch = (inputId, storageKey) => {
             </div>
             <div class="flex flex-wrap gap-2">
                 ${searches.map(s => `
-                    <button class="recent-item px-3 py-1.5 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-primary transition-all">
+                    <button class="recent-item px-3 py-1.5 bg-slate-50 dark:bg-[#102b20] rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-primary transition-all">
                         ${s}
                     </button>
                 `).join('')}
@@ -322,7 +322,7 @@ window.fontSizeManager = {
         if (!allowedPages.includes(page)) return;
 
         const settingsHTML = `
-        <div id="settings-drawer" class="fixed top-0 right-0 h-full w-80 bg-white dark:bg-slate-900 z-[200] shadow-[-10px_0_30px_rgba(0,0,0,0.1)] transform translate-x-full transition-transform duration-500 ease-in-out border-l border-emerald-50 dark:border-slate-800">
+        <div id="settings-drawer" class="fixed top-0 right-0 h-full w-80 bg-white dark:bg-[#0b2018] z-[200] shadow-[-10px_0_30px_rgba(0,0,0,0.1)] transform translate-x-full transition-transform duration-500 ease-in-out border-l border-emerald-50 dark:border-[#1a3b2e]">
             <div class="p-8">
                 <div class="flex justify-between items-center mb-10">
                     <h3 class="text-xl font-bold text-slate-800 dark:text-white">পঠন সেটিংস</h3>
@@ -348,7 +348,7 @@ window.fontSizeManager = {
                         <input type="range" min="14" max="36" value="${this.bengali}" class="deen-range" id="slider-bengali" oninput="window.fontSizeManager.set('bengali', this.value)">
                     </div>
 
-                    <button onclick="window.fontSizeManager.reset()" class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-2xl font-bold hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-all flex items-center justify-center space-x-2">
+                    <button onclick="window.fontSizeManager.reset()" class="w-full py-4 bg-slate-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 rounded-2xl font-bold hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-500 transition-all flex items-center justify-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                         <span>রিসেট করুন</span>
                     </button>
@@ -358,7 +358,7 @@ window.fontSizeManager = {
 
         <div id="drawer-backdrop" class="fixed inset-0 bg-transparent z-[190] hidden"></div>
 
-        <button id="settings-toggle" class="fixed bottom-24 right-8 w-14 h-14 bg-white dark:bg-slate-900 text-primary rounded-2xl shadow-xl flex items-center justify-center border border-emerald-50 dark:border-slate-800 hover:scale-110 active:scale-95 transition-all z-[150]">
+        <button id="settings-toggle" class="fixed bottom-24 right-8 w-14 h-14 bg-white dark:bg-[#0b2018] text-primary rounded-2xl shadow-xl flex items-center justify-center border border-emerald-50 dark:border-[#1a3b2e] hover:scale-110 active:scale-95 transition-all z-[150]">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
         </button>
         `;
@@ -579,12 +579,12 @@ window.initCommandPalette = (basePath) => {
     modal.id = 'deen-command-palette';
     modal.className = "fixed inset-0 z-[500] hidden bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm flex items-start justify-center pt-20 px-4 transition-all duration-200";
     modal.innerHTML = `
-        <div class="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-2xl shadow-2xl border border-stone-200/90 dark:border-slate-800/80 overflow-hidden transform transition-all flex flex-col max-h-[80vh]">
+        <div class="bg-white dark:bg-[#0b2018] w-full max-w-2xl rounded-2xl shadow-2xl border border-stone-200/90 dark:border-[#1a3b2e]/80 overflow-hidden transform transition-all flex flex-col max-h-[80vh]">
             <!-- Search Input Header -->
-            <div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center space-x-3">
+            <div class="p-4 border-b border-slate-100 dark:border-[#1a3b2e] flex items-center space-x-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 <input type="text" id="palette-search-input" placeholder="সূরা, দো'আ, কিবলা, নামাজ, হাদিস বা বিষয় খুঁজুন..." class="w-full bg-transparent text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none text-base font-medium">
-                <kbd class="hidden sm:inline-block px-2 py-1 text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-400 rounded-lg font-mono">ESC</kbd>
+                <kbd class="hidden sm:inline-block px-2 py-1 text-[11px] bg-slate-100 dark:bg-[#102b20] text-slate-400 rounded-lg font-mono">ESC</kbd>
             </div>
 
             <!-- Results List -->
@@ -593,10 +593,10 @@ window.initCommandPalette = (basePath) => {
             </div>
 
             <!-- Footer Shortcuts -->
-            <div class="p-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+            <div class="p-3 bg-slate-50 dark:bg-[#102b20]/50 border-t border-slate-100 dark:border-[#1a3b2e] flex justify-between items-center text-[11px] text-slate-400">
                 <div class="flex items-center space-x-3">
-                    <span><kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded shadow-sm">↑</kbd> <kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded shadow-sm">↓</kbd> নেভিগেশন</span>
-                    <span><kbd class="font-mono bg-white dark:bg-slate-800 px-1.5 py-0.5 rounded shadow-sm">↵</kbd> খুলুন</span>
+                    <span><kbd class="font-mono bg-white dark:bg-[#102b20] px-1.5 py-0.5 rounded shadow-sm">↑</kbd> <kbd class="font-mono bg-white dark:bg-[#102b20] px-1.5 py-0.5 rounded shadow-sm">↓</kbd> নেভিগেশন</span>
+                    <span><kbd class="font-mono bg-white dark:bg-[#102b20] px-1.5 py-0.5 rounded shadow-sm">↵</kbd> খুলুন</span>
                 </div>
                 <span>DeenIslam কুইক সার্চ</span>
             </div>
@@ -630,9 +630,9 @@ window.initCommandPalette = (basePath) => {
 
         selectedIndex = 0;
         resultsContainer.innerHTML = currentResults.map((item, idx) => `
-            <a href="${basePath}${item.url}" class="palette-item block p-3 rounded-2xl transition-all flex items-center justify-between group ${idx === 0 ? 'bg-emerald-50 dark:bg-emerald-950/40 text-primary' : 'hover:bg-slate-50 dark:hover:bg-slate-800/60'}" data-index="${idx}">
+            <a href="${basePath}${item.url}" class="palette-item block p-3 rounded-2xl transition-all flex items-center justify-between group ${idx === 0 ? 'bg-emerald-50 dark:bg-emerald-950/40 text-primary' : 'hover:bg-slate-50 dark:hover:bg-[#102b20]/60'}" data-index="${idx}">
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center text-primary text-xs font-bold shrink-0">
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-[#102b20] group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/50 flex items-center justify-center text-primary text-xs font-bold shrink-0">
                         ${idx === 0 ? '→' : '•'}
                     </div>
                     <div>
@@ -808,8 +808,8 @@ window.openDistrictSelector = (callback) => {
         modal.id = 'deen-district-modal';
         modal.className = "fixed inset-0 z-[600] hidden bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-200";
         modal.innerHTML = `
-            <div class="bg-white dark:bg-slate-900 w-full max-w-xl rounded-2xl shadow-2xl border border-stone-200/90 dark:border-slate-800 p-5 sm:p-6 flex flex-col max-h-[85vh]">
-                <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-slate-800">
+            <div class="bg-white dark:bg-[#0b2018] w-full max-w-xl rounded-2xl shadow-2xl border border-stone-200/90 dark:border-[#1a3b2e] p-5 sm:p-6 flex flex-col max-h-[85vh]">
+                <div class="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-[#1a3b2e]">
                     <div class="flex items-center space-x-2">
                         <span class="text-xl">📍</span>
                         <h3 class="text-lg font-bold text-slate-800 dark:text-white">জেলা নির্বাচন করুন (৬৪ জেলা)</h3>
@@ -819,27 +819,27 @@ window.openDistrictSelector = (callback) => {
 
                 <!-- Search Input -->
                 <div class="my-3 relative">
-                    <input type="text" id="district-search-input" placeholder="আপনার জেলা খুঁজুন (যেমন: চট্টগ্রাম, সিলেট, বগুড়া)..." class="w-full bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <input type="text" id="district-search-input" placeholder="আপনার জেলা খুঁজুন (যেমন: চট্টগ্রাম, সিলেট, বগুড়া)..." class="w-full bg-stone-50 dark:bg-[#102b20]/80 border border-stone-200 dark:border-[#1a3b2e] rounded-xl py-2.5 pl-10 pr-4 text-xs sm:text-sm font-semibold text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 </div>
 
                 <!-- Division Filter Tabs -->
                 <div id="division-tabs" class="flex gap-1.5 overflow-x-auto pb-2 scrollbar-none text-xs font-semibold">
                     <button class="division-tab-btn active px-3 py-1 rounded-lg bg-emerald-600 text-white shrink-0" data-div="all">সব বিভাগ</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="ঢাকা">ঢাকা</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="চট্টগ্রাম">চট্টগ্রাম</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="সিলেট">সিলেট</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="রাজশাহী">রাজশাহী</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="খুলনা">খুলনা</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="বরিশাল">বরিশাল</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="রংপুর">রংপুর</button>
-                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0" data-div="ময়মনসিংহ">ময়মনসিংহ</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="ঢাকা">ঢাকা</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="চট্টগ্রাম">চট্টগ্রাম</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="সিলেট">সিলেট</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="রাজশাহী">রাজশাহী</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="খুলনা">খুলনা</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="বরিশাল">বরিশাল</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="রংপুর">রংপুর</button>
+                    <button class="division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0" data-div="ময়মনসিংহ">ময়মনসিংহ</button>
                 </div>
 
                 <!-- District Grid -->
                 <div id="district-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2 overflow-y-auto mt-2 p-1 flex-grow"></div>
 
-                <div class="mt-3 pt-3 border-t border-stone-100 dark:border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+                <div class="mt-3 pt-3 border-t border-stone-100 dark:border-[#1a3b2e] flex justify-between items-center text-[11px] text-slate-400">
                     <span>* ঢাকা থেকে মিনিট পার্থক্য ব্র্যাকেটে দেখানো হয়েছে</span>
                     <button id="district-use-gps" class="text-primary font-bold hover:underline flex items-center gap-1">
                         <span>🎯 বর্তমান জিপিএস লোকেশন</span>
@@ -881,7 +881,7 @@ window.openDistrictSelector = (callback) => {
             const isSelected = d.name === currentCity;
             const offsetSign = d.offset > 0 ? `+${window.toBengaliNumerals(d.offset)}` : (d.offset < 0 ? window.toBengaliNumerals(d.offset) : '০');
             return `
-                <button class="district-select-btn p-2.5 rounded-xl border text-left transition-all flex items-center justify-between ${isSelected ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 text-primary font-bold' : 'border-stone-200/80 dark:border-slate-800 hover:border-emerald-500/40 hover:bg-stone-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 font-medium'}" data-name="${d.name}">
+                <button class="district-select-btn p-2.5 rounded-xl border text-left transition-all flex items-center justify-between ${isSelected ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 text-primary font-bold' : 'border-stone-200/80 dark:border-[#1a3b2e] hover:border-emerald-500/40 hover:bg-stone-50 dark:hover:bg-[#102b20]/60 text-slate-700 dark:text-slate-300 font-medium'}" data-name="${d.name}">
                     <span class="text-xs truncate">${d.name}</span>
                     <span class="text-[10px] font-mono opacity-60 ml-1">(${offsetSign} মি.)</span>
                 </button>
@@ -913,7 +913,7 @@ window.openDistrictSelector = (callback) => {
     tabBtns.forEach(btn => {
         btn.onclick = () => {
             tabBtns.forEach(b => {
-                b.className = 'division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0';
+                b.className = 'division-tab-btn px-3 py-1 rounded-lg bg-stone-100 dark:bg-[#102b20] text-slate-600 dark:text-slate-300 shrink-0';
             });
             btn.className = 'division-tab-btn active px-3 py-1 rounded-lg bg-emerald-600 text-white shrink-0';
             selectedDiv = btn.getAttribute('data-div');
@@ -977,7 +977,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOthersActive = ['community.html', 'about.html', 'credits.html'].includes(currentPage);
 
         navbarPlaceholder.innerHTML = `
-        <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#0b1120]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 transition-colors duration-200" style="background-color: var(--navbar-bg);">
+        <header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-[#06130e]/95 backdrop-blur-md border-b border-stone-200/80 dark:border-[#1a3b2e] transition-colors duration-200" style="background-color: var(--navbar-bg);">
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center gap-4 bg-transparent" style="background: transparent !important; background-color: transparent !important; border: none !important;">
                 <!-- Brand Logo -->
                 <a href="${basePath}index.html" class="flex items-center space-x-2.5 shrink-0 group">
@@ -994,33 +994,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="hidden lg:flex items-center justify-center">
                     <ul class="flex items-center gap-1 xl:gap-2 text-sm font-semibold whitespace-nowrap">
                         <li>
-                            <a href="${basePath}index.html" class="px-3.5 py-2 rounded-xl transition-colors ${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                            <a href="${basePath}index.html" class="px-3.5 py-2 rounded-xl transition-colors ${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-[#102b20]/60'}">
                                 হোম
                             </a>
                         </li>
                         <li>
-                            <a href="${basePath}quran.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                            <a href="${basePath}quran.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-[#102b20]/60'}">
                                 আল-কুরআন
                             </a>
                         </li>
                         <li>
-                            <a href="${basePath}hadith.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'hadith.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                            <a href="${basePath}hadith.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'hadith.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-[#102b20]/60'}">
                                 হাদিস
                             </a>
                         </li>
                         <li>
-                            <a href="${basePath}seerah.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'seerah.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                            <a href="${basePath}seerah.html" class="px-3.5 py-2 rounded-xl transition-colors ${currentPage === 'seerah.html' ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-[#102b20]/60'}">
                                 সীরাত (ﷺ)
                             </a>
                         </li>
 
                         <!-- All Ibadah, Tools & Portal Resources Dropdown -->
                         <li class="relative group">
-                            <button class="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-colors ${isIbadahActive ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-slate-800/60'}">
+                            <button class="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl transition-colors ${isIbadahActive ? 'text-primary font-bold bg-emerald-50/80 dark:bg-emerald-950/40' : 'text-slate-600 hover:text-primary hover:bg-stone-100/70 dark:text-slate-300 dark:hover:text-primary dark:hover:bg-[#102b20]/60'}">
                                 <span>ইবাদত ও টুলস</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 transform group-hover:rotate-180 transition-transform duration-200 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                             </button>
-                            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-[30rem] bg-white dark:bg-[#0f172a] border border-stone-200/90 dark:border-slate-800 rounded-2xl shadow-xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+                            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-[30rem] bg-white dark:bg-[#0b2018] border border-stone-200/90 dark:border-[#1a3b2e] rounded-2xl shadow-xl p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
                                 <div class="grid grid-cols-2 gap-1">
                                     <a href="${basePath}salat.html" class="flex items-center space-x-2.5 px-3 py-2 text-xs font-semibold ${currentPage === 'salat.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-700 dark:text-slate-300 hover:bg-emerald-50/70 dark:hover:bg-emerald-950/30 hover:text-primary'} rounded-xl transition-colors">
                                         <span class="text-base">🕰️</span>
@@ -1075,16 +1075,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <span>ইসলামের ৫ কালিমা</span>
                                     </a>
                                 </div>
-                                <div class="mt-2 pt-2 border-t border-stone-100 dark:border-slate-800 grid grid-cols-3 gap-1">
-                                    <a href="${basePath}media.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${currentPage === 'media.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-slate-800'} rounded-lg transition-colors">
+                                <div class="mt-2 pt-2 border-t border-stone-100 dark:border-[#1a3b2e] grid grid-cols-3 gap-1">
+                                    <a href="${basePath}media.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${currentPage === 'media.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-[#102b20]'} rounded-lg transition-colors">
                                         <span>🎬</span>
                                         <span>মিডিয়া</span>
                                     </a>
-                                    <a href="${basePath}articles/index.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${isSubDir ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-slate-800'} rounded-lg transition-colors">
+                                    <a href="${basePath}articles/index.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${isSubDir ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-[#102b20]'} rounded-lg transition-colors">
                                         <span>📝</span>
                                         <span>প্রবন্ধ</span>
                                     </a>
-                                    <a href="${basePath}community.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${currentPage === 'community.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-slate-800'} rounded-lg transition-colors">
+                                    <a href="${basePath}community.html" class="flex items-center justify-center space-x-1.5 px-2.5 py-1.5 text-xs font-semibold ${currentPage === 'community.html' ? 'text-primary bg-emerald-50 dark:bg-emerald-950/40' : 'text-slate-600 dark:text-slate-300 hover:bg-stone-100 dark:hover:bg-[#102b20]'} rounded-lg transition-colors">
                                         <span>💬</span>
                                         <span>কমিউনিটি</span>
                                     </a>
@@ -1097,10 +1097,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Right Side Actions (Compact & Uncluttered) -->
                 <div class="flex items-center space-x-2 shrink-0">
                     <!-- Quick Search Button -->
-                    <button onclick="window.openCommandPalette()" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-stone-100/90 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-stone-200/80 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:text-primary transition-all text-xs font-medium" title="অনুসন্ধান (Ctrl+K)">
+                    <button onclick="window.openCommandPalette()" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-stone-100/90 dark:bg-[#102b20]/80 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-stone-200/80 dark:border-[#1a3b2e] text-slate-500 dark:text-slate-300 hover:text-primary transition-all text-xs font-medium" title="অনুসন্ধান (Ctrl+K)">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                        <span class="hidden sm:inline text-xs text-slate-500 dark:text-slate-400">অনুসন্ধান</span>
-                        <kbd class="hidden md:inline-block px-1.5 py-0.5 text-[10px] bg-white dark:bg-slate-700 text-slate-400 rounded font-mono border border-stone-200 dark:border-slate-600">⌘K</kbd>
+                        <span class="hidden sm:inline text-xs text-slate-500 dark:text-[#9ab3a8]">অনুসন্ধান</span>
+                        <kbd class="hidden md:inline-block px-1.5 py-0.5 text-[10px] bg-white dark:bg-[#0b2018] text-slate-400 rounded font-mono border border-stone-200 dark:border-[#1a3b2e]">⌘K</kbd>
                     </button>
 
                     <!-- Bookmarks -->
@@ -1110,36 +1110,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
 
                     <!-- Theme Toggle -->
-                    <button class="theme-toggle p-2 rounded-xl bg-stone-100/90 dark:bg-slate-800/80 border border-stone-200/80 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all" title="থিম পরিবর্তন">
+                    <button class="theme-toggle p-2 rounded-xl bg-stone-100/90 dark:bg-[#102b20]/80 border border-stone-200/80 dark:border-[#1a3b2e] text-slate-600 dark:text-slate-300 hover:text-primary hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all" title="থিম পরিবর্তন">
                         <svg class="theme-toggle-dark-icon hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                         <svg class="theme-toggle-light-icon hidden w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                     </button>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="lg:hidden text-slate-600 dark:text-slate-300 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 border border-stone-200 dark:border-slate-700" aria-label="Menu">
+                    <button id="mobile-menu-btn" class="lg:hidden text-slate-600 dark:text-slate-300 p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-[#102b20] border border-stone-200 dark:border-[#1a3b2e]" aria-label="Menu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     </button>
                 </div>
             </nav>
 
             <!-- Mobile Drawer Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-200/80 dark:border-slate-800 bg-white dark:bg-[#0b1120] px-4 sm:px-6 py-4 space-y-2 shadow-lg overflow-y-auto max-h-[80vh]">
-                <a href="${basePath}index.html" class="block p-2.5 rounded-xl ${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">হোম</a>
-                <a href="${basePath}salat.html" class="block p-2.5 rounded-xl ${currentPage === 'salat.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সালাতের সময়সূচি</a>
-                <a href="${basePath}quran.html" class="block p-2.5 rounded-xl ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">পবিত্র কুরআন</a>
-                <a href="${basePath}hadith.html" class="block p-2.5 rounded-xl ${currentPage === 'hadith.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সহীহ হাদিস</a>
-                <a href="${basePath}seerah.html" class="block p-2.5 rounded-xl ${currentPage === 'seerah.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">সীরাতুন্নবী (ﷺ) বিশ্বকোষ</a>
+            <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-200/80 dark:border-[#1a3b2e] bg-white dark:bg-[#06130e] px-4 sm:px-6 py-4 space-y-2 shadow-lg overflow-y-auto max-h-[80vh]">
+                <a href="${basePath}index.html" class="block p-2.5 rounded-xl ${(currentPage === 'index.html' || currentPage === '') && !isSubDir ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">হোম</a>
+                <a href="${basePath}salat.html" class="block p-2.5 rounded-xl ${currentPage === 'salat.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">সালাতের সময়সূচি</a>
+                <a href="${basePath}quran.html" class="block p-2.5 rounded-xl ${currentPage === 'quran.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">পবিত্র কুরআন</a>
+                <a href="${basePath}hadith.html" class="block p-2.5 rounded-xl ${currentPage === 'hadith.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">সহীহ হাদিস</a>
+                <a href="${basePath}seerah.html" class="block p-2.5 rounded-xl ${currentPage === 'seerah.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">সীরাতুন্নবী (ﷺ) বিশ্বকোষ</a>
                 
                 <!-- Mobile Ibadah & Tools -->
                 <div>
-                    <button id="mobile-ibadah-btn" class="w-full flex justify-between items-center p-3 rounded-2xl font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                    <button id="mobile-ibadah-btn" class="w-full flex justify-between items-center p-3 rounded-2xl font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20] transition-all">
                         <span class="flex items-center space-x-2">
                             <span>ইবাদত ও টুলস</span>
                             <span class="px-2 py-0.5 text-[10px] bg-primary/10 text-primary rounded-full font-bold">নতুন</span>
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" id="mobile-ibadah-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
-                    <div id="mobile-ibadah-menu" class="hidden pl-4 space-y-1 mt-1 border-l-2 border-emerald-100 dark:border-slate-800 ml-2">
+                    <div id="mobile-ibadah-menu" class="hidden pl-4 space-y-1 mt-1 border-l-2 border-emerald-100 dark:border-[#1a3b2e] ml-2">
                         <a href="${basePath}qibla.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'qibla.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🧭 কিবলা কম্পাস</a>
                         <a href="${basePath}dua.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'dua.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🤲 দো'আ ও জিকির</a>
                         <a href="${basePath}allah-names.html" class="block p-2.5 rounded-xl text-xs font-semibold ${currentPage === 'allah-names.html' ? 'text-primary font-bold' : 'dark:text-slate-300'}">🌟 আল্লাহর ৯৯ নাম</a>
@@ -1155,18 +1155,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
 
-                <a href="${basePath}media.html" class="block p-3 rounded-2xl ${currentPage === 'media.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">মিডিয়া</a>
-                <a href="${basePath}articles/index.html" class="block p-3 rounded-2xl ${isSubDir || currentPage === 'articles' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}">প্রবন্ধ</a>
+                <a href="${basePath}media.html" class="block p-3 rounded-2xl ${currentPage === 'media.html' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">মিডিয়া</a>
+                <a href="${basePath}articles/index.html" class="block p-3 rounded-2xl ${isSubDir || currentPage === 'articles' ? 'text-primary font-bold bg-emerald-50 dark:bg-emerald-900/20' : 'font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20]'}">প্রবন্ধ</a>
 
                 <div>
-                    <button id="mobile-other-btn" class="w-full flex justify-between items-center p-3 rounded-2xl font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                    <button id="mobile-other-btn" class="w-full flex justify-between items-center p-3 rounded-2xl font-medium dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#102b20] transition-all">
                         <span>অন্যান্য</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" id="mobile-other-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                     </button>
                     <div id="mobile-other-menu" class="hidden pl-6 space-y-1 mt-1">
-                        <a href="${basePath}community.html" class="block p-2.5 rounded-xl text-xs ${currentPage === 'community.html' ? 'text-primary font-bold' : 'dark:text-slate-400 font-medium'}">কমিউনিটি ও প্রশ্নোত্তর</a>
-                        <a href="${basePath}about.html" class="block p-2.5 rounded-xl text-xs ${currentPage === 'about.html' ? 'text-primary font-bold' : 'dark:text-slate-400 font-medium'}">আমাদের সম্পর্কে</a>
-                        <a href="${basePath}credits.html" class="block p-2.5 rounded-xl text-xs ${currentPage === 'credits.html' ? 'text-primary font-bold' : 'dark:text-slate-400 font-medium'}">কৃতজ্ঞতা স্বীকার</a>
+                        <a href="${basePath}community.html" class="block p-2.5 rounded-xl text-xs ${currentPage === 'community.html' ? 'text-primary font-bold' : 'dark:text-[#9ab3a8] font-medium'}">কমিউনিটি ও প্রশ্নোত্তর</a>
+                        <a href="${basePath}about.html" class="block p-2.5 rounded-xl text-xs ${currentPage === 'about.html' ? 'text-primary font-bold' : 'dark:text-[#9ab3a8] font-medium'}">আমাদের সম্পর্কে</a>
+                        <a href="${basePath}credits.html" class="block p-2.5 rounded-xl text-xs ${currentPage === 'credits.html' ? 'text-primary font-bold' : 'dark:text-[#9ab3a8] font-medium'}">কৃতজ্ঞতা স্বীকার</a>
                     </div>
                 </div>
                 <a href="${basePath}donation.html" class="block p-3 mt-4 bg-primary text-white text-center rounded-2xl font-bold shadow-lg">দান করুন</a>
@@ -1231,11 +1231,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         footerPlaceholder.innerHTML = `
-        <footer class="mt-auto w-full bg-white dark:bg-[#080d1a] border-t border-stone-200/80 dark:border-slate-800/80 transition-colors duration-300">
+        <footer class="mt-auto w-full bg-white dark:bg-[#080d1a] border-t border-stone-200/80 dark:border-[#1a3b2e]/80 transition-colors duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
                 
                 <!-- Main Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-stone-200/80 dark:border-slate-800/80">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-stone-200/80 dark:border-[#1a3b2e]/80">
                     
                     <!-- Col 1: Brand & Bio (5 cols on lg) -->
                     <div class="lg:col-span-5 space-y-4">
@@ -1250,7 +1250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </a>
 
-                        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+                        <p class="text-slate-600 dark:text-[#9ab3a8] text-xs sm:text-sm leading-relaxed max-w-sm">
                             সহীহ কুরআন, বিশুদ্ধ হাদিস ও ইসলামিক জ্ঞানের আধুনিক ডিজিটাল প্ল্যাটফর্ম। আপনার প্রাত্যহিক দ্বীনি জীবনের নির্ভরযোগ্য সঙ্গী।
                         </p>
 
@@ -1270,7 +1270,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <!-- Col 2: Core Sections (2-3 cols on lg) -->
                     <div class="lg:col-span-2">
                         <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">মূল পাতা</h3>
-                        <ul class="space-y-2.5 text-xs font-semibold text-slate-600 dark:text-slate-400">
+                        <ul class="space-y-2.5 text-xs font-semibold text-slate-600 dark:text-[#9ab3a8]">
                             <li><a href="${basePath}index.html" class="hover:text-primary dark:hover:text-white transition-colors">হোম</a></li>
                             <li><a href="${basePath}quran.html" class="hover:text-primary dark:hover:text-white transition-colors">আল-কুরআন</a></li>
                             <li><a href="${basePath}hadith.html" class="hover:text-primary dark:hover:text-white transition-colors">সহীহ হাদিস</a></li>
@@ -1284,7 +1284,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <!-- Col 3: Ibadah & Tools (3 cols on lg) -->
                     <div class="lg:col-span-3">
                         <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">ইবাদত ও টুলস</h3>
-                        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 text-xs font-semibold text-slate-600 dark:text-slate-400">
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 text-xs font-semibold text-slate-600 dark:text-[#9ab3a8]">
                             <li><a href="${basePath}qibla.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🧭</span><span>কিবলা কম্পাস</span></a></li>
                             <li><a href="${basePath}tasbih.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>📿</span><span>ডিজিটাল তাসবীহ</span></a></li>
                             <li><a href="${basePath}dua.html" class="hover:text-primary dark:hover:text-white transition-colors flex items-center space-x-1.5"><span>🤲</span><span>হিসনুল মুসলিম দো'আ</span></a></li>
@@ -1298,14 +1298,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <!-- Col 4: Community & Support (2 cols on lg) -->
                     <div class="lg:col-span-2">
                         <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">যুক্ত হোন</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 font-mono">contact@deenislam.org</p>
+                        <p class="text-xs text-slate-500 dark:text-[#9ab3a8] mb-3 font-mono">contact@deenislam.org</p>
                         
                         <div class="space-y-2.5">
                             <a href="https://www.facebook.com/groups/deenislam.org/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-[#1877F2] text-white px-3.5 py-2 rounded-xl font-bold text-xs hover:bg-[#166fe5] transition-all shadow-sm w-full justify-center">
                                 <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-0.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                                 <span>ফেসবুক গ্রুপ</span>
                             </a>
-                            <a href="${basePath}community.html" class="block text-center py-2 px-3 rounded-xl bg-stone-100/90 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-xs font-semibold transition-all border border-stone-200 dark:border-slate-700">
+                            <a href="${basePath}community.html" class="block text-center py-2 px-3 rounded-xl bg-stone-100/90 dark:bg-[#102b20]/80 text-slate-700 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-xs font-semibold transition-all border border-stone-200 dark:border-[#1a3b2e]">
                                 প্রশ্নোত্তর ফোরাম →
                             </a>
                             <a href="${basePath}donation.html" class="block text-center py-2 px-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-primary dark:text-emerald-400 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 dark:hover:text-white text-xs font-bold transition-all border border-emerald-200/60 dark:border-emerald-800/60">
@@ -1317,7 +1317,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <!-- Bottom Bar -->
-                <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-slate-400 gap-4">
+                <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 dark:text-[#9ab3a8] gap-4">
                     <div class="flex items-center space-x-2">
                         <span>© 2026 DeenIslam.org</span>
                         <span>•</span>
@@ -1368,17 +1368,17 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.id = 'deen-share-modal';
         modal.className = 'fixed inset-0 z-[600] hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto transition-opacity duration-200';
         modal.innerHTML = `
-            <div class="bg-white dark:bg-[#0f172a] rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl border border-stone-200/90 dark:border-slate-800 flex flex-col my-auto max-h-[94vh]">
+            <div class="bg-white dark:bg-[#0b2018] rounded-2xl max-w-2xl w-full p-4 sm:p-6 shadow-2xl border border-stone-200/90 dark:border-[#1a3b2e] flex flex-col my-auto max-h-[94vh]">
                 <!-- Modal Header -->
-                <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-stone-100 dark:border-slate-800 shrink-0">
+                <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-stone-100 dark:border-[#1a3b2e] shrink-0">
                     <div>
                         <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
                             <span>📤</span>
                             <span>শেয়ার ইমেজ কার্ড</span>
                         </h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">সোশ্যাল মিডিয়ায় শেয়ার করার জন্য ব্র্যান্ডেড ইমেজ তৈরি করুন</p>
+                        <p class="text-xs text-slate-500 dark:text-[#9ab3a8]">সোশ্যাল মিডিয়ায় শেয়ার করার জন্য ব্র্যান্ডেড ইমেজ তৈরি করুন</p>
                     </div>
-                    <button onclick="window.closeShareCardModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center font-bold text-sm" title="বন্ধ করুন">
+                    <button onclick="window.closeShareCardModal()" class="w-8 h-8 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-stone-100 dark:hover:bg-[#102b20] transition-colors flex items-center justify-center font-bold text-sm" title="বন্ধ করুন">
                         ✕
                     </button>
                 </div>
@@ -1386,29 +1386,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Theme Selection Segmented Bar -->
                 <div class="flex items-center justify-between mb-4 gap-2 flex-wrap shrink-0">
                     <span class="text-xs font-bold text-slate-600 dark:text-slate-300">কার্ড থিম:</span>
-                    <div class="inline-flex bg-stone-100 dark:bg-slate-800/80 p-1 rounded-xl border border-stone-200/70 dark:border-slate-700/70 text-xs font-bold">
+                    <div class="inline-flex bg-stone-100 dark:bg-[#102b20]/80 p-1 rounded-xl border border-stone-200/70 dark:border-[#1a3b2e]/70 text-xs font-bold">
                         <button onclick="window.setShareCardTheme('emerald')" id="theme-btn-emerald" class="px-3 py-1.5 rounded-lg transition-all bg-emerald-600 text-white shadow-xs">
                             🌿 এমারেল্ড
                         </button>
-                        <button onclick="window.setShareCardTheme('ivory')" id="theme-btn-ivory" class="px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600">
+                        <button onclick="window.setShareCardTheme('ivory')" id="theme-btn-ivory" class="px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-[#9ab3a8] hover:text-emerald-600">
                             📜 আইভরি
                         </button>
-                        <button onclick="window.setShareCardTheme('midnight')" id="theme-btn-midnight" class="px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600">
+                        <button onclick="window.setShareCardTheme('midnight')" id="theme-btn-midnight" class="px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-[#9ab3a8] hover:text-emerald-600">
                             🌙 মিডনাইট
                         </button>
                     </div>
                 </div>
 
                 <!-- Preview Scroll Container -->
-                <div class="overflow-y-auto flex-grow rounded-2xl mb-4 p-2 bg-stone-100/60 dark:bg-slate-950/60 border border-stone-200/60 dark:border-slate-800 flex justify-center items-center">
+                <div class="overflow-y-auto flex-grow rounded-2xl mb-4 p-2 bg-stone-100/60 dark:bg-[#06130e]/60 border border-stone-200/60 dark:border-[#1a3b2e] flex justify-center items-center">
                     <div id="share-card-container" class="w-full max-w-[620px]">
                         <!-- Card rendered dynamically -->
                     </div>
                 </div>
 
                 <!-- Actions Bar -->
-                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-stone-100 dark:border-slate-800 shrink-0">
-                    <button onclick="window.copyShareCardText()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-stone-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-slate-800 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-stone-100 dark:border-[#1a3b2e] shrink-0">
+                    <button onclick="window.copyShareCardText()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-stone-200 dark:border-[#1a3b2e] text-slate-700 dark:text-slate-200 hover:bg-stone-100 dark:hover:bg-[#102b20] text-xs font-bold transition-all flex items-center justify-center gap-2">
                         <span>📋</span>
                         <span>টেক্সট কপি</span>
                     </button>
@@ -1480,13 +1480,13 @@ document.addEventListener('DOMContentLoaded', () => {
             taglineColor = 'color: #a7f3d0;';
             refBadgeStyle = 'background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); color: #a7f3d0;';
         } else if (theme === 'ivory') {
-            cardStyle = 'background: #fbfaf8; color: #0f172a; border: 1.5px solid #e2e8f0; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.09);';
+            cardStyle = 'background: #fbfaf8; color: #0b2018; border: 1.5px solid #e2e8f0; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.09);';
             headerPillStyle = 'background: #ecfdf5; border: 1px solid rgba(5, 150, 105, 0.3); box-shadow: inset 0 1px 2px rgba(5, 150, 105, 0.06);';
             pillDotColor = '#059669';
             pillTextColor = '#065f46';
             logoBadgeStyle = 'background: linear-gradient(135deg, #059669 0%, #047857 100%); box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25); border: 1px solid rgba(5, 150, 105, 0.2);';
             logoIconStyle = 'color: #ffffff;';
-            brandTitleColor = '#0f172a';
+            brandTitleColor = '#0b2018';
             brandSubColor = '#059669';
             arabicColor = 'color: #064e3b;';
             dividerColor = 'rgba(5, 150, 105, 0.3)';
@@ -1497,7 +1497,7 @@ document.addEventListener('DOMContentLoaded', () => {
             taglineColor = 'color: #64748b;';
             refBadgeStyle = 'background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569;';
         } else { // midnight
-            cardStyle = 'background: linear-gradient(145deg, #0b1120 0%, #020617 60%, #0b1120 100%); color: #f8fafc; border: 1.5px solid #1e293b; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.85);';
+            cardStyle = 'background: linear-gradient(145deg, #06130e 0%, #06130e 60%, #06130e 100%); color: #f8fafc; border: 1.5px solid #1e293b; box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.85);';
             headerPillStyle = 'background: rgba(30, 41, 59, 0.85); border: 1px solid #334155; box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.04);';
             pillDotColor = '#34d399';
             pillTextColor = '#6ee7b7';
@@ -1629,7 +1629,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (t === currentTheme) {
                 btn.className = 'px-3 py-1.5 rounded-lg transition-all bg-emerald-600 text-white shadow-xs';
             } else {
-                btn.className = 'px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-emerald-600';
+                btn.className = 'px-3 py-1.5 rounded-lg transition-all text-slate-600 dark:text-[#9ab3a8] hover:text-emerald-600';
             }
         });
     }
